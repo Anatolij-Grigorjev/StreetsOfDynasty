@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://characters/template/template_bodyparts.png" type="Texture" id=1]
+
+[node name="CharacterRig" type="Node2D"]
+
+[node name="Torso" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 25, 96, 40, 75 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Head" type="Sprite" parent="Torso"]
+position = Vector2( 0.23143, -33.8422 )
+texture = ExtResource( 1 )
+offset = Vector2( -0.384346, -17.8449 )
+region_enabled = true
+region_rect = Rect2( 52, 21, 36, 36 )
+
+[node name="LeftArmTop" type="Sprite" parent="Torso"]
+show_behind_parent = true
+
+[node name="LeftArmBottom" type="Sprite" parent="Torso/LeftArmTop"]
+
+[node name="RightArmTop" type="Sprite" parent="Torso"]
+position = Vector2( -15.1301, -31.6875 )
+rotation = 0.202458
+texture = ExtResource( 1 )
+offset = Vector2( -0.142731, 17.8421 )
+region_enabled = true
+region_rect = Rect2( 105, 33, 17, 41 )
+
+[node name="RightArmBottom" type="Sprite" parent="Torso/RightArmTop"]
+show_behind_parent = true
+position = Vector2( -1.52588e-05, 33.9713 )
+rotation = -0.607375
+texture = ExtResource( 1 )
+offset = Vector2( -0.142731, 17.8421 )
+region_enabled = true
+region_rect = Rect2( 105, 33, 17, 41 )
+
+[node name="RightLegTop" type="Sprite" parent="Torso"]
+
+[node name="RightLegBottom" type="Sprite" parent="Torso/RightLegTop"]
+
+[node name="LeftLegTop" type="Sprite" parent="Torso"]
+
+[node name="LeftLegBottom" type="Sprite" parent="Torso/LeftLegTop"]
