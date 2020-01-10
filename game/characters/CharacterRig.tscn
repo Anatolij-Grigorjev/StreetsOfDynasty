@@ -5,12 +5,10 @@
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Torso" type="Sprite" parent="."]
+editor/display_folded = true
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 25, 96, 40, 75 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Head" type="Sprite" parent="Torso"]
 position = Vector2( 0.23143, -33.8422 )
@@ -19,32 +17,87 @@ offset = Vector2( -0.384346, -17.8449 )
 region_enabled = true
 region_rect = Rect2( 52, 21, 36, 36 )
 
-[node name="LeftArmTop" type="Sprite" parent="Torso"]
+[node name="RightLegUpper" type="Sprite" parent="Torso"]
+position = Vector2( -3.24929, 32.9481 )
+rotation = 0.0583714
+texture = ExtResource( 1 )
+offset = Vector2( 0.710922, 16.5539 )
+region_enabled = true
+region_rect = Rect2( 92, 75, 17, 41 )
+
+[node name="RightLegLower" type="Sprite" parent="Torso/RightLegUpper"]
+position = Vector2( 0.625664, 35.9452 )
+rotation = 0.0725247
+texture = ExtResource( 1 )
+offset = Vector2( 0.212616, 20.0344 )
+region_enabled = true
+region_rect = Rect2( 92, 75, 17, 41 )
+
+[node name="LeftArmUpper" type="Sprite" parent="Torso"]
 show_behind_parent = true
+position = Vector2( 8.80852, -31.2498 )
+rotation = -0.0117342
+texture = ExtResource( 1 )
+offset = Vector2( -0.157089, 19.2063 )
+region_enabled = true
+region_rect = Rect2( 152.87, 33, 17, 41 )
 
-[node name="LeftArmBottom" type="Sprite" parent="Torso/LeftArmTop"]
+[node name="LeftArmJoint" type="Sprite" parent="Torso/LeftArmUpper"]
+self_modulate = Color( 0.72549, 0.72549, 0.72549, 1 )
+position = Vector2( 0.433701, 39.0479 )
+texture = ExtResource( 1 )
+offset = Vector2( -0.649202, 0.218534 )
+region_enabled = true
+region_rect = Rect2( 61, 70, 18, 18 )
 
-[node name="RightArmTop" type="Sprite" parent="Torso"]
-position = Vector2( -15.1301, -31.6875 )
-rotation = 0.202458
+[node name="LeftArmLower" type="Sprite" parent="Torso/LeftArmUpper/LeftArmJoint"]
+show_behind_parent = true
+position = Vector2( -0.710312, 2.18958 )
+rotation = -0.399669
+texture = ExtResource( 1 )
+offset = Vector2( -0.157089, 19.2063 )
+region_enabled = true
+region_rect = Rect2( 152.87, 33, 17, 41 )
+
+[node name="LeftLegUpper" type="Sprite" parent="Torso"]
+show_behind_parent = true
+position = Vector2( 6.63618, 26.2752 )
+rotation = -0.201382
+texture = ExtResource( 1 )
+offset = Vector2( 0.456848, 20.1907 )
+region_enabled = true
+region_rect = Rect2( 138, 75, 18, 41 )
+
+[node name="LeftLegLower" type="Sprite" parent="Torso/LeftLegUpper"]
+position = Vector2( 0.38765, 39.9282 )
+rotation = 0.262902
+texture = ExtResource( 1 )
+offset = Vector2( 0.502945, 19.5241 )
+region_enabled = true
+region_rect = Rect2( 138, 75, 18, 41 )
+
+[node name="RightArmUpper" type="Sprite" parent="Torso"]
+position = Vector2( -9.88662, -35.0683 )
+rotation = 0.120748
+texture = ExtResource( 1 )
+offset = Vector2( 0.0642338, 20.0722 )
+region_enabled = true
+region_rect = Rect2( 105, 33, 17, 41 )
+
+[node name="RightArmJoint" type="Sprite" parent="Torso/RightArmUpper"]
+position = Vector2( 0.197465, 41.9324 )
+texture = ExtResource( 1 )
+offset = Vector2( -0.649202, 0.218534 )
+region_enabled = true
+region_rect = Rect2( 61, 70, 18, 18 )
+
+[node name="RightArmLower" type="Sprite" parent="Torso/RightArmUpper/RightArmJoint"]
+show_behind_parent = true
+position = Vector2( 0.45422, 3.67108 )
+rotation = -0.53199
 texture = ExtResource( 1 )
 offset = Vector2( -0.142731, 17.8421 )
 region_enabled = true
 region_rect = Rect2( 105, 33, 17, 41 )
 
-[node name="RightArmBottom" type="Sprite" parent="Torso/RightArmTop"]
-show_behind_parent = true
-position = Vector2( -1.52588e-05, 33.9713 )
-rotation = -0.607375
-texture = ExtResource( 1 )
-offset = Vector2( -0.142731, 17.8421 )
-region_enabled = true
-region_rect = Rect2( 105, 33, 17, 41 )
-
-[node name="RightLegTop" type="Sprite" parent="Torso"]
-
-[node name="RightLegBottom" type="Sprite" parent="Torso/RightLegTop"]
-
-[node name="LeftLegTop" type="Sprite" parent="Torso"]
-
-[node name="LeftLegBottom" type="Sprite" parent="Torso/LeftLegTop"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
