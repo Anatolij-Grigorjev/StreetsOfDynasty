@@ -1,14 +1,103 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://characters/template/template_bodyparts.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Torso/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.23143, -33.8422 ), Vector2( 0.262371, -35.7201 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Torso/Head:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Torso/RightArmUpper:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( -9.88662, -35.0683 ), Vector2( -9.85568, -36.9463 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Torso/RightArmUpper:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6.91838, 6.91838 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Torso/LeftArmUpper:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 8.80852, -31.2498 ), Vector2( 8.83946, -33.1277 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Torso/LeftArmUpper:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -0.672323, -0.672323 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Torso/LeftLegUpper/LeftLegLower/LeftFoot:rotation_degrees")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 0.125, 0.0947323, 0.125, 0.0947323 ),
+"update": 0,
+"values": [ -1.62306, -10.0, -1.62306, -10.0 ]
+}
 
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Torso" type="Sprite" parent="."]
-editor/display_folded = true
+rotation = -0.0164742
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 25, 96, 40, 75 )
+region_rect = Rect2( 25, 100, 40, 70 )
 
 [node name="Head" type="Sprite" parent="Torso"]
 position = Vector2( 0.23143, -33.8422 )
@@ -18,12 +107,12 @@ region_enabled = true
 region_rect = Rect2( 52, 21, 36, 36 )
 
 [node name="RightLegUpper" type="Sprite" parent="Torso"]
-position = Vector2( -3.24929, 32.9481 )
-rotation = 0.0583714
+position = Vector2( -6.51155, 28.6283 )
+rotation = 0.0510953
 texture = ExtResource( 1 )
 offset = Vector2( 0.710922, 16.5539 )
 region_enabled = true
-region_rect = Rect2( 92, 75, 17, 41 )
+region_rect = Rect2( 93, 123, 17, 42 )
 
 [node name="RightLegLower" type="Sprite" parent="Torso/RightLegUpper"]
 position = Vector2( 0.625664, 35.9452 )
@@ -32,6 +121,14 @@ texture = ExtResource( 1 )
 offset = Vector2( 0.212616, 20.0344 )
 region_enabled = true
 region_rect = Rect2( 92, 75, 17, 41 )
+
+[node name="RightFoot" type="Sprite" parent="Torso/RightLegUpper/RightLegLower"]
+position = Vector2( -0.451504, 39.7498 )
+rotation = 0.00544558
+texture = ExtResource( 1 )
+offset = Vector2( 4.85836, 7.40139 )
+region_enabled = true
+region_rect = Rect2( 138, 120, 25, 15 )
 
 [node name="LeftArmUpper" type="Sprite" parent="Torso"]
 show_behind_parent = true
@@ -42,27 +139,28 @@ offset = Vector2( -0.157089, 19.2063 )
 region_enabled = true
 region_rect = Rect2( 152.87, 33, 17, 41 )
 
-[node name="LeftArmJoint" type="Sprite" parent="Torso/LeftArmUpper"]
-self_modulate = Color( 0.72549, 0.72549, 0.72549, 1 )
-position = Vector2( 0.433701, 39.0479 )
-texture = ExtResource( 1 )
-offset = Vector2( -0.649202, 0.218534 )
-region_enabled = true
-region_rect = Rect2( 61, 70, 18, 18 )
-
-[node name="LeftArmLower" type="Sprite" parent="Torso/LeftArmUpper/LeftArmJoint"]
-show_behind_parent = true
-position = Vector2( -0.710312, 2.18958 )
+[node name="LeftArmLower" type="Sprite" parent="Torso/LeftArmUpper"]
+position = Vector2( -1.24019, 31.7289 )
 rotation = -0.399669
+scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( -0.157089, 19.2063 )
 region_enabled = true
 region_rect = Rect2( 152.87, 33, 17, 41 )
 
+[node name="LeftArmHand" type="Sprite" parent="Torso/LeftArmUpper/LeftArmLower"]
+self_modulate = Color( 0.72549, 0.72549, 0.72549, 1 )
+position = Vector2( 0.535331, 28.6037 )
+rotation = 0.399669
+texture = ExtResource( 1 )
+offset = Vector2( 2.36984, 6.27732 )
+region_enabled = true
+region_rect = Rect2( 61, 70, 18, 18 )
+
 [node name="LeftLegUpper" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 6.63618, 26.2752 )
-rotation = -0.201382
+position = Vector2( 5.85014, 22.7554 )
+rotation = -0.214125
 texture = ExtResource( 1 )
 offset = Vector2( 0.456848, 20.1907 )
 region_enabled = true
@@ -70,11 +168,19 @@ region_rect = Rect2( 138, 75, 18, 41 )
 
 [node name="LeftLegLower" type="Sprite" parent="Torso/LeftLegUpper"]
 position = Vector2( 0.38765, 39.9282 )
-rotation = 0.262902
+rotation = 0.354255
 texture = ExtResource( 1 )
 offset = Vector2( 0.502945, 19.5241 )
 region_enabled = true
 region_rect = Rect2( 138, 75, 18, 41 )
+
+[node name="LeftFoot" type="Sprite" parent="Torso/LeftLegUpper/LeftLegLower"]
+position = Vector2( -0.543865, 38.8574 )
+rotation = -0.0283277
+texture = ExtResource( 1 )
+offset = Vector2( 5.15724, 7.42253 )
+region_enabled = true
+region_rect = Rect2( 166, 120, 25, 15 )
 
 [node name="RightArmUpper" type="Sprite" parent="Torso"]
 position = Vector2( -9.88662, -35.0683 )
@@ -84,20 +190,23 @@ offset = Vector2( 0.0642338, 20.0722 )
 region_enabled = true
 region_rect = Rect2( 105, 33, 17, 41 )
 
-[node name="RightArmJoint" type="Sprite" parent="Torso/RightArmUpper"]
-position = Vector2( 0.197465, 41.9324 )
-texture = ExtResource( 1 )
-offset = Vector2( -0.649202, 0.218534 )
-region_enabled = true
-region_rect = Rect2( 61, 70, 18, 18 )
-
-[node name="RightArmLower" type="Sprite" parent="Torso/RightArmUpper/RightArmJoint"]
-show_behind_parent = true
-position = Vector2( 0.45422, 3.67108 )
-rotation = -0.53199
+[node name="RightArmLower" type="Sprite" parent="Torso/RightArmUpper"]
+position = Vector2( -0.864359, 34.5967 )
+rotation = -0.418334
+scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( -0.142731, 17.8421 )
 region_enabled = true
 region_rect = Rect2( 105, 33, 17, 41 )
 
+[node name="RightArmHand" type="Sprite" parent="Torso/RightArmUpper/RightArmLower"]
+position = Vector2( -1.06303, 28.3012 )
+rotation = 0.53199
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 4.02532, 5.64486 )
+region_enabled = true
+region_rect = Rect2( 61, 70, 18, 18 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
