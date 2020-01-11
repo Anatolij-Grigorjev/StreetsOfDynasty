@@ -100,13 +100,14 @@ region_enabled = true
 region_rect = Rect2( 25, 100, 40, 70 )
 
 [node name="Head" type="Sprite" parent="Torso"]
-position = Vector2( 0.23143, -33.8422 )
+position = Vector2( 0.260784, -35.6238 )
 texture = ExtResource( 1 )
 offset = Vector2( -0.384346, -17.8449 )
 region_enabled = true
 region_rect = Rect2( 52, 21, 36, 36 )
 
 [node name="RightLegUpper" type="Sprite" parent="Torso"]
+editor/display_folded = true
 position = Vector2( -6.51155, 28.6283 )
 rotation = 0.0510953
 texture = ExtResource( 1 )
@@ -130,9 +131,17 @@ offset = Vector2( 4.85836, 7.40139 )
 region_enabled = true
 region_rect = Rect2( 138, 120, 25, 15 )
 
+[node name="Sheath" type="Sprite" parent="Torso"]
+position = Vector2( -9.99711, 28.2727 )
+rotation = 0.304025
+texture = ExtResource( 1 )
+offset = Vector2( -0.0132399, 21.5989 )
+region_enabled = true
+region_rect = Rect2( 18, 9, 9, 53 )
+
 [node name="LeftArmUpper" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 8.80852, -31.2498 )
+position = Vector2( 8.83787, -33.0314 )
 rotation = -0.0117342
 texture = ExtResource( 1 )
 offset = Vector2( -0.157089, 19.2063 )
@@ -183,7 +192,7 @@ region_enabled = true
 region_rect = Rect2( 166, 120, 25, 15 )
 
 [node name="RightArmUpper" type="Sprite" parent="Torso"]
-position = Vector2( -9.88662, -35.0683 )
+position = Vector2( -9.85727, -36.8499 )
 rotation = 0.120748
 texture = ExtResource( 1 )
 offset = Vector2( 0.0642338, 20.0722 )
