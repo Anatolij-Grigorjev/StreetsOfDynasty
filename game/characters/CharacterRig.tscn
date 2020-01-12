@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://characters/template/template_bodyparts.png" type="Texture" id=1]
 
@@ -52,7 +52,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 6.91838, 6.91838 ]
+"values": [ 22.2771, 22.3 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Torso/LeftArmUpper:position")
@@ -91,6 +91,9 @@ tracks/6/keys = {
 "values": [ -1.62306, -10.0, -1.62306, -10.0 ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "strike_pose"
+
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Torso" type="Sprite" parent="."]
@@ -100,7 +103,7 @@ region_enabled = true
 region_rect = Rect2( 25, 100, 40, 70 )
 
 [node name="Head" type="Sprite" parent="Torso"]
-position = Vector2( 0.260784, -35.6238 )
+position = Vector2( 0.23143, -33.8422 )
 texture = ExtResource( 1 )
 offset = Vector2( -0.384346, -17.8449 )
 region_enabled = true
@@ -131,17 +134,9 @@ offset = Vector2( 4.85836, 7.40139 )
 region_enabled = true
 region_rect = Rect2( 138, 120, 25, 15 )
 
-[node name="Sheath" type="Sprite" parent="Torso"]
-position = Vector2( -9.99711, 28.2727 )
-rotation = 0.304025
-texture = ExtResource( 1 )
-offset = Vector2( -0.0132399, 21.5989 )
-region_enabled = true
-region_rect = Rect2( 18, 9, 9, 53 )
-
 [node name="LeftArmUpper" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 8.83787, -33.0314 )
+position = Vector2( 8.80852, -31.2498 )
 rotation = -0.0117342
 texture = ExtResource( 1 )
 offset = Vector2( -0.157089, 19.2063 )
@@ -192,16 +187,16 @@ region_enabled = true
 region_rect = Rect2( 166, 120, 25, 15 )
 
 [node name="RightArmUpper" type="Sprite" parent="Torso"]
-position = Vector2( -9.85727, -36.8499 )
-rotation = 0.120748
+position = Vector2( -9.88662, -35.0683 )
+rotation = 0.388808
 texture = ExtResource( 1 )
 offset = Vector2( 0.0642338, 20.0722 )
 region_enabled = true
 region_rect = Rect2( 105, 33, 17, 41 )
 
 [node name="RightArmLower" type="Sprite" parent="Torso/RightArmUpper"]
-position = Vector2( -0.864359, 34.5967 )
-rotation = -0.418334
+position = Vector2( -1.78362, 35.7285 )
+rotation = -1.06563
 scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( -0.142731, 17.8421 )
@@ -209,13 +204,24 @@ region_enabled = true
 region_rect = Rect2( 105, 33, 17, 41 )
 
 [node name="RightArmHand" type="Sprite" parent="Torso/RightArmUpper/RightArmLower"]
-position = Vector2( -1.06303, 28.3012 )
-rotation = 0.53199
+position = Vector2( 0.919522, 32.3736 )
+rotation = 1.32236
 scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
-offset = Vector2( 4.02532, 5.64486 )
+offset = Vector2( 0.359934, 1.02209 )
 region_enabled = true
 region_rect = Rect2( 61, 70, 18, 18 )
 
+[node name="Weapon" type="Sprite" parent="Torso/RightArmUpper/RightArmLower/RightArmHand"]
+show_behind_parent = true
+position = Vector2( -0.220184, 5.05989 )
+rotation = -0.0010525
+texture = ExtResource( 1 )
+offset = Vector2( 0.155792, 27.104 )
+region_enabled = true
+region_rect = Rect2( 21, 12, 19, 65 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 anims/idle = SubResource( 1 )
+anims/strike_pose = SubResource( 2 )

@@ -19,6 +19,7 @@ extents = Vector2( 820, 150 )
 [node name="WhiteBox" type="Node2D"]
 
 [node name="BG" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Sprites" type="Node2D" parent="BG"]
 position = Vector2( 0, 50 )
