@@ -5,7 +5,8 @@ Abstract state machine interface
 const NO_STATE: String = "<NO_STATE>"
 
 export(String) var state: String = NO_STATE setget set_state
-export(NodePath) var entity_path: NodePath
+#default entity path is direct parent
+export(NodePath) var entity_path: NodePath = NodePath("..")
 
 var previous_state: String = NO_STATE
 onready var entity: Node = get_node(entity_path)
