@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 [node name="Body" type="Node2D" parent="."]
 
 [node name="CharacterRig" parent="Body" instance=ExtResource( 2 )]
-position = Vector2( -11.3425, -165.879 )
+position = Vector2( -6.80554, -158.795 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.235886, -181.578 )
