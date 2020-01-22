@@ -5,8 +5,8 @@ Abstract state machine state interface.
 Nodes implementing this can be children of a state machine
 """
 
-onready var fsm: StateMachine = get_parent()
-
+var fsm
+var entity: Node
 
 
 func _ready():
