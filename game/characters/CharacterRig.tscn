@@ -181,7 +181,7 @@ position = Vector2( -5.55212, -13.3912 )
 texture = ExtResource( 1 )
 offset = Vector2( -56.5899, 17.8153 )
 hframes = 12
-frame = 11
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
