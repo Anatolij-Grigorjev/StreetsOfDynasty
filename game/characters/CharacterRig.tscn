@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=1]
-[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=2]
-[ext_resource path="res://characters/Yu/spritesheets/turn.png" type="Texture" id=3]
+[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=1]
+[ext_resource path="res://characters/Yu/spritesheets/turn.png" type="Texture" id=2]
+[ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -30,7 +30,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -43,30 +43,6 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 5 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -56.5899, 17.8153 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -5.55212, -13.3912 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -82,7 +58,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -135,7 +111,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "walk"
-length = 1.2
+length = 2.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -144,10 +120,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+"values": [ 1, 2, 3, 4, 5, 8, 9, 10, 11, 4, 5, 8, 9 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:texture")
@@ -159,7 +135,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 1 ) ]
+"values": [ ExtResource( 3 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -180,8 +156,7 @@ tracks/2/keys = {
 position = Vector2( -5.55212, -13.3912 )
 texture = ExtResource( 1 )
 offset = Vector2( -56.5899, 17.8153 )
-hframes = 12
-frame = 4
+hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
