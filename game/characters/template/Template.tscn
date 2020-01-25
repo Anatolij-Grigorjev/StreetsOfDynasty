@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://characters/template/Template.gd" type="Script" id=1]
-[ext_resource path="res://characters/CharacterRig.tscn" type="PackedScene" id=2]
-[ext_resource path="res://characters/template/TemplateStateMachine.gd" type="Script" id=3]
-[ext_resource path="res://characters/template/Idle.gd" type="Script" id=4]
-[ext_resource path="res://characters/template/Walk.gd" type="Script" id=5]
+[ext_resource path="res://characters/template/TemplateStateMachine.gd" type="Script" id=2]
+[ext_resource path="res://characters/template/Idle.gd" type="Script" id=3]
+[ext_resource path="res://characters/template/Walk.gd" type="Script" id=4]
+[ext_resource path="res://characters/CharacterRig.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 46.1862
@@ -13,21 +13,21 @@ height = 208.892
 [node name="Template" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
+[node name="TemplateStateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Idle" type="Node" parent="TemplateStateMachine"]
+script = ExtResource( 3 )
+
+[node name="Walk" type="Node" parent="TemplateStateMachine"]
+script = ExtResource( 4 )
+
 [node name="Body" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="CharacterRig" parent="Body" instance=ExtResource( 2 )]
+[node name="CharacterRig" parent="Body" instance=ExtResource( 5 )]
 position = Vector2( -6.80554, -158.795 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.235886, -181.578 )
 shape = SubResource( 1 )
-
-[node name="TemplateStateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="Idle" type="Node" parent="TemplateStateMachine"]
-script = ExtResource( 4 )
-
-[node name="Walk" type="Node" parent="TemplateStateMachine"]
-script = ExtResource( 5 )
