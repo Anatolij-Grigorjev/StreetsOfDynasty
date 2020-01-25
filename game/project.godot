@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "AttackBox",
+"language": "GDScript",
+"path": "res://characters/AttackBox.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CharacterTemplate",
 "language": "GDScript",
 "path": "res://characters/template/Template.gd"
+}, {
+"base": "Area2D",
+"class": "Hitbox",
+"language": "GDScript",
+"path": "res://characters/Hitbox.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -25,7 +35,9 @@ _global_script_classes=[ {
 "path": "res://characters/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"AttackBox": "",
 "CharacterTemplate": "",
+"Hitbox": "",
 "State": "",
 "StateMachine": ""
 }
@@ -67,6 +79,11 @@ move_down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="terrain"
+2d_physics/layer_6="normal_attack"
 
 [logging]
 
