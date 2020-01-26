@@ -5,12 +5,12 @@ A type of area that describes where character can get hit on their body.
 Defines which hit animation gets played during the hit
 The expected client entity of this is a CharacterTemplate
 """
-export(NodePath) var entity_path: NodePath = NodePath("..")
+export(NodePath) var hitbox_manager_path: NodePath = NodePath("..")
 export(String) var hit_anim: String = "hit"
 
-onready var entity: CharacterTemplate = get_node(entity_path)
+onready var hitbox_manager = get_node(hitbox_manager_path)
+onready var shape: CollisionShape2D = get_child(0)
 
 
-
-func process_hit() -> void:
-	print(entity.name + "." + name + ":" + " got hit")
+func process_hit(attack) -> void:
+	hitbox_manager.resolve_attack_hitbox(attack, self)

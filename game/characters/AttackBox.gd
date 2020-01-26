@@ -13,12 +13,14 @@ var known_hitboxes = []
 
 
 """
-Called externally during attack animations
+Called externally during attack animations,
+porcess hit on all hitboxes not currentyl disabled
 """
 func process_attack() -> void:
 	for node in known_hitboxes:
-		var hitbox: Hitbox = node as Hitbox
-		hitbox.process_hit()
+		var hitbox := node as Hitbox
+		if (not hitbox.shape.disabled):
+			hitbox.process_hit(self)
 
 
 func _on_area_entered(area: Area2D) -> void:
