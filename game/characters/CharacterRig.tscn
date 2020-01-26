@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=1]
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=2]
 [ext_resource path="res://characters/Yu/spritesheets/turn.png" type="Texture" id=3]
 [ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=4]
-[ext_resource path="res://characters/HitboxManager.gd" type="Script" id=5]
-[ext_resource path="res://characters/Hitbox.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attackA1"
@@ -56,20 +54,6 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -187.712, -34.1745 ), Vector2( -89.908, -40.2873 ), Vector2( -147.979, -38.4534 ), Vector2( 165.604, -68.4059 ), Vector2( -108.246, -67.1833 ), Vector2( -111.914, -73.9074 ), Vector2( -108.246, -39.0648 ), Vector2( -23.8905, -40.2873 ), Vector2( -102.134, -20.7265 ), Vector2( -144.923, -21.9491 ) ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("Hitboxes")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "AttackA1" ],
-"method": "switch_to_hitbox"
-} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -122,20 +106,6 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -2.60461, -15.6933 ) ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("Hitboxes")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "Idle" ],
-"method": "switch_to_hitbox"
-} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -252,32 +222,6 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( -49.5227, -12.5655 ) ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("Hitboxes")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "Walk" ],
-"method": "switch_to_hitbox"
-} ]
-}
-
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 49.7755
-height = 300.709
-
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 41.1712
-height = 325.566
-
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 33.5229
-height = 286.169
 
 [node name="CharacterRig" type="Node2D"]
 
@@ -293,30 +237,3 @@ anims/attackA1 = SubResource( 1 )
 anims/idle = SubResource( 2 )
 anims/turn = SubResource( 3 )
 anims/walk = SubResource( 4 )
-
-[node name="Hitboxes" type="Node2D" parent="."]
-script = ExtResource( 5 )
-
-[node name="Idle" type="Area2D" parent="Hitboxes"]
-editor/display_folded = true
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Idle"]
-position = Vector2( 16.2524, 0.956024 )
-shape = SubResource( 5 )
-
-[node name="Walk" type="Area2D" parent="Hitboxes"]
-editor/display_folded = true
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Walk"]
-position = Vector2( -0.956055, 19.1206 )
-shape = SubResource( 6 )
-
-[node name="AttackA1" type="Area2D" parent="Hitboxes"]
-editor/display_folded = true
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/AttackA1"]
-position = Vector2( 21.0327, 5.73615 )
-shape = SubResource( 7 )

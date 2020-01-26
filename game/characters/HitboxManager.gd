@@ -6,9 +6,12 @@ and send signal about a hit hitbox to parents
 """
 signal hitbox_hit(hitbox, attackbox)
 
-
+export(NodePath) var entity_path := NodePath("..")
 export(String) var active_hitbox := ""
+
+
 onready var all_hitboxes := {}
+onready var entity := get_node(entity_path)
 
 
 func _ready() -> void:
