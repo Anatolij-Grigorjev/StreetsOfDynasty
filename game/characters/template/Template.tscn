@@ -6,9 +6,8 @@
 [ext_resource path="res://characters/template/Walk.gd" type="Script" id=4]
 [ext_resource path="res://characters/CharacterRig.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 46.1862
-height = 208.892
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 93.043, 36.2723 )
 
 [node name="Template" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -29,6 +28,6 @@ editor/display_folded = true
 [node name="CharacterRig" parent="Body" instance=ExtResource( 5 )]
 position = Vector2( -6.80554, -158.795 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.235886, -181.578 )
+[node name="Terrain" type="CollisionShape2D" parent="."]
+position = Vector2( 1.5639, 15.6388 )
 shape = SubResource( 1 )
