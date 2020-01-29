@@ -14,7 +14,7 @@ var known_hitboxes = []
 
 """
 Called externally during attack animations,
-porcess hit on all hitboxes not currentyl disabled
+process hit on all hitboxes not currently disabled
 """
 func process_attack() -> void:
 	for node in known_hitboxes:

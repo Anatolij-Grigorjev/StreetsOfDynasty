@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AreaAnimationImporter",
+"language": "GDScript",
+"path": "res://characters/AreaAnimationImporter.gd"
+}, {
 "base": "Node2D",
 "class": "AreaGroup",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://characters/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"AreaAnimationImporter": "",
 "AreaGroup": "",
 "AttackBox": "",
 "CharacterTemplate": "",
