@@ -17,13 +17,14 @@ onready var area_group = get_node(area_group_path)
 func _ready():
 	if (not _are_parameters_valid()):
 		return
-	var file: File = _get_valid_file(animation_data_path)
-	if (not file):
-		return
-	var area_timing_json = _get_valid_json(file.get_as_text())
+
+	#this is parsed json data
+	var area_timing_json: Array = _get_valid_file_json(animation_data_path)
 	if (not area_timing_json):
 		return
-	#TODO: constrcut animator tracks
+	
+	animator
+	
 
 
 
@@ -52,3 +53,14 @@ func _get_valid_json(text: String):
 		return null
 		
 	return parse_json(text)
+	
+	
+func _get_valid_file_json(filepath: String):
+	var file: File = _get_valid_file(filepath)
+	if (not file):
+		return null
+	var valid_json = _get_valid_json(file.get_as_text())
+	if (not valid_json):
+		return null
+	
+	return valid_json
