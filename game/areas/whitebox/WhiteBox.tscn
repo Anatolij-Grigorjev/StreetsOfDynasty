@@ -19,7 +19,6 @@ extents = Vector2( 820, 150 )
 [node name="WhiteBox" type="Node2D"]
 
 [node name="BG" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Sprites" type="Node2D" parent="BG"]
 position = Vector2( 0, 50 )
@@ -62,14 +61,12 @@ __meta__ = {
 [node name="Colliders" type="Node2D" parent="BG"]
 
 [node name="Left" type="StaticBody2D" parent="BG/Colliders"]
-editor/display_folded = true
 position = Vector2( -150, 300 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Left"]
 shape = SubResource( 1 )
 
 [node name="Right" type="StaticBody2D" parent="BG/Colliders"]
-editor/display_folded = true
 position = Vector2( 1170, 300 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Right"]
