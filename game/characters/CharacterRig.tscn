@@ -231,7 +231,7 @@ position = Vector2( -49.5227, -12.5655 )
 texture = ExtResource( 4 )
 offset = Vector2( -56.5899, 17.8153 )
 hframes = 12
-frame = 9
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1

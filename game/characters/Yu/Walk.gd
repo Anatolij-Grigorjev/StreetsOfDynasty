@@ -3,6 +3,8 @@ extends State
 A type of State implementation used for walking state
 """
 
+onready var hitbox_group: AreaGroup = get_node(@"../../Body/HitboxGroup")
+
 func process_state(delta: float):
 	var move_direction = fsm._get_move_direction()
 	
@@ -16,6 +18,7 @@ func process_state(delta: float):
 	
 func enter_state(prev_state: String):
 	entity.anim.play("walk")
+	hitbox_group.switch_to_area("Walk")
 	
 	
 func exit_state(next_state: String):

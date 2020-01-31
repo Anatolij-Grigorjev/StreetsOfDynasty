@@ -25,18 +25,20 @@ Switch to a specific named area and disable all others
 func switch_to_area(area_name: String) -> void:
 	_disable_all_areas()
 	_enable_area(area_name)
-	self.active_area = area_name
+	active_area = area_name
 
 
 func _disable_all_areas() -> void:
 	for area_name in all_areas:
 		_get_area_shape(all_areas[area_name]).disabled = true
+		all_areas[area_name].visible = false
 
 
 func _enable_area(area_name: String) -> void:
 	if (all_areas.has(area_name)):
 		_get_area_shape(all_areas[area_name]).disabled = false
+		all_areas[area_name].visible = true
 		
 		
-func _get_area_shape(area: Area2D) -> CollisionObject2D:
-	return area.get_child(0) as CollisionObject2D
+func _get_area_shape(area: Area2D) -> CollisionShape2D:
+	return area.get_child(0) as CollisionShape2D

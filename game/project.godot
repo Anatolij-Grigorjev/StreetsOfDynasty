@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "AreaAnimationImporter",
-"language": "GDScript",
-"path": "res://characters/AreaAnimationImporter.gd"
-}, {
 "base": "Node2D",
 "class": "AreaGroup",
 "language": "GDScript",
@@ -27,7 +22,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "CharacterTemplate",
 "language": "GDScript",
-"path": "res://characters/template/Template.gd"
+"path": "res://characters/Yu/YuCharacter.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
@@ -45,7 +40,6 @@ _global_script_classes=[ {
 "path": "res://characters/StateMachine.gd"
 } ]
 _global_script_class_icons={
-"AreaAnimationImporter": "",
 "AreaGroup": "",
 "AttackBox": "",
 "CharacterTemplate": "",
