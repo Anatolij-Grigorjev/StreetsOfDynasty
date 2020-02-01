@@ -1,5 +1,7 @@
-extends State
-
+extends AttackState
+"""
+State describing first normal attack in character attack chain
+"""
 
 func process_state(delta: float):
 	pass

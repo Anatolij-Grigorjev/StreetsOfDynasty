@@ -5,6 +5,8 @@ Abstract state machine state interface.
 Nodes implementing this can be children of a state machine
 """
 
+# type should be derived from StateMachine, 
+# not explicit due to cyclic type loading
 var fsm
 var entity: Node
 

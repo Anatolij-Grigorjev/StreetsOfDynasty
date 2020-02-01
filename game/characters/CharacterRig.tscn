@@ -6,7 +6,7 @@
 [ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
-resource_name = "attackA1"
+resource_name = "attack_a1"
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -227,15 +227,15 @@ tracks/3/keys = {
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -49.5227, -12.5655 )
-texture = ExtResource( 4 )
+position = Vector2( -187.712, -34.1745 )
+texture = ExtResource( 2 )
 offset = Vector2( -56.5899, 17.8153 )
-hframes = 12
+hframes = 11
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/attackA1 = SubResource( 1 )
+anims/attack_a1 = SubResource( 1 )
 anims/idle = SubResource( 2 )
 anims/turn = SubResource( 3 )
 anims/walk = SubResource( 4 )
