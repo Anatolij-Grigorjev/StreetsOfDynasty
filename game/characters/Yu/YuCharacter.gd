@@ -7,7 +7,7 @@ var velocity = Vector2()
 
 
 onready var anim: AnimationPlayer = $Body/CharacterRig/AnimationPlayer
-onready var fsm: StateMachine = $TemplateStateMachine
+onready var fsm: StateMachine = $FSM
 
 func _ready() -> void:
 	pass 

@@ -18,9 +18,10 @@ var state_nodes = {}
 func _ready() -> void:
 	for node in get_children():
 		var state = node as State
-		state_nodes[state.name] = state
-		state.fsm = self
-		state.entity = entity
+		if (state):
+			state_nodes[state.name] = state
+			state.fsm = self
+			state.entity = entity
 		
 
 func _process(delta: float) -> void:

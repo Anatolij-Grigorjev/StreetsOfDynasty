@@ -72,3 +72,16 @@ script = ExtResource( 6 )
 [node name="Terrain" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5639, 15.6388 )
 shape = SubResource( 4 )
+
+[node name="CurrentState" type="Label" parent="."]
+margin_left = -60.0
+margin_top = -400.0
+margin_right = 40.0
+margin_bottom = -375.0
+rect_min_size = Vector2( 100, 25 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
