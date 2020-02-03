@@ -5,9 +5,6 @@ A type of area that describes the range and reach of an attack.
 This stores internally all Hitbox clients that it encounters and
 forces them to process a hit when invoked
 """
-export(NodePath) var entity_path: NodePath = NodePath("..")
-onready var entity: CharacterTemplate = get_node(entity_path)
-
 
 var known_hitboxes = []
 

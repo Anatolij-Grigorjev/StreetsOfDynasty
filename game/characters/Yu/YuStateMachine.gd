@@ -13,6 +13,7 @@ onready var current_state: Label = get_node(@"../CurrentState")
 
 func _ready():
 	._ready()
+	attackboxes.call_deferred("disable_all_areas")
 	call_deferred("set_state", "Idle")
 	
 

@@ -226,11 +226,11 @@ tracks/3/keys = {
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -187.712, -34.1745 )
+position = Vector2( 165.604, -68.4059 )
 texture = ExtResource( 2 )
 offset = Vector2( -56.5899, 17.8153 )
 hframes = 11
-frame = 1
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1

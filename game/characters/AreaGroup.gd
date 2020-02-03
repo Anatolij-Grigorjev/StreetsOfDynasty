@@ -1,9 +1,10 @@
 extends Node2D
 class_name AreaGroup
 """
-Utility to switch to a specific active area in a list of areas
 If areas are put as children of this node they can be managed
-using the methods
+using this area group node
+This group node supports setting one active area or disabling/enabling
+specific areas by node name
 """
 export(NodePath) var entity_path := NodePath("..")
 export(String) var active_area := "" setget switch_to_area
@@ -23,21 +24,35 @@ func _ready() -> void:
 Switch to a specific named area and disable all others
 """
 func switch_to_area(area_name: String) -> void:
-	_disable_all_areas()
-	_enable_area(area_name)
+	disable_all_areas()
+	enable_area(area_name)
 	active_area = area_name
+	
+
+"""
+Toggle area node named area_name to visible enabled
+"""
+func enable_area(area_name: String):
+	_toggle_area_enabled(area_name, true)
+	
+
+"""
+Toggle area node named area_name to invisible disabled
+"""
+func disable_area(area_name: String):
+	_toggle_area_enabled(area_name, false)
+		
+		
+func _toggle_area_enabled(area_name: String, enable: bool) -> void:
+	if (all_areas.has(area_name)):
+		_get_area_shape(all_areas[area_name]).disabled = not enable
+		all_areas[area_name].visible = enable
 
 
-func _disable_all_areas() -> void:
+func disable_all_areas() -> void:
 	for area_name in all_areas:
 		_get_area_shape(all_areas[area_name]).disabled = true
 		all_areas[area_name].visible = false
-
-
-func _enable_area(area_name: String) -> void:
-	if (all_areas.has(area_name)):
-		_get_area_shape(all_areas[area_name]).disabled = false
-		all_areas[area_name].visible = true
 		
 		
 func _get_area_shape(area: Area2D) -> CollisionShape2D:
