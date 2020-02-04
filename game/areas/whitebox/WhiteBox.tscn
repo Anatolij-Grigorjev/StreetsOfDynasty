@@ -86,3 +86,7 @@ shape = SubResource( 4 )
 
 [node name="YuMain" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240.416, 420.368 )
+
+[node name="YuMain2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 596.56, 425.4 )
+scale = Vector2( -1, 1 )

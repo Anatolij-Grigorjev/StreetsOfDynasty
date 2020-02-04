@@ -34,6 +34,8 @@ func process_state(delta: float):
 	_check_can_change_attack()
 	_check_attack_finished()
 	_apply_attackbox_timeline()
+	for attackbox in attackboxes.get_enabled_areas():
+		attackbox.process_attack()
 	attack_time += delta
 	
 	

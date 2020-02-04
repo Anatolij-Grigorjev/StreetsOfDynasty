@@ -50,6 +50,8 @@ script = ExtResource( 6 )
 entity_path = NodePath("../../../YuMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup"]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle"]
@@ -57,6 +59,8 @@ position = Vector2( 3.1915, -160.209 )
 shape = SubResource( 1 )
 
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup"]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Walk"]
@@ -64,6 +68,8 @@ position = Vector2( -18.3044, -143.205 )
 shape = SubResource( 2 )
 
 [node name="AttackA1" type="Area2D" parent="Body/HitboxGroup"]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA1"]
@@ -74,6 +80,8 @@ shape = SubResource( 3 )
 script = ExtResource( 6 )
 
 [node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup"]
+collision_layer = 0
+collision_mask = 32
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1"]
@@ -96,5 +104,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[editable path="Body/CharacterRig"]

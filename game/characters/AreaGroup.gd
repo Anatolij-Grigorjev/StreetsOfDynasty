@@ -55,5 +55,13 @@ func disable_all_areas() -> void:
 		all_areas[area_name].visible = false
 		
 		
+func get_enabled_areas() -> Array:
+	var enabled_areas := []
+	for area_name in all_areas:
+		if (all_areas[area_name].visible):
+			enabled_areas.append(all_areas[area_name])
+	return enabled_areas
+		
+
 func _get_area_shape(area: Area2D) -> CollisionShape2D:
 	return area.get_child(0) as CollisionShape2D

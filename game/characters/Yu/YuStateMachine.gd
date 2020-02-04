@@ -8,7 +8,7 @@ enum AttackInput {
 
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
-onready var current_state: Label = get_node(@"../CurrentState")
+onready var current_state_lbl: Label = get_node(@"../CurrentState")
 
 
 func _ready():
@@ -19,7 +19,7 @@ func _ready():
 
 func set_state(next_state: String) -> void:
 	.set_state(next_state)
-	current_state.text = state
+	current_state_lbl.text = state
 	
 	
 func _get_next_state(delta: float) -> String:

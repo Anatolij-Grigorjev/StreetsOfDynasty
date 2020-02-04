@@ -60,6 +60,10 @@ _global_script_class_icons={
 "Stopwatch": ""
 }
 
+[Debug]
+
+max_remote_stdout_chars_per_second=""
+
 [application]
 
 config/name="Streets Of Dynasty"
@@ -74,6 +78,10 @@ settings/stdout/print_fps=true
 
 window/size/width=1280
 window/size/height=720
+
+[global]
+
+max_remote_stdout_chars_per_second=false
 
 [input]
 
@@ -111,6 +119,11 @@ attack_normal={
 [logging]
 
 file_logging/enable_file_logging=true
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=32768
+limits/debugger_stdout/max_messages_per_frame=100
 
 [rendering]
 
