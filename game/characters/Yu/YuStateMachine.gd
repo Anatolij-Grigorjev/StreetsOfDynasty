@@ -25,20 +25,27 @@ func set_state(next_state: String) -> void:
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
+	var hurting: bool = entity.is_hurting
 	match(state):
 		"Idle":
+			if (hurting):
+				return "Hurt"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_input == AttackInput.NORMAL):
 				return "AttackA1"
 			return NO_STATE
 		"Walk":
+			if (hurting):
+				return "Hurt"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
 			if (attack_input == AttackInput.NORMAL):
 				return "AttackA1"
 			return NO_STATE
 		"AttackA1":
+			if (hurting):
+				return "Hurt"
 			var attack_state: AttackState = state_nodes[state] as AttackState
 			if (not attack_state.can_change_attack):
 				return NO_STATE
@@ -47,6 +54,11 @@ func _get_next_state(delta: float) -> String:
 			if (attack_state.is_attack_over):
 				return "Idle"
 			return NO_STATE
+		"Hurt":
+			var state_node = state_nodes[state]
+			if (state_node.is_hurting):
+				return NO_STATE
+			return "Idle"
 		_:
 			breakpoint
 			return NO_STATE

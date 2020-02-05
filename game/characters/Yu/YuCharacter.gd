@@ -8,10 +8,19 @@ var velocity = Vector2()
 
 onready var anim: AnimationPlayer = $Body/CharacterRig/AnimationPlayer
 onready var fsm: StateMachine = $FSM
+onready var hitboxes: AreaGroup = $Body/HitboxGroup
+
+var is_hurting = false
 
 func _ready() -> void:
-	pass 
+	for hitbox in hitboxes:
+		hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
 	
 	
 func _process(delta: float) -> void:
+	pass
+	
+	
+func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
+	is_hurting = true
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://characters/Yu/YuCharacter.gd" type="Script" id=1]
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=7]
 [ext_resource path="res://characters/Yu/AttackA1.gd" type="Script" id=8]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=9]
+[ext_resource path="res://characters/Yu/Hurt.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -39,6 +40,11 @@ script = ExtResource( 3 )
 
 [node name="AttackA1" type="Node" parent="FSM"]
 script = ExtResource( 8 )
+
+[node name="Hurt" type="Node" parent="FSM"]
+script = ExtResource( 10 )
+
+[node name="Timer" type="Timer" parent="FSM/Hurt"]
 
 [node name="Body" type="Node2D" parent="."]
 
