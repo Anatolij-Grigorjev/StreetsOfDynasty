@@ -13,7 +13,7 @@ onready var hitboxes: AreaGroup = $Body/HitboxGroup
 var is_hurting = false
 
 func _ready() -> void:
-	for hitbox in hitboxes:
+	for hitbox in hitboxes.get_children():
 		hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
 	
 	

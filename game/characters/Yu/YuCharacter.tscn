@@ -43,6 +43,7 @@ script = ExtResource( 8 )
 
 [node name="Hurt" type="Node" parent="FSM"]
 script = ExtResource( 10 )
+hurt_duration = 1.2
 
 [node name="Timer" type="Timer" parent="FSM/Hurt"]
 

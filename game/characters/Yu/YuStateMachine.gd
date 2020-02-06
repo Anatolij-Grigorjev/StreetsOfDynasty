@@ -25,7 +25,7 @@ func set_state(next_state: String) -> void:
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
-	var hurting: bool = entity.is_hurting
+	var hurting: bool = entity.is_hurting or Input.is_action_pressed("debug1")
 	match(state):
 		"Idle":
 			if (hurting):

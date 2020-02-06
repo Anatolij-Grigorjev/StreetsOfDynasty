@@ -22,12 +22,12 @@ func process_state(delta: float):
 func enter_state(prev_state: String):
 	is_hurting = true
 	hurt_time.start()
-	#TODO: hurt animation
-	pass
+	entity.anim.play("hurt_low")
+	fsm.hitboxes.disable_all_areas()
 	
 	
 func exit_state(next_state: String):
-	pass 
+	entity.is_hurting = false
 	
 
 func _on_hurt_time_end():
