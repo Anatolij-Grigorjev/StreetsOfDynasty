@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://characters/Yu/YuCharacter.gd" type="Script" id=1]
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://characters/Yu/AttackA1.gd" type="Script" id=8]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=9]
 [ext_resource path="res://characters/Yu/Hurt.gd" type="Script" id=10]
+[ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -20,10 +21,13 @@ extents = Vector2( 52.6578, 185.16 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 69.0345, 194.518 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 201.246, 42.3184 )
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 42.1761, 150.383 )
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 201.246, 42.3184 )
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 93.043, 36.2723 )
 
 [node name="YuMain" type="KinematicBody2D"]
@@ -52,11 +56,18 @@ hurt_duration = 1.2
 [node name="CharacterRig" parent="Body" instance=ExtResource( 5 )]
 position = Vector2( -6.80554, -158.795 )
 
+[node name="Sprite" parent="Body/CharacterRig" index="0"]
+position = Vector2( 0, 0 )
+texture = ExtResource( 11 )
+hframes = 5
+frame = 0
+
 [node name="HitboxGroup" type="Node2D" parent="Body"]
 script = ExtResource( 6 )
 entity_path = NodePath("../../../YuMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup"]
+visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 7 )
@@ -66,6 +77,7 @@ position = Vector2( 3.1915, -160.209 )
 shape = SubResource( 1 )
 
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup"]
+visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 7 )
@@ -75,6 +87,7 @@ position = Vector2( -18.3044, -143.205 )
 shape = SubResource( 2 )
 
 [node name="AttackA1" type="Area2D" parent="Body/HitboxGroup"]
+visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 7 )
@@ -83,7 +96,15 @@ script = ExtResource( 7 )
 position = Vector2( -10.6253, -145.493 )
 shape = SubResource( 3 )
 
+[node name="HurtLow1" type="Area2D" parent="Body/HitboxGroup"]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/HurtLow1"]
+position = Vector2( -13.8321, -176.36 )
+shape = SubResource( 6 )
+
 [node name="AttackboxGroup" type="Node2D" parent="Body"]
+visible = false
 script = ExtResource( 6 )
 
 [node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup"]
@@ -93,11 +114,11 @@ script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1"]
 position = Vector2( 235.146, -220.449 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Terrain" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5639, 15.6388 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CurrentState" type="Label" parent="."]
 margin_left = -60.0
@@ -111,3 +132,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="Body/CharacterRig"]

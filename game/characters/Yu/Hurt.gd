@@ -23,7 +23,7 @@ func enter_state(prev_state: String):
 	is_hurting = true
 	hurt_time.start()
 	entity.anim.play("hurt_low")
-	fsm.hitboxes.disable_all_areas()
+	fsm.hitboxes.switch_to_area("HurtLow")
 	
 	
 func exit_state(next_state: String):

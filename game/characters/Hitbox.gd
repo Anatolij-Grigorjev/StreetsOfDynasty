@@ -7,11 +7,26 @@ The expected client entity of this is a CharacterTemplate
 """
 signal hitbox_hit(hitbox, attackbox)
 
-
+export(float) var attack_recovery: float = 0.5
 export(String) var hit_anim: String = "hit"
 onready var shape: CollisionPolygon2D = get_child(0)
 
+var recent_attacks: Dictionary = {}
+
+
+func _process(delta):
+	var recovered_attacks = []
+	for attackbox in recent_attacks:
+		recent_attacks[attackbox] -= delta
+		if (recent_attacks[attackbox] <= 0.0):
+			recovered_attacks.append(attackbox)
+
+	for attackbox in recovered_attacks:
+		recent_attacks.erase(attackbox)
+
 
 func process_hit(attack) -> void:
-	print("%s:%s got hit!" % [owner.name, name])
-	emit_signal("hitbox_hit", self, attack)
+	if (not recent_attacks.has(attack)):
+		print("%s:%s got hit!" % [owner.name, name])
+		recent_attacks[attack] = attack_recovery
+		emit_signal("hitbox_hit", self, attack)

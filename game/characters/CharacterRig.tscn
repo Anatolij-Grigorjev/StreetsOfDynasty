@@ -57,7 +57,7 @@ tracks/3/keys = {
 "values": [ Vector2( -187.712, -34.1745 ), Vector2( -89.908, -40.2873 ), Vector2( -147.979, -38.4534 ), Vector2( 165.604, -68.4059 ), Vector2( -108.246, -67.1833 ), Vector2( -111.914, -73.9074 ), Vector2( -108.246, -39.0648 ), Vector2( -23.8905, -40.2873 ), Vector2( -102.134, -20.7265 ), Vector2( -144.923, -21.9491 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "hurt_low"
 length = 1.2
 tracks/0/type = "value"
@@ -121,7 +121,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -173,7 +173,7 @@ tracks/3/keys = {
 "values": [ Vector2( -2.60461, -15.6933 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -236,7 +236,7 @@ tracks/4/keys = {
 "values": [ Vector2( 16.7673, 29.3429 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 2.6
 loop = true
 tracks/0/type = "value"
@@ -291,15 +291,16 @@ tracks/3/keys = {
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+position = Vector2( -187.712, -34.1745 )
+texture = ExtResource( 2 )
 offset = Vector2( -55.0157, 16.4309 )
-hframes = 5
+hframes = 11
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
 anims/attack_a1 = SubResource( 1 )
-anims/hurt_low = SubResource( 5 )
-anims/idle = SubResource( 2 )
-anims/turn = SubResource( 3 )
-anims/walk = SubResource( 4 )
+anims/hurt_low = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/turn = SubResource( 4 )
+anims/walk = SubResource( 5 )
