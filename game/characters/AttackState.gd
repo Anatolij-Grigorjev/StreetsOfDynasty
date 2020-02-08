@@ -18,43 +18,26 @@ var can_change_attack := true
 var is_attack_over := true
 #reference to attackboxes required to enable specific ones during attack
 var attackboxes: AreaGroup
-"""
-Timeline of timebox activations during this attack.
-A timeline item can be described as the object:
-	{
-		time: 0.34, <-- point to do action
-		enable: false, <-- flag to disable or enable the attackbox
-		attackbox: "A1" <-- name of attackbox to feed into area group
-	}
-"""
-var attackbox_timeline := []
-var timeline_idx := 0
+#reference to the name areagroup timeline node fo this attack state
+#if this is valid, the state will follow a timeline
+var areas_timeline_name: String
+var areas_timeline_items: Array
+var areas_timeline: AreaGroupTimeline
+
+
+func _ready():
+	call_deferred("_set_attackboxes")
+	call_deferred("_set_timeline")
+
 
 func process_state(delta: float):
 	_check_can_change_attack()
 	_check_attack_finished()
-	_apply_attackbox_timeline()
+	if (is_instance_valid(areas_timeline)):
+		areas_timeline.process_timeline(delta)
 	for attackbox in attackboxes.get_enabled_areas():
 		attackbox.process_attack()
 	attack_time += delta
-	
-	
-func _apply_attackbox_timeline():
-	if (timeline_idx >= attackbox_timeline.size()):
-		return
-	while (
-		timeline_idx < attackbox_timeline.size()
-		and attackbox_timeline[timeline_idx].time < attack_time
-	):
-		_apply_attackbox_timeline_item(attackbox_timeline[timeline_idx])
-		timeline_idx += 1
-
-
-func _apply_attackbox_timeline_item(timeline_item: Dictionary):
-	if (timeline_item.enable):
-		attackboxes.enable_area(timeline_item.attackbox)
-	else:
-		attackboxes.disable_area(timeline_item.attackbox)
 
 	
 func _check_can_change_attack():
@@ -72,10 +55,22 @@ func _check_attack_finished():
 func enter_state(prev_state: String):
 	is_attack_over = false
 	attack_time = 0.0
-	timeline_idx = 0
+	if (is_instance_valid(areas_timeline)):
+		areas_timeline.reset()
 
 
 func _finish_attack():
 	is_attack_over = true
 	can_change_attack = true
+	
+	
+func _set_attackboxes():
+	attackboxes = fsm.attackboxes
+
+
+func _set_timeline():
+	if (areas_timeline_name):
+		areas_timeline = attackboxes.find_node(areas_timeline_name) as AreaGroupTimeline
+		if (areas_timeline_items):
+			areas_timeline.areas_timeline = areas_timeline_items
 	

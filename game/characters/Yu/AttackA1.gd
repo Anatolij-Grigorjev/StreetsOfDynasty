@@ -4,24 +4,19 @@ State describing first normal attack in character attack chain
 """
 
 func _ready():
-	._ready()
-	attackbox_timeline = [
+	areas_timeline_name = "AttackA1Timeline"
+	areas_timeline_items = [
 		{
 			"time": 0.2,
 			"enable": true,
-			"attackbox": "AttackA1"
+			"area": "AttackA1"
 		},
 		{
 			"time": 0.5,
 			"enable": false,
-			"attackbox": "AttackA1"
+			"area": "AttackA1"
 		}
 	]
-	call_deferred("_set_attackboxes")
-	
-	
-func _set_attackboxes():
-	self.attackboxes = fsm.attackboxes
 
 
 func process_state(delta: float):

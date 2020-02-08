@@ -29,7 +29,7 @@ func _get_next_state(delta: float) -> String:
 	match(state):
 		"Idle":
 			if (hurting):
-				return "Hurt"
+				return "HurtLow"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_input == AttackInput.NORMAL):
@@ -37,7 +37,7 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"Walk":
 			if (hurting):
-				return "Hurt"
+				return "HurtLow"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
 			if (attack_input == AttackInput.NORMAL):
@@ -45,7 +45,7 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"AttackA1":
 			if (hurting):
-				return "Hurt"
+				return "HurtLow"
 			var attack_state: AttackState = state_nodes[state] as AttackState
 			if (not attack_state.can_change_attack):
 				return NO_STATE
@@ -54,7 +54,7 @@ func _get_next_state(delta: float) -> String:
 			if (attack_state.is_attack_over):
 				return "Idle"
 			return NO_STATE
-		"Hurt":
+		"HurtLow":
 			var state_node = state_nodes[state]
 			if (state_node.is_hurting):
 				return NO_STATE
