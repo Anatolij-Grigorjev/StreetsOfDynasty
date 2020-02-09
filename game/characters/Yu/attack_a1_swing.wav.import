@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/attack_a1_swing.wav-fb968b8c7bed47660c39e5de2654f9bd.sample"
+
+[deps]
+
+source_file="res://characters/Yu/attack_a1_swing.wav"
+dest_files=[ "res://.import/attack_a1_swing.wav-fb968b8c7bed47660c39e5de2654f9bd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
