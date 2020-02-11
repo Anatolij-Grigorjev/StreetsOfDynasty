@@ -23,4 +23,13 @@ func _process(delta: float) -> void:
 	
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	is_hurting = true
+	#TODO: instance correct damage spark
+	match(attackbox.damage_type):
+		AttackBox.DamageType.BLUNT:
+			pass
+		AttackBox.DamageType.BLEEDING:
+			pass
+		_:
+			print("Unknown damage type %s" % attackbox.damage_type)
+			breakpoint
 	pass
