@@ -365,11 +365,11 @@ tracks/3/keys = {
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -108.246, -39.0648 )
+position = Vector2( -187.712, -34.1745 )
 texture = ExtResource( 2 )
 offset = Vector2( -55.0157, 16.4309 )
 hframes = 11
-frame = 7
+frame = 1
 
 [node name="TrailFX" type="Sprite" parent="."]
 visible = false
