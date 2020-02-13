@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://characters/Yu/YuCharacter.gd" type="Script" id=1]
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://characters/Yu/AttackA1.gd" type="Script" id=8]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=9]
 [ext_resource path="res://characters/Yu/HurtLow.gd" type="Script" id=10]
-[ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=11]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -62,12 +61,6 @@ script = ExtResource( 10 )
 
 [node name="CharacterRig" parent="Body" instance=ExtResource( 5 )]
 position = Vector2( -6.80554, -158.795 )
-
-[node name="Sprite" parent="Body/CharacterRig" index="0"]
-position = Vector2( 0, 0 )
-texture = ExtResource( 11 )
-hframes = 5
-frame = 2
 
 [node name="HitboxGroup" type="Node2D" parent="Body"]
 script = ExtResource( 6 )
@@ -174,5 +167,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[editable path="Body/CharacterRig"]

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name CharacterTemplate
 
-var SparkBlunt = preload("res://characters/spritefx/SparkBlunt.tscn")
+var Spark = preload("res://characters/spritefx/Spark.tscn")
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 var velocity = Vector2()
@@ -24,23 +24,27 @@ func _process(delta: float) -> void:
 	
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	is_hurting = true
-	var hitbox_center_position = (
-			hitbox.shape.position 
-			+ hitbox.shape.shape.extents
-		)
-	#TODO: instance correct damage spark
-	match(attackbox.damage_type):
+	var spark_instance: Node2D = _build_random_spark(hitbox)
+	var damage_type = randi() % 2 #attackbox.damage_type
+	match(damage_type):
 		AttackBox.DamageType.BLUNT:
-			var spark = SparkBlunt.instance()
-			var position = Utils.rand_point(5, 5) + hitbox_center_position
-			var rotation = randf() * 360
-			get_tree().get_root().add_child(spark)
-			spark.global_position = position
-			spark.global_rotation_degrees = rotation
+			spark_instance.get_node("AnimationPlayer").play("blunt")
 			pass
 		AttackBox.DamageType.BLEEDING:
+			spark_instance.get_node("AnimationPlayer").play("bleeding")
 			pass
 		_:
 			print("Unknown damage type %s" % attackbox.damage_type)
 			breakpoint
 	pass
+
+func _build_random_spark(hitbox: Hitbox) -> Node2D:
+	var hitbox_center_position = hitbox.shape.global_position
+	var spark = Spark.instance()
+	var position = Utils.rand_point(10, 5) + hitbox_center_position
+	var rotation = randf() * 360
+	get_tree().get_root().add_child(spark)
+	spark.global_position = position
+	spark.global_rotation_degrees = rotation
+	
+	return spark

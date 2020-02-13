@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=1]
 [ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=2]
-[ext_resource path="res://characters/Yu/spritesheets/turn.png" type="Texture" id=3]
 [ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=4]
 [ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=5]
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=6]
@@ -194,6 +193,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("TrailFX:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 1.5
@@ -245,69 +256,6 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -2.60461, -15.6933 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -18.7201, -26.7196 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite:hframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:offset")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 16.7673, 29.3429 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -384,7 +332,6 @@ method_call_mode = 1
 anims/attack_a1 = SubResource( 1 )
 anims/hurt_low = SubResource( 2 )
 anims/idle = SubResource( 3 )
-anims/turn = SubResource( 4 )
 anims/walk = SubResource( 5 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="."]
