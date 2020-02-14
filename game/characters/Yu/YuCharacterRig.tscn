@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
+[ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=3]
+[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=4]
+[ext_resource path="res://characters/Yu/animations/attack_a1.tres" type="Animation" id=5]
+[ext_resource path="res://characters/Yu/animations/hurt_low.tres" type="Animation" id=6]
+[ext_resource path="res://characters/Yu/animations/idle.tres" type="Animation" id=7]
+[ext_resource path="res://characters/Yu/animations/walk.tres" type="Animation" id=8]
+
+[node name="YuCharacterRig" instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( -187.712, -34.1745 )
+texture = ExtResource( 3 )
+offset = Vector2( -55.0157, 16.4309 )
+hframes = 11
+frame = 1
+
+[node name="TrailFX" type="Sprite" parent="." index="1"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 231.353, -89.2322 )
+rotation = -2.90925
+scale = Vector2( 1, 1 )
+texture = ExtResource( 4 )
+flip_h = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AnimationPlayer" parent="." index="2"]
+method_call_mode = 1
+anims/attack_a1 = ExtResource( 5 )
+anims/hurt_low = ExtResource( 6 )
+anims/idle = ExtResource( 7 )
+anims/walk = ExtResource( 8 )
+
+[node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}

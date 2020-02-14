@@ -1,5 +1,11 @@
 extends KinematicBody2D
 class_name CharacterTemplate
+"""
+Base class for game characters. 
+Supports having hitboxes and attackboxes, receiving messages about
+damage (foreign attackbox contact on own hitbox), sets move speed
+"""
+
 
 var Spark = preload("res://characters/spritefx/Spark.tscn")
 
@@ -7,9 +13,9 @@ export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 var velocity = Vector2()
 
 
-onready var anim: AnimationPlayer = $Body/CharacterRig/AnimationPlayer
 onready var fsm: StateMachine = $FSM
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
+onready var attackboxes: AreaGroup = $Body/AttackboxGroup
 
 var is_hurting = false
 

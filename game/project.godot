@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "CharacterTemplate",
 "language": "GDScript",
-"path": "res://characters/Yu/YuCharacter.gd"
+"path": "res://characters/CharacterTemplate.gd"
 }, {
 "base": "Area2D",
 "class": "Hitbox",
