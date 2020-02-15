@@ -27,6 +27,9 @@ func _process(delta):
 
 func process_hit(attack) -> void:
 	if (not recent_attacks.has(attack)):
-		print("%s:%s got hit!" % [owner.name, name])
 		recent_attacks[attack] = attack_recovery
 		emit_signal("hitbox_hit", self, attack)
+		
+		
+func _to_string():
+	return "HB[%s:%s]" % [owner.name, name]

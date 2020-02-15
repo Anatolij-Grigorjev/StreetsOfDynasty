@@ -12,11 +12,11 @@
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( -144.923, -21.9491 )
+position = Vector2( -187.712, -34.1745 )
 texture = ExtResource( 3 )
 offset = Vector2( -55.0157, 16.4309 )
 hframes = 11
-frame = 10
+frame = 1
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false

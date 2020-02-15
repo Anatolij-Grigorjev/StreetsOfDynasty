@@ -48,3 +48,7 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 		and area is Hitbox
 		and area.owner != owner
 	)
+	
+	
+func _to_string():
+	return "AB[%s:%s]" % [owner.name, name]
