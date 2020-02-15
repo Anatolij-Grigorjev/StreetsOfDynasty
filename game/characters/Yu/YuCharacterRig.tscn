@@ -12,18 +12,17 @@
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( -187.712, -34.1745 )
+position = Vector2( -144.923, -21.9491 )
 texture = ExtResource( 3 )
 offset = Vector2( -55.0157, 16.4309 )
 hframes = 11
-frame = 1
+frame = 10
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 231.353, -89.2322 )
-rotation = -2.90925
-scale = Vector2( 1, 1 )
+rotation = -2.90924
 texture = ExtResource( 4 )
 flip_h = true
 __meta__ = {

@@ -6,22 +6,14 @@ enum AttackInput {
 	SPECIAL = 2
 }
 
-onready var hitboxes: AreaGroup
-onready var attackboxes: AreaGroup
+onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
+onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 onready var current_state_lbl: Label = get_node(@"../CurrentState")
 
 
 func _ready():
 	._ready()
-	call_deferred("_init_state_machine")
-	
-	
-
-func _init_state_machine():
-	self.hitboxes = entity.hitboxes
-	self.attackboxes = entity.attackboxes
-	attackboxes.call_deferred("disable_all_areas")
-	set_state("Idle")
+	call_deferred("set_state", "Idle")
 
 
 func set_state(next_state: String) -> void:
