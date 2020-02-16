@@ -85,8 +85,9 @@ position = Vector2( 500, -150 )
 shape = SubResource( 4 )
 
 [node name="YuCharacterMain" parent="." instance=ExtResource( 3 )]
-position = Vector2( 215.202, 445.419 )
+position = Vector2( 260.245, 449.422 )
+scale = Vector2( 0.75, 0.75 )
 
 [node name="YuCharacterMain2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 592.557, 444.418 )
-scale = Vector2( -1, 1 )
+scale = Vector2( -0.75, 0.75 )

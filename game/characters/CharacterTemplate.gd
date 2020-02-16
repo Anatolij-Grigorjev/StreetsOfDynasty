@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	is_hurting = true
 	var spark_instance: Node2D = _build_random_spark(hitbox)
-	var damage_type = randi() % 2 #attackbox.damage_type
+	var damage_type = randi() % AttackBox.DamageType.size() #attackbox.damage_type
 	match(damage_type):
 		AttackBox.DamageType.BLUNT:
 			spark_instance.get_node("AnimationPlayer").play("blunt")
