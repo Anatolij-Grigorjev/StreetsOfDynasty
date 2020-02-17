@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://areas/whitebox/whitebox_sky.png" type="Texture" id=1]
 [ext_resource path="res://areas/whitebox/whitebox_floor.png" type="Texture" id=2]
 [ext_resource path="res://characters/Yu/YuCharacterMain.tscn" type="PackedScene" id=3]
+[ext_resource path="res://characters/Mudman/MudmanCharacterMain.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 150, 420 )
@@ -88,6 +89,6 @@ shape = SubResource( 4 )
 position = Vector2( 260.245, 449.422 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="YuCharacterMain2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 592.557, 444.418 )
-scale = Vector2( -0.75, 0.75 )
+[node name="MudmanCharacterMain" parent="." instance=ExtResource( 4 )]
+position = Vector2( 541.509, 351.33 )
+scale = Vector2( -1, 1 )
