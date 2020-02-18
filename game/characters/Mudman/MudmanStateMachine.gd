@@ -3,15 +3,24 @@ extends StateMachine
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
+var target: Node2D
 
 func _ready():
 	._ready()
 	call_deferred("set_state", "Idle")
+	if (get_tree().get_nodes_in_group("Player")):
+		var player = get_tree().get_nodes_in_group("Player")[0]
+		call_deferred("_set_target", player)
+	
+
+func _set_target(new_target: Node2D):
+	self.target = new_target
 	
 	
 func _get_next_state(delta: float) -> String:
+	
 	var move_direction = _get_move_direction()
-	var hurting: bool = entity.is_hurting or Input.is_action_pressed("debug1")
+	var hurting: bool = entity.is_hurting
 	match(state):
 		"Idle":
 			if (hurting):
@@ -36,7 +45,5 @@ func _get_next_state(delta: float) -> String:
 
 
 func _get_move_direction() -> Vector2:
-	var move_direction_horiz = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
-	var move_direction_vert = -int(Input.is_action_pressed("move_up")) + int(Input.is_action_pressed("move_down"))
-	
-	return Vector2(move_direction_horiz, move_direction_vert).normalized()
+	var target_location: Vector2 = target.global_position
+	return entity.global_position.direction_to(target_location).normalized()

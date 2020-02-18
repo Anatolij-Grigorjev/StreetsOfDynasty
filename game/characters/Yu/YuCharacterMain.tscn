@@ -40,7 +40,9 @@ extents = Vector2( 201.246, 42.3184 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 93.043, 36.2723 )
 
-[node name="YuCharacterMain" instance=ExtResource( 2 )]
+[node name="YuCharacterMain" groups=[
+"Player",
+] instance=ExtResource( 2 )]
 script = ExtResource( 11 )
 
 [node name="FSM" parent="." index="0"]
