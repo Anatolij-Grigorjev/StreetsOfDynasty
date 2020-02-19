@@ -1,9 +1,13 @@
 extends StateMachine
 
+
+export(float) var min_target_proximity: float = 150
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
+
 var target: Node2D
+
 
 func _ready():
 	._ready()
@@ -19,7 +23,7 @@ func _set_target(new_target: Node2D):
 	
 func _get_next_state(delta: float) -> String:
 	
-	var move_direction = _get_move_direction()
+	var move_direction = _get_move_direction() if target else Vector2.ZERO
 	var hurting: bool = entity.is_hurting
 	match(state):
 		"Idle":
@@ -45,5 +49,8 @@ func _get_next_state(delta: float) -> String:
 
 
 func _get_move_direction() -> Vector2:
-	var target_location: Vector2 = target.global_position
-	return entity.global_position.direction_to(target_location).normalized()
+	var target_distance := target.global_position.distance_to(entity.global_position)
+	if (target_distance > min_target_proximity):
+		return entity.global_position.direction_to(target.global_position)
+	else:
+		return Vector2.ZERO

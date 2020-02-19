@@ -91,4 +91,3 @@ scale = Vector2( 0.75, 0.75 )
 
 [node name="MudmanCharacterMain" parent="." instance=ExtResource( 4 )]
 position = Vector2( 541.509, 351.33 )
-scale = Vector2( -1, 1 )
