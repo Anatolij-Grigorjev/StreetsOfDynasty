@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=9]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
+[ext_resource path="res://characters/WaitState.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 31.6954
@@ -44,6 +45,12 @@ script = ExtResource( 3 )
 [node name="Hurt" type="Node" parent="FSM" index="2"]
 script = ExtResource( 4 )
 hurt_duration = 0.6
+
+[node name="WaitIdle" type="Node" parent="FSM" index="3"]
+script = ExtResource( 11 )
+wait_animation = "idle"
+wait_hitbox = "Idle"
+next_state = "Walk"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 
@@ -100,5 +107,20 @@ entity_path = NodePath("../../../MudmanCharacterMain/Body")
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( -7.46237, 87.5129 )
 shape = SubResource( 1 )
+
+[node name="CurrentState" type="Label" parent="." index="3"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -58.8647
+margin_top = -231.975
+margin_right = 41.1353
+margin_bottom = -206.975
+rect_min_size = Vector2( 100, 25 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 
 [editable path="Body/MudmanCharacterRig"]

@@ -1,12 +1,15 @@
 extends StateMachine
 
 
-export(float) var min_target_proximity: float = 150
+export(Array, float) var target_proximity_phases = [350, 250, 100]
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
+onready var current_state_lbl: Label = get_node(@"../CurrentState")
 
 
 var target: Node2D
+
+var proximity_phase: int = 0
 
 
 func _ready():
@@ -19,6 +22,13 @@ func _ready():
 
 func _set_target(new_target: Node2D):
 	self.target = new_target
+	
+	
+func set_state(next_state: String) -> void:
+	.set_state(next_state)
+	#setter might get called before node init
+	if (is_instance_valid(current_state_lbl)):
+		current_state_lbl.text = state
 	
 	
 func _get_next_state(delta: float) -> String:
@@ -37,20 +47,48 @@ func _get_next_state(delta: float) -> String:
 				return "Hurt"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
-			return NO_STATE
+			var should_keep_moving = _check_approached_proximity()
+			if (should_keep_moving):
+				return NO_STATE
+			else:
+				_build_next_wait()
+				return "WaitIdle"
 		"Hurt":
 			var state_node = state_nodes[state]
 			if (state_node.is_hurting):
 				return NO_STATE
 			return "Idle"
+		"WaitIdle":
+			var state_node = state_nodes[state] as WaitState
+			if (hurting):
+				return "Hurt"
+			if (state_node.waiting_over):
+				return state_node.next_state
+			else:
+				return NO_STATE
 		_:
 			breakpoint
 			return NO_STATE
 
 
 func _get_move_direction() -> Vector2:
-	var target_distance := target.global_position.distance_to(entity.global_position)
-	if (target_distance > min_target_proximity):
+	if (is_instance_valid(target)):
 		return entity.global_position.direction_to(target.global_position)
 	else:
 		return Vector2.ZERO
+		
+		
+func _check_approached_proximity():
+	var distance_to_target = entity.global_position.distance_to(target.global_position)
+	var initial_phase := proximity_phase
+	while(proximity_phase < target_proximity_phases.size() and 
+		distance_to_target < target_proximity_phases[proximity_phase]):
+			proximity_phase += 1
+	
+	return initial_phase != proximity_phase
+	
+	
+func _build_next_wait():
+	var wait_state = state_nodes["WaitIdle"] as WaitState
+	wait_state.wait_time = rand_range(0.9, 3.5)
+	
