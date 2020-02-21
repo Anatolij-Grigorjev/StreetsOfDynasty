@@ -3,6 +3,9 @@ class_name StateMachine
 """
 Abstract state machine interface
 """
+signal state_changed(old_state, new_state)
+
+
 const NO_STATE: String = "<NO_STATE>"
 
 export(String) var state: String = NO_STATE setget set_state
@@ -32,16 +35,17 @@ func _process(delta: float) -> void:
 			set_state(next_state)
 	
 
-func set_state(next_state: String) -> void:
+func set_state(next_state: String):
 	previous_state = state
 	state = next_state
+	emit_signal("state_changed", previous_state, next_state)
 	
 	if (previous_state != NO_STATE):
 		_exit_state(previous_state, state)
 		
 	if (state != NO_STATE):
 		_enter_state(state, previous_state)
-		
+	
 
 func get_state(state_name: String) -> State:
 	return state_nodes[state_name]
@@ -59,7 +63,7 @@ func _exit_state(prev_state: String, next_state: String):
 		get_state(next_state).enter_state(prev_state)
 
 
-func _process_state(delta: float) -> void:
+func _process_state(delta: float):
 	get_state(state).process_state(delta)
 
 

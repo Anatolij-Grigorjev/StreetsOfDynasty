@@ -8,19 +8,17 @@ enum AttackInput {
 
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
-onready var current_state_lbl: Label = get_node(@"../CurrentState")
 
 
 func _ready():
 	._ready()
 	call_deferred("set_state", "Idle")
+	
 
-
-func set_state(next_state: String) -> void:
+func set_state(next_state: String):
 	.set_state(next_state)
-	#setter might get called before node init
-	if (is_instance_valid(current_state_lbl)):
-		current_state_lbl.text = state
+	if (entity and is_instance_valid(entity.LOG)):
+		entity.LOG.info("'{}' -> '{}'", [previous_state, next_state])
 	
 	
 func _get_next_state(delta: float) -> String:

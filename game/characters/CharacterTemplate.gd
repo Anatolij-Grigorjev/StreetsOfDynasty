@@ -20,6 +20,7 @@ onready var attackboxes: AreaGroup = $Body/AttackboxGroup
 var is_hurting = false
 
 func _ready() -> void:
+	fsm.connect("state_changed", self, "_on_FSM_state_changed")
 	for hitbox in hitboxes.get_children():
 		hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
 	
@@ -54,3 +55,7 @@ func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	spark.global_rotation_degrees = rotation
 	
 	return spark
+	
+	
+func _on_FSM_state_changed(old_state: String, new_state: String):
+	pass

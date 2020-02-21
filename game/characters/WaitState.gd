@@ -30,6 +30,4 @@ func enter_state(prev_state: String):
 	
 	
 func exit_state(next_state: String):
-	#reset proximity phase
-	fsm.proximity_phase = 0
 	pass 

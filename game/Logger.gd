@@ -32,6 +32,11 @@ enum LogLevel {
 	ERROR = 3
 }
 
+enum NamingScheme {
+	PARENT = 0,
+	OWNER = 1
+}
+
 """
 Is this logger completely disabled
 """
@@ -44,6 +49,11 @@ export(Array, LogLevel) var enabled_levels: Array = [
 		LogLevel.WARN, 
 		LogLevel.ERROR
 	]
+"""
+Should the name of this logger be resolved only by parent node
+or by using owner of entire hierarchy
+"""
+export(NamingScheme) var naming_scheme = NamingScheme.PARENT
 
 """
 Log descriptor
@@ -55,11 +65,25 @@ var _logger_name: String
 Create a bound logger instance with the given descriptor.
 """
 func _ready():
-	_logger_name = (
-		get_parent() if is_instance_valid(get_parent()) 
-			else self
-		).name
+	_logger_name = _resolve_logger_name()
 	info("Created logger '{}'!", [_logger_name])
+	
+	
+func _resolve_logger_name() -> String:
+	var parent_node: Node = get_parent()
+	match(naming_scheme):
+		NamingScheme.PARENT:
+			if (not is_instance_valid(parent_node)):
+				return name
+			else:
+				return parent_node.name
+		NamingScheme.OWNER:
+			return "%s.%s" % [owner.name, parent_node.name]
+		_:
+			print("WARN: Unknown logger naming scheme %s!" % naming_scheme)
+			return name
+	
+	
 	
 
 """

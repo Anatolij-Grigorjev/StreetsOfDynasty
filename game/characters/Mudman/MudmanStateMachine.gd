@@ -4,12 +4,11 @@ extends StateMachine
 export(Array, float) var target_proximity_phases = [350, 250, 100]
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
-onready var current_state_lbl: Label = get_node(@"../CurrentState")
 
 
 var target: Node2D
 
-var proximity_phase: int = 0
+var proximity_phase_idx: int = 0
 
 
 func _ready():
@@ -18,17 +17,15 @@ func _ready():
 	if (get_tree().get_nodes_in_group("Player")):
 		var player = get_tree().get_nodes_in_group("Player")[0]
 		call_deferred("_set_target", player)
+		
+func set_state(next_state: String):
+	.set_state(next_state)
+	if (is_instance_valid($Logger)):
+		$Logger.info("'{}' -> '{}'", [previous_state, next_state])
 	
 
 func _set_target(new_target: Node2D):
 	self.target = new_target
-	
-	
-func set_state(next_state: String) -> void:
-	.set_state(next_state)
-	#setter might get called before node init
-	if (is_instance_valid(current_state_lbl)):
-		current_state_lbl.text = state
 	
 	
 func _get_next_state(delta: float) -> String:
@@ -80,12 +77,13 @@ func _get_move_direction() -> Vector2:
 		
 func _check_approached_proximity():
 	var distance_to_target = entity.global_position.distance_to(target.global_position)
-	var initial_phase := proximity_phase
-	while(proximity_phase < target_proximity_phases.size() and 
-		distance_to_target < target_proximity_phases[proximity_phase]):
-			proximity_phase += 1
+	var initial_phase := proximity_phase_idx
+	while(proximity_phase_idx < target_proximity_phases.size() and 
+		distance_to_target < target_proximity_phases[proximity_phase_idx]):
+			$Logger.info("distance {}, passed proximity {}", [distance_to_target, target_proximity_phases[proximity_phase_idx]])
+			proximity_phase_idx += 1
 	
-	return initial_phase != proximity_phase
+	return initial_phase != proximity_phase_idx
 	
 	
 func _build_next_wait():

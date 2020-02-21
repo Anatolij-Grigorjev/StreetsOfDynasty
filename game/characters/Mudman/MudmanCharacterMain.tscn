@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=9]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
 [ext_resource path="res://characters/WaitState.gd" type="Script" id=11]
+[ext_resource path="res://Logger.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 31.6954
@@ -51,6 +52,10 @@ script = ExtResource( 11 )
 wait_animation = "idle"
 wait_hitbox = "Idle"
 next_state = "Walk"
+
+[node name="Logger" type="Node" parent="FSM" index="4"]
+script = ExtResource( 12 )
+naming_scheme = 1
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 
