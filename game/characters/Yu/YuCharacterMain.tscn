@@ -57,6 +57,8 @@ script = ExtResource( 5 )
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
 
+[node name="AttackMove" type="Tween" parent="FSM/AttackA1" index="0"]
+
 [node name="HurtLow" type="Node" parent="FSM" index="3"]
 script = ExtResource( 7 )
 
