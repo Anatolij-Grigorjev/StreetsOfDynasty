@@ -56,11 +56,13 @@ script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
+areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
 
 [node name="AttackMove" type="Tween" parent="FSM/AttackA1" index="0"]
 
 [node name="HurtLow" type="Node" parent="FSM" index="3"]
 script = ExtResource( 7 )
+areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( -6.80554, -158.795 )
@@ -168,7 +170,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLowTimeline" type="Node2D" parent="Body/HitboxGroup" index="7"]
+[node name="HitboxTimeline" type="Node2D" parent="Body/HitboxGroup" index="7"]
 script = ExtResource( 8 )
 __meta__ = {
 "_editor_description_": ""
@@ -192,7 +194,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AttackA1Timeline" type="Node2D" parent="Body/AttackboxGroup" index="1"]
+[node name="AttackboxTimeline" type="Node2D" parent="Body/AttackboxGroup" index="1"]
 script = ExtResource( 8 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]

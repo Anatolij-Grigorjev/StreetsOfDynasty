@@ -4,6 +4,7 @@ class_name AreaGroupTimeline
 AreaGroup extension that enables various area group 
 areas during a fixed timeline. 
 Can be reset and stepped through manually
+Supports concurrent work with multiple timelines within the same group
 """
 
 onready var area_group: AreaGroup = get_parent()
@@ -16,9 +17,9 @@ A timeline item can be described as the object:
 		area: "A1" <-- name of area to feed into area group
 	}
 """
-export(Array, Dictionary) var areas_timeline := []
-var iteration_time: float = 0.0
-var timeline_idx: int = 0
+export(Dictionary) var areas_timelines := {}
+var iteration_times: Dictionary = {}
+var timelines_idx: Dictionary = {}
 
 
 func _ready():
@@ -26,22 +27,32 @@ func _ready():
 	set_physics_process(false)
 	
 
-func reset():
-	timeline_idx = 0
-	iteration_time = 0.0
+func reset(group_id: String):
+	timelines_idx[group_id] = 0
+	iteration_times[group_id] = 0.0
+	
+
+func add_group_timeline(group_id: String, timeline_items: Array):
+	areas_timelines[group_id] = timeline_items
+	reset(group_id)
 	
 	
-func process_timeline(delta: float):
-	if (timeline_idx >= areas_timeline.size()):
+func process_timeline(group_id: String, delta: float):
+	var group_timeline_idx = timelines_idx[group_id]
+	var group_timeline = areas_timelines[group_id]
+	
+	if (group_timeline_idx >= group_timeline.size()):
 		return
 	while (
-		timeline_idx < areas_timeline.size()
-		and areas_timeline[timeline_idx].time < iteration_time
+		group_timeline_idx < group_timeline.size()
+		and group_timeline[group_timeline_idx].time < iteration_times[group_id]
 	):
-		_apply_timeline_item(areas_timeline[timeline_idx])
-		timeline_idx += 1
-		
-	iteration_time += delta
+		_apply_timeline_item(group_timeline[group_timeline_idx])
+		group_timeline_idx += 1
+	
+	#write values back into maps
+	timelines_idx[group_id] = group_timeline_idx
+	iteration_times[group_id] += delta
 	
 
 func _apply_timeline_item(timeline_item: Dictionary):

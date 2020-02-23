@@ -4,8 +4,8 @@ State describing first normal attack in character attack chain
 """
 
 func _ready():
-	areas_timeline_name = "AttackA1Timeline"
-	areas_timeline_items = [
+	group_id = "A1"
+	set_group_timeline([
 		{
 			"time": 0.2,
 			"enable": true,
@@ -16,7 +16,7 @@ func _ready():
 			"enable": false,
 			"area": "AttackA1"
 		}
-	]
+	])
 
 
 func process_state(delta: float):
@@ -39,13 +39,16 @@ func exit_state(next_state: String):
 func _move_with_attack(move_distance: float, move_duration: float):
 	if ($AttackMove.is_active()):
 		return
-	var move_to = entity.global_position.x + entity.scale.x * move_distance
-	$AttackMove.interpolate_property(
-		entity, 'global_position:x', 
-		null, move_to, move_duration, 
+	$AttackMove.interpolate_method(
+		entity, 'do_movement', 
+		Vector2.ZERO, Vector2(move_distance, 0), move_duration, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT
 	)
-	entity.LOG.info("move {} -> {} over {}s", 
-		[entity.global_position.x, move_to, move_duration]
+	entity.LOG.info("move {} -> {}, over {}s", 
+		[
+			entity.global_position.x, 
+			entity.global_position.x + move_distance, 
+			move_duration
+		]
 	)
 	$AttackMove.start()

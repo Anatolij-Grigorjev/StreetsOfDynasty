@@ -5,8 +5,8 @@ State for getting hurt standing in the belly
 
 
 func _ready():
-	areas_timeline_name = "HurtLowTimeline"
-	areas_timeline_items = [
+	group_id = "HurtLow"
+	set_group_timeline([
 		{
 			"time": 0.0,
 			"enable": true,
@@ -67,7 +67,7 @@ func _ready():
 			"enable": false,
 			"area": "HurtLow2"
 		}
-	]
+	])
 
 
 func process_state(delta: float):
