@@ -5,8 +5,7 @@ State for getting hurt standing in the belly
 
 
 func _ready():
-	group_id = "HurtLow"
-	set_group_timeline([
+	set_hitboxes_timeline([
 		{
 			"time": 0.0,
 			"enable": true,

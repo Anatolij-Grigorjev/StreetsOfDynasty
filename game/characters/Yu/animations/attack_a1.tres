@@ -50,7 +50,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -187.712, -34.1745 ), Vector2( -89.908, -40.2873 ), Vector2( -147.979, -38.4534 ), Vector2( 165.604, -68.4059 ), Vector2( -108.246, -67.1833 ), Vector2( -111.914, -73.9074 ), Vector2( -108.246, -39.0648 ), Vector2( -23.8905, -40.2873 ), Vector2( -102.134, -20.7265 ), Vector2( -144.923, -21.9491 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("FXPlayer:playing")
@@ -98,7 +98,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( -46.6011, -75.293 ), Vector2( 231.353, -89.2322 ) ]
+"values": [ Vector2( -46.6011, -75.293 ), Vector2( 231.353, -70.2303 ) ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("TrailFX:rotation_degrees")
@@ -123,4 +123,16 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1, 0.307786, 0.143587 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.991992 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite:offset")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -247.915, -11.3247 ), Vector2( -150.159, -15.6761 ), Vector2( -203.317, -24.3832 ), Vector2( 106.006, -37.6657 ), Vector2( -166.967, -41.5616 ), Vector2( -166.967, -41.5616 ), Vector2( -163.681, -7.1072 ), Vector2( -75.3092, -12.61 ), Vector2( -157.267, 12.4107 ), Vector2( -198.697, 10.6293 ) ]
 }

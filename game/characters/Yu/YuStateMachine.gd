@@ -50,6 +50,19 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
+			if (attack_input == AttackInput.NORMAL):
+				return "AttackA2"
+			if (attack_state.is_attack_over):
+				return "Idle"
+			return NO_STATE
+		"AttackA2":
+			if (hurting):
+				return "HurtLow"
+			var attack_state: AttackState = state_nodes[state] as AttackState
+			if (not attack_state.can_change_attack):
+				return NO_STATE
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
 			if (attack_state.is_attack_over):
 				return "Idle"
 			return NO_STATE

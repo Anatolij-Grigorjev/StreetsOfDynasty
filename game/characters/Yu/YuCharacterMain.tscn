@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
+[ext_resource path="res://characters/Yu/AttackA2.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -21,6 +22,12 @@ extents = Vector2( 52.6578, 185.16 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 69.0345, 194.518 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 49.9709, 151.65 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 52.938, 149.277 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 42.1761, 150.383 )
@@ -36,6 +43,9 @@ extents = Vector2( 85.375, 97.5963 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 201.246, 42.3184 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 126.06, 45.3669 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 93.043, 36.2723 )
@@ -56,13 +66,24 @@ script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
-areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
+attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
+attackbox_group_id = "A1"
+tween_path = NodePath("../../Body/Tween")
 
-[node name="AttackMove" type="Tween" parent="FSM/AttackA1" index="0"]
+[node name="AttackA2" type="Node" parent="FSM" index="3"]
+script = ExtResource( 13 )
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+hitbox_group_id = "A2"
+attack_commit_end_sec = 0.82
+attack_length_sec = 0.9
+attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
+attackbox_group_id = "A2"
+tween_path = NodePath("../../Body/Tween")
 
-[node name="HurtLow" type="Node" parent="FSM" index="3"]
+[node name="HurtLow" type="Node" parent="FSM" index="4"]
 script = ExtResource( 7 )
-areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+hitbox_group_id = "HurtLow"
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( -6.80554, -158.795 )
@@ -118,7 +139,24 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow1" type="Area2D" parent="Body/HitboxGroup" index="3"]
+[node name="AttackA2_1" type="Area2D" parent="Body/HitboxGroup" index="3"]
+visible = false
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_1" index="0"]
+position = Vector2( -2.37372, -156.071 )
+shape = SubResource( 10 )
+
+[node name="AttackA2_2" type="Area2D" parent="Body/HitboxGroup" index="4"]
+visible = false
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_2" index="0"]
+position = Vector2( -35.6056, -153.104 )
+shape = SubResource( 11 )
+
+[node name="HurtLow1" type="Area2D" parent="Body/HitboxGroup" index="5"]
+visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -131,7 +169,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow2" type="Area2D" parent="Body/HitboxGroup" index="4"]
+[node name="HurtLow2" type="Area2D" parent="Body/HitboxGroup" index="6"]
+visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -144,7 +183,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow3" type="Area2D" parent="Body/HitboxGroup" index="5"]
+[node name="HurtLow3" type="Area2D" parent="Body/HitboxGroup" index="7"]
+visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -157,7 +197,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow4" type="Area2D" parent="Body/HitboxGroup" index="6"]
+[node name="HurtLow4" type="Area2D" parent="Body/HitboxGroup" index="8"]
+visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -170,7 +211,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HitboxTimeline" type="Node2D" parent="Body/HitboxGroup" index="7"]
+[node name="HitboxTimeline" type="Node2D" parent="Body/HitboxGroup" index="9"]
 script = ExtResource( 8 )
 __meta__ = {
 "_editor_description_": ""
@@ -194,8 +235,17 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AttackboxTimeline" type="Node2D" parent="Body/AttackboxGroup" index="1"]
+[node name="AttackA2" type="Area2D" parent="Body/AttackboxGroup" index="1"]
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
+position = Vector2( 131.143, -206.461 )
+shape = SubResource( 12 )
+
+[node name="AttackboxTimeline" type="Node2D" parent="Body/AttackboxGroup" index="2"]
 script = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="Body" index="3"]
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 1.5639, 15.6388 )
@@ -221,3 +271,5 @@ __meta__ = {
 
 [node name="Logger" type="Node" parent="." index="4"]
 script = ExtResource( 12 )
+
+[editable path="Body/YuCharacterRig"]

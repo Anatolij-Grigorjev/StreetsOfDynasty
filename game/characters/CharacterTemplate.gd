@@ -22,7 +22,9 @@ var is_hurting = false
 func _ready() -> void:
 	fsm.connect("state_changed", self, "_on_FSM_state_changed")
 	for hitbox in hitboxes.get_children():
-		hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
+		var typed_hitbox: Hitbox = hitbox as Hitbox
+		if (is_instance_valid(typed_hitbox)):
+			typed_hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
 	
 	
 func _process(delta: float) -> void:
