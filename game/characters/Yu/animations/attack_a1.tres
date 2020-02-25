@@ -1,6 +1,7 @@
-[gd_resource type="Animation" load_steps=2 format=2]
+[gd_resource type="Animation" load_steps=3 format=2]
 
 [ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=1]
+[ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=2]
 
 [resource]
 resource_name = "attack_a1"
@@ -53,43 +54,43 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("FXPlayer:playing")
+tracks/4/path = NodePath("TrailFX:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("TrailFX:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("TrailFX:flip_h")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("TrailFX:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("TrailFX:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -46.6011, -75.293 ), Vector2( 231.353, -70.2303 ) ]
+}
 tracks/7/type = "value"
-tracks/7/path = NodePath("TrailFX:position")
+tracks/7/path = NodePath("TrailFX:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -98,41 +99,67 @@ tracks/7/keys = {
 "times": PoolRealArray( 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( -46.6011, -75.293 ), Vector2( 231.353, -70.2303 ) ]
+"values": [ -14.1223, -166.687 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("TrailFX:rotation_degrees")
+tracks/8/path = NodePath("TrailFX:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ -14.1223, -166.687 ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("TrailFX:modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
 "times": PoolRealArray( 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 0.307786, 0.143587 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.991992 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite:offset")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -247.915, -11.3247 ), Vector2( -150.159, -15.6761 ), Vector2( -203.317, -24.3832 ), Vector2( 106.006, -37.6657 ), Vector2( -166.967, -41.5616 ), Vector2( -166.967, -41.5616 ), Vector2( -163.681, -7.1072 ), Vector2( -75.3092, -12.61 ), Vector2( -157.267, 12.4107 ), Vector2( -198.697, 10.6293 ) ]
+}
 tracks/10/type = "value"
-tracks/10/path = NodePath("Sprite:offset")
+tracks/10/path = NodePath("FXPlayer:stream")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -247.915, -11.3247 ), Vector2( -150.159, -15.6761 ), Vector2( -203.317, -24.3832 ), Vector2( 106.006, -37.6657 ), Vector2( -166.967, -41.5616 ), Vector2( -166.967, -41.5616 ), Vector2( -163.681, -7.1072 ), Vector2( -75.3092, -12.61 ), Vector2( -157.267, 12.4107 ), Vector2( -198.697, 10.6293 ) ]
+"values": [ ExtResource( 2 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("FXPlayer:pitch_scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/12/type = "method"
+tracks/12/path = NodePath("FXPlayer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }

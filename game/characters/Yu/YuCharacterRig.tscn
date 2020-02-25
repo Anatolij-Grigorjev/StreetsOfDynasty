@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=3]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=4]
 [ext_resource path="res://characters/Yu/animations/attack_a1.tres" type="Animation" id=5]
 [ext_resource path="res://characters/Yu/animations/hurt_low.tres" type="Animation" id=6]
@@ -73,14 +72,51 @@ tracks/4/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("FXPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("FXPlayer:pitch_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.75 ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("FXPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
-texture = ExtResource( 3 )
-offset = Vector2( -198.697, 10.6293 )
-hframes = 11
-frame = 10
+texture = ExtResource( 9 )
+offset = Vector2( -122.713, 12.7595 )
+hframes = 8
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
@@ -103,6 +139,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 1 )
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }
