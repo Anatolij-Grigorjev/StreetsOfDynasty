@@ -66,18 +66,19 @@ script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
+hitbox_group_id = "A1_H"
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-attackbox_group_id = "A1"
+attackbox_group_id = "A1_A"
 tween_path = NodePath("../../Body/Tween")
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 13 )
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-hitbox_group_id = "A2"
+hitbox_group_id = "A2_H"
 attack_commit_end_sec = 0.82
 attack_length_sec = 0.9
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-attackbox_group_id = "A2"
+attackbox_group_id = "A2_A"
 tween_path = NodePath("../../Body/Tween")
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
@@ -236,6 +237,8 @@ __meta__ = {
 }
 
 [node name="AttackA2" type="Area2D" parent="Body/AttackboxGroup" index="1"]
+collision_layer = 0
+collision_mask = 32
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
@@ -271,5 +274,3 @@ __meta__ = {
 
 [node name="Logger" type="Node" parent="." index="4"]
 script = ExtResource( 12 )
-
-[editable path="Body/YuCharacterRig"]

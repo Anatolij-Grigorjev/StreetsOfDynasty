@@ -1,14 +1,11 @@
 extends StateMachine
 
 
-export(Array, float) var target_proximity_phases = [350, 250, 100]
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
 
 var target: Node2D
-
-var proximity_phase_idx: int = 0
 
 
 func _ready():
@@ -44,11 +41,10 @@ func _get_next_state(delta: float) -> String:
 				return "Hurt"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
-			var should_keep_moving = _check_approached_proximity()
+			var should_keep_moving = true
 			if (should_keep_moving):
 				return NO_STATE
 			else:
-				_build_next_wait()
 				return "WaitIdle"
 		"Hurt":
 			var state_node = state_nodes[state]
@@ -73,20 +69,4 @@ func _get_move_direction() -> Vector2:
 		return entity.global_position.direction_to(target.global_position)
 	else:
 		return Vector2.ZERO
-		
-		
-func _check_approached_proximity():
-	var distance_to_target = entity.global_position.distance_to(target.global_position)
-	var initial_phase := proximity_phase_idx
-	while(proximity_phase_idx < target_proximity_phases.size() and 
-		distance_to_target < target_proximity_phases[proximity_phase_idx]):
-			$Logger.info("distance {}, passed proximity {}", [distance_to_target, target_proximity_phases[proximity_phase_idx]])
-			proximity_phase_idx += 1
-	
-	return initial_phase != proximity_phase_idx
-	
-	
-func _build_next_wait():
-	var wait_state = state_nodes["WaitIdle"] as WaitState
-	wait_state.wait_time = rand_range(0.9, 3.5)
 	

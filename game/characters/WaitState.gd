@@ -15,6 +15,7 @@ var waiting_over := false
 
 
 func process_state(delta: float):
+	.process_state(delta)
 	if (not waiting_over):
 		current_wait -= delta
 	if (not waiting_over and current_wait <= 0.0):
@@ -22,6 +23,7 @@ func process_state(delta: float):
 	
 	
 func enter_state(prev_state: String):
+	.enter_state(prev_state)
 	entity.anim.play(wait_animation)
 	if (wait_hitbox):
 		fsm.hitboxes.switch_to_area(wait_hitbox)
@@ -30,4 +32,4 @@ func enter_state(prev_state: String):
 	
 	
 func exit_state(next_state: String):
-	pass 
+	.exit_state(next_state)

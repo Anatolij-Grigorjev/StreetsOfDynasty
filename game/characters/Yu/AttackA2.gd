@@ -1,6 +1,6 @@
 extends AttackMoveState
 """
-State describing first normal attack in character attack chain
+State describing second normal attack in character attack chain
 """
 
 func _ready():
