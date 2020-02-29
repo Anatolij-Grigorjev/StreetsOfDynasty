@@ -13,17 +13,19 @@ func _move_with_attack(
 	move_duration: float, 
 	move_delay: float = 0.0
 ):
-	
+	var facing_aware_move_impulse := Vector2(
+		move_impulse.x * entity.facing, move_impulse.y
+	)
 	tween.interpolate_method(
 		entity, 'do_movement', 
-		Vector2.ZERO, move_impulse, move_duration, 
+		Vector2.ZERO, facing_aware_move_impulse, move_duration, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT, 
 		move_delay
 	)
 	entity.LOG.info("move {} -> {}, over {}s", 
 		[
 			entity.global_position, 
-			entity.global_position + move_impulse, 
+			entity.global_position + facing_aware_move_impulse, 
 			move_duration
 		]
 	)

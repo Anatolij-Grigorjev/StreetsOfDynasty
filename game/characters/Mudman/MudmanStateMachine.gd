@@ -27,7 +27,7 @@ func _set_target(new_target: Node2D):
 	
 func _get_next_state(delta: float) -> String:
 	
-	var move_direction = _get_move_direction() if target else Vector2.ZERO
+	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
 	var hurting: bool = entity.is_hurting
 	match(state):
 		"Idle":

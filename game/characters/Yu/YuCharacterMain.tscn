@@ -4,7 +4,7 @@
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Yu/YuCharacterRig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/Yu/Idle.gd" type="Script" id=4]
-[ext_resource path="res://characters/Yu/Walk.gd" type="Script" id=5]
+[ext_resource path="res://characters/TemplateWalkState.gd" type="Script" id=5]
 [ext_resource path="res://characters/Yu/AttackA1.gd" type="Script" id=6]
 [ext_resource path="res://characters/Yu/HurtLow.gd" type="Script" id=7]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=8]
@@ -87,7 +87,7 @@ hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 hitbox_group_id = "HurtLow"
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
-position = Vector2( -6.80554, -158.795 )
+position = Vector2( 0, -150 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")

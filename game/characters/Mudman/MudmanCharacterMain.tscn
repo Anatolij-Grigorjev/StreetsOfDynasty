@@ -1,14 +1,13 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
-[ext_resource path="res://characters/Mudman/Walk.gd" type="Script" id=3]
+[ext_resource path="res://characters/TemplateWalkState.gd" type="Script" id=3]
 [ext_resource path="res://characters/Mudman/Hurt.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=6]
 [ext_resource path="res://characters/Mudman/Idle.gd" type="Script" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
-[ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=9]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
 [ext_resource path="res://characters/WaitState.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
@@ -60,13 +59,7 @@ script = ExtResource( 12 )
 naming_scheme = 1
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
-
-[node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
-position = Vector2( -15.6052, -1.91695 )
-texture = ExtResource( 9 )
-offset = Vector2( -49.6218, -27.5669 )
-hframes = 4
-frame = 3
+position = Vector2( 0, -75 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
@@ -77,7 +70,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle" index="0"]
-position = Vector2( 12.2111, -4.74876 )
+position = Vector2( 12.211, -79.749 )
 shape = SubResource( 2 )
 
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup" index="1"]
@@ -86,7 +79,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Walk" index="0"]
-position = Vector2( 9.49753, 5.42715 )
+position = Vector2( 9.498, -69.573 )
 shape = SubResource( 3 )
 
 [node name="Hurt1" type="Area2D" parent="Body/HitboxGroup" index="2"]
@@ -95,14 +88,14 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Hurt1" index="0"]
-position = Vector2( -5.42715, -24.4222 )
+position = Vector2( -5.427, -99.422 )
 shape = SubResource( 4 )
 
 [node name="Hurt2" type="Area2D" parent="Body/HitboxGroup" index="3"]
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Hurt2" index="0"]
-position = Vector2( -20.3518, 0.678375 )
+position = Vector2( -20.352, -74.322 )
 shape = SubResource( 5 )
 
 [node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="4"]
@@ -112,7 +105,7 @@ script = ExtResource( 10 )
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( -7.46237, 87.5129 )
+position = Vector2( -7.462, 12.513 )
 shape = SubResource( 1 )
 
 [node name="CurrentState" type="Label" parent="." index="3"]
@@ -129,5 +122,3 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
-
-[editable path="Body/MudmanCharacterRig"]

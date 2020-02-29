@@ -85,9 +85,11 @@ position = Vector2( 500, -150 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Top"]
 shape = SubResource( 4 )
 
-[node name="YuCharacterMain" parent="." instance=ExtResource( 3 )]
-position = Vector2( 260.245, 449.422 )
-scale = Vector2( 0.75, 0.75 )
+[node name="YSort" type="YSort" parent="."]
 
-[node name="MudmanCharacterMain" parent="." instance=ExtResource( 4 )]
-position = Vector2( 541.509, 351.33 )
+[node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 260.245, 449.422 )
+scale = Vector2( 0.65, 0.65 )
+
+[node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 541.509, 473.445 )

@@ -11,7 +11,7 @@ var Spark = preload("res://characters/spritefx/Spark.tscn")
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 var velocity = Vector2()
-
+var facing: int = 1
 
 onready var fsm: StateMachine = $FSM
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
@@ -62,7 +62,7 @@ func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	var spark = Spark.instance()
 	var position = Utils.rand_point(10, 5) + hitbox_center_position
 	var rotation = randf() * 360
-	get_tree().get_root().add_child(spark)
+	add_child(spark)
 	spark.global_position = position
 	spark.global_rotation_degrees = rotation
 	
