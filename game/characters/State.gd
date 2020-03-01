@@ -7,7 +7,7 @@ Nodes implementing this can be children of a state machine
 #reference to the hitbox groups timeline to animate hitbox groups
 export(NodePath) var hitbox_areas_timeline_path
 #group id for timeline processing
-export(String) var hitbox_group_id: String = ""
+var hitbox_group_id: String = ""
 #reference to the areas timeline if valid path provided
 onready var hitbox_areas_timeline: AreaGroupTimeline = get_node(hitbox_areas_timeline_path)
 

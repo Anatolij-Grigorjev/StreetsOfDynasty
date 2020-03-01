@@ -1,0 +1,46 @@
+{
+	"attack_animation": "attack_a2",
+	"attack_move": {
+		"x": 35,
+		"y": -4
+	},
+    "attackboxes_timeline": [
+        {
+            "time": 0.3,
+            "enable": true,
+            "area": "AttackA2"
+        },
+        {
+            "time": 0.6,
+            "enable": false,
+            "area": "AttackA2"
+        }
+    ],
+    "hitboxes_timeline": [
+    	{
+            "time": 0.0,
+            "enable": true,
+            "area": "AttackA2_1"
+        },
+        {
+            "time": 0.3,
+            "enable": false,
+            "area": "AttackA2_1"
+        },
+        {
+            "time": 0.3,
+            "enable": true,
+            "area": "AttackA2_2"
+        },
+        {
+            "time": 0.8,
+            "enable": false,
+            "area": "AttackA2_2"
+        },
+        {
+            "time": 0.8,
+            "enable": true,
+            "area": "AttackA2_1"
+        }
+    ]
+}

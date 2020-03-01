@@ -12,7 +12,7 @@ export(float) var attack_length_sec := 1.0
 #reference to the attack groups timeline to animate attack groups
 export(NodePath) var attackbox_areas_timeline_path
 #group id for timeline processing
-export(String) var attackbox_group_id: String = ""
+var attackbox_group_id: String = ""
 
 
 var attack_time: float = 0.0
@@ -70,6 +70,6 @@ func _set_attackboxes():
 	attackboxes = fsm.attackboxes
 
 
-func set_attackbox_timeline(timeline_items: Array):
+func set_attackboxes_timeline(timeline_items: Array):
 	assert(is_instance_valid(attackbox_areas_timeline))
 	attackbox_areas_timeline.add_group_timeline(attackbox_group_id, timeline_items)

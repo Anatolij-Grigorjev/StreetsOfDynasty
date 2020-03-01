@@ -1,0 +1,31 @@
+{
+	"attack_animation": "attack_a1",
+	"attack_move": {
+		"x": 25,
+		"y": -3
+	},
+    "attackboxes_timeline": [
+        {
+            "area": "AttackA1",
+            "enable": true,
+            "time": 0.2
+        },
+        {
+            "area": "AttackA1",
+            "enable": false,
+            "time": 0.5
+        }
+    ],
+    "hitboxes_timeline": [
+    	{
+            "area": "AttackA1",
+            "enable": true,
+            "time": 0.0
+        },
+        {
+            "area": "AttackA1",
+            "enable": false,
+            "time": 1.0
+        }
+    ]
+}

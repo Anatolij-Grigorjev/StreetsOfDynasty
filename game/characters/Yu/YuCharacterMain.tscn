@@ -1,18 +1,17 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Yu/YuCharacterRig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/Yu/Idle.gd" type="Script" id=4]
 [ext_resource path="res://characters/TemplateWalkState.gd" type="Script" id=5]
-[ext_resource path="res://characters/Yu/AttackA1.gd" type="Script" id=6]
+[ext_resource path="res://characters/CharacterTemplateAttackState.gd" type="Script" id=6]
 [ext_resource path="res://characters/Yu/HurtLow.gd" type="Script" id=7]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=8]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=9]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
-[ext_resource path="res://characters/Yu/AttackA2.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -42,10 +41,10 @@ extents = Vector2( 82.7745, 127.069 )
 extents = Vector2( 85.375, 97.5963 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 201.246, 42.3184 )
+extents = Vector2( 201.246, 50.2261 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 126.06, 45.3669 )
+extents = Vector2( 138.288, 45.3669 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 93.043, 36.2723 )
@@ -66,28 +65,33 @@ script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
-hitbox_group_id = "A1_H"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-attackbox_group_id = "A1_A"
 tween_path = NodePath("../../Body/Tween")
+attack_params_file = "res://characters/Yu/attack_data/attack_a1.json"
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
-script = ExtResource( 13 )
+script = ExtResource( 6 )
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-hitbox_group_id = "A2_H"
-attack_commit_end_sec = 0.82
-attack_length_sec = 0.9
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-attackbox_group_id = "A2_A"
 tween_path = NodePath("../../Body/Tween")
+attack_params_file = "res://characters/Yu/attack_data/attack_a2.json"
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
 script = ExtResource( 7 )
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-hitbox_group_id = "HurtLow"
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
+
+[node name="Sprite" parent="Body/YuCharacterRig" index="0"]
+offset = Vector2( 38.0418, 9.53383 )
+frame = 4
+
+[node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
+modulate = Color( 1, 1, 1, 0.991992 )
+position = Vector2( -46.6011, -75.293 )
+rotation = -0.246481
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")
@@ -230,7 +234,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
-position = Vector2( 235.146, -220.449 )
+position = Vector2( 232.488, -177.854 )
 shape = SubResource( 8 )
 __meta__ = {
 "_editor_description_": ""
@@ -242,7 +246,7 @@ collision_mask = 32
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
-position = Vector2( 131.143, -206.461 )
+position = Vector2( 147.093, -196.714 )
 shape = SubResource( 12 )
 
 [node name="AttackboxTimeline" type="Node2D" parent="Body/AttackboxGroup" index="2"]
@@ -274,3 +278,5 @@ __meta__ = {
 
 [node name="Logger" type="Node" parent="." index="4"]
 script = ExtResource( 12 )
+
+[editable path="Body/YuCharacterRig"]

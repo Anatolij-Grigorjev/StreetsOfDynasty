@@ -45,7 +45,6 @@ script = ExtResource( 3 )
 [node name="Hurt" type="Node" parent="FSM" index="2"]
 script = ExtResource( 4 )
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
-hitbox_group_id = "Hurt"
 hurt_duration = 0.6
 
 [node name="WaitIdle" type="Node" parent="FSM" index="3"]

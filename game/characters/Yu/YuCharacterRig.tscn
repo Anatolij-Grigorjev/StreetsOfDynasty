@@ -2,114 +2,13 @@
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/Yu/animations/attack_a2.tres" type="Animation" id=3]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=4]
 [ext_resource path="res://characters/Yu/animations/attack_a1.tres" type="Animation" id=5]
 [ext_resource path="res://characters/Yu/animations/hurt_low.tres" type="Animation" id=6]
 [ext_resource path="res://characters/Yu/animations/idle.tres" type="Animation" id=7]
 [ext_resource path="res://characters/Yu/animations/walk.tres" type="Animation" id=8]
 [ext_resource path="res://characters/Yu/spritesheets/attack_A2.png" type="Texture" id=9]
-
-[sub_resource type="Animation" id=1]
-resource_name = "attack_a2"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 8 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:offset")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.4, 0.6, 0.7, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -122.713, 12.7595 ), Vector2( 54.1709, 13.5295 ), Vector2( 38.0418, 9.53383 ), Vector2( -97.2308, 7.92098 ), Vector2( -138.777, 15.0453 ), Vector2( -122.34, 14.2268 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("FXPlayer:stream")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("FXPlayer:pitch_scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 1.75 ]
-}
-tracks/7/type = "method"
-tracks/7/path = NodePath("FXPlayer")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
-}
 
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
@@ -132,7 +31,7 @@ __meta__ = {
 [node name="AnimationPlayer" parent="." index="2"]
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
-anims/attack_a2 = SubResource( 1 )
+anims/attack_a2 = ExtResource( 3 )
 anims/hurt_low = ExtResource( 6 )
 anims/idle = ExtResource( 7 )
 anims/walk = ExtResource( 8 )
