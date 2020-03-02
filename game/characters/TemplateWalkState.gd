@@ -13,7 +13,7 @@ func process_state(delta: float):
 	
 	entity.velocity.x = lerp(entity.velocity.x, entity.move_speed.x * move_direction.x, 0.5)
 	entity.velocity.y = lerp(entity.velocity.y, entity.move_speed.y * move_direction.y, 0.75)
-	entity.do_movement()
+	entity.do_movement_slide(entity.velocity)
 	
 	
 func enter_state(prev_state: String):

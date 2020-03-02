@@ -7,6 +7,7 @@ export(String) var attack_params_file: String
 
 var attack_params: Dictionary = {}
 var attack_move_impulse: Vector2 = Vector2.ZERO
+var attack_move_duration: float = 0.0
 var attack_animation: String
 
 
@@ -28,7 +29,7 @@ func enter_state(prev_state: String):
 	fsm.attackboxes.disable_all_areas()
 	fsm.hitboxes.disable_all_areas()
 	if (attack_move_impulse != Vector2.ZERO):
-		_move_with_attack(attack_move_impulse, 0.2)
+		_move_with_attack(attack_move_impulse, attack_move_duration)
 	entity.anim.play(attack_animation)
 	
 	
@@ -42,6 +43,7 @@ func _set_move_impulse(attack_params: Dictionary):
 		var attack_move: Dictionary = attack_params.attack_move as Dictionary
 		assert(attack_move != null)
 		attack_move_impulse = Vector2(attack_move.x, attack_move.y)
+		attack_move_duration = Utils.get_or_default(attack_move, "duration", 0.2)
 		
 		
 func _set_attack_animation(attack_params: Dictionary):

@@ -2,16 +2,17 @@
 	"attack_animation": "attack_a2",
 	"attack_move": {
 		"x": 35,
-		"y": -4
+		"y": -4,
+        "duration": 0.25
 	},
     "attackboxes_timeline": [
         {
-            "time": 0.3,
+            "time": 0.2,
             "enable": true,
             "area": "AttackA2"
         },
         {
-            "time": 0.6,
+            "time": 0.5,
             "enable": false,
             "area": "AttackA2"
         }
@@ -23,22 +24,22 @@
             "area": "AttackA2_1"
         },
         {
-            "time": 0.3,
+            "time": 0.2,
             "enable": false,
             "area": "AttackA2_1"
         },
         {
-            "time": 0.3,
+            "time": 0.2,
             "enable": true,
             "area": "AttackA2_2"
         },
         {
-            "time": 0.8,
+            "time": 0.7,
             "enable": false,
             "area": "AttackA2_2"
         },
         {
-            "time": 0.8,
+            "time": 0.7,
             "enable": true,
             "area": "AttackA2_1"
         }

@@ -31,3 +31,14 @@ static func get_file_text(filepath: String) -> String:
 	var file_text: String = file.get_as_text()
 	file.close()
 	return file_text
+	
+	
+"""
+Get the value at specified key from dictionary. 
+If key not present return default
+"""
+static func get_or_default(dict: Dictionary, key: String, default):
+	if (dict != null and dict.has(key)):
+		return dict[key]
+	else: 
+		return default

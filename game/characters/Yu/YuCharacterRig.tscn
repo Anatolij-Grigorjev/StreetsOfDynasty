@@ -14,8 +14,9 @@
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 9 )
-offset = Vector2( -122.713, 12.7595 )
+offset = Vector2( -122.34, 14.2268 )
 hframes = 8
+frame = 7
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false

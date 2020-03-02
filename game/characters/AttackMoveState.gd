@@ -17,7 +17,7 @@ func _move_with_attack(
 		move_impulse.x * entity.facing, move_impulse.y
 	)
 	tween.interpolate_method(
-		entity, 'do_movement', 
+		entity, 'do_movement_slide', 
 		Vector2.ZERO, facing_aware_move_impulse, move_duration, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT, 
 		move_delay

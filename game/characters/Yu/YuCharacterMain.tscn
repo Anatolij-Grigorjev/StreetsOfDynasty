@@ -47,7 +47,7 @@ extents = Vector2( 201.246, 50.2261 )
 extents = Vector2( 138.288, 45.3669 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 93.043, 36.2723 )
+extents = Vector2( 70, 36.272 )
 
 [node name="YuCharacterMain" groups=[
 "Player",
@@ -73,6 +73,8 @@ attack_params_file = "res://characters/Yu/attack_data/attack_a1.json"
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+attack_commit_end_sec = 0.7
+attack_length_sec = 0.8
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
 tween_path = NodePath("../../Body/Tween")
 attack_params_file = "res://characters/Yu/attack_data/attack_a2.json"
@@ -255,7 +257,7 @@ script = ExtResource( 8 )
 [node name="Tween" type="Tween" parent="Body" index="3"]
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 1.5639, 15.6388 )
+position = Vector2( 0, 25 )
 shape = SubResource( 9 )
 __meta__ = {
 "_editor_description_": ""

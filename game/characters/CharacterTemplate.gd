@@ -31,13 +31,16 @@ func _process(delta: float) -> void:
 	pass
 	
 
+func do_movement_collide(velocity: Vector2):
+	move_and_collide(velocity)
+	
+
 """
 1-arg movement method for use in action tweens. 
-Can use character velocity by default.
 This makes sure action tweens move character via velocity
 and dont ignore kinematic collisions
 """
-func do_movement(velocity: Vector2 = self.velocity):
+func do_movement_slide(velocity: Vector2):
 	move_and_slide(velocity, Vector2.UP)
 	
 	
