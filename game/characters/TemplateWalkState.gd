@@ -4,6 +4,7 @@ A type of State implementation used for walking state
 """
 
 func process_state(delta: float):
+	.process_state(delta)
 	var move_direction = fsm._get_move_direction()
 	
 	if (move_direction.x != 0):
@@ -17,6 +18,7 @@ func process_state(delta: float):
 	
 	
 func enter_state(prev_state: String):
+	.enter_state(prev_state)
 	entity.anim.play("walk")
 	fsm.hitboxes.switch_to_area("Walk")
 	
