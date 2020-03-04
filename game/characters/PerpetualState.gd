@@ -4,6 +4,8 @@ class_name PerpetualState
 Type of state that goes on until an external trigger forces a change
 Properties loaded from a property source
 """
+#path to json file with object that represents state data
+export(String) var state_params_filepath
 #reference to the hitbox groups timeline to animate hitbox groups
 export(NodePath) var hitbox_areas_timeline_path
 #reference to the attack groups timeline to animate attack groups
@@ -27,12 +29,28 @@ var hitbox_group_id: String = ""
 var fsm
 #root node of the character these states manipulate, owner of FSM
 var entity: Node
+#state params map, generated from file JSON
+#this contains properties like:
+# state_animation
+# state_move_impulse
+# state_move_duration
+var state_params: Dictionary = {
+	'state_animation': "",
+	'state_move_impulse': Vector2.ZERO,
+	'state_move_duration': 0.2
+}
 
 
 func _ready():
 	set_process(false)
 	set_physics_process(false)
-
+	assert(state_params_filepath != null)
+	var loaded_state_params = Utils.get_json_from_file(state_params_filepath) as Dictionary
+	state_params = Utils.merge_dicts(state_params, loaded_state_params)
+	assert(state_params != null)
+	_set_move_impulse(state_params)
+	_set_areagroup_timelines(state_params)
+	
 
 func process_state(delta: float):
 	if (is_instance_valid(hitbox_areas_timeline)):
@@ -48,7 +66,15 @@ func enter_state(prev_state: String):
 		hitbox_areas_timeline.reset(hitbox_group_id)
 	if (is_instance_valid(attackbox_areas_timeline)):
 		attackbox_areas_timeline.reset(attackbox_group_id)
-	
+	fsm.attackboxes.disable_all_areas()
+	fsm.hitboxes.disable_all_areas()
+	if (state_params.state_move_impulse != Vector2.ZERO):
+		_move_with_state(
+			state_params.state_move_impulse, 
+			state_params.state_move_duration
+		)
+	if (state_params.state_animation != ""):
+		entity.anim.play(state_params.state_animation)
 	
 	
 func exit_state(next_state: String):
@@ -88,3 +114,20 @@ func _move_with_state(
 	)
 	if (not tween.is_active()):
 		tween.start()
+		
+		
+func _set_move_impulse(state_params: Dictionary):
+	if (state_params.has("state_move")):
+		var state_move: Dictionary = state_params.state_move as Dictionary
+		assert(state_move != null)
+		state_params.state_move_impulse = Vector2(state_move.x, state_move.y)
+		state_params.state_move_duration = Utils.get_or_default(state_move, "duration", 0.2)
+		
+		
+func _set_areagroup_timelines(state_params: Dictionary):
+	assert(state_params.hitboxes_timeline as Array != null)
+	hitbox_group_id = name
+	set_hitboxes_timeline(state_params.hitboxes_timeline)
+	assert(state_params.attackboxes_timeline as Array != null)
+	attackbox_group_id = name
+	set_attackboxes_timeline(state_params.attackboxes_timeline)

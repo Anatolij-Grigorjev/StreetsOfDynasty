@@ -42,3 +42,22 @@ static func get_or_default(dict: Dictionary, key: String, default):
 		return dict[key]
 	else: 
 		return default
+		
+		
+"""
+Merge keys from 2 dictionaries into a new one (does not alter param dicts). 
+Conflicts resolved in favor of second dictionary
+"""
+static func merge_dicts(dict1: Dictionary, dict2: Dictionary):
+	if (dict1 == null or dict1.empty()):
+		return dict2
+	if (dict2 == null or dict2.empty()):
+		return dict1
+		
+	var merged_dict = {}
+	for key in dict1:
+		merged_dict[key] = dict1[key]
+	for key in dict2:
+		merged_dict[key]	= dict2[key]
+	
+	return merged_dict	
