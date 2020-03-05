@@ -1,4 +1,4 @@
-extends Node
+extends State
 class_name PerpetualState
 """
 Type of state that goes on until an external trigger forces a change
@@ -25,10 +25,7 @@ onready var tween: Tween = get_node(tween_path)
 var attackbox_group_id: String = ""
 #group id for timeline processing
 var hitbox_group_id: String = ""
-# type is StateMachine, not explicit due to cyclic type loading
-var fsm
-#root node of the character these states manipulate, owner of FSM
-var entity: Node
+
 #state params map, generated from file JSON
 #this contains properties like:
 # state_animation
@@ -42,8 +39,7 @@ var state_params: Dictionary = {
 
 
 func _ready():
-	set_process(false)
-	set_physics_process(false)
+	#parent disables physics
 	assert(state_params_filepath != null)
 	var loaded_state_params = Utils.get_json_from_file(state_params_filepath) as Dictionary
 	state_params = Utils.merge_dicts(state_params, loaded_state_params)
@@ -125,9 +121,10 @@ func _set_move_impulse(state_params: Dictionary):
 		
 		
 func _set_areagroup_timelines(state_params: Dictionary):
-	assert(state_params.hitboxes_timeline as Array != null)
-	hitbox_group_id = name
-	set_hitboxes_timeline(state_params.hitboxes_timeline)
-	assert(state_params.attackboxes_timeline as Array != null)
-	attackbox_group_id = name
-	set_attackboxes_timeline(state_params.attackboxes_timeline)
+	if (state_params.has('hitboxes_timeline')):
+		hitbox_group_id = name
+		set_hitboxes_timeline(state_params.hitboxes_timeline)
+		
+	if (state_params.has('attackboxes_timeline')):
+		attackbox_group_id = name
+		set_attackboxes_timeline(state_params.attackboxes_timeline)

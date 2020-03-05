@@ -1,6 +1,6 @@
 {
-	"attack_animation": "attack_a1",
-	"attack_move": {
+	"state_animation": "attack_a1",
+	"state_move": {
 		"x": 25,
 		"y": -3
 	},
