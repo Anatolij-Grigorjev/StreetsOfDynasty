@@ -43,7 +43,6 @@ func _ready():
 	assert(state_params_filepath != null)
 	var loaded_state_params = Utils.get_json_from_file(state_params_filepath) as Dictionary
 	state_params = Utils.merge_dicts(state_params, loaded_state_params)
-	assert(state_params != null)
 	_set_move_impulse(state_params)
 	_set_areagroup_timelines(state_params)
 	

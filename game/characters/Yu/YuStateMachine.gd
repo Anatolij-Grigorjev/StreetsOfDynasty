@@ -60,32 +60,32 @@ func _get_next_state(delta: float) -> String:
 		"AttackA1":
 			if (hurting):
 				return "HurtLow"
-			var attack_state: AttackState = state_nodes[state] as AttackState
-			if (not attack_state.can_change_attack):
+			var attack_state = state_nodes[state] as FiniteState
+			if (not attack_state.can_change_state):
 				return NO_STATE
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (next_attack_input == AttackInput.NORMAL):
 				return "AttackA2"
-			if (attack_state.is_attack_over):
-				return "Idle"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
 			return NO_STATE
 		"AttackA2":
 			if (hurting):
 				return "HurtLow"
-			var attack_state: AttackState = state_nodes[state] as AttackState
-			if (not attack_state.can_change_attack):
+			var attack_state = state_nodes[state] as FiniteState
+			if (not attack_state.can_change_state):
 				return NO_STATE
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
-			if (attack_state.is_attack_over):
-				return "Idle"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
 			return NO_STATE
 		"HurtLow":
-			var state_node = state_nodes[state]
-			if (state_node.is_hurting):
+			var hurt_state = state_nodes[state] as FiniteState
+			if (not hurt_state.is_state_over):
 				return NO_STATE
-			return "Idle"
+			return _next_or_default(hurt_state)
 		_:
 			breakpoint
 			return NO_STATE
@@ -119,3 +119,10 @@ func _refresh_next_attack_cache(delta: float):
 			next_attack_input = AttackInput.NONE
 			current_next_attack_input_ttl = 0.0
 			emit_signal("next_attack_input_changed", AttackInput.NONE)
+			
+
+func _next_or_default(state: FiniteState, default: String = "Idle") -> String:
+	if (state.next_state):
+		return state.next_state
+	else:
+		return default

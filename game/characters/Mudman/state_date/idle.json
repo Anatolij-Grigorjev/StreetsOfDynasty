@@ -1,0 +1,10 @@
+{
+	"state_animation": "idle",
+    "hitboxes_timeline": [
+    	{
+            "area": "Idle",
+            "enable": true,
+            "time": 0.0
+        }
+    ]
+}

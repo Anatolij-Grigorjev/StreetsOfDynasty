@@ -1,0 +1,10 @@
+{
+	"state_animation": "walk",
+    "hitboxes_timeline": [
+    	{
+            "area": "Walk",
+            "enable": true,
+            "time": 0.0
+        }
+    ]
+}

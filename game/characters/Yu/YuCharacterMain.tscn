@@ -1,10 +1,12 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Yu/YuCharacterRig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/PerpetualState.gd" type="Script" id=4]
 [ext_resource path="res://characters/TemplateWalkState.gd" type="Script" id=5]
+[ext_resource path="res://characters/FiniteState.gd" type="Script" id=6]
+[ext_resource path="res://characters/HurtFiniteState.gd" type="Script" id=7]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=8]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=9]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
@@ -66,10 +68,30 @@ state_params_filepath = "res://characters/Yu/state_data/walk.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
+script = ExtResource( 6 )
+state_params_filepath = "res://characters/Yu/state_data/attack_a1.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
+tween_path = NodePath("../../Body/Tween")
+next_state = "Idle"
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
+script = ExtResource( 6 )
+state_params_filepath = "res://characters/Yu/state_data/attack_a2.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
+tween_path = NodePath("../../Body/Tween")
+state_commit_start_sec = 0.05
+state_commit_end_sec = 0.73
+state_length_sec = 0.8
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
+script = ExtResource( 7 )
+state_params_filepath = "res://characters/Yu/state_data/hurt_low.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+state_commit_end_sec = 1.2
+state_length_sec = 1.2
+next_state = "Idle"
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )

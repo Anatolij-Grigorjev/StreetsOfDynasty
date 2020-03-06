@@ -1,0 +1,25 @@
+{
+	"state_animation": "hurt",
+    "hitboxes_timeline": [
+    	{
+			"time": 0.0,
+			"enable": true,
+			"area": "Hurt1"
+		},
+		{
+			"time": 0.1,
+			"enable": false,
+			"area": "Hurt1"
+		},
+		{
+			"time": 0.1,
+			"enable": true,
+			"area": "Hurt2"
+		},
+		{
+			"time": 0.6,
+			"enable": false,
+			"area": "Hurt2"
+		}
+    ]
+}
