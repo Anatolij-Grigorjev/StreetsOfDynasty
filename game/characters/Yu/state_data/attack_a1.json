@@ -21,11 +21,6 @@
             "area": "AttackA1",
             "enable": true,
             "time": 0.0
-        },
-        {
-            "area": "AttackA1",
-            "enable": false,
-            "time": 1.0
         }
     ]
 }

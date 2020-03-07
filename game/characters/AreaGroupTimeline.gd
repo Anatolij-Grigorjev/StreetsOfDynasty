@@ -9,15 +9,17 @@ Supports concurrent work with multiple timelines within the same group
 
 onready var area_group: AreaGroup = get_parent()
 """
-Timeline of timebox activations during this attack.
+Items of areabox activations during this timeline.
 A timeline item can be described as the object:
 	{
 		time: 0.34, <-- point to do action
 		enable: false, <-- flag to disable or enable the area
-		area: "A1" <-- name of area to feed into area group
+		area: "A1" <-- name of area to toggle in the parent area group
 	}
 """
 export(Dictionary) var areas_timelines := {}
+
+#helper vars to loop
 var iteration_times: Dictionary = {}
 var timelines_idx: Dictionary = {}
 

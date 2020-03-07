@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
+[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -97,8 +98,8 @@ next_state = "Idle"
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-offset = Vector2( 38.0418, 9.53383 )
-frame = 4
+texture = ExtResource( 13 )
+offset = Vector2( -58.468, 4.86353 )
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
 modulate = Color( 1, 1, 1, 0.991992 )
@@ -109,7 +110,6 @@ rotation = -0.246481
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
-visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource( 9 )

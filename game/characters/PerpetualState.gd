@@ -61,6 +61,7 @@ func enter_state(prev_state: String):
 		hitbox_areas_timeline.reset(hitbox_group_id)
 	if (is_instance_valid(attackbox_areas_timeline)):
 		attackbox_areas_timeline.reset(attackbox_group_id)
+	
 	fsm.attackboxes.disable_all_areas()
 	fsm.hitboxes.disable_all_areas()
 	if (state_params.state_move_impulse != Vector2.ZERO):
@@ -123,7 +124,6 @@ func _set_areagroup_timelines(state_params: Dictionary):
 	if (state_params.has('hitboxes_timeline')):
 		hitbox_group_id = name
 		set_hitboxes_timeline(state_params.hitboxes_timeline)
-		
 	if (state_params.has('attackboxes_timeline')):
 		attackbox_group_id = name
 		set_attackboxes_timeline(state_params.attackboxes_timeline)
