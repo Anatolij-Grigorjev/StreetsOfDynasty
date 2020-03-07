@@ -24,16 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/AttackBox.gd"
 }, {
-"base": "AttackState",
-"class": "AttackMoveState",
-"language": "GDScript",
-"path": "res://characters/AttackMoveState.gd"
-}, {
-"base": "State",
-"class": "AttackState",
-"language": "GDScript",
-"path": "res://characters/AttackState.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "CharacterTemplate",
 "language": "GDScript",
@@ -53,11 +43,6 @@ _global_script_classes=[ {
 "class": "HurtFiniteState",
 "language": "GDScript",
 "path": "res://characters/HurtFiniteState.gd"
-}, {
-"base": "State",
-"class": "HurtState",
-"language": "GDScript",
-"path": "res://characters/HurtState.gd"
 }, {
 "base": "Node",
 "class": "Logger",
@@ -93,31 +78,22 @@ _global_script_classes=[ {
 "class": "Utils",
 "language": "GDScript",
 "path": "res://Utils.gd"
-}, {
-"base": "State",
-"class": "WaitState",
-"language": "GDScript",
-"path": "res://characters/WaitState.gd"
 } ]
 _global_script_class_icons={
 "AreaGroup": "",
 "AreaGroupTimeline": "",
 "AttackBox": "",
-"AttackMoveState": "",
-"AttackState": "",
 "CharacterTemplate": "",
 "FiniteState": "",
 "Hitbox": "",
 "HurtFiniteState": "",
-"HurtState": "",
 "Logger": "",
 "PerpetualState": "",
 "State": "",
 "StateMachine": "",
 "Stopwatch": "",
 "TemplateWalkState": "",
-"Utils": "",
-"WaitState": ""
+"Utils": ""
 }
 
 [Debug]
