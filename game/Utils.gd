@@ -42,6 +42,16 @@ static func get_or_default(dict: Dictionary, key: String, default):
 		return dict[key]
 	else: 
 		return default
+	
+	
+"""
+Convert Object properties x and y into a vector2 object
+"""
+static func dict2vector(dict: Dictionary) -> Vector2:
+	if (dict):
+		return Vector2(dict.x, dict.y)
+	else:
+		return Vector2.ZERO
 		
 		
 """

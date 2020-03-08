@@ -34,7 +34,9 @@ var hitbox_group_id: String = ""
 var state_params: Dictionary = {
 	'state_animation': "",
 	'state_move_impulse': Vector2.ZERO,
-	'state_move_duration': 0.2
+	'state_move_duration': 0.2,
+	'hitboxes': [],
+	'attackboxes': []
 }
 
 
@@ -44,6 +46,7 @@ func _ready():
 	var loaded_state_params = Utils.get_json_from_file(state_params_filepath) as Dictionary
 	state_params = Utils.merge_dicts(state_params, loaded_state_params)
 	_set_move_impulse(state_params)
+	_build_areas(state_params)
 	_set_areagroup_timelines(state_params)
 	
 
@@ -116,7 +119,7 @@ func _set_move_impulse(state_params: Dictionary):
 	if (state_params.has("state_move")):
 		var state_move: Dictionary = state_params.state_move as Dictionary
 		assert(state_move != null)
-		state_params.state_move_impulse = Vector2(state_move.x, state_move.y)
+		state_params.state_move_impulse = Utils.dict2vector(state_move)
 		state_params.state_move_duration = Utils.get_or_default(state_move, "duration", 0.2)
 		
 		
@@ -127,3 +130,45 @@ func _set_areagroup_timelines(state_params: Dictionary):
 	if (state_params.has('attackboxes_timeline')):
 		attackbox_group_id = name
 		set_attackboxes_timeline(state_params.attackboxes_timeline)
+		
+		
+func _build_areas(state_params: Dictionary):
+	var state_name: String = name
+	var rig_offset: Vector2 = Vector2.ZERO #TODO
+	for hitbox_definition in state_params.hitboxes:
+		var hitbox_area := _build_hitbox(hitbox_definition, rig_offset)
+		entity.hitboxes.add_child(hitbox_area)
+	for attackbox_definition in state_params.attackboxes:
+		var attackbox_area := _build_attackbox(attackbox_definition, rig_offset)
+		entity.attackboxes.add_child(attackbox_area)
+		
+		
+func _build_hitbox(hitbox_definition: Dictionary, shape_offset: Vector2) -> Area2D:
+	var hitbox := _build_area_with_rect(hitbox_definition, shape_offset)
+	for body_layer in hitbox_definition.body_layers:
+		hitbox.set_collision_layer_bit(body_layer, true)
+	return hitbox 
+	
+	
+func _build_attackbox(attackbox_definition: Dictionary, shape_offset: Vector2) -> Area2D:
+	var attackbox := _build_area_with_rect(attackbox_definition, shape_offset)
+	for attack_layer in attackbox_definition.attack_layers:
+		attackbox.set_collision_mask_bit(attack_layer, true)
+	return attackbox
+	
+	
+func _build_area_with_rect(area_definition: Dictionary, rect_offset: Vector2) -> Area2D:
+	var area := Area2D.new()
+	area.name = area_definition.name
+	#no collision
+	area.collision_layer = 0
+	area.collision_mask = 0
+	var collider := CollisionShape2D.new()
+	collider.position = Utils.dict2vector(area_definition.position)
+	collider.position += rect_offset
+	collider.shape = RectangleShape2D.new()
+	collider.shape.extents = Utils.dict2vector(area_definition.rect_extents)
+	area.add_child(collider)
+	
+	return area
+	
