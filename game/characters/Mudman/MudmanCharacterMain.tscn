@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/PerpetualState.gd" type="Script" id=3]
-[ext_resource path="res://characters/HurtFiniteState.gd" type="Script" id=4]
+[ext_resource path="res://characters/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=6]
+[ext_resource path="res://characters/HurtStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
@@ -52,9 +53,10 @@ state_commit_end_sec = 0.6
 state_length_sec = 0.6
 next_state = "Idle"
 
-[node name="WaitIdle" type="Node" parent="FSM" index="3"]
+[node name="HurtStateAspect" type="Node" parent="FSM/Hurt" index="0"]
+script = ExtResource( 7 )
 
-[node name="Logger" type="Node" parent="FSM" index="4"]
+[node name="Logger" type="Node" parent="FSM" index="3"]
 script = ExtResource( 12 )
 naming_scheme = 1
 

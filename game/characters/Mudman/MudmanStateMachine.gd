@@ -51,14 +51,6 @@ func _get_next_state(delta: float) -> String:
 			if (not hurt_state.is_state_over):
 				return NO_STATE
 			return "Idle"
-		"WaitIdle":
-			var wait_state = state_nodes[state] as FiniteState
-			if (hurting):
-				return "Hurt"
-			if (wait_state.is_state_over):
-				return wait_state.next_state
-			else:
-				return NO_STATE
 		_:
 			breakpoint
 			return NO_STATE

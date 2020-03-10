@@ -50,6 +50,7 @@ func _ready():
 	
 
 func process_state(delta: float):
+	.process_state(delta)
 	if (is_instance_valid(hitbox_areas_timeline)):
 		hitbox_areas_timeline.process_timeline(hitbox_group_id, delta)
 	if (is_instance_valid(attackbox_areas_timeline)):
@@ -59,6 +60,7 @@ func process_state(delta: float):
 	
 	
 func enter_state(prev_state: String):
+	.enter_state(prev_state)
 	if (is_instance_valid(hitbox_areas_timeline)):
 		hitbox_areas_timeline.reset(hitbox_group_id)
 	if (is_instance_valid(attackbox_areas_timeline)):

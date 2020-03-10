@@ -4,9 +4,9 @@
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/Yu/YuCharacterRig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://characters/PerpetualState.gd" type="Script" id=4]
-[ext_resource path="res://characters/TemplateWalkState.gd" type="Script" id=5]
+[ext_resource path="res://characters/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/FiniteState.gd" type="Script" id=6]
-[ext_resource path="res://characters/HurtFiniteState.gd" type="Script" id=7]
+[ext_resource path="res://characters/HurtStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=8]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=9]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
@@ -64,9 +64,12 @@ state_params_filepath = "res://characters/Yu/state_data/idle.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 
 [node name="Walk" type="Node" parent="FSM" index="1"]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 state_params_filepath = "res://characters/Yu/state_data/walk.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+
+[node name="WalkStateAspect" type="Node" parent="FSM/Walk" index="0"]
+script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
@@ -85,14 +88,18 @@ tween_path = NodePath("../../Body/Tween")
 state_commit_start_sec = 0.05
 state_commit_end_sec = 0.73
 state_length_sec = 0.8
+next_state = "Idle"
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 state_params_filepath = "res://characters/Yu/state_data/hurt_low.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-state_commit_end_sec = 1.2
+state_commit_end_sec = 1.0
 state_length_sec = 1.2
 next_state = "Idle"
+
+[node name="HurtStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
+script = ExtResource( 7 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
