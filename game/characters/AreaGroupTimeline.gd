@@ -17,7 +17,7 @@ A timeline item can be described as the object:
 		area: "A1" <-- name of area to toggle in the parent area group
 	}
 """
-export(Dictionary) var areas_timelines := {}
+var areas_timelines = {}
 
 #helper vars to loop
 var iteration_times: Dictionary = {}

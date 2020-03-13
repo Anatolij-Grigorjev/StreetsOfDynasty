@@ -65,3 +65,7 @@ func get_enabled_areas() -> Array:
 
 func _get_area_shape(area: Area2D) -> CollisionShape2D:
 	return area.get_child(0) as CollisionShape2D
+	
+	
+func _to_string():
+	return "AG[%s](%s)" % [name, all_areas.size()]
