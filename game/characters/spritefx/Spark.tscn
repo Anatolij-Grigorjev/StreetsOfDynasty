@@ -2,7 +2,7 @@
 
 [ext_resource path="res://characters/spritefx/attack_blunt_spark.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "bleeding"
 length = 0.1
 step = 0.01
@@ -295,5 +295,5 @@ hframes = 3
 frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/bleeding = SubResource( 3 )
+anims/bleeding = SubResource( 1 )
 anims/blunt = SubResource( 2 )

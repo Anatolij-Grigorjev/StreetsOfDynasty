@@ -6,6 +6,7 @@ Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
 var Spark = preload("res://characters/spritefx/Spark.tscn")
+var BluntHit = preload("res://characters/blunt_hit1.wav")
 
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
@@ -16,6 +17,7 @@ var facing: int = 1
 onready var fsm: StateMachine = $FSM
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
+onready var sound_player: AudioStreamPlayer2D = $CharacterFX
 
 
 var is_hurting = false
@@ -53,9 +55,13 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	match(damage_type):
 		AttackBox.DamageType.BLUNT:
 			spark_instance.get_node("AnimationPlayer").play("blunt")
+			sound_player.stream = BluntHit
+			sound_player.play()
 			pass
 		AttackBox.DamageType.BLEEDING:
 			spark_instance.get_node("AnimationPlayer").play("bleeding")
+			sound_player.stream = BluntHit
+			sound_player.play()
 			pass
 		_:
 			print("Unknown damage type %s" % attackbox.damage_type)
