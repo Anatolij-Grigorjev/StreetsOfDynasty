@@ -8,6 +8,10 @@ damage (foreign attackbox contact on own hitbox), sets move speed
 var Spark = preload("res://characters/spritefx/Spark.tscn")
 var BluntHit = preload("res://characters/blunt_hit1.wav")
 
+var damage_type_sounds: Dictionary = {
+	AttackBox.DamageType.BLUNT: BluntHit,
+	AttackBox.DamageType.BLEEDING: BluntHit
+}
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 var velocity = Vector2()
@@ -55,18 +59,18 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	match(damage_type):
 		AttackBox.DamageType.BLUNT:
 			spark_instance.get_node("AnimationPlayer").play("blunt")
-			sound_player.stream = BluntHit
-			sound_player.play()
 			pass
 		AttackBox.DamageType.BLEEDING:
 			spark_instance.get_node("AnimationPlayer").play("bleeding")
-			sound_player.stream = BluntHit
-			sound_player.play()
 			pass
 		_:
 			print("Unknown damage type %s" % attackbox.damage_type)
 			breakpoint
-	pass
+	if (not sound_player.playing):
+		sound_player.stream = damage_type_sounds[damage_type]
+		sound_player.play()
+	
+	
 
 func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	var hitbox_center_position = hitbox.shape.global_position
