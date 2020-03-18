@@ -1,8 +1,8 @@
 {
 	"state_animation": "attack_a1",
 	"state_move": {
-		"x": 25,
-		"y": -3
+		"x": 23,
+		"y": 0
 	},
     "attackboxes_timeline": [
         {

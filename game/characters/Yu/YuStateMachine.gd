@@ -10,7 +10,7 @@ enum AttackInput {
 signal next_attack_input_changed(next_attack_input)
 
 
-export(float) var next_attack_input_cache_ttl: float = 0.25
+export(float) var next_attack_input_cache_ttl: float = 0.3
 
 
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
@@ -99,7 +99,7 @@ func _get_move_direction() -> Vector2:
 	
 	
 func _get_attack_input() -> int:
-	if (Input.is_action_pressed("attack_normal")):
+	if (Input.is_action_just_pressed("attack_normal")):
 		return AttackInput.NORMAL
 	return AttackInput.NONE
 	

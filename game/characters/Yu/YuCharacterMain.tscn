@@ -79,6 +79,11 @@ attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTim
 tween_path = NodePath("../../Body/Tween")
 next_state = "Idle"
 
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="0"]
+script = ExtResource( 5 )
+move_speed = Vector2( 5, 9 )
+change_facing = false
+
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )
 state_params_filepath = "res://characters/Yu/state_data/attack_a2.json"
@@ -89,6 +94,11 @@ state_commit_start_sec = 0.05
 state_commit_end_sec = 0.73
 state_length_sec = 0.8
 next_state = "Idle"
+
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackA2" index="0"]
+script = ExtResource( 5 )
+move_speed = Vector2( 7, 2 )
+change_facing = false
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )

@@ -22,9 +22,10 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	var bar = healthbar.get_node("Bar")
 	bar.value -= damage
 	if (bar.value <= 0.0):
-		healthbar.hide()
+		bar.value = 100
 	var label = DamageLabel.instance()
 	label.position = rig.position
-	label.global_position += Vector2.ONE * rand_range(-25, 25)
+	label.movement *= rand_range(0.75, 1.75)
+	label.global_position += Utils.rand_point(25, 25)
 	add_child(label)
 	label.set_damage(damage)
