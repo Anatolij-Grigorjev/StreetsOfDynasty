@@ -69,7 +69,10 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	if (not sound_player.playing):
 		sound_player.stream = damage_type_sounds[damage_type]
 		sound_player.play()
-	
+	if (attackbox.target_move != Vector2.ZERO):
+		var displacement = attackbox.target_move * attackbox.owner.facing
+		velocity += displacement
+		do_movement_slide(velocity)
 	
 
 func _build_random_spark(hitbox: Hitbox) -> Node2D:

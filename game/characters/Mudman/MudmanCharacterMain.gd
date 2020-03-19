@@ -16,6 +16,9 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 	current_state_lbl.text = new_state
 	
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
+	
+	
+	
 	._on_hitbox_hit(hitbox, attackbox)
 	var damage = rand_range(3.5, 7.5)
 	

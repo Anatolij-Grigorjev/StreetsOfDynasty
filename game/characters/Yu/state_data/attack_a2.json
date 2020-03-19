@@ -1,7 +1,7 @@
 {
 	"state_animation": "attack_a2",
 	"state_move": {
-		"x": 25,
+		"x": 35,
 		"y": -4,
         "duration": 0.15
 	},

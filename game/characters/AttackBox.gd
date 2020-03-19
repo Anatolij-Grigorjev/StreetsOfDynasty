@@ -10,7 +10,17 @@ enum DamageType {
 	BLEEDING = 1
 }
 
+"""
+Type of damage this applies to the target.
+"""
 export(DamageType) var damage_type = DamageType.BLUNT
+"""
+Amount of diplacement to apply to target velocity 
+during this hit. 
+The direction is based on facing of attacker, not attacked
+"""
+export(Vector2) var target_move = Vector2.ZERO
+
 var known_hitboxes = []
 
 

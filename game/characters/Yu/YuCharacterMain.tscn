@@ -258,6 +258,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_editor_description_": ""
 }
+target_move = Vector2( -35, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
 position = Vector2( 232.488, -177.854 )
@@ -270,6 +271,7 @@ __meta__ = {
 collision_layer = 0
 collision_mask = 32
 script = ExtResource( 10 )
+target_move = Vector2( 150, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
 position = Vector2( 147.093, -196.714 )

@@ -14,6 +14,8 @@ export(NodePath) var hitbox_areas_timeline_path
 export(NodePath) var attackbox_areas_timeline_path
 #path to tween node to help character movement during state
 export(NodePath) var tween_path
+#preserve velocity from previous state
+export(bool) var keep_velocity: bool = false
 
 
 #reference to the areas timeline if valid path provided
@@ -65,6 +67,9 @@ func enter_state(prev_state: String):
 		hitbox_areas_timeline.reset(hitbox_group_id)
 	if (is_instance_valid(attackbox_areas_timeline)):
 		attackbox_areas_timeline.reset(attackbox_group_id)
+	
+	if (not keep_velocity):
+		entity.velocity = Vector2()
 	
 	fsm.attackboxes.disable_all_areas()
 	fsm.hitboxes.disable_all_areas()
