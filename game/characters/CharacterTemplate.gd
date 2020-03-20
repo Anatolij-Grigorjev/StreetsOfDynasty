@@ -53,6 +53,8 @@ func do_movement_slide(velocity: Vector2):
 	
 	
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
+	#character level indicator if a hurt-state is happening
+	#gets reset when a state with a child HurtStateAspect exits
 	is_hurting = true
 	var spark_instance: Node2D = _build_random_spark(hitbox)
 	var damage_type = randi() % AttackBox.DamageType.size() #attackbox.damage_type
@@ -71,8 +73,7 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 		sound_player.play()
 	if (attackbox.target_move != Vector2.ZERO):
 		var displacement = attackbox.target_move * attackbox.owner.facing
-		velocity += displacement
-		do_movement_slide(velocity)
+		fsm.hurt_move = displacement
 	
 
 func _build_random_spark(hitbox: Hitbox) -> Node2D:

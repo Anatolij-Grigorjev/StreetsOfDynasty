@@ -175,6 +175,8 @@ __meta__ = {
 
 [node name="AttackA2_1" type="Area2D" parent="Body/HitboxGroup" index="3"]
 visible = false
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_1" index="0"]
@@ -183,6 +185,8 @@ shape = SubResource( 4 )
 
 [node name="AttackA2_2" type="Area2D" parent="Body/HitboxGroup" index="4"]
 visible = false
+collision_layer = 32
+collision_mask = 0
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_2" index="0"]
@@ -191,6 +195,8 @@ shape = SubResource( 5 )
 
 [node name="HurtLow1" type="Area2D" parent="Body/HitboxGroup" index="5"]
 visible = false
+collision_layer = 64
+collision_mask = 0
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -205,6 +211,8 @@ __meta__ = {
 
 [node name="HurtLow2" type="Area2D" parent="Body/HitboxGroup" index="6"]
 visible = false
+collision_layer = 64
+collision_mask = 0
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -219,6 +227,8 @@ __meta__ = {
 
 [node name="HurtLow3" type="Area2D" parent="Body/HitboxGroup" index="7"]
 visible = false
+collision_layer = 64
+collision_mask = 0
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -233,6 +243,8 @@ __meta__ = {
 
 [node name="HurtLow4" type="Area2D" parent="Body/HitboxGroup" index="8"]
 visible = false
+collision_layer = 64
+collision_mask = 0
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""

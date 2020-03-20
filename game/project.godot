@@ -172,6 +172,7 @@ debug2={
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_6="normal_attack"
+2d_physics/layer_7="hurt_attack"
 
 [logging]
 

@@ -13,7 +13,7 @@
 [ext_resource path="res://characters/WalkStateAspect.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 31.6954
 height = 127.436
 
@@ -61,6 +61,10 @@ next_state = "Idle"
 [node name="HurtStateAspect" type="Node" parent="FSM/Hurt" index="0"]
 script = ExtResource( 7 )
 
+[node name="WalkStateAspect" type="Node" parent="FSM/Hurt" index="1"]
+script = ExtResource( 11 )
+change_facing = false
+
 [node name="Logger" type="Node" parent="FSM" index="3"]
 script = ExtResource( 12 )
 naming_scheme = 1
@@ -81,7 +85,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle" index="0"]
 position = Vector2( 12.211, -79.749 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup" index="1"]
 collision_layer = 32
@@ -93,7 +97,7 @@ position = Vector2( 9.498, -69.573 )
 shape = SubResource( 2 )
 
 [node name="Hurt1" type="Area2D" parent="Body/HitboxGroup" index="2"]
-collision_layer = 32
+collision_layer = 64
 collision_mask = 0
 script = ExtResource( 6 )
 
@@ -102,6 +106,7 @@ position = Vector2( -5.427, -99.422 )
 shape = SubResource( 3 )
 
 [node name="Hurt2" type="Area2D" parent="Body/HitboxGroup" index="3"]
+collision_layer = 64
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Hurt2" index="0"]
