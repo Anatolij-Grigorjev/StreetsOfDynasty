@@ -72,7 +72,8 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 		sound_player.stream = damage_type_sounds[damage_type]
 		sound_player.play()
 	if (attackbox.target_move != Vector2.ZERO):
-		var displacement = attackbox.target_move * attackbox.owner.facing
+		print("target_move: %s, attacker facing: %s, target facing: %s" % [attackbox.target_move, attackbox.owner.facing, facing])
+		var displacement = attackbox.target_move
 		fsm.hurt_move = displacement
 	
 

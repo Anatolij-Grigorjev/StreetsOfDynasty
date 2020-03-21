@@ -30,12 +30,13 @@ func _get_next_state(delta: float) -> String:
 	
 	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
 	var hurting: bool = entity.is_hurting
+	
 	#apply hurt move
 	if (hurting and hurt_move != Vector2.ZERO):
 		var hurt_state_node = state_nodes["Hurt"]
-		var walk_aspect = hurt_state_node.get_node('WalkStateAspect')
-		if (walk_aspect):
-			walk_aspect.move_speed = hurt_move
+		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
+		if (moved_aspect):
+			moved_aspect.move_impulse = hurt_move
 		hurt_move = Vector2.ZERO
 		
 	match(state):

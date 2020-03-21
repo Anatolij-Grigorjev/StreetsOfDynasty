@@ -2,7 +2,8 @@ extends State
 class_name WalkStateAspect
 """
 State aspect that processes entity velocity and facing information
-into lerped motion
+into lerped motion. 
+Motion and direction is controlled by entity SM, making it adjustable
 """
 
 """
@@ -10,6 +11,11 @@ move speed via this aspect.
 if this is 0 then the entity move speed is used
 """
 export(Vector2) var move_speed: Vector2 = Vector2.ZERO
+"""
+Does entity facing reported by the SM change the facing of the rig
+By default it does (like when walking), 
+not changing emulates things like backstep
+"""
 export(bool) var change_facing: bool = true
 
 
