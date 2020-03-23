@@ -15,6 +15,10 @@ Type of damage this applies to the target.
 """
 export(DamageType) var damage_type = DamageType.BLUNT
 """
+Amount of raw damage dealt by attack
+"""
+export(float) var damage_amount = rand_range(10.0, 15.0)
+"""
 Amount of diplacement to apply to target velocity 
 during this hit. 
 The direction is based on facing of attacker, not attacked
