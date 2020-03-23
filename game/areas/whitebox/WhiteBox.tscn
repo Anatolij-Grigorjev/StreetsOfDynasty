@@ -19,7 +19,14 @@ extents = Vector2( 820, 150 )
 
 [node name="WhiteBox" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 640, 350 )
+current = true
+
 [node name="BG" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprites" type="Node2D" parent="BG"]
 position = Vector2( 0, 50 )
@@ -86,6 +93,9 @@ position = Vector2( 500, -150 )
 shape = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 260.245, 449.422 )

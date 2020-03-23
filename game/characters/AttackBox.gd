@@ -17,7 +17,7 @@ export(DamageType) var damage_type = DamageType.BLUNT
 """
 Amount of raw damage dealt by attack
 """
-export(float) var damage_amount = rand_range(10.0, 15.0)
+export(float) var damage_amount = 0
 """
 Amount of diplacement to apply to target velocity 
 during this hit. 

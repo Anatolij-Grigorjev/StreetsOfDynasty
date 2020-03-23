@@ -20,10 +20,6 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	var multiplier = rand_range(0.75, 1.25)
 	var damage = attackbox.damage_amount * multiplier
 	
-	fsm.get_node('Logger').info("damage: %2.2f x %2.2f = %2.2f", 
-		[attackbox.damage_amount, multiplier, damage]
-	)
-	
 	var bar = healthbar.get_node("Bar")
 	bar.value -= damage
 	if (bar.value <= 0.0):
