@@ -75,6 +75,8 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 		print("target_move: %s, attacker facing: %s, target facing: %s" % [attackbox.target_move, attackbox.owner.facing, facing])
 		var displacement = attackbox.target_move * attackbox.owner.facing
 		fsm.hurt_move = displacement
+		
+	get_tree().get_nodes_in_group("camera")[0].get_child(0).start()
 	
 
 func _build_random_spark(hitbox: Hitbox) -> Node2D:
