@@ -10,7 +10,7 @@ enum AttackInput {
 signal next_attack_input_changed(next_attack_input)
 
 
-export(float) var next_attack_input_cache_ttl: float = 0.3
+export(float) var next_attack_input_cache_ttl: float = 0.4
 
 
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")

@@ -7,10 +7,11 @@ damage (foreign attackbox contact on own hitbox), sets move speed
 """
 var Spark = preload("res://characters/spritefx/Spark.tscn")
 var BluntHit = preload("res://characters/blunt_hit1.wav")
+var BluntHitHeavy = preload("res://characters/blunt_hit_heavy1.wav")
 
 var damage_type_sounds: Dictionary = {
-	AttackBox.DamageType.BLUNT: BluntHit,
-	AttackBox.DamageType.BLEEDING: BluntHit
+	AttackBox.DamageType.BLUNT: BluntHitHeavy,
+	AttackBox.DamageType.BLEEDING: BluntHitHeavy
 }
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
@@ -68,14 +69,8 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 		_:
 			print("Unknown damage type %s" % attackbox.damage_type)
 			breakpoint
-	if (not sound_player.playing):
-		sound_player.stream = damage_type_sounds[damage_type]
-		sound_player.play()
-	if (attackbox.target_move != Vector2.ZERO):
-		print("target_move: %s, attacker facing: %s, target facing: %s" % [attackbox.target_move, attackbox.owner.facing, facing])
-		var displacement = attackbox.target_move * attackbox.owner.facing
-		fsm.hurt_move = displacement
-		
+	_handle_play_hit_sound(damage_type)
+	_handle_hit_displacement(attackbox)
 	get_tree().get_nodes_in_group("camera")[0].get_child(0).start()
 	
 
@@ -89,6 +84,31 @@ func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	spark.global_rotation_degrees = rotation
 	
 	return spark
+	
+	
+func _handle_play_hit_sound(damage_type: int): 
+	if (sound_player.is_playing()):
+		return
+	var sound_file = damage_type_sounds[damage_type]
+	if (not sound_file):
+		print("No sound assigned for damage type ", damage_type)
+		breakpoint
+	var db_scale = 0.25
+	var pitch_scale = 0.25
+	sound_player.stream = sound_file
+	sound_player.volume_db = rand_range(-db_scale, db_scale)
+	sound_player.pitch_scale = rand_range(1 - pitch_scale, 1 + pitch_scale)
+	sound_player.play()
+	
+	
+func _handle_hit_displacement(attackbox: AttackBox):
+	if (attackbox.target_move != Vector2.ZERO):
+		print(
+			"target_move: %s, attacker facing: %s, target facing: %s" % 
+			[attackbox.target_move, attackbox.owner.facing, facing]
+		)
+		var displacement = attackbox.target_move * attackbox.owner.facing
+		fsm.hurt_move = displacement
 	
 	
 func _on_FSM_state_changed(old_state: String, new_state: String):

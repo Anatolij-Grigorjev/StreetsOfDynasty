@@ -11,7 +11,7 @@ var amplitude = 0
 onready var camera: Camera2D = get_parent()
 
 
-func start(duration = 0.15, frequency = 15, amplitude = 5):
+func start(duration = 0.2, frequency = 15, amplitude = 10):
 	self.amplitude = amplitude
 	
 	$Duration.wait_time = duration
