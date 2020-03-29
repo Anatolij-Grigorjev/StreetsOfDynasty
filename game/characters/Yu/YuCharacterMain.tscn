@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
+[ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -83,6 +84,9 @@ next_state = "Idle"
 script = ExtResource( 5 )
 move_speed = Vector2( 5, 9 )
 change_facing = false
+
+[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="1"]
+script = ExtResource( 14 )
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )

@@ -10,15 +10,11 @@ enum AttackInput {
 signal next_attack_input_changed(next_attack_input)
 
 
-export(float) var next_attack_input_cache_ttl: float = 0.4
-
-
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
 
 var next_attack_input: int = AttackInput.NONE
-var current_next_attack_input_ttl: float = 0.0
 
 
 func _ready():
@@ -32,13 +28,12 @@ func set_state(next_state: String):
 		
 		
 func _process(delta):
-	_refresh_next_attack_cache(delta)
+	pass
 	
 	
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
-	_cache_next_attack_input(attack_input)
 	var hurting: bool = entity.is_hurting or Input.is_action_pressed("debug1")
 	match(state):
 		"Idle":
@@ -61,12 +56,14 @@ func _get_next_state(delta: float) -> String:
 			if (hurting):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
+			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			if (next_attack_input == AttackInput.NORMAL):
+				_clear_next_attack_input()
+				return "AttackA2"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
-			if (next_attack_input == AttackInput.NORMAL):
-				return "AttackA2"
 			if (attack_state.is_state_over):
 				return _next_or_default(attack_state)
 			return NO_STATE
@@ -104,22 +101,20 @@ func _get_attack_input() -> int:
 	return AttackInput.NONE
 	
 	
-func _cache_next_attack_input(attack_input: int):
-	if (not attack_input == AttackInput.NONE
-		and attack_input != next_attack_input):
-		next_attack_input = attack_input
-		current_next_attack_input_ttl = next_attack_input_cache_ttl
-		emit_signal("next_attack_input_changed", next_attack_input)
-		
-
-func _refresh_next_attack_cache(delta: float):
-	if (current_next_attack_input_ttl > 0.0):
-		current_next_attack_input_ttl -= delta
-		if (current_next_attack_input_ttl <= 0.0):
-			next_attack_input = AttackInput.NONE
-			current_next_attack_input_ttl = 0.0
-			emit_signal("next_attack_input_changed", AttackInput.NONE)
+func _clear_next_attack_input():
+	next_attack_input = AttackInput.NONE
+	emit_signal("next_attack_input_changed", next_attack_input)
 			
+			
+func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
+	var attack_phase_aspect = attack_state.get_node('AttackStatePhaseAspect')
+	if (not attack_phase_aspect):
+		print(state, " requires a AttackStatePhaseAspect child!")
+		breakpoint
+	if (attack_phase_aspect.attack_phase != AttackStatePhaseAspect.AttackPhase.WIND_UP):
+		next_attack_input = attack_input
+		emit_signal("next_attack_input_changed", next_attack_input)
+
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:
 	if (state.next_state):
