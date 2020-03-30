@@ -8,20 +8,21 @@
 [ext_resource path="res://characters/Yu/animations/hurt_low.tres" type="Animation" id=6]
 [ext_resource path="res://characters/Yu/animations/idle.tres" type="Animation" id=7]
 [ext_resource path="res://characters/Yu/animations/walk.tres" type="Animation" id=8]
-[ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=9]
+[ext_resource path="res://characters/Yu/spritesheets/attack_A2.png" type="Texture" id=9]
 
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 9 )
-offset = Vector2( -55.0157, 16.4309 )
-hframes = 5
+offset = Vector2( -122.34, 14.2268 )
+hframes = 8
+frame = 7
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 231.353, -70.2303 )
-rotation = -2.90924
+modulate = Color( 1, 1, 1, 0.0588235 )
+position = Vector2( 55.7294, -49.1013 )
+rotation = -3.16578
 texture = ExtResource( 4 )
 flip_h = true
 __meta__ = {
@@ -38,6 +39,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 1 )
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }

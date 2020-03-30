@@ -111,7 +111,10 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 	if (not attack_phase_aspect):
 		print(state, " requires a AttackStatePhaseAspect child!")
 		breakpoint
-	if (attack_phase_aspect.attack_phase != AttackStatePhaseAspect.AttackPhase.WIND_UP):
+	if (
+		attack_phase_aspect.attack_phase != AttackStatePhaseAspect.AttackPhase.WIND_UP
+		and attack_input != AttackInput.NONE
+	):
 		next_attack_input = attack_input
 		emit_signal("next_attack_input_changed", next_attack_input)
 
