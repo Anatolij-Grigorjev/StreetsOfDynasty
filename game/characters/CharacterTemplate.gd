@@ -71,7 +71,6 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 			breakpoint
 	_handle_play_hit_sound(damage_type)
 	_handle_hit_displacement(attackbox)
-	get_tree().get_nodes_in_group("camera")[0].get_child(0).start()
 	
 
 func _build_random_spark(hitbox: Hitbox) -> Node2D:

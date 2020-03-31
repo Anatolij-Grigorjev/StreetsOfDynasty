@@ -9,6 +9,7 @@ onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var current_state_lbl: Label = $CurrentState
 onready var healthbar = $Body/MudmanCharacterRig/HealthBar
+onready var screen_shake = $ScreenShakeRequestor
 
 
 
@@ -17,6 +18,9 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 	
 func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	._on_hitbox_hit(hitbox, attackbox)
+	screen_shake.request_screen_shake()
+	
+	
 	var multiplier = rand_range(0.75, 1.25)
 	var damage = attackbox.damage_amount * multiplier
 	
