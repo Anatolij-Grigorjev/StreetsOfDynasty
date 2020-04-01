@@ -94,7 +94,6 @@ state_params_filepath = "res://characters/Yu/state_data/attack_a2.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
 tween_path = NodePath("../../Body/Tween")
-state_commit_start_sec = 0.05
 state_commit_end_sec = 0.73
 state_length_sec = 0.8
 next_state = "Idle"

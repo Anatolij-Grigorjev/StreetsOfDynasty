@@ -78,9 +78,11 @@ func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	var spark = Spark.instance()
 	var position = Utils.rand_point(10, 5) + hitbox_center_position
 	var rotation = randf() * 360
+	var scale = rand_range(1.0, 2.0)
 	add_child(spark)
 	spark.global_position = position
 	spark.global_rotation_degrees = rotation
+	spark.global_scale = Vector2(scale, scale)
 	
 	return spark
 	

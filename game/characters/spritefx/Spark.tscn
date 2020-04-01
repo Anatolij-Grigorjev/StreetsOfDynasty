@@ -282,15 +282,15 @@ tracks/10/keys = {
 [node name="Spark" type="Node2D"]
 
 [node name="Sprite2" type="Sprite" parent="."]
-modulate = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+modulate = Color( 1, 0.00392157, 0.00392157, 1 )
 position = Vector2( -4.07037, 6.10556 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 3
-frame = 5
+frame = 3
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+modulate = Color( 0.972549, 0.0117647, 0.0117647, 1 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 3
