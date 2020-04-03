@@ -15,13 +15,11 @@
 [ext_resource path="res://characters/MovedStateAspect.gd" type="Script" id=13]
 [ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=14]
 
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 31.6954
-height = 127.436
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 42.4063, 87.6463 )
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 35.0875
-height = 70.4771
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 39.532, 88.51 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 37.801, 74.3964 )
@@ -86,7 +84,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle" index="0"]
-position = Vector2( 12.211, -79.749 )
+position = Vector2( -0.360563, -94.183 )
 shape = SubResource( 6 )
 
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup" index="1"]
@@ -95,8 +93,8 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Walk" index="0"]
-position = Vector2( 9.498, -69.573 )
-shape = SubResource( 2 )
+position = Vector2( -4.00481, -92.388 )
+shape = SubResource( 7 )
 
 [node name="Hurt1" type="Area2D" parent="Body/HitboxGroup" index="2"]
 collision_layer = 64

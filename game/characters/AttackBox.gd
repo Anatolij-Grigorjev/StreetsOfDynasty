@@ -19,6 +19,10 @@ Amount of raw damage dealt by attack
 """
 export(float) var damage_amount = 0
 """
+Attack vertical reach limit, regardless of hitbox size
+"""
+export(float) var radius = 40.6
+"""
 Amount of diplacement to apply to target velocity 
 during this hit. 
 The direction is based on facing of attacker, not attacked
@@ -26,6 +30,7 @@ The direction is based on facing of attacker, not attacked
 export(Vector2) var target_move = Vector2.ZERO
 
 var known_hitboxes = []
+onready var shape: CollisionPolygon2D = get_child(0)
 
 
 func _ready():
@@ -41,7 +46,8 @@ process hit on all hitboxes not currently disabled
 func process_attack() -> void:
 	for node in known_hitboxes:
 		var hitbox := node as Hitbox
-		if (not hitbox.shape.disabled):
+		if (not hitbox.shape.disabled
+			and _hitbox_in_radius(hitbox)):
 			hitbox.process_hit(self)
 
 
@@ -62,6 +68,16 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 		and area is Hitbox
 		and area.owner != owner
 	)
+	
+	
+func _hitbox_in_radius(hitbox: Hitbox) -> bool:
+	var does_hit = abs(shape.global_position.y - hitbox.shape.global_position.y) <= radius
+	print("%s y: %s, %s y: %s - %s" % [
+		self, shape.global_position.y, 
+		hitbox, hitbox.shape.global_position.y, 
+		"HIT!" if does_hit else "MISS!"
+	] )
+	return abs(shape.global_position.y - hitbox.shape.global_position.y) <= radius
 	
 	
 func _to_string():
