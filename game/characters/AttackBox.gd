@@ -21,7 +21,7 @@ export(float) var damage_amount = 0
 """
 Attack vertical reach limit, regardless of hitbox size
 """
-export(float) var radius = 40.6
+export(float) var radius = 45.6
 """
 Amount of diplacement to apply to target velocity 
 during this hit. 
@@ -71,13 +71,22 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 	
 	
 func _hitbox_in_radius(hitbox: Hitbox) -> bool:
-	var does_hit = abs(shape.global_position.y - hitbox.shape.global_position.y) <= radius
-	print("%s y: %s, %s y: %s - %s" % [
+	var distance = abs(shape.global_position.y - hitbox.shape.global_position.y)
+	var does_hit = distance <= radius
+	print("%s y: %s, %s y: %s - abs: %s - %s" % [
 		self, shape.global_position.y, 
 		hitbox, hitbox.shape.global_position.y, 
-		"HIT!" if does_hit else "MISS!"
+		distance, "HIT!" if does_hit else "MISS!"
 	] )
-	return abs(shape.global_position.y - hitbox.shape.global_position.y) <= radius
+	if does_hit:
+		_disable_hit(hitbox)
+	return does_hit
+	
+	
+func _disable_hit(hitbox: Hitbox):
+	hitbox.owner.visible = false
+	yield(get_tree().create_timer(3.0), "timeout")
+	hitbox.owner.visible = true
 	
 	
 func _to_string():

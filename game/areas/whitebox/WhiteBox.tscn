@@ -104,7 +104,7 @@ __meta__ = {
 
 [node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 260.245, 449.422 )
-scale = Vector2( 0.65, 0.65 )
+scale = Vector2( 0.7, 0.7 )
 
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 541.509, 473.445 )

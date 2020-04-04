@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -50,6 +50,9 @@ extents = Vector2( 138.288, 45.3669 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 70, 36.272 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="YuCharacterMain" groups=[
 "Player",
@@ -307,12 +310,13 @@ __meta__ = {
 }
 
 [node name="CurrentState" type="Label" parent="." index="3"]
-modulate = Color( 0, 0, 0, 1 )
-margin_left = -60.0
-margin_top = -400.0
-margin_right = 40.0
-margin_bottom = -375.0
+margin_left = -81.5811
+margin_top = -406.772
+margin_right = 18.4189
+margin_bottom = -381.772
 rect_min_size = Vector2( 100, 25 )
+rect_scale = Vector2( 1.5, 1.5 )
+custom_styles/normal = SubResource( 13 )
 text = "<NO_STATE>"
 align = 1
 valign = 1

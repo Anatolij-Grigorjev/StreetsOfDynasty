@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@ extents = Vector2( 37.1226, 65.5772 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 63.58, 18.768 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
@@ -124,12 +127,15 @@ position = Vector2( -7.462, 12.513 )
 shape = SubResource( 5 )
 
 [node name="CurrentState" type="Label" parent="." index="3"]
-modulate = Color( 0, 0, 0, 1 )
 margin_left = -58.8647
 margin_top = -231.975
 margin_right = 41.1353
 margin_bottom = -206.975
 rect_min_size = Vector2( 100, 25 )
+custom_styles/normal = SubResource( 8 )
+custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
