@@ -28,13 +28,11 @@ func _ready():
 	
 func _connect_signals():
 	timeline = attack_state.attackbox_areas_timeline
-	timeline.connect("group_timeline_started", self, "_attackbox_timeline_group_timeline_started")
-	timeline.connect("group_timeline_finished", self, "_attackbox_timeline_group_timeline_finished")
+	timeline.connect("group_timeline_area_changed", self, "_attackbox_timeline_group_timeline_changed")
 
 
-func _attackbox_timeline_group_timeline_started(group_id: String, first_area_name: String):
-	attack_phase = AttackPhase.HIT
-
-
-func _attackbox_timeline_group_timeline_finished(group_id: String, last_area_name: String):
-	attack_phase = AttackPhase.WIND_DOWN
+func _attackbox_timeline_group_timeline_changed(group_id: String, prev_area_name, next_area_name):
+	if (prev_area_name and not next_area_name):
+		attack_phase = AttackPhase.WIND_DOWN
+	elif (not prev_area_name and next_area_name):
+		attack_phase = AttackPhase.HIT

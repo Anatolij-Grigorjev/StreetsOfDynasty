@@ -6,10 +6,8 @@ areas during a fixed timeline.
 Can be reset and stepped through manually
 Supports concurrent work with multiple timelines within the same group
 """
-
-signal group_timeline_started(group_id, first_area_name)
 signal group_timeline_area_changed(group_id, prev_area_name, next_area_name)
-signal group_timeline_finished(group_id, last_area_name)
+
 
 onready var area_group: AreaGroup = get_parent()
 """
@@ -76,11 +74,11 @@ func _emit_timeline_signals(group_id: String, group_timeline: Array, group_timel
 	
 	#this happened during first iteration
 	if (group_timeline_idx == 0):
-		emit_signal("group_timeline_started", group_id, applied_item.area)
+		emit_signal("group_timeline_area_changed", group_id, null, applied_item.area)
 		
 	#this happened during last iteration
 	elif (group_timeline_idx == group_timeline.size() - 1):
-		emit_signal("group_timeline_finished", group_id, applied_item.area)
+		emit_signal("group_timeline_area_changed", group_id, applied_item.area, null)
 		
 	#this happened at some iteration and maybe active area changed
 	else:
