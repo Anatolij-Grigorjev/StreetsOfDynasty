@@ -1,7 +1,7 @@
 extends State
 class_name MovedStateAspect
 """
-A state aspect that allows a character to moved by 
+A state aspect that allows a character to be moved by 
 a controlled motion with aspects like facing/speed/etc 
 set by the external mover
 """

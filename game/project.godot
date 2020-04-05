@@ -60,6 +60,11 @@ _global_script_classes=[ {
 "path": "res://Logger.gd"
 }, {
 "base": "State",
+"class": "MoveToEnemyStateAspect",
+"language": "GDScript",
+"path": "res://characters/MoveToEnemyStateAspect.gd"
+}, {
+"base": "State",
 "class": "MovedStateAspect",
 "language": "GDScript",
 "path": "res://characters/MovedStateAspect.gd"
@@ -115,6 +120,7 @@ _global_script_class_icons={
 "HurtFiniteState": "",
 "HurtStateAspect": "",
 "Logger": "",
+"MoveToEnemyStateAspect": "",
 "MovedStateAspect": "",
 "PerpetualState": "",
 "ScreenShakeRequestor": "",
