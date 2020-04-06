@@ -73,13 +73,13 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 func _hitbox_in_radius(hitbox: Hitbox) -> bool:
 	var distance = abs(shape.global_position.y - hitbox.shape.global_position.y)
 	var does_hit = distance <= radius
-	print("%s y: %s, %s y: %s - abs: %s - %s" % [
-		self, shape.global_position.y, 
-		hitbox, hitbox.shape.global_position.y, 
-		distance, "HIT!" if does_hit else "MISS!"
-	] )
-	if does_hit:
-		_disable_hit(hitbox)
+#	print("%s y: %s, %s y: %s - abs: %s - %s" % [
+#		self, shape.global_position.y, 
+#		hitbox, hitbox.shape.global_position.y, 
+#		distance, "HIT!" if does_hit else "MISS!"
+#	] )
+#	if does_hit:
+#		_disable_hit(hitbox)
 	return does_hit
 	
 	

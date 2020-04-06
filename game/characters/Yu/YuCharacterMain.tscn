@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
+[ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -91,6 +92,11 @@ change_facing = false
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 14 )
 
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+script = ExtResource( 15 )
+check_enemy_arc_radius = 45.0
+collision_mask = 96
+
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )
 state_params_filepath = "res://characters/Yu/state_data/attack_a2.json"
@@ -105,6 +111,9 @@ next_state = "Idle"
 script = ExtResource( 5 )
 move_speed = Vector2( 7, 2 )
 change_facing = false
+
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA2" index="1"]
+script = ExtResource( 15 )
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )

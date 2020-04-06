@@ -8,6 +8,7 @@ onready var anim: AnimationPlayer = $Body/YuCharacterRig/AnimationPlayer
 onready var LOG: Logger = $Logger
 onready var current_state_lbl: Label = $CurrentState
 
+var draw_q = []
 
 func _ready():
 	fsm.connect("next_attack_input_changed", self, "_on_FSM_next_attack_input_changed")
@@ -20,6 +21,17 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	current_state_lbl.text = new_state
+	
+	
+func _process(delta):
+	update()
+	
+	
+func _draw():
+	if (not draw_q.empty()):
+		for point in draw_q:
+			draw_line(global_position, point, Color.red, 15.0)
+		draw_q.clear()
 	
 	
 func _on_FSM_next_attack_input_changed(next_attack_input: int):

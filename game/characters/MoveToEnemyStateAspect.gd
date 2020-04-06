@@ -24,7 +24,7 @@ export(float) var check_enemy_max_distance := 350
 How much of the arc radius is handled by 1 ray
 The lower the number the more accurate the hits
 """
-export(float) var arc_ray_partition_size := 13.5
+export(float) var arc_ray_partition_size := 10.5
 """
 Mask of layers ray should try collide against
 """
@@ -45,14 +45,16 @@ func exit_state(next_state: String):
 
 
 func _physics_process(delta):
+	entity.update()
 	#get 2d physics space
 	var space_state := _get_world_space_state()
-	#check raycasts direct/aboeve/below in that order
+	#check raycasts direct/above/below in that order
 	var hit_position := _get_raycast_checks_hit_position(space_state)
 	#use hit position to move there
 	if (_hit_position_valid(hit_position)):
+		print("RAYCAST: hit at position %s" % hit_position)
 		_move_towards_hit_position(hit_position)
-		#disable physics
+		#disable physics to stop further checking
 		set_physics_process(false)
 	
 	
@@ -100,6 +102,7 @@ func _cast_ray_in_front(space_state: Physics2DDirectSpaceState) -> Dictionary:
 	
 
 func _cast_ray_to(space_state: Physics2DDirectSpaceState, ray_endpoint: Vector2) -> Dictionary:
+	entity.draw_q.append(ray_endpoint)
 	var server_check = space_state.intersect_ray(
 		entity.global_position, 
 		ray_endpoint, 
@@ -120,7 +123,7 @@ func _cast_rays_above(space_state: Physics2DDirectSpaceState) -> Dictionary:
 	
 	
 func _raycast_hit(raycast_result) -> bool:
-	return raycast_result != null and (raycast_result as Dictionary).position != null	
+	return raycast_result != null and (raycast_result as Dictionary).has("position")
 	
 	
 func _cast_rays_below(space_state: Physics2DDirectSpaceState) -> Dictionary: 
