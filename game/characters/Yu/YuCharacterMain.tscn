@@ -94,7 +94,8 @@ script = ExtResource( 14 )
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
 script = ExtResource( 15 )
-check_enemy_arc_radius = 45.0
+check_enemy_arc_radius = 90.0
+arc_ray_partition_size = 20.0
 collision_mask = 96
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]

@@ -75,24 +75,28 @@ __meta__ = {
 
 [node name="Left" type="StaticBody2D" parent="BG/Colliders"]
 position = Vector2( -150, 300 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Left"]
 shape = SubResource( 1 )
 
 [node name="Right" type="StaticBody2D" parent="BG/Colliders"]
 position = Vector2( 1170, 300 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Right"]
 shape = SubResource( 2 )
 
 [node name="Bottom" type="StaticBody2D" parent="BG/Colliders"]
 position = Vector2( 500, 750 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Bottom"]
 shape = SubResource( 3 )
 
 [node name="Top" type="StaticBody2D" parent="BG/Colliders"]
 position = Vector2( 500, -150 )
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Top"]
 shape = SubResource( 4 )

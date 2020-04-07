@@ -19,7 +19,7 @@ export(float) var check_enemy_arc_radius := 0.0
 """
 How far will the rays check for an enemy horizontally
 """
-export(float) var check_enemy_max_distance := 350
+export(float) var check_enemy_max_distance := 550
 """
 How much of the arc radius is handled by 1 ray
 The lower the number the more accurate the hits
@@ -45,7 +45,6 @@ func exit_state(next_state: String):
 
 
 func _physics_process(delta):
-	entity.update()
 	#get 2d physics space
 	var space_state := _get_world_space_state()
 	#check raycasts direct/above/below in that order
@@ -87,7 +86,7 @@ func _move_towards_hit_position(hit_position: Vector2):
 	var position := entity.global_position as Vector2
 	var move_direction := position.direction_to(hit_position)
 	var move_amount := min(position.distance_to(hit_position), max_move)
-	var move_impulse := move_direction * move_amount
+	var move_impulse := move_direction * move_amount * 1000
 	#move for this much impulse in 0.15 seconds
 	state._move_with_state(move_impulse, 0.15)
 
@@ -95,27 +94,29 @@ func _move_towards_hit_position(hit_position: Vector2):
 
 
 func _cast_ray_in_front(space_state: Physics2DDirectSpaceState) -> Dictionary:
-	var global_position := entity.global_position as Vector2
 	return _cast_ray_to(
 		space_state, 
-		global_position + Vector2(check_enemy_max_distance, 0))
+		Vector2(check_enemy_max_distance, 0))
 	
 
 func _cast_ray_to(space_state: Physics2DDirectSpaceState, ray_endpoint: Vector2) -> Dictionary:
 	entity.draw_q.append(ray_endpoint)
+	
 	var server_check = space_state.intersect_ray(
-		entity.global_position, 
-		ray_endpoint, 
-		[entity], collision_mask)
+		entity.body.position, 
+		ray_endpoint 
+		, [entity]
+		, collision_mask
+	)
 	return server_check if (server_check != null) else {}
 
 	
 func _cast_rays_above(space_state: Physics2DDirectSpaceState) -> Dictionary: 
-	var global_position := entity.global_position as Vector2
+
 	for pos_y_increment in range(arc_ray_partition_size, check_enemy_arc_radius, arc_ray_partition_size):
-		var check := _cast_ray_to(space_state, Vector2(
-			global_position.x + check_enemy_max_distance,
-			global_position.y + pos_y_increment)
+		var check := _cast_ray_to(
+			space_state, 
+			Vector2(check_enemy_max_distance, pos_y_increment)
 		)
 		if (_raycast_hit(check)):
 			return check
@@ -127,11 +128,11 @@ func _raycast_hit(raycast_result) -> bool:
 	
 	
 func _cast_rays_below(space_state: Physics2DDirectSpaceState) -> Dictionary: 
-	var global_position := entity.global_position as Vector2
+
 	for pos_y_increment in range(-arc_ray_partition_size, -check_enemy_arc_radius, -arc_ray_partition_size):
-		var check := _cast_ray_to(space_state, Vector2(
-			global_position.x + check_enemy_max_distance,
-			global_position.y + pos_y_increment)
+		var check := _cast_ray_to(
+			space_state, 
+			Vector2(check_enemy_max_distance, pos_y_increment)
 		)
 		if (_raycast_hit(check)):
 			return check

@@ -30,7 +30,7 @@ func _process(delta):
 func _draw():
 	if (not draw_q.empty()):
 		for point in draw_q:
-			draw_line(global_position, point, Color.red, 15.0)
+			draw_line(body.position, point, Color.red, 15.0)
 		draw_q.clear()
 	
 	

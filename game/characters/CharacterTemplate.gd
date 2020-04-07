@@ -20,6 +20,7 @@ var facing: int = 1
 
 
 onready var fsm: StateMachine = $FSM
+onready var body: Node2D = $Body
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
 onready var sound_player: AudioStreamPlayer2D = $CharacterFX
