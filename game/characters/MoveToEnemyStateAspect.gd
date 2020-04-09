@@ -34,7 +34,7 @@ export(int, LAYERS_2D_PHYSICS) var collision_mask := 0
 onready var state: PerpetualState = get_parent()
 
 var rays_array: Node2D
-
+var direct_ray: RayCast2D
 
 func _ready():
 	call_deferred("_build_rays_arc")
@@ -45,10 +45,10 @@ func _build_rays_arc():
 	rays_array = Node2D.new()
 	rays_array.name = "MoveToEnemyAspectRays"
 	#add tree to character
-	entity.add_child(rays_array)
+	entity.body.add_child(rays_array)
 	
 	#add rays
-	var direct_ray = _build_raycast_to(Vector2(check_enemy_max_distance, 0))
+	direct_ray = _build_raycast_to(Vector2(check_enemy_max_distance, 0))
 	rays_array.add_child(direct_ray)
 	for pos_y_increment in range(arc_ray_partition_size, check_enemy_arc_radius, arc_ray_partition_size):
 		var ray_above = _build_raycast_to(Vector2(check_enemy_max_distance, pos_y_increment))
@@ -70,44 +70,44 @@ func _build_raycast_to(destination: Vector2) -> RayCast2D:
 
 func enter_state(prev_state: String):
 	.enter_state(prev_state)
-	set_physics_process(true)
+	#enable rays array
+	for ray in rays_array.get_children():
+		ray.enabled = true
+	set_process(true)
 	
 	
 func exit_state(next_state: String):
 	.exit_state(next_state)
-	set_physics_process(false)
+	#disable rays array
+	for ray in rays_array.get_children():
+		ray.enabled = false
+	set_process(false)
 
 
-func _physics_process(delta):
-	#get 2d physics space
-	var space_state := _get_world_space_state()
+func _process(delta):
+
 	#check raycasts direct/above/below in that order
-	var hit_position := _get_raycast_checks_hit_position(space_state)
+	var hit_position := _get_raycast_checks_hit_position()
 	#use hit position to move there
 	if (_hit_position_valid(hit_position)):
 		print("RAYCAST: hit at position %s" % hit_position)
 		_move_towards_hit_position(hit_position)
 		#disable physics to stop further checking
-		set_physics_process(false)
+		set_process(false)
 	
 	
-func _get_world_space_state() -> Physics2DDirectSpaceState:
-	return entity.get_world_2d().direct_space_state
-	
-	
-func _get_raycast_checks_hit_position(space_state: Physics2DDirectSpaceState) -> Vector2:
-	var hit_direct := _cast_ray_in_front(space_state)
+func _get_raycast_checks_hit_position() -> Vector2:
+	var hit_direct := _check_ray(direct_ray)
 	if (_raycast_hit(hit_direct)):
 		return hit_direct.position
+		
 	if (check_enemy_arc_radius > 0):
-		var hit_above := _cast_rays_above(space_state)
-		if (_raycast_hit(hit_above)):
-			return hit_above.position
-		var hit_below := _cast_rays_below(space_state)
-		if (_raycast_hit(hit_below)):
-			return hit_below.position
-		else:
-			return Vector2.ZERO
+		for ray in rays_array.get_children():
+			var hit := _check_ray(ray)
+			if (_raycast_hit(hit)):
+				return hit.position
+				
+		return Vector2.ZERO
 	else:
 		return Vector2.ZERO
 	
@@ -125,49 +125,16 @@ func _move_towards_hit_position(hit_position: Vector2):
 	state._move_with_state(move_impulse, 0.15)
 
 
-
-
-func _cast_ray_in_front(space_state: Physics2DDirectSpaceState) -> Dictionary:
-	return _cast_ray_to(
-		space_state, 
-		Vector2(check_enemy_max_distance, 0))
+func _check_ray_in_front() -> Dictionary:
+	return _check_ray(direct_ray)
 	
 
-func _cast_ray_to(space_state: Physics2DDirectSpaceState, ray_endpoint: Vector2) -> Dictionary:
-	entity.draw_q.append(ray_endpoint)
-	
-	var server_check = space_state.intersect_ray(
-		entity.body.position, 
-		ray_endpoint 
-		, [entity]
-		, collision_mask
-	)
-	return server_check if (server_check != null) else {}
-
-	
-func _cast_rays_above(space_state: Physics2DDirectSpaceState) -> Dictionary: 
-
-	for pos_y_increment in range(arc_ray_partition_size, check_enemy_arc_radius, arc_ray_partition_size):
-		var check := _cast_ray_to(
-			space_state, 
-			Vector2(check_enemy_max_distance, pos_y_increment)
-		)
-		if (_raycast_hit(check)):
-			return check
-	return {}
+func _check_ray(ray: RayCast2D) -> Dictionary:
+	return {
+		'hit': ray.is_colliding(),
+		'position': ray.get_collision_point()
+	}
 	
 	
-func _raycast_hit(raycast_result) -> bool:
-	return raycast_result != null and (raycast_result as Dictionary).has("position")
-	
-	
-func _cast_rays_below(space_state: Physics2DDirectSpaceState) -> Dictionary: 
-
-	for pos_y_increment in range(-arc_ray_partition_size, -check_enemy_arc_radius, -arc_ray_partition_size):
-		var check := _cast_ray_to(
-			space_state, 
-			Vector2(check_enemy_max_distance, pos_y_increment)
-		)
-		if (_raycast_hit(check)):
-			return check
-	return {}
+func _raycast_hit(raycast_result: Dictionary) -> bool:
+	return raycast_result.hit
