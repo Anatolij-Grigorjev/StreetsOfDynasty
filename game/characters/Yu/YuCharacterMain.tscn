@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
-[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
 
@@ -44,10 +43,10 @@ extents = Vector2( 82.7745, 127.069 )
 extents = Vector2( 85.375, 97.5963 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 201.246, 50.2261 )
+extents = Vector2( 201.246, 46.767 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 138.288, 45.3669 )
+extents = Vector2( 138.288, 44.0404 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 70, 36.272 )
@@ -94,7 +93,6 @@ script = ExtResource( 14 )
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
 script = ExtResource( 15 )
-check_enemy_arc_radius = 90.0
 arc_ray_partition_size = 20.0
 collision_mask = 96
 
@@ -115,6 +113,7 @@ change_facing = false
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA2" index="1"]
 script = ExtResource( 15 )
+collision_mask = 96
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
@@ -131,13 +130,13 @@ script = ExtResource( 7 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-texture = ExtResource( 13 )
-offset = Vector2( -58.468, 4.86353 )
+offset = Vector2( 38.0418, 9.53383 )
+frame = 4
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-modulate = Color( 1, 1, 1, 0.991992 )
-position = Vector2( -46.6011, -75.293 )
-rotation = -0.246481
+visible = true
+modulate = Color( 1, 1, 1, 0.396078 )
+show_behind_parent = true
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")

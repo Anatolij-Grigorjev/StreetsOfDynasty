@@ -87,40 +87,41 @@ func exit_state(next_state: String):
 func _process(delta):
 
 	#check raycasts direct/above/below in that order
-	var hit_position := _get_raycast_checks_hit_position()
+	var hit_dict := _get_raycast_checks_hit_dict()
 	#use hit position to move there
-	if (_hit_position_valid(hit_position)):
-		print("RAYCAST: hit at position %s" % hit_position)
-		_move_towards_hit_position(hit_position)
+	if (_is_hit_position_valid(hit_dict)):
+		print("RAYCAST: got valid hit info %s" % hit_dict)
+		_move_towards_hit_position(hit_dict.position)
 		#disable physics to stop further checking
 		set_process(false)
 	
 	
-func _get_raycast_checks_hit_position() -> Vector2:
+func _get_raycast_checks_hit_dict() -> Dictionary:
 	var hit_direct := _check_ray(direct_ray)
 	if (_raycast_hit(hit_direct)):
-		return hit_direct.position
+		return hit_direct
 		
 	if (check_enemy_arc_radius > 0):
 		for ray in rays_array.get_children():
 			var hit := _check_ray(ray)
 			if (_raycast_hit(hit)):
-				return hit.position
+				return hit
 				
-		return Vector2.ZERO
+		return {}
 	else:
-		return Vector2.ZERO
+		return {}
 	
 	
-func _hit_position_valid(position: Vector2) -> bool:
-	return position != Vector2.ZERO
+func _is_hit_position_valid(hit_dict: Dictionary) -> bool:
+	return hit_dict.has("hit") && hit_dict.hit
 	
 	
 func _move_towards_hit_position(hit_position: Vector2):
 	var position := entity.global_position as Vector2
 	var move_direction := position.direction_to(hit_position)
 	var move_amount := min(position.distance_to(hit_position), max_move)
-	var move_impulse := move_direction * move_amount * 1000
+	var move_impulse := move_direction * move_amount * 50
+	print("moving for %s units in direction %s, total %s" % [move_amount, move_direction, move_impulse])
 	#move for this much impulse in 0.15 seconds
 	state._move_with_state(move_impulse, 0.15)
 
@@ -132,7 +133,9 @@ func _check_ray_in_front() -> Dictionary:
 func _check_ray(ray: RayCast2D) -> Dictionary:
 	return {
 		'hit': ray.is_colliding(),
-		'position': ray.get_collision_point()
+		'position': ray.get_collision_point(),
+		'collider': ray.get_collider(),
+		'collider_shape_rid': ray.get_collider_shape()
 	}
 	
 	
