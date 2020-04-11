@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
+[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
 
@@ -58,6 +59,7 @@ bg_color = Color( 0, 0, 0, 1 )
 "Player",
 ] instance=ExtResource( 2 )]
 script = ExtResource( 11 )
+sprite_size = Vector2( 300, 400 )
 
 [node name="FSM" parent="." index="0"]
 script = ExtResource( 1 )
@@ -130,13 +132,16 @@ script = ExtResource( 7 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-offset = Vector2( 38.0418, 9.53383 )
-frame = 4
+texture = ExtResource( 13 )
+offset = Vector2( -58.468, 4.86353 )
+hframes = 5
+frame = 0
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-visible = true
-modulate = Color( 1, 1, 1, 0.396078 )
+modulate = Color( 1, 1, 1, 0.995996 )
 show_behind_parent = true
+position = Vector2( 231.353, -70.2303 )
+rotation = -2.90924
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")
@@ -334,7 +339,23 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Logger" type="Node" parent="." index="4"]
+[node name="CurrentPosition" type="Label" parent="." index="4"]
+margin_left = -82.1806
+margin_top = -446.337
+margin_right = 17.8194
+margin_bottom = -421.337
+rect_min_size = Vector2( 100, 25 )
+rect_scale = Vector2( 1.5, 1.5 )
+custom_styles/normal = SubResource( 13 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Logger" type="Node" parent="." index="5"]
 script = ExtResource( 12 )
 
 [editable path="Body/YuCharacterRig"]

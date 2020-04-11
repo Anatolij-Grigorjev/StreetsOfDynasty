@@ -15,6 +15,7 @@ var damage_type_sounds: Dictionary = {
 }
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
+export(Vector2) var sprite_size: Vector2 = Vector2.ZERO
 var velocity = Vector2()
 var facing: int = 1
 

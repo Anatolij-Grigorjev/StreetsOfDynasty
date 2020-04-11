@@ -46,6 +46,7 @@ func _build_rays_arc():
 	rays_array.name = "MoveToEnemyAspectRays"
 	#add tree to character
 	entity.body.add_child(rays_array)
+	rays_array.position = Vector2(0, -entity.sprite_size.y / 2)
 	
 	#add rays
 	direct_ray = _build_raycast_to(Vector2(check_enemy_max_distance, 0))
@@ -91,7 +92,7 @@ func _process(delta):
 	#use hit position to move there
 	if (_is_hit_position_valid(hit_dict)):
 		print("RAYCAST: got valid hit info %s" % hit_dict)
-		_move_towards_hit_position(hit_dict.position)
+		_move_towards_hit_position(hit_dict.collider.global_position)
 		#disable physics to stop further checking
 		set_process(false)
 	
@@ -118,12 +119,10 @@ func _is_hit_position_valid(hit_dict: Dictionary) -> bool:
 	
 func _move_towards_hit_position(hit_position: Vector2):
 	var position := entity.global_position as Vector2
-	var move_direction := position.direction_to(hit_position)
-	var move_amount := min(position.distance_to(hit_position), max_move)
-	var move_impulse := move_direction * move_amount * 50
-	print("moving for %s units in direction %s, total %s" % [move_amount, move_direction, move_impulse])
+	var moved_position := position.move_toward(hit_position, max_move)
+	print("moving from %s to %s up to %s" % [position, hit_position, moved_position])
 	#move for this much impulse in 0.15 seconds
-	state._move_with_state(move_impulse, 0.15)
+	state._move_with_state((moved_position - position) * 50, 0.15)
 
 
 func _check_ray_in_front() -> Dictionary:

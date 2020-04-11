@@ -7,8 +7,8 @@ Character behavior and nodes specific to Yu
 onready var anim: AnimationPlayer = $Body/YuCharacterRig/AnimationPlayer
 onready var LOG: Logger = $Logger
 onready var current_state_lbl: Label = $CurrentState
+onready var current_position_lbl: Label = $CurrentPosition
 
-var draw_q = []
 
 func _ready():
 	fsm.connect("next_attack_input_changed", self, "_on_FSM_next_attack_input_changed")
@@ -24,14 +24,7 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 	
 	
 func _process(delta):
-	update()
-	
-	
-func _draw():
-	if (not draw_q.empty()):
-		for point in draw_q:
-			draw_line(body.position, point, Color.red, 15.0)
-		draw_q.clear()
+	current_position_lbl.text = "%3.3f;%3.3f" % [global_position.x, global_position.y]
 	
 	
 func _on_FSM_next_attack_input_changed(next_attack_input: int):
@@ -39,7 +32,6 @@ func _on_FSM_next_attack_input_changed(next_attack_input: int):
 	if (next_attack_input > 0):
 		current_state_lbl.text = "%s (NXT:%s)" % [only_state_label_text, next_attack_input]
 		
-	
 	
 func _get_no_NXT_label_text() -> String:
 	var current_text: String = current_state_lbl.text

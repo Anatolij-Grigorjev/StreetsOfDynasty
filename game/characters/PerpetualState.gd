@@ -102,7 +102,7 @@ func _move_with_state(
 	move_delay: float = 0.0
 ):
 	var facing_aware_move_impulse := Vector2(
-		move_impulse.x * entity.facing, move_impulse.y
+		abs(move_impulse.x) * entity.facing, move_impulse.y
 	)
 	tween.interpolate_method(
 		entity, 'do_movement_slide', 

@@ -144,5 +144,23 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ScreenShakeRequestor" type="Node" parent="." index="5"]
+[node name="CurrentPosition" type="Label" parent="." index="4"]
+margin_left = -59.3303
+margin_top = -260.377
+margin_right = 40.6697
+margin_bottom = -235.377
+rect_min_size = Vector2( 100, 25 )
+custom_styles/normal = SubResource( 8 )
+custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ScreenShakeRequestor" type="Node" parent="." index="6"]
 script = ExtResource( 14 )
