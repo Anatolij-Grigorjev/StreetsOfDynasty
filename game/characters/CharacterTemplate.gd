@@ -60,6 +60,7 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	#gets reset when a state with a child HurtStateAspect exits
 	is_hurting = true
 	var spark_instance: Node2D = _build_random_spark(hitbox)
+	_add_blood_splatter(spark_instance.position, attackbox.owner.facing)
 	var damage_type = randi() % AttackBox.DamageType.size() #attackbox.damage_type
 	match(damage_type):
 		AttackBox.DamageType.BLUNT:
@@ -87,6 +88,14 @@ func _build_random_spark(hitbox: Hitbox) -> Node2D:
 	spark.global_scale = Vector2(scale, scale)
 	
 	return spark
+	
+
+func _add_blood_splatter(local_position: Vector2, facing: int):
+	var particles = get_node('BloodParticles') as Particles2D
+	particles.position = local_position
+	particles.process_material.direction.x *= facing
+	particles.emitting = true
+	
 	
 	
 func _handle_play_hit_sound(damage_type: int): 
