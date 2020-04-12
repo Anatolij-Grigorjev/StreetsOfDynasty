@@ -122,7 +122,12 @@ func _move_towards_hit_position(hit_position: Vector2):
 	var moved_position := position.move_toward(hit_position, max_move)
 	print("moving from %s to %s up to %s" % [position, hit_position, moved_position])
 	#move for this much impulse in 0.15 seconds
-	state._move_with_state((moved_position - position) * 50, 0.15)
+	state._move_with_state(
+		(moved_position - position), 
+		0.15,
+		0.0,
+		state.MoveType.MOVE_COLLIDE
+	)
 
 
 func _check_ray_in_front() -> Dictionary:

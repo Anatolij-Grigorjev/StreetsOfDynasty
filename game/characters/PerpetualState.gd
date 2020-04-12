@@ -6,6 +6,11 @@ Properties loaded from a property source
 State can be a composite for substates or state aspects that supply their
 own State-like lifecycles
 """
+enum MoveType {
+	MOVE_SLIDE = 0,
+	MOVE_COLLIDE = 1
+}
+
 #path to json file with object that represents state data
 export(String) var state_params_filepath
 #reference to the hitbox groups timeline to animate hitbox groups
@@ -99,13 +104,16 @@ func set_attackboxes_timeline(timeline_items: Array):
 func _move_with_state(
 	move_impulse: Vector2, 
 	move_duration: float, 
-	move_delay: float = 0.0
+	move_delay: float = 0.0,
+	move_type: int = MoveType.MOVE_SLIDE
 ):
 	var facing_aware_move_impulse := Vector2(
-		abs(move_impulse.x) * entity.facing, move_impulse.y
+		abs(move_impulse.x) * entity.facing, 
+		move_impulse.y
 	)
+	var move_method := _get_move_method(move_type)
 	tween.interpolate_method(
-		entity, 'do_movement_slide', 
+		entity, move_method, 
 		Vector2.ZERO, facing_aware_move_impulse, move_duration, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT, 
 		move_delay
@@ -120,6 +128,19 @@ func _move_with_state(
 	if (not tween.is_active()):
 		tween.start()
 		
+		
+func _get_move_method(move_type: int) -> String:
+	match(move_type):
+		MoveType.MOVE_SLIDE:
+			return 'do_movement_slide'
+		MoveType.MOVE_COLLIDE:
+			return 'do_movement_collide'
+		_:
+			print("Unknown movement type constant: %s" % move_type)
+			breakpoint
+	return ""
+
+
 		
 func _set_move_impulse(state_params: Dictionary):
 	if (state_params.has("state_move")):
