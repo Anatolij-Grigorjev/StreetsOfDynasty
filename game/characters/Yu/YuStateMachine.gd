@@ -1,11 +1,5 @@
 extends StateMachine
 
-enum AttackInput {
-	NONE = 0,
-	NORMAL = 1,
-	SPECIAL = 2
-}
-
 
 signal next_attack_input_changed(next_attack_input)
 
@@ -14,7 +8,7 @@ onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
 
-var next_attack_input: int = AttackInput.NONE
+var next_attack_input: int = C.AttackInputType.NONE
 
 
 func _ready():
@@ -41,7 +35,7 @@ func _get_next_state(delta: float) -> String:
 				return "HurtLow"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
-			if (attack_input == AttackInput.NORMAL):
+			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
 			return NO_STATE
 		"Walk":
@@ -49,7 +43,7 @@ func _get_next_state(delta: float) -> String:
 				return "HurtLow"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
-			if (attack_input == AttackInput.NORMAL):
+			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
 			return NO_STATE
 		"AttackA1":
@@ -59,7 +53,7 @@ func _get_next_state(delta: float) -> String:
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
-			if (next_attack_input == AttackInput.NORMAL):
+			if (next_attack_input == C.AttackInputType.NORMAL):
 				_clear_next_attack_input()
 				return "AttackA2"
 			if (move_direction != Vector2.ZERO):
@@ -97,12 +91,12 @@ func _get_move_direction() -> Vector2:
 	
 func _get_attack_input() -> int:
 	if (Input.is_action_just_pressed("attack_normal")):
-		return AttackInput.NORMAL
-	return AttackInput.NONE
+		return C.AttackInputType.NORMAL
+	return C.AttackInputType.NONE
 	
 	
 func _clear_next_attack_input():
-	next_attack_input = AttackInput.NONE
+	next_attack_input = C.AttackInputType.NONE
 	emit_signal("next_attack_input_changed", next_attack_input)
 			
 			
@@ -112,8 +106,8 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		print(state, " requires a AttackStatePhaseAspect child!")
 		breakpoint
 	if (
-		attack_phase_aspect.attack_phase != AttackStatePhaseAspect.AttackPhase.WIND_UP
-		and attack_input != AttackInput.NONE
+		attack_phase_aspect.attack_phase != C.AttackPhase.WIND_UP
+		and attack_input != C.AttackInputType.NONE
 	):
 		next_attack_input = attack_input
 		emit_signal("next_attack_input_changed", next_attack_input)

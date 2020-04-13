@@ -126,7 +126,7 @@ func _move_towards_hit_position(hit_position: Vector2):
 		(moved_position - position), 
 		0.15,
 		0.0,
-		state.MoveType.MOVE_COLLIDE
+		C.CharacterMoveType.MOVE_COLLIDE
 	)
 
 

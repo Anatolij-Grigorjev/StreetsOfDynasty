@@ -5,15 +5,11 @@ A type of area that describes the range and reach of an attack.
 This stores internally all Hitbox clients that it encounters and
 forces them to process a hit when invoked
 """
-enum DamageType {
-	BLUNT = 0,
-	BLEEDING = 1
-}
 
 """
 Type of damage this applies to the target.
 """
-export(DamageType) var damage_type = DamageType.BLUNT
+export(C.DamageType) var damage_type = C.DamageType.BLUNT
 """
 Amount of raw damage dealt by attack
 """

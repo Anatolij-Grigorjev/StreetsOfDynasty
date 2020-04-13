@@ -6,10 +6,6 @@ Properties loaded from a property source
 State can be a composite for substates or state aspects that supply their
 own State-like lifecycles
 """
-enum MoveType {
-	MOVE_SLIDE = 0,
-	MOVE_COLLIDE = 1
-}
 
 #path to json file with object that represents state data
 export(String) var state_params_filepath
@@ -105,7 +101,7 @@ func _move_with_state(
 	move_impulse: Vector2, 
 	move_duration: float, 
 	move_delay: float = 0.0,
-	move_type: int = MoveType.MOVE_SLIDE
+	move_type: int = C.CharacterMoveType.MOVE_SLIDE
 ):
 	var facing_aware_move_impulse := Vector2(
 		abs(move_impulse.x) * entity.facing, 
@@ -131,9 +127,9 @@ func _move_with_state(
 		
 func _get_move_method(move_type: int) -> String:
 	match(move_type):
-		MoveType.MOVE_SLIDE:
+		C.CharacterMoveType.MOVE_SLIDE:
 			return 'do_movement_slide'
-		MoveType.MOVE_COLLIDE:
+		C.CharacterMoveType.MOVE_COLLIDE:
 			return 'do_movement_collide'
 		_:
 			print("Unknown movement type constant: %s" % move_type)

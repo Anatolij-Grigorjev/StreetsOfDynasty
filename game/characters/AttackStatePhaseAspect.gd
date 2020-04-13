@@ -5,12 +5,6 @@ This state aspect is intended to use for attack states
 this will follow singlas from attackbox timeline and set the 
 correct phase based on those changes
 """
-enum AttackPhase {
-	UNKNOWN = -1,
-	WIND_UP = 0,
-	HIT = 1,
-	WIND_DOWN = 2
-}
 
 
 export(String) var group_id: String = ""
@@ -18,12 +12,12 @@ export(String) var group_id: String = ""
 
 onready var attack_state: FiniteState = get_parent()
 var timeline: AreaGroupTimeline
-var attack_phase: int = AttackPhase.UNKNOWN
+var attack_phase: int
 
 
 func _ready():
 	call_deferred("_connect_signals")
-	attack_phase = AttackPhase.WIND_UP
+	attack_phase = C.AttackPhase.WIND_UP
 	
 	
 func _connect_signals():
@@ -33,6 +27,6 @@ func _connect_signals():
 
 func _attackbox_timeline_group_timeline_changed(group_id: String, prev_area_name, next_area_name):
 	if (prev_area_name and not next_area_name):
-		attack_phase = AttackPhase.WIND_DOWN
+		attack_phase = C.AttackPhase.WIND_DOWN
 	elif (not prev_area_name and next_area_name):
-		attack_phase = AttackPhase.HIT
+		attack_phase = C.AttackPhase.HIT
