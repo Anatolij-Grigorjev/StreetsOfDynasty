@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/spritefx/HitEffect.gd" type="Script" id=1]
+[ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.383178, 0.131458 ), -10.4108, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 150, 0, 0 )
+spread = 50.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 350.0
+initial_velocity_random = 0.2
+angular_velocity = 34.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = 45.0
+tangential_accel_random = 0.25
+damping = 250.0
+scale = 7.0
+scale_random = 0.15
+scale_curve = SubResource( 2 )
+color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+
+[node name="HitEffect" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="HitParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SoundFX" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ScreenShakeRequestor" type="Node" parent="."]
+script = ExtResource( 2 )
