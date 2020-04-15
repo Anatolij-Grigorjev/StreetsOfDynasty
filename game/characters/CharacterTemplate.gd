@@ -5,15 +5,6 @@ Base class for game characters.
 Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
-var Spark = preload("res://characters/spritefx/Spark.tscn")
-var BluntHit = preload("res://characters/blunt_hit1.wav")
-var BluntHitHeavy = preload("res://characters/blunt_hit_heavy1.wav")
-
-var damage_type_sounds: Dictionary = {
-	AttackBox.DamageType.BLUNT: BluntHitHeavy,
-	AttackBox.DamageType.BLEEDING: BluntHitHeavy
-}
-
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 export(Vector2) var sprite_size: Vector2 = Vector2.ZERO
 var velocity = Vector2()
@@ -24,7 +15,6 @@ onready var fsm: StateMachine = $FSM
 onready var body: Node2D = $Body
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
-onready var sound_player: AudioStreamPlayer2D = $CharacterFX
 
 
 var is_hurting = false
@@ -59,10 +49,6 @@ func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
 	#character level indicator if a hurt-state is happening
 	#gets reset when a state with a child HurtStateAspect exits
 	is_hurting = true
-	
-	
-	var damage_type = attackbox.damage_type
-	
 	_handle_hit_displacement(attackbox)
 	
 	

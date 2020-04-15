@@ -1,4 +1,5 @@
 extends Node2D
+class_name HitEffect
 """
 Hit effects sprite that has several effect children 
 which all play to juice the hit
@@ -24,10 +25,10 @@ func invoke_hit_fx(hit_hitbox: Hitbox, attack_attackbox: AttackBox):
 	#hit spark
 	var spark = _build_random_spark(hit_hitbox)
 	add_child(spark)
-	spark.get_node("AnimationPlayer").play("bleeding")
+	spark.get_node("AnimationPlayer").play(spark_anim)
 	
 	#hit particles
-	_add_particles(spark.local_position, attack_attackbox.owner.facing)
+	_add_particles(spark.position, attack_attackbox.owner.facing)
 	
 	#hit sound
 	_play_hit_sound()
@@ -38,15 +39,11 @@ func invoke_hit_fx(hit_hitbox: Hitbox, attack_attackbox: AttackBox):
 	
 	
 func _build_random_spark(hitbox: Hitbox) -> Node2D:
-	var hitbox_center_position = hitbox.shape.global_position
 	
 	var spark = Spark.instance()
-	var position = Utils.rand_point(10, 5) + hitbox_center_position
-	var rotation = randf() * 360
-	var scale = rand_range(1.0, 2.0)
-	spark.global_position = position
-	spark.global_rotation_degrees = rotation
-	spark.global_scale = Vector2(scale, scale)
+	spark.position = Utils.rand_point(10, 5)
+	spark.rotation = randf() * 360
+	spark.scale = Vector2.ONE * rand_range(1.0, 2.0)
 	
 	return spark
 	

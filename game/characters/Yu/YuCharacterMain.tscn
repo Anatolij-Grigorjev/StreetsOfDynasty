@@ -290,6 +290,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_editor_description_": ""
 }
+damage_type = 1
 damage_amount = 5.0
 target_move = Vector2( -35, 0 )
 

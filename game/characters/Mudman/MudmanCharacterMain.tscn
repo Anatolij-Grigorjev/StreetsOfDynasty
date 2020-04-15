@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -13,8 +13,9 @@
 [ext_resource path="res://characters/WalkStateAspect.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/MovedStateAspect.gd" type="Script" id=13]
-[ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=14]
-[ext_resource path="res://characters/BloodParticles.tscn" type="PackedScene" id=15]
+[ext_resource path="res://characters/AttackTypeHitEffects.gd" type="Script" id=14]
+[ext_resource path="res://characters/spritefx/BleedingHitEffect.tscn" type="PackedScene" id=15]
+[ext_resource path="res://characters/spritefx/BluntHitEffect.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -78,6 +79,13 @@ position = Vector2( 0, -75 )
 
 [node name="HealthBar" parent="Body/MudmanCharacterRig" index="2" instance=ExtResource( 9 )]
 position = Vector2( -80, -175 )
+
+[node name="AttackTypeHitEffects" type="Node2D" parent="Body/MudmanCharacterRig" index="3"]
+script = ExtResource( 14 )
+
+[node name="BluntHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="0" instance=ExtResource( 16 )]
+
+[node name="BleedingHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="1" instance=ExtResource( 15 )]
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
@@ -162,8 +170,3 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
-
-[node name="ScreenShakeRequestor" type="Node" parent="." index="6"]
-script = ExtResource( 14 )
-
-[node name="BloodParticles" parent="." index="7" instance=ExtResource( 15 )]
