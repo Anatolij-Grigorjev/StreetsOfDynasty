@@ -41,7 +41,7 @@ func invoke_hit_fx(hit_connect: HitConnect):
 func _build_random_spark() -> Node2D:
 	
 	var spark = Spark.instance()
-	spark.global_position = Utils.rand_point(10, 5)
+	spark.position = Utils.rand_point(25, 35)
 	spark.rotation = randf() * 360
 	spark.scale = Vector2.ONE * rand_range(1.0, 2.0)
 	
