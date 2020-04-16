@@ -45,21 +45,21 @@ func do_movement_slide(velocity: Vector2):
 	move_and_slide(velocity, Vector2.UP)
 	
 	
-func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
+func _on_hitbox_hit(hit_connect: HitConnect):
 	#character level indicator if a hurt-state is happening
 	#gets reset when a state with a child HurtStateAspect exits
 	is_hurting = true
-	_handle_hit_displacement(attackbox)
+	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	
 	
 	
-func _handle_hit_displacement(attackbox: AttackBox):
+func _handle_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
 		print(
 			"target_move: %s, attacker facing: %s, target facing: %s" % 
 			[attackbox.target_move, attackbox.owner.facing, facing]
 		)
-		var displacement = attackbox.target_move * attackbox.owner.facing
+		var displacement = attackbox.target_move * attack_facing
 		fsm.hurt_move = displacement
 	
 	

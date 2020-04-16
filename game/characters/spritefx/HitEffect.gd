@@ -21,14 +21,14 @@ func _ready():
 	pass
 
 
-func invoke_hit_fx(hit_hitbox: Hitbox, attack_attackbox: AttackBox):
+func invoke_hit_fx(hit_connect: HitConnect):
 	#hit spark
-	var spark = _build_random_spark(hit_hitbox)
+	var spark = _build_random_spark()
 	add_child(spark)
 	spark.get_node("AnimationPlayer").play(spark_anim)
 	
 	#hit particles
-	_add_particles(spark.position, attack_attackbox.owner.facing)
+	_add_particles(spark.position, hit_connect.attack_facing)
 	
 	#hit sound
 	_play_hit_sound()
@@ -38,10 +38,10 @@ func invoke_hit_fx(hit_hitbox: Hitbox, attack_attackbox: AttackBox):
 	pass
 	
 	
-func _build_random_spark(hitbox: Hitbox) -> Node2D:
+func _build_random_spark() -> Node2D:
 	
 	var spark = Spark.instance()
-	spark.position = Utils.rand_point(10, 5)
+	spark.global_position = Utils.rand_point(10, 5)
 	spark.rotation = randf() * 360
 	spark.scale = Vector2.ONE * rand_range(1.0, 2.0)
 	

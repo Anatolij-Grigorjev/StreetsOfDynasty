@@ -71,3 +71,28 @@ static func merge_dicts(dict1: Dictionary, dict2: Dictionary):
 		merged_dict[key]	= dict2[key]
 	
 	return merged_dict	
+
+
+"""
+Convert a collision polygon 2D with a rectangular shape 
+into a Rect in global coordinates
+"""
+static func shape2rect(collider: CollisionShape2D) -> Rect2:
+	return Rect2(
+		collider.global_position - collider.shape.extents,
+		collider.shape.extents * 2
+	)
+
+
+"""
+Get the current rectangular overlap of 2 collision polygons that 
+have rectnagle shapes
+"""
+static func get_collision_rects_overlap(
+	collider_a: CollisionShape2D, 
+	collider_b: CollisionShape2D
+) -> Rect2:
+	var rect_a := shape2rect(collider_a)
+	var rect_b := shape2rect(collider_b)
+	
+	return rect_a.clip(rect_b)

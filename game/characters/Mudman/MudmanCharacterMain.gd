@@ -20,13 +20,13 @@ func _process(delta):
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	current_state_lbl.text = new_state
 	
-func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
-	._on_hitbox_hit(hitbox, attackbox)
-	hit_effects.do_hit_effects(hitbox, attackbox)
+func _on_hitbox_hit(hit_connect: HitConnect):
+	._on_hitbox_hit(hit_connect)
+	hit_effects.invoke_hit_effects(hit_connect)
 	
 	
 	var multiplier = rand_range(0.75, 1.25)
-	var damage = attackbox.damage_amount * multiplier
+	var damage = hit_connect.attackbox.damage_amount * multiplier
 	
 	var bar = healthbar.get_node("Bar")
 	bar.value -= damage

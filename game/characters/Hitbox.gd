@@ -5,7 +5,7 @@ A type of area that describes where character can get hit on their body.
 Defines which hit animation gets played during the hit
 The expected client entity of this is a CharacterTemplate
 """
-signal hitbox_hit(hitbox, attackbox)
+signal hitbox_hit(hit_connect)
 
 export(float) var attack_recovery: float = 0.5
 export(String) var hit_anim: String = "hit"
@@ -28,7 +28,9 @@ func _process(delta):
 func process_hit(attack) -> void:
 	if (not recent_attacks.has(attack)):
 		recent_attacks[attack] = attack_recovery
-		emit_signal("hitbox_hit", self, attack)
+		var hit_connect := HitConnect.new(self, attack)
+		
+		emit_signal("hitbox_hit", hit_connect)
 		
 		
 func _to_string():

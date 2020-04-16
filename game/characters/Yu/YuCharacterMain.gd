@@ -14,9 +14,9 @@ func _ready():
 	fsm.connect("next_attack_input_changed", self, "_on_FSM_next_attack_input_changed")
 	
 
-func _on_hitbox_hit(hitbox: Hitbox, attackbox: AttackBox):
-	._on_hitbox_hit(hitbox, attackbox)
-	LOG.info("{} got hit by {}!", [hitbox, attackbox])
+func _on_hitbox_hit(hit_connect: HitConnect):
+	._on_hitbox_hit(hit_connect)
+	LOG.info("Connected hit: {}!" % hit_connect)
 	
 	
 func _on_FSM_state_changed(old_state: String, new_state: String):
