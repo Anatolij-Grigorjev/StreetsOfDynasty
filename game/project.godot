@@ -166,6 +166,10 @@ config/name="Streets Of Dynasty"
 run/main_scene="res://areas/whitebox/WhiteBox.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Debug="*res://GlobalDebug.gd"
+
 [debug]
 
 settings/stdout/print_fps=true

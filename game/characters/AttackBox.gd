@@ -29,6 +29,7 @@ export(Vector2) var target_move = Vector2.ZERO
 var known_hitboxes = []
 onready var shape: CollisionPolygon2D = get_child(0)
 
+var draw_q := []
 
 func _ready():
 	#connect the hitbox registering signals
@@ -72,8 +73,15 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 	
 	
 func _hitbox_in_radius(hitbox: Hitbox) -> bool:
-	var distance = abs(shape.global_position.y - hitbox.shape.global_position.y)
-	print("%s distance to %s: %s" % [self, hitbox, distance] )
+	var attack_position = shape.global_position
+	var hitbox_position = hitbox.shape.global_position
+	Debug.draw_q.append({
+		'type': 'line',
+		'from': attack_position,
+		'to': hitbox_position
+	})
+	var distance = abs(attack_position.y - hitbox_position.y)
+	print("%s distance to %s: %s" % [attack_position, hitbox_position, distance] )
 	var does_hit = distance <= radius
 	return does_hit
 	
