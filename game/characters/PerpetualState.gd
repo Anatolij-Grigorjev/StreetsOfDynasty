@@ -110,7 +110,7 @@ func _move_with_state(
 	var move_method := _get_move_method(move_type)
 	tween.interpolate_method(
 		entity, move_method, 
-		Vector2.ZERO, facing_aware_move_impulse, move_duration, 
+		facing_aware_move_impulse, Vector2.ZERO, move_duration, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT, 
 		move_delay
 	)
