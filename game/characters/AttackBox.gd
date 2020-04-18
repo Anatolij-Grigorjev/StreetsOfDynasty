@@ -15,10 +15,10 @@ Amount of raw damage dealt by attack
 """
 export(float) var damage_amount = 0
 """
-Attack vertical reach limit, regardless of hitbox size
-(clamped to be hitbox size if too large or if -1)
+Attack vertical reach limit, regardless of attackbox size
+Limited by attackbox actually overlapping hitbox
 """
-export(float) var radius = -1
+export(float) var radius = 50.77
 """
 Amount of diplacement to apply to target velocity 
 during this hit. 
@@ -35,10 +35,6 @@ func _ready():
 	#connect the hitbox registering signals
 	connect("area_entered", self, "_on_area_entered")
 	connect("area_exited", self, "_on_area_exited")
-	#correct attack radius
-	var attackbox_extents = shape.shape.extents
-	if (radius < 0.0 or radius > attackbox_extents.y):
-		radius = attackbox_extents.y
 
 
 """
@@ -49,7 +45,7 @@ func process_attack() -> void:
 	for node in known_hitboxes:
 		var hitbox := node as Hitbox
 		if (not hitbox.shape.disabled
-			and _hitbox_in_radius(hitbox)):
+			and _entity_in_radius(hitbox.owner)):
 			hitbox.process_hit(self)
 
 
@@ -72,16 +68,16 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 	)
 	
 	
-func _hitbox_in_radius(hitbox: Hitbox) -> bool:
-	var attack_position = shape.global_position
-	var hitbox_position = hitbox.shape.global_position
-	Debug.draw_q.append({
+func _entity_in_radius(hitbox_owner: Node2D) -> bool:
+	var attacker_position = owner.global_position
+	var receiver_position = hitbox_owner.global_position
+	Debug.add_global_draw({
 		'type': 'line',
-		'from': attack_position,
-		'to': hitbox_position
+		'from': attacker_position,
+		'to': receiver_position
 	})
-	var distance = abs(attack_position.y - hitbox_position.y)
-	print("%s distance to %s: %s" % [attack_position, hitbox_position, distance] )
+	var distance = abs(attacker_position.y - receiver_position.y)
+	print("%s distance to %s: %s" % [attacker_position, receiver_position, distance] )
 	var does_hit = distance <= radius
 	return does_hit
 	

@@ -22,6 +22,11 @@ func _ready():
 	self.z_index = 999
 	
 	
+func add_global_draw(draw_item: Dictionary):
+	assert(draw_item.has('type'), 'Drawing must have a type!')
+	draw_q.append(draw_item)
+	
+	
 func _process(delta):
 	update()
 	
