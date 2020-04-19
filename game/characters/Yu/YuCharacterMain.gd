@@ -40,3 +40,7 @@ func _get_no_NXT_label_text() -> String:
 		return current_text.substr(0, prev_mention)
 	else:
 		return current_text
+		
+		
+func _to_string() -> String:
+	return name

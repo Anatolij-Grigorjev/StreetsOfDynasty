@@ -103,26 +103,22 @@ func _move_with_state(
 	move_delay: float = 0.0,
 	move_type: int = C.CharacterMoveType.MOVE_SLIDE
 ):
+	#with MOVE_SLIDE value is divided by delta in physics engine
+	#so to ensure amount travelled we need to divide by time again
+	var time_divisor := (move_duration 
+		if move_type == C.CharacterMoveType.MOVE_SLIDE 
+		else 1.0
+	)
 	var facing_aware_move_impulse := Vector2(
 		abs(move_impulse.x) * entity.facing, 
 		move_impulse.y
-	)
+	) / time_divisor
 	var move_method := _get_move_method(move_type)
-	tween.interpolate_method(
-		entity, move_method, 
-		facing_aware_move_impulse, Vector2.ZERO, move_duration, 
-		Tween.TRANS_EXPO, Tween.EASE_OUT, 
-		move_delay
-	)
-	entity.LOG.info("move {} -> {}, over {}s", 
-		[
-			entity.global_position, 
-			entity.global_position + facing_aware_move_impulse, 
-			move_duration
-		]
-	)
-	if (not tween.is_active()):
-		tween.start()
+	entity.call(move_method, facing_aware_move_impulse)
+	Debug.LOG.info("%s.%s(%s) for %ss", [entity, move_method, facing_aware_move_impulse, move_duration])
+	yield(get_tree().create_timer(move_duration), "timeout")
+	entity.call(move_method, Vector2.ZERO)
+	
 		
 		
 func _get_move_method(move_type: int) -> String:
@@ -139,13 +135,21 @@ func _get_move_method(move_type: int) -> String:
 
 		
 func _set_move_impulse(state_params: Dictionary):
-	if (state_params.has("state_move")):
-		var state_move: Dictionary = state_params.state_move as Dictionary
-		assert(state_move != null)
-		state_params.state_move_impulse = Utils.dict2vector(state_move)
-		state_params.state_move_duration = Utils.get_or_default(state_move, "duration", 0.2)
+	if (state_params.has("state_move_tiles")):
+		var state_move_tiles: Dictionary = state_params.state_move_tiles as Dictionary
+		assert(state_move_tiles != null)
+		state_params.state_move_impulse = _build_entity_move_impulse(state_move_tiles)
+		state_params.state_move_duration = Utils.get_or_default(state_move_tiles, "duration", 0.2)
 		
 		
+func _build_entity_move_impulse(state_move_tiles: Dictionary) -> Vector2:
+	var move_in_tiles := Utils.dict2vector(state_move_tiles)
+	return Vector2(
+		move_in_tiles.x * owner.move_speed.x,
+		move_in_tiles.y * owner.move_speed.y
+	)
+
+
 func _set_areagroup_timelines(state_params: Dictionary):
 	if (state_params.has('hitboxes_timeline')):
 		hitbox_group_id = name

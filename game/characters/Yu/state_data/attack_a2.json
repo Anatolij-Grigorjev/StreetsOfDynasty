@@ -1,8 +1,8 @@
 {
 	"state_animation": "attack_a2",
-	"state_move": {
-		"x": 135,
-		"y": -4,
+	"state_move_tiles": {
+		"x": 1.25,
+		"y": -0.5,
         "duration": 0.15
 	},
     "attackboxes_timeline": [

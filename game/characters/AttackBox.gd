@@ -29,7 +29,6 @@ export(Vector2) var target_move = Vector2.ZERO
 var known_hitboxes = []
 onready var shape: CollisionPolygon2D = get_child(0)
 
-var draw_q := []
 
 func _ready():
 	#connect the hitbox registering signals
