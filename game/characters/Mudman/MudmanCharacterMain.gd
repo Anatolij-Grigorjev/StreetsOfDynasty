@@ -3,6 +3,7 @@ extends CharacterTemplate
 Main behavior script for Mudman
 """
 var DamageLabel = preload("res://characters/DamageLabel.tscn")
+var Corpse = preload("res://characters/Mudman/MudmanCharacterRig.tscn")
 
 
 onready var rig: Node2D = $Body/MudmanCharacterRig
@@ -31,10 +32,24 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	var bar = healthbar.get_node("Bar")
 	bar.value -= damage
 	if (bar.value <= 0.0):
-		bar.value = 100
+		_do_die()
 	var label = DamageLabel.instance()
 	label.position = rig.position
 	label.movement *= rand_range(0.75, 1.75)
 	label.global_position += Utils.rand_point(25, 25)
 	add_child(label)
 	label.set_damage(damage)
+	
+	
+	
+func _do_die():
+	var corpse = Corpse.instance()
+	
+	var parent = get_parent()
+	parent.add_child(corpse)
+	
+	corpse.global_position = global_position
+	corpse.get_node("AnimationPlayer").play("dead")
+	
+	queue_free()
+	

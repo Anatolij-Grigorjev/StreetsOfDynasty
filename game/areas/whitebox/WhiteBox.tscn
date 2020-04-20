@@ -18,7 +18,9 @@ extents = Vector2( 820, 155 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 820, 150 )
 
-[node name="WhiteBox" type="Node2D"]
+[node name="WhiteBox" type="Node2D" groups=[
+"stage",
+]]
 
 [node name="Camera2D" type="Camera2D" parent="." groups=[
 "camera",
@@ -102,9 +104,6 @@ collision_mask = 0
 shape = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 260.245, 449.422 )

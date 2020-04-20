@@ -15,10 +15,6 @@ var draw_q: Array = []
 func _ready():
 	LOG = LoggerFactory.instance()
 	add_child(LOG)
-	var stage = get_tree().get_root().get_node("WhiteBox")
-	var stage_position = stage.global_position
-	LOG.info("Moving from {} to {}...", [global_position, stage_position])
-	self.global_position = stage_position
 	self.z_index = 999
 	
 	
