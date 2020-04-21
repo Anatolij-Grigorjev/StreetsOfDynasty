@@ -111,3 +111,7 @@ scale = Vector2( 0.7, 0.7 )
 
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 541.509, 473.445 )
+
+[node name="Corpses" type="YSort" parent="YSort" groups=[
+"corpses",
+]]

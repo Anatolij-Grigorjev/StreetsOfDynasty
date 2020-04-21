@@ -84,8 +84,10 @@ position = Vector2( -80, -175 )
 script = ExtResource( 14 )
 
 [node name="BluntHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="0" instance=ExtResource( 16 )]
+label_color = Color( 0.870588, 1, 0.00784314, 1 )
 
 [node name="BleedingHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="1" instance=ExtResource( 15 )]
+label_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../MudmanCharacterMain/Body")

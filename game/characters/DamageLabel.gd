@@ -3,8 +3,8 @@ extends Node2D
 Label that appears as character takes a hit, 
 this thing announces the damage amount and flies away
 """
+export(float) var ttl: float = 1.0
 export(Vector2) var movement: Vector2 = Vector2(50, -50)
-
 
 onready var label: Label = $Label
 onready var tween: Tween = $Tween
@@ -16,7 +16,7 @@ func _ready():
 		0.2, Tween.TRANS_EXPO, Tween.EASE_OUT
 	)
 	tween.start()
-	yield(get_tree().create_timer(1.5), 'timeout')
+	yield(get_tree().create_timer(ttl), 'timeout')
 	queue_free()
 	
 	

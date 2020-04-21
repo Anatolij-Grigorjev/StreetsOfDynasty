@@ -96,3 +96,15 @@ static func get_collision_rects_overlap(
 	var rect_b := shape2rect(collider_b)
 	
 	return rect_a.clip(rect_b)
+	
+	
+"""
+Globally search for the first node within the specific group
+(i.e. node with a specific tag)
+"""
+static func get_node_by_tag(tag: String) -> Node:
+	var nodes = Debug.get_tree().get_nodes_in_group(tag)
+	if (nodes):
+		return nodes[0]
+	else:
+		return null
