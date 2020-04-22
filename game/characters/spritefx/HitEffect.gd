@@ -32,9 +32,9 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	#hit damage label
 	var label = _build_damage_label(hit_connect)
 	label.position = spark.position + Utils.rand_point(25.0, 25.0)
+	#set_damage requires label in tree
 	add_child(label)
-	#requires label in tree
-	label.set_damage(hit_connect.attack_damage)
+	label.set_damage(-hit_connect.attack_damage)
 	
 	#hit particles
 	_add_particles(spark.position, hit_connect.attack_facing)

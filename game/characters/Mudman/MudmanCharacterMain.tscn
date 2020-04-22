@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://characters/AttackTypeHitEffects.gd" type="Script" id=14]
 [ext_resource path="res://characters/spritefx/BleedingHitEffect.tscn" type="PackedScene" id=15]
 [ext_resource path="res://characters/spritefx/BluntHitEffect.tscn" type="PackedScene" id=16]
+[ext_resource path="res://characters/DyingStateAspect.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -70,7 +71,15 @@ script = ExtResource( 7 )
 script = ExtResource( 13 )
 move_easing = 2
 
-[node name="Logger" type="Node" parent="FSM" index="3"]
+[node name="Dying" type="Node" parent="FSM" index="3"]
+script = ExtResource( 4 )
+state_params_filepath = "res://characters/Mudman/state_data/dying.json"
+state_commit_end_sec = 1.0
+
+[node name="DyingStateAspect" type="Node" parent="FSM/Dying" index="0"]
+script = ExtResource( 17 )
+
+[node name="Logger" type="Node" parent="FSM" index="4"]
 script = ExtResource( 12 )
 naming_scheme = 1
 
