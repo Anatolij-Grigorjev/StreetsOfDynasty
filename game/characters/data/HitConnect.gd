@@ -22,4 +22,4 @@ func _init(hitbox, attackbox):
 	self.receiver = hitbox.owner
 	self.attack_facing = attacker.facing
 	self.attack_damage_type = attackbox.damage_type
-	self.attack_damage = attackbox.damage_amount
+	self.attack_damage = attackbox.damage_amount * rand_range(0.75, 1.25)

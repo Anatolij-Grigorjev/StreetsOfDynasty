@@ -5,10 +5,15 @@ Base class for game characters.
 Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
+signal damage_received(damage, health, total_health)
+
+
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 export(Vector2) var sprite_size: Vector2 = Vector2.ZERO
+export(float) var total_health: float = 150
 var velocity = Vector2()
 var facing: int = 1
+var health := total_health
 
 
 onready var fsm: StateMachine = $FSM
@@ -49,6 +54,7 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	#character level indicator if a hurt-state is happening
 	#gets reset when a state with a child HurtStateAspect exits
 	is_hurting = true
+	_handle_receive_damage(hit_connect)
 	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	
 	
@@ -65,3 +71,11 @@ func _handle_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	pass
+	
+
+func _handle_receive_damage(hit_connect: HitConnect):
+	var damage_taken = hit_connect.attack_damage
+	health -= damage_taken
+	if (health < 0.0):
+		health = total_health
+	emit_signal("damage_received", damage_taken, health, total_health)

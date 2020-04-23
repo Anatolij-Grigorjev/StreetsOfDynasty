@@ -88,6 +88,8 @@ position = Vector2( 0, -75 )
 
 [node name="HealthBar" parent="Body/MudmanCharacterRig" index="2" instance=ExtResource( 9 )]
 position = Vector2( -80, -175 )
+tween_bar_delay = 0.15
+tween_bar_move = 0.25
 
 [node name="AttackTypeHitEffects" type="Node2D" parent="Body/MudmanCharacterRig" index="3"]
 script = ExtResource( 14 )
