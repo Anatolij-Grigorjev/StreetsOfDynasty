@@ -67,5 +67,6 @@ func init_animation_length_state():
 	var animation_length := 0.0
 	if (state_params.state_animation):
 		animation_length = entity.anim.get_animation(state_params.state_animation).length
+	print("Setting state length to %s..." % animation_length)
 	state_commit_end_sec = animation_length
 	state_length_sec = animation_length

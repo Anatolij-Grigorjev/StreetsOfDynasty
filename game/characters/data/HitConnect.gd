@@ -14,7 +14,7 @@ var attack_damage_type: int
 var attack_damage: float
 
 
-func _init(hitbox, attackbox):
+func _init(hitbox, attackbox, attack_damage):
 	self.hitbox = hitbox
 	self.attackbox = attackbox
 	self.overlap = Utils.get_collision_rects_overlap(hitbox.shape, attackbox.shape)
@@ -22,4 +22,4 @@ func _init(hitbox, attackbox):
 	self.receiver = hitbox.owner
 	self.attack_facing = attacker.facing
 	self.attack_damage_type = attackbox.damage_type
-	self.attack_damage = attackbox.damage_amount * rand_range(0.75, 1.25)
+	self.attack_damage = attack_damage

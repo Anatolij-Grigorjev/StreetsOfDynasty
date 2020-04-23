@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://characters/spritefx/BleedingHitEffect.tscn" type="PackedScene" id=15]
 [ext_resource path="res://characters/spritefx/BluntHitEffect.tscn" type="PackedScene" id=16]
 [ext_resource path="res://characters/DyingStateAspect.gd" type="Script" id=17]
+[ext_resource path="res://characters/Mudman/MudmanCorpse.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -78,6 +79,7 @@ state_commit_end_sec = 1.0
 
 [node name="DyingStateAspect" type="Node" parent="FSM/Dying" index="0"]
 script = ExtResource( 17 )
+CorpseScene = ExtResource( 18 )
 
 [node name="Logger" type="Node" parent="FSM" index="4"]
 script = ExtResource( 12 )
@@ -149,10 +151,10 @@ position = Vector2( -7.462, 12.513 )
 shape = SubResource( 5 )
 
 [node name="CurrentState" type="Label" parent="." index="3"]
-margin_left = -58.8647
-margin_top = -231.975
-margin_right = 41.1353
-margin_bottom = -206.975
+margin_left = -61.6584
+margin_top = -279.002
+margin_right = 38.3416
+margin_bottom = -254.002
 rect_min_size = Vector2( 100, 25 )
 custom_styles/normal = SubResource( 6 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
@@ -167,10 +169,10 @@ __meta__ = {
 }
 
 [node name="CurrentPosition" type="Label" parent="." index="4"]
-margin_left = -59.3303
-margin_top = -260.377
-margin_right = 40.6697
-margin_bottom = -235.377
+margin_left = -62.124
+margin_top = -308.801
+margin_right = 37.876
+margin_bottom = -283.801
 rect_min_size = Vector2( 100, 25 )
 custom_styles/normal = SubResource( 6 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )

@@ -28,7 +28,8 @@ func _process(delta):
 func process_hit(attack) -> void:
 	if (not recent_attacks.has(attack)):
 		recent_attacks[attack] = attack_recovery
-		var hit_connect := HitConnect.new(self, attack)
+		var attack_damage = rand_range(0.75, 1.25) * attack.damage_amount
+		var hit_connect := HitConnect.new(self, attack, attack_damage)
 		
 		emit_signal("hitbox_hit", hit_connect)
 		
