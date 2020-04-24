@@ -72,7 +72,20 @@ script = ExtResource( 7 )
 script = ExtResource( 13 )
 move_easing = 2
 
-[node name="Dying" type="Node" parent="FSM" index="3"]
+[node name="Falling" type="Node" parent="FSM" index="3"]
+script = ExtResource( 4 )
+state_params_filepath = "res://characters/Mudman/state_data/falling.json"
+state_commit_end_sec = 1.0
+next_state = "Idle"
+
+[node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
+script = ExtResource( 13 )
+move_easing = 2
+
+[node name="HurtStateAspect" type="Node" parent="FSM/Falling" index="1"]
+script = ExtResource( 7 )
+
+[node name="Dying" type="Node" parent="FSM" index="4"]
 script = ExtResource( 4 )
 state_params_filepath = "res://characters/Mudman/state_data/dying.json"
 state_commit_end_sec = 1.0
@@ -81,7 +94,7 @@ state_commit_end_sec = 1.0
 script = ExtResource( 17 )
 CorpseScene = ExtResource( 18 )
 
-[node name="Logger" type="Node" parent="FSM" index="4"]
+[node name="Logger" type="Node" parent="FSM" index="5"]
 script = ExtResource( 12 )
 naming_scheme = 1
 

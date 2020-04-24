@@ -8,6 +8,7 @@ onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 var target: Node2D
 
 var hurt_move: Vector2 = Vector2.ZERO
+var next_hurt_state = "Hurt"
 
 func _ready():
 	._ready()
@@ -31,24 +32,19 @@ func _get_next_state(delta: float) -> String:
 	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
 	var hurting: bool = entity.is_hurting
 	
-	#apply hurt move
-	if (hurting and hurt_move != Vector2.ZERO):
-		var hurt_state_node = state_nodes["Hurt"]
-		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
-		if (moved_aspect):
-			moved_aspect.move_impulse = hurt_move
-		hurt_move = Vector2.ZERO
+	if (hurting):
+		_build_next_hurt_state()
 		
 	match(state):
 		"Idle":
 			if (hurting):
-				return "Hurt"
+				return next_hurt_state
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			return NO_STATE
 		"Walk":
 			if (hurting):
-				return "Hurt"
+				return next_hurt_state
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
 			var should_keep_moving = true
@@ -57,17 +53,20 @@ func _get_next_state(delta: float) -> String:
 			else:
 				return "WaitIdle"
 		"Hurt":
-			var hurt_state = state_nodes[state] as FiniteState
+			var hurt_state = get_state(state) as FiniteState
 			if (not hurt_state.is_state_over):
 				return NO_STATE
 			return hurt_state.next_state
+		"Falling":
+			var fall_state = get_state(state) as FiniteState
+			if (not fall_state.is_state_over):
+				return NO_STATE
+			return fall_state.next_state
 		"Dying":
-			var dying_state = state_nodes[state] as FiniteState
+			var dying_state = get_state(state) as FiniteState
 			if (not dying_state.is_state_over):
 				return NO_STATE
-			#after state animation is over we need to 
-			#provide following state
-			#because the dying aspect engages on state exit
+			#DyingStateAspect triggers on state exit
 			#state exit only happens if there is a following state
 			return "Dying"
 		_:
@@ -85,4 +84,18 @@ func _get_move_direction() -> Vector2:
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
 	if (health <= 0.0):
 		state_nodes["Hurt"].next_state = "Dying"
+		
+		
+func _build_next_hurt_state():
+	if (hurt_move.x > 10):
+		next_hurt_state = "Falling"
+	else:
+		next_hurt_state = "Hurt"
+	
+	if (hurt_move):
+		var hurt_state_node = state_nodes[next_hurt_state]
+		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
+		if (moved_aspect):
+			moved_aspect.move_impulse = hurt_move
+			hurt_move = Vector2.ZERO
 	

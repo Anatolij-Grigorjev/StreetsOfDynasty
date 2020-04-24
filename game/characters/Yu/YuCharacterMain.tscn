@@ -124,7 +124,7 @@ state_commit_end_sec = 1.0
 state_length_sec = 1.2
 next_state = "Idle"
 
-[node name="HurtStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
+[node name="HurtEndStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
 script = ExtResource( 7 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
@@ -290,7 +290,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 damage_type = 1
-damage_amount = 15.0
+damage_amount = 56.0
 target_move = Vector2( -35, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
@@ -304,7 +304,7 @@ __meta__ = {
 collision_layer = 0
 collision_mask = 32
 script = ExtResource( 10 )
-damage_amount = 17.5
+damage_amount = 67.0
 target_move = Vector2( 150, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]

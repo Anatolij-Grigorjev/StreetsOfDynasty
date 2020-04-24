@@ -69,11 +69,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/Hitbox.gd"
 }, {
-"base": "FiniteState",
-"class": "HurtFiniteState",
-"language": "GDScript",
-"path": "res://characters/HurtFiniteState.gd"
-}, {
 "base": "State",
 "class": "HurtStateAspect",
 "language": "GDScript",
@@ -147,7 +142,6 @@ _global_script_class_icons={
 "HitConnect": "",
 "HitEffect": "",
 "Hitbox": "",
-"HurtFiniteState": "",
 "HurtStateAspect": "",
 "Logger": "",
 "MoveToEnemyStateAspect": "",
