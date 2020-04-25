@@ -8,10 +8,6 @@ export(PackedScene) var CorpseScene
 export(Vector2) var corpse_offset = Vector2.ZERO
 
 onready var state: FiniteState = get_parent()
-
-func _ready():
-	#ensure this state lasts as long as animation
-	state.init_animation_length_state()
 	
 	
 func exit_state(next_state: String):

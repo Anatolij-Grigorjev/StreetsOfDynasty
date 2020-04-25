@@ -89,6 +89,7 @@ script = ExtResource( 7 )
 script = ExtResource( 4 )
 state_params_filepath = "res://characters/Mudman/state_data/dying.json"
 state_commit_end_sec = 1.0
+state_length_sec = 0.6
 
 [node name="DyingStateAspect" type="Node" parent="FSM/Dying" index="0"]
 script = ExtResource( 17 )

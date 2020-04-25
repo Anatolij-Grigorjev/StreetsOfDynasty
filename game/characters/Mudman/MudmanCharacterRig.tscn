@@ -96,7 +96,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "falling"
-length = 0.5
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -116,7 +116,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -440,7 +440,6 @@ rotation = -0.0124779
 texture = ExtResource( 5 )
 offset = Vector2( -30.7643, -3.46134 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/dying = SubResource( 1 )
