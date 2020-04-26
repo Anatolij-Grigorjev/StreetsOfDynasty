@@ -104,6 +104,3 @@ func _build_next_hurt_state():
 func _start_blinking():
 	var blinker = entity.get_node("InvincibilityBlinker")
 	blinker.start()
-	entity.invincibility = true
-	yield(blinker.duration_timer, "timeout")
-	entity.invincibility = false

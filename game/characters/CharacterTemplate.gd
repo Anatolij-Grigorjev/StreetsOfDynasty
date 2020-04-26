@@ -82,5 +82,7 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 func _handle_receive_damage(hit_connect: HitConnect):
 	var damage_taken = hit_connect.attack_damage
 	health = clamp(health - damage_taken, 0.0, total_health)
-	
+	Debug.LOG.info("{} Received {} damage, health is {}", [
+		self, damage_taken, health
+	])
 	emit_signal("damage_received", damage_taken, health, total_health)

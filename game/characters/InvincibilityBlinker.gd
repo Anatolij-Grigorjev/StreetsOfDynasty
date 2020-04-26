@@ -44,12 +44,14 @@ func _start_blinking():
 	self.sprites_visible = false
 	duration_timer.start()
 	blink_timer.start()
+	entity.invincibility = true
 	
 	
 func _stop_blinking():
 	self.sprites_visible = true
 	duration_timer.stop()
 	blink_timer.stop()
+	entity.invincibility = false
 		
 
 func _toggle_sprites_visible(visible: bool):
