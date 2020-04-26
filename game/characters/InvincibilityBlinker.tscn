@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://characters/InvincibilityBlinker.gd" type="Script" id=1]
+
+[node name="InvincibilityBlinker" type="Node"]
+script = ExtResource( 1 )
+
+[node name="BlinkTime" type="Timer" parent="."]
+
+[node name="Duration" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="BlinkTime" to="." method="_on_BlinkTime_timeout"]
+[connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]

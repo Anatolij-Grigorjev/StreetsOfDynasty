@@ -44,7 +44,8 @@ func process_attack() -> void:
 	for node in known_hitboxes:
 		var hitbox := node as Hitbox
 		if (not hitbox.shape.disabled
-			and _entity_in_radius(hitbox.owner)):
+			and _entity_in_radius(hitbox.owner)
+			and not hitbox.owner.invincibility):
 			hitbox.process_hit(self)
 
 

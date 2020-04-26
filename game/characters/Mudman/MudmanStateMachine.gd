@@ -61,6 +61,7 @@ func _get_next_state(delta: float) -> String:
 			var fall_state = get_state(state) as FiniteState
 			if (not fall_state.is_state_over):
 				return NO_STATE
+			_start_blinking()
 			return fall_state.next_state
 		"Dying":
 			var dying_state = get_state(state) as FiniteState
@@ -99,3 +100,10 @@ func _build_next_hurt_state():
 			moved_aspect.move_impulse = hurt_move
 			hurt_move = Vector2.ZERO
 	
+	
+func _start_blinking():
+	var blinker = entity.get_node("InvincibilityBlinker")
+	blinker.start()
+	entity.invincibility = true
+	yield(blinker.duration_timer, "timeout")
+	entity.invincibility = false

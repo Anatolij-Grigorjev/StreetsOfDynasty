@@ -14,6 +14,7 @@ export(float) var total_health: float = 150
 var velocity = Vector2()
 var facing: int = 1
 var health := total_health
+var invincibility := false
 
 
 onready var fsm: StateMachine = $FSM
