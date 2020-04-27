@@ -61,7 +61,8 @@ func _get_next_state(delta: float) -> String:
 			var fall_state = get_state(state) as FiniteState
 			if (not fall_state.is_state_over):
 				return NO_STATE
-			_start_blinking()
+			if (fall_state.next_state != "Dying"):
+				_start_blinking()
 			return fall_state.next_state
 		"Dying":
 			var dying_state = get_state(state) as FiniteState
@@ -84,11 +85,16 @@ func _get_move_direction() -> Vector2:
 		
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
 	if (health <= 0.0):
-		state_nodes["Hurt"].next_state = "Dying"
+		var hurt_states := [
+			"Hurt", "Falling"
+		]
+		for hurt_state in hurt_states:
+			state_nodes[hurt_state].next_state = "Dying"
+		
 		
 		
 func _build_next_hurt_state():
-	if (hurt_move.x > 10):
+	if (abs(hurt_move.x) > 40):
 		next_hurt_state = "Falling"
 	else:
 		next_hurt_state = "Hurt"

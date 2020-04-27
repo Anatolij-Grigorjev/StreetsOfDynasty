@@ -52,15 +52,11 @@ func get_state(state_name: String) -> State:
 		
 		
 func _enter_state(next_state: String, prev_state: String):
-	if (prev_state != NO_STATE):
-		get_state(prev_state).exit_state(next_state)
 	get_state(next_state).enter_state(prev_state)
 	
 
 func _exit_state(prev_state: String, next_state: String):
 	get_state(prev_state).exit_state(next_state)
-	if (next_state != NO_STATE):
-		get_state(next_state).enter_state(prev_state)
 
 
 func _process_state(delta: float):

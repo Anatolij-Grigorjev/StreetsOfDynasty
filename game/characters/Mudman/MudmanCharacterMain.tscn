@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://characters/DyingStateAspect.gd" type="Script" id=17]
 [ext_resource path="res://characters/Mudman/MudmanCorpse.tscn" type="PackedScene" id=18]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=19]
+[ext_resource path="res://characters/Mudman/DyingState.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -87,10 +88,10 @@ move_easing = 2
 script = ExtResource( 7 )
 
 [node name="Dying" type="Node" parent="FSM" index="4"]
-script = ExtResource( 4 )
+script = ExtResource( 20 )
 state_params_filepath = "res://characters/Mudman/state_data/dying.json"
 state_commit_end_sec = 1.0
-state_length_sec = 0.6
+state_length_sec = 0.5
 
 [node name="DyingStateAspect" type="Node" parent="FSM/Dying" index="0"]
 script = ExtResource( 17 )
