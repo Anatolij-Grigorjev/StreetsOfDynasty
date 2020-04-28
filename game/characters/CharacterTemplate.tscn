@@ -5,6 +5,7 @@
 [ext_resource path="res://characters/CharacterTemplate.gd" type="Script" id=3]
 
 [node name="CharacterTemplate" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 3 )
 
 [node name="FSM" type="Node" parent="."]

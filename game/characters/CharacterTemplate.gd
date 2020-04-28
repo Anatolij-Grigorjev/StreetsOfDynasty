@@ -27,6 +27,7 @@ var is_hurting = false
 
 
 func _ready() -> void:
+	
 	fsm.connect("state_changed", self, "_on_FSM_state_changed")
 	for hitbox in hitboxes.get_children():
 		var typed_hitbox: Hitbox = hitbox as Hitbox
