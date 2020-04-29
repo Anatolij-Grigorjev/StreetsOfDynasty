@@ -29,6 +29,7 @@ func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
 	var hurting: bool = entity.is_hurting or Input.is_action_pressed("debug1")
+	var catching: Hitbox = entity.catching_hitbox
 	match(state):
 		"Idle":
 			if (hurting):
@@ -45,6 +46,9 @@ func _get_next_state(delta: float) -> String:
 				return "Idle"
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
+			if (catching):
+				_prepare_catching_state(catching)
+				return "Catching"
 			return NO_STATE
 		"AttackA1":
 			if (hurting):
@@ -111,6 +115,12 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 	):
 		next_attack_input = attack_input
 		emit_signal("next_attack_input_changed", next_attack_input)
+
+
+func _prepare_catching_state(caught_hitbox: Hitbox):
+	var state_node = get_state("Catching")
+	var catcher_aspect: CatchingStateAspect = state_node.get_node("CatchingStateAspect")
+	catcher_aspect.caught_character = caught_hitbox.owner
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

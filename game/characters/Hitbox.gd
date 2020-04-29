@@ -6,12 +6,16 @@ Defines which hit animation gets played during the hit
 The expected client entity of this is a CharacterTemplate
 """
 signal hitbox_hit(hit_connect)
+signal hitbox_catch(enemy_hitbox)
 
 export(float) var attack_recovery: float = 0.5
 export(String) var hit_anim: String = "hit"
 onready var shape: CollisionPolygon2D = get_child(0)
 
 var recent_attacks: Dictionary = {}
+
+func _ready():
+	connect("area_entered", self, "_on_area_entered")
 
 
 func _process(delta):
@@ -36,3 +40,8 @@ func process_hit(attack) -> void:
 		
 func _to_string():
 	return "HB[%s:%s]" % [owner.name, name]
+	
+	
+func _on_area_entered(area: Hitbox):
+	if (area.owner != owner):
+		emit_signal("hitbox_catch", area)

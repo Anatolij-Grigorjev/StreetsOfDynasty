@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
+[ext_resource path="res://characters/CatchingStateAspect.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -127,6 +128,18 @@ next_state = "Idle"
 [node name="HurtEndStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
 script = ExtResource( 7 )
 
+[node name="Catching" type="Node" parent="FSM" index="5"]
+script = ExtResource( 6 )
+state_params_filepath = "res://characters/Yu/state_data/catching.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
+state_commit_start_sec = 5.0
+state_commit_end_sec = 5.0
+state_length_sec = 5.0
+next_state = "Idle"
+
+[node name="CatchingStateAspect" type="Node" parent="FSM/Catching" index="0"]
+script = ExtResource( 16 )
+
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
 
@@ -137,10 +150,10 @@ hframes = 5
 frame = 0
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-modulate = Color( 1, 1, 1, 0.995996 )
+modulate = Color( 1, 1, 1, 0.991992 )
 show_behind_parent = true
-position = Vector2( 231.353, -70.2303 )
-rotation = -2.90924
+position = Vector2( -46.6011, -75.293 )
+rotation = -0.246481
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")
@@ -163,7 +176,7 @@ __meta__ = {
 [node name="Walk" type="Area2D" parent="Body/HitboxGroup" index="1"]
 visible = false
 collision_layer = 32
-collision_mask = 0
+collision_mask = 64
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""

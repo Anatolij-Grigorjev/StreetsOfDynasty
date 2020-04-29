@@ -24,6 +24,8 @@ onready var attackboxes: AreaGroup = $Body/AttackboxGroup
 
 
 var is_hurting = false
+var is_caught = false
+var catching_hitbox = null
 
 
 func _ready() -> void:
@@ -33,6 +35,7 @@ func _ready() -> void:
 		var typed_hitbox: Hitbox = hitbox as Hitbox
 		if (is_instance_valid(typed_hitbox)):
 			typed_hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
+			typed_hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
 	
 	
 func _process(delta: float) -> void:
@@ -63,6 +66,11 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	is_hurting = true
 	_handle_receive_damage(hit_connect)
 	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
+	
+	
+func _on_hitbox_catch(enemy_hitbox: Hitbox):
+	Debug.LOG.info("Catching %s", [enemy_hitbox])
+	catching_hitbox = enemy_hitbox
 	
 	
 	
