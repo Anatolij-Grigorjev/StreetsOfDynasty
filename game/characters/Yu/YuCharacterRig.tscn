@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -8,15 +8,79 @@
 [ext_resource path="res://characters/Yu/animations/hurt_low.tres" type="Animation" id=6]
 [ext_resource path="res://characters/Yu/animations/idle.tres" type="Animation" id=7]
 [ext_resource path="res://characters/Yu/animations/walk.tres" type="Animation" id=8]
-[ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=9]
+[ext_resource path="res://characters/Yu/spritesheets/attack_A2.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "catching"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( -122.713, 12.7595 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
 
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 9 )
-offset = Vector2( -106.371, 6.68986 )
-hframes = 12
-frame = 1
+offset = Vector2( -122.713, 12.7595 )
+hframes = 8
+frame = 6
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
@@ -33,12 +97,14 @@ __meta__ = {
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
 anims/attack_a2 = ExtResource( 3 )
+anims/catching = SubResource( 1 )
 anims/hurt_low = ExtResource( 6 )
 anims/idle = ExtResource( 7 )
 anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 1 )
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }

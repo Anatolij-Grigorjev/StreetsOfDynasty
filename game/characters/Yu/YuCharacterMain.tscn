@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
-[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
 [ext_resource path="res://characters/CatchingStateAspect.gd" type="Script" id=16]
@@ -143,17 +142,14 @@ script = ExtResource( 16 )
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
 
-[node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-texture = ExtResource( 13 )
-offset = Vector2( -58.468, 4.86353 )
-hframes = 5
-frame = 0
-
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
 modulate = Color( 1, 1, 1, 0.991992 )
 show_behind_parent = true
 position = Vector2( -46.6011, -75.293 )
 rotation = -0.246481
+
+[node name="FXPlayer" parent="Body/YuCharacterRig" index="3"]
+pitch_scale = 1.0
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")
@@ -370,5 +366,11 @@ __meta__ = {
 
 [node name="Logger" type="Node" parent="." index="5"]
 script = ExtResource( 12 )
+
+[node name="CatchPoint" parent="." index="6"]
+position = Vector2( 80.0608, -180.917 )
+
+[node name="CaughtPoint" parent="." index="7"]
+position = Vector2( 16.1161, -241.742 )
 
 [editable path="Body/YuCharacterRig"]

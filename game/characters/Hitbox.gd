@@ -15,7 +15,9 @@ onready var shape: CollisionPolygon2D = get_child(0)
 var recent_attacks: Dictionary = {}
 
 func _ready():
-	connect("area_entered", self, "_on_area_entered")
+	if (collision_mask):
+		Debug.LOG.info("%s can make catch signals on mask %s", [self, collision_mask])
+		connect("area_entered", self, "_on_area_entered")
 
 
 func _process(delta):
@@ -42,6 +44,6 @@ func _to_string():
 	return "HB[%s:%s]" % [owner.name, name]
 	
 	
-func _on_area_entered(area: Hitbox):
+func _on_area_entered(area: Area2D):
 	if (area.owner != owner):
 		emit_signal("hitbox_catch", area)

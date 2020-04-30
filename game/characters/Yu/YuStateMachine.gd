@@ -76,6 +76,11 @@ func _get_next_state(delta: float) -> String:
 			if (attack_state.is_state_over):
 				return _next_or_default(attack_state)
 			return NO_STATE
+		"Catching":
+			var catching_state = state_nodes[state] as FiniteState
+			if (not catching_state.is_state_over):
+				return NO_STATE
+			return _next_or_default(catching_state)
 		"HurtLow":
 			var hurt_state = state_nodes[state] as FiniteState
 			if (not hurt_state.is_state_over):

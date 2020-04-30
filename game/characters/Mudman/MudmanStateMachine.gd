@@ -31,6 +31,7 @@ func _get_next_state(delta: float) -> String:
 	
 	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
 	var hurting: bool = entity.is_hurting
+	var caught:bool = entity.is_caught
 	
 	if (hurting):
 		_build_next_hurt_state()
@@ -39,12 +40,16 @@ func _get_next_state(delta: float) -> String:
 		"Idle":
 			if (hurting):
 				return next_hurt_state
+			if(caught):
+				return "Caught"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			return NO_STATE
 		"Walk":
 			if (hurting):
 				return next_hurt_state
+			if(caught):
+				return "Caught"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
 			var should_keep_moving = true
@@ -52,6 +57,8 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			else:
 				return "WaitIdle"
+		"Caught":
+			return NO_STATE
 		"Hurt":
 			var hurt_state = get_state(state) as FiniteState
 			if (not hurt_state.is_state_over):

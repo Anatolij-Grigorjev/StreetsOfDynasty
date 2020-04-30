@@ -97,7 +97,15 @@ state_length_sec = 0.5
 script = ExtResource( 17 )
 CorpseScene = ExtResource( 18 )
 
-[node name="Logger" type="Node" parent="FSM" index="5"]
+[node name="Caught" type="Node" parent="FSM" index="5"]
+script = ExtResource( 4 )
+state_params_filepath = "res://characters/Mudman/state_data/caught.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
+state_commit_end_sec = 1.0
+state_length_sec = 5.0
+next_state = "Idle"
+
+[node name="Logger" type="Node" parent="FSM" index="6"]
 script = ExtResource( 12 )
 naming_scheme = 1
 
@@ -150,6 +158,7 @@ shape = SubResource( 3 )
 
 [node name="Hurt2" type="Area2D" parent="Body/HitboxGroup" index="3"]
 collision_layer = 64
+collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Hurt2" index="0"]
@@ -205,3 +214,6 @@ __meta__ = {
 [node name="InvincibilityBlinker" parent="." index="5" instance=ExtResource( 19 )]
 duration = 2.0
 blink_frequency = 5
+
+[node name="CaughtPoint" parent="." index="7"]
+position = Vector2( 37.7423, -109.716 )

@@ -21,6 +21,8 @@ onready var fsm: StateMachine = $FSM
 onready var body: Node2D = $Body
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
+onready var catch_point: Position2D = $CatchPoint
+onready var caught_point: Position2D = $CaughtPoint
 
 
 var is_hurting = false
@@ -68,7 +70,7 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	
 	
-func _on_hitbox_catch(enemy_hitbox: Hitbox):
+func _on_hitbox_catch(enemy_hitbox: Area2D):
 	Debug.LOG.info("Catching %s", [enemy_hitbox])
 	catching_hitbox = enemy_hitbox
 	
