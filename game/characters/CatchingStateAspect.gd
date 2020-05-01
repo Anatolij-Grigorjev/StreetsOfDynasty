@@ -24,6 +24,10 @@ func exit_state(next_state: String):
 	
 	
 func _align_caught_catch_points():
+	#make them look at each other
+	caught_character.facing = -1 * entity.facing
+	yield(get_tree(), "idle_frame")
+	
 	var caught_pos: Vector2 = caught_character.caught_point.global_position
 	var catch_pos: Vector2 = entity.catch_point.global_position
 	var directed_move: Vector2 = caught_pos.direction_to(catch_pos) * caught_pos.distance_to(catch_pos)

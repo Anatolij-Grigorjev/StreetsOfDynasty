@@ -45,5 +45,6 @@ func _to_string():
 	
 	
 func _on_area_entered(area: Area2D):
-	if (area.owner != owner):
+	if (area.owner != owner and 
+	not area.owner.invincibility):
 		emit_signal("hitbox_catch", area)

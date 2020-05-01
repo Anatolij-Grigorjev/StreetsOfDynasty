@@ -19,6 +19,6 @@ script = ExtResource( 1 )
 [node name="AttackboxGroup" type="Node2D" parent="Body"]
 script = ExtResource( 1 )
 
-[node name="CatchPoint" type="Position2D" parent="."]
+[node name="CatchPoint" type="Position2D" parent="Body"]
 
-[node name="CaughtPoint" type="Position2D" parent="."]
+[node name="CaughtPoint" type="Position2D" parent="Body"]

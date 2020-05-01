@@ -325,6 +325,9 @@ script = ExtResource( 8 )
 
 [node name="Tween" type="Tween" parent="Body" index="3"]
 
+[node name="CatchPoint" parent="Body" index="4"]
+position = Vector2( 75.9019, -196.513 )
+
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 25 )
 shape = SubResource( 12 )
@@ -366,11 +369,5 @@ __meta__ = {
 
 [node name="Logger" type="Node" parent="." index="5"]
 script = ExtResource( 12 )
-
-[node name="CatchPoint" parent="." index="6"]
-position = Vector2( 80.0608, -180.917 )
-
-[node name="CaughtPoint" parent="." index="7"]
-position = Vector2( 16.1161, -241.742 )
 
 [editable path="Body/YuCharacterRig"]

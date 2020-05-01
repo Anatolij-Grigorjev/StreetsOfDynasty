@@ -17,10 +17,19 @@ func exit_state(next_state: String):
 	
 	
 func _leave_corpse():
-	var corpse = CorpseScene.instance()
-	corpse.global_position = entity.global_position + corpse_offset
+	#build
+	var corpse := _build_facing_position_aware_corpse()
+	
 	#add corpse to corpses in scene
 	var corpses_node = Utils.get_node_by_tag("corpses")
 	corpses_node.add_child(corpse)
-	corpse.get_node("Label").text = "%3.3f;%3.3f" % [corpse.global_position.x, corpse.global_position.y]
+	
 	Debug.LOG.info("%s leaving corpse at %s", [entity, corpse.global_position])
+	
+	
+func _build_facing_position_aware_corpse() -> Node2D:
+	var corpse = CorpseScene.instance()
+	corpse.get_node("Sprite").scale.x *= sign(entity.facing)
+	corpse.global_position = entity.global_position + corpse_offset
+	corpse.get_node("Label").text = "%3.3f;%3.3f" % [corpse.global_position.x, corpse.global_position.y]
+	return corpse

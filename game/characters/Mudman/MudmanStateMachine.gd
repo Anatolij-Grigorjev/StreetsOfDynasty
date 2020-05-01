@@ -58,6 +58,9 @@ func _get_next_state(delta: float) -> String:
 			else:
 				return "WaitIdle"
 		"Caught":
+			if (not caught):
+				return "Falling"
+			
 			return NO_STATE
 		"Hurt":
 			var hurt_state = get_state(state) as FiniteState

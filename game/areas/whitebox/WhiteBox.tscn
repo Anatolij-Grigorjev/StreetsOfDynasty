@@ -112,21 +112,6 @@ scale = Vector2( 0.7, 0.7 )
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 541.509, 473.445 )
 
-[node name="MudmanCharacterMain2" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 397.688, 378.902 )
-
-[node name="MudmanCharacterMain3" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 442.955, 535.901 )
-
-[node name="MudmanCharacterMain4" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 376.488, 457.401 )
-
-[node name="MudmanCharacterMain5" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 562.137, 400.102 )
-
-[node name="MudmanCharacterMain6" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 562.71, 538.193 )
-
 [node name="Corpses" type="YSort" parent="YSort" groups=[
 "corpses",
 ]]

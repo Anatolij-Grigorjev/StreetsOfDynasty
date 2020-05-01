@@ -1,5 +1,10 @@
 {
 	"state_animation": "catching",
     "hitboxes_timeline": [
+    	{
+            "time": 0.0,
+            "enable": true,
+            "area": "AttackA2_2"
+        }
     ]
 }

@@ -12,7 +12,7 @@ export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 export(Vector2) var sprite_size: Vector2 = Vector2.ZERO
 export(float) var total_health: float = 150
 var velocity = Vector2()
-var facing: int = 1
+var facing: int = 1 setget set_facing
 var health := total_health
 var invincibility := false
 
@@ -21,8 +21,8 @@ onready var fsm: StateMachine = $FSM
 onready var body: Node2D = $Body
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
-onready var catch_point: Position2D = $CatchPoint
-onready var caught_point: Position2D = $CaughtPoint
+onready var catch_point: Position2D = $Body/CatchPoint
+onready var caught_point: Position2D = $Body/CaughtPoint
 
 
 var is_hurting = false
@@ -42,6 +42,11 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	pass
+	
+	
+func set_facing(new_facing: int):
+	facing = new_facing
+	body.scale.x = facing
 	
 
 """

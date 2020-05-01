@@ -28,7 +28,6 @@ func process_state(delta: float):
 	var move_direction = fsm._get_move_direction()
 	if (move_direction.x != 0 and change_facing):
 		var new_facing = sign(move_direction.x)
-		entity.body.scale.x = new_facing
 		entity.facing = new_facing
 	
 	entity.velocity.x = lerp(entity.velocity.x, move_speed.x * move_direction.x, 0.5)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=1]
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCorpse" type="Node2D"]
@@ -21,7 +21,7 @@ margin_top = -136.602
 margin_right = 38.4823
 margin_bottom = -111.602
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 1 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
