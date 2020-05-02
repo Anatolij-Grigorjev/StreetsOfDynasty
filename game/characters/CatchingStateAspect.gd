@@ -32,3 +32,5 @@ func _align_caught_catch_points():
 	var catch_pos: Vector2 = entity.catch_point.global_position
 	var directed_move: Vector2 = caught_pos.direction_to(catch_pos) * caught_pos.distance_to(catch_pos)
 	caught_character.global_position += directed_move
+	#reduce y to catcher
+	caught_character.global_position.y = entity.global_position.y

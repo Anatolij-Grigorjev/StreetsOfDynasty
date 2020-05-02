@@ -28,11 +28,13 @@ func _process(delta):
 			recovered_attacks.append(attackbox)
 
 	for attackbox in recovered_attacks:
+		Debug.LOG.info("%s Receovered from %s", [self, attackbox])
 		recent_attacks.erase(attackbox)
 
 
 func process_hit(attack) -> void:
 	if (not recent_attacks.has(attack)):
+		Debug.LOG.info("%s recover from %s in %s seconds...", [self, attack, attack_recovery])
 		recent_attacks[attack] = attack_recovery
 		var attack_damage = rand_range(0.75, 1.25) * attack.damage_amount
 		var hit_connect := HitConnect.new(self, attack, attack_damage)

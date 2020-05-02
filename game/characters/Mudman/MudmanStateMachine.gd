@@ -3,7 +3,7 @@ extends StateMachine
 
 onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
 onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
-
+onready var blinker: Node = get_node("../InvincibilityBlinker")
 
 var target: Node2D
 
@@ -63,6 +63,9 @@ func _get_next_state(delta: float) -> String:
 			
 			return NO_STATE
 		"Hurt":
+			#reset hurting if hit again
+			if (hurting):
+				return next_hurt_state
 			var hurt_state = get_state(state) as FiniteState
 			if (not hurt_state.is_state_over):
 				return NO_STATE
@@ -72,7 +75,7 @@ func _get_next_state(delta: float) -> String:
 			if (not fall_state.is_state_over):
 				return NO_STATE
 			if (fall_state.next_state != "Dying"):
-				_start_blinking()
+				_start_blinking(1.0)
 			return fall_state.next_state
 		"Dying":
 			var dying_state = get_state(state) as FiniteState
@@ -117,6 +120,5 @@ func _build_next_hurt_state():
 			hurt_move = Vector2.ZERO
 	
 	
-func _start_blinking():
-	var blinker = entity.get_node("InvincibilityBlinker")
-	blinker.start()
+func _start_blinking(duration = blinker.duration):
+	blinker.start(duration)
