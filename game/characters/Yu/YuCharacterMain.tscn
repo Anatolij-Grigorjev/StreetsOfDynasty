@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -12,9 +12,11 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
+[ext_resource path="res://characters/StateMachineState.gd" type="Script" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
 [ext_resource path="res://characters/CatchingStateAspect.gd" type="Script" id=16]
+[ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -128,15 +130,22 @@ next_state = "Idle"
 script = ExtResource( 7 )
 
 [node name="Catching" type="Node" parent="FSM" index="5"]
+script = ExtResource( 13 )
+initial_state = "CatchIdle"
+
+[node name="FSM" type="Node" parent="FSM/Catching" index="0"]
+script = ExtResource( 17 )
+entity_path = NodePath("../../..")
+
+[node name="CatchIdle" type="Node" parent="FSM/Catching/FSM" index="0"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/catching.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-state_commit_start_sec = 5.0
+state_params_filepath = "res://characters/Yu/state_data/catch_idle.json"
+hitbox_areas_timeline_path = NodePath("../../../../Body/HitboxGroup/HitboxTimeline")
 state_commit_end_sec = 5.0
 state_length_sec = 5.0
-next_state = "Idle"
+next_state = "CatchIdle"
 
-[node name="CatchingStateAspect" type="Node" parent="FSM/Catching" index="0"]
+[node name="CatchingStateAspect" type="Node" parent="FSM/Catching/FSM/CatchIdle" index="0"]
 script = ExtResource( 16 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]

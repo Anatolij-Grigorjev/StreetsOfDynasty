@@ -13,10 +13,11 @@ var fsm setget _set_fsm
 var entity: Node setget _set_entity
 
 
-onready var state_aspects: Array = get_children()
+onready var state_aspects: Array = []
 
 
 func _ready():
+	state_aspects = _filter_state_aspects()
 	set_process(false)
 	set_physics_process(false)
 
@@ -46,3 +47,14 @@ func _set_entity(set_entity: Node):
 	entity = set_entity
 	for aspect in state_aspects:
 		aspect.entity = set_entity
+		
+
+func _filter_state_aspects() -> Array:
+	var aspects := []
+	for child in get_children():
+		#using "as" instead of "is"
+		#to avoid cyclic dependency error
+		if (child as State):
+			aspects.append(child)
+	
+	return aspects

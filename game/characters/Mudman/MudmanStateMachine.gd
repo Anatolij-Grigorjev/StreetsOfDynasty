@@ -1,8 +1,6 @@
 extends StateMachine
 
 
-onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
-onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 onready var blinker: Node = get_node("../InvincibilityBlinker")
 
 var target: Node2D

@@ -1,11 +1,10 @@
 extends StateMachine
+"""
+Yu main state machine
+"""
 
 
 signal next_attack_input_changed(next_attack_input)
-
-
-onready var hitboxes: AreaGroup = get_node(@"../Body/HitboxGroup")
-onready var attackboxes: AreaGroup = get_node(@"../Body/AttackboxGroup")
 
 
 var next_attack_input: int = C.AttackInputType.NONE
@@ -47,7 +46,7 @@ func _get_next_state(delta: float) -> String:
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
 			if (entity.catching_hitbox):
-				_prepare_catching_state(entity.catching_hitbox)
+				_prepare_catching_fsm(entity.catching_hitbox)
 				#clear catching
 				entity.catching_hitbox = null
 				return "Catching"
@@ -79,10 +78,9 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"Catching":
-			var catching_state = state_nodes[state] as FiniteState
-			if (not catching_state.is_state_over):
-				return NO_STATE
-			return _next_or_default(catching_state)
+			var catching_state = state_nodes[state] as StateMachineState
+			#TODO: finish catching FSM
+			return NO_STATE
 		"HurtLow":
 			var hurt_state = state_nodes[state] as FiniteState
 			if (not hurt_state.is_state_over):
@@ -124,10 +122,9 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		emit_signal("next_attack_input_changed", next_attack_input)
 
 
-func _prepare_catching_state(caught_hitbox: Hitbox):
-	var state_node = get_state("Catching")
-	var catcher_aspect: CatchingStateAspect = state_node.get_node("CatchingStateAspect")
-	catcher_aspect.caught_character = caught_hitbox.owner
+func _prepare_catching_fsm(caught_hitbox: Hitbox):
+	var state_node = get_state("Catching") as StateMachineState
+	state_node.sub_fsm.caught_character = caught_hitbox.owner
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

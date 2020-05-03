@@ -58,7 +58,7 @@ func process_state(delta: float):
 		hitbox_areas_timeline.process_timeline(hitbox_group_id, delta)
 	if (is_instance_valid(attackbox_areas_timeline)):
 		attackbox_areas_timeline.process_timeline(attackbox_group_id, delta)
-	for attackbox in fsm.attackboxes.get_enabled_areas():
+	for attackbox in entity.attackboxes.get_enabled_areas():
 		attackbox.process_attack()
 	
 	
@@ -72,8 +72,8 @@ func enter_state(prev_state: String):
 	if (not keep_velocity):
 		entity.velocity = Vector2()
 	
-	fsm.attackboxes.disable_all_areas()
-	fsm.hitboxes.disable_all_areas()
+	entity.attackboxes.disable_all_areas()
+	entity.hitboxes.disable_all_areas()
 	if (state_params.state_move_impulse != Vector2.ZERO):
 		_move_with_state(
 			state_params.state_move_impulse, 

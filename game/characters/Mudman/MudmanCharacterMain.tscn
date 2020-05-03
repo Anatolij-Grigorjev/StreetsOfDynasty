@@ -212,5 +212,4 @@ __meta__ = {
 }
 
 [node name="InvincibilityBlinker" parent="." index="5" instance=ExtResource( 19 )]
-duration = 2.0
 blink_frequency = 5
