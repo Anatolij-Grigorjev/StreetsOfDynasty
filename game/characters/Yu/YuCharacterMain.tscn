@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://characters/StateMachineState.gd" type="Script" id=13]
 [ext_resource path="res://characters/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/MoveToEnemyStateAspect.gd" type="Script" id=15]
-[ext_resource path="res://characters/CatchingStateAspect.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -144,9 +143,6 @@ hitbox_areas_timeline_path = NodePath("../../../../Body/HitboxGroup/HitboxTimeli
 state_commit_end_sec = 5.0
 state_length_sec = 5.0
 next_state = "CatchIdle"
-
-[node name="CatchingStateAspect" type="Node" parent="FSM/Catching/FSM/CatchIdle" index="0"]
-script = ExtResource( 16 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )

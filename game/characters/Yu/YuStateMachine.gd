@@ -79,8 +79,10 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"Catching":
 			var catching_state = state_nodes[state] as StateMachineState
-			#TODO: finish catching FSM
-			return NO_STATE
+			if (not catching_state.sub_fsm_over):
+				return NO_STATE
+			
+			return "Idle"
 		"HurtLow":
 			var hurt_state = state_nodes[state] as FiniteState
 			if (not hurt_state.is_state_over):
