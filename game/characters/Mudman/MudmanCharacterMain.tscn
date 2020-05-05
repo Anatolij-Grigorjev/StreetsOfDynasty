@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -32,6 +32,9 @@ extents = Vector2( 37.801, 74.3964 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 37.1226, 65.5772 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 37.123, 65 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 63.58, 18.768 )
@@ -162,7 +165,17 @@ script = ExtResource( 6 )
 position = Vector2( -20.352, -74.322 )
 shape = SubResource( 4 )
 
-[node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="4"]
+[node name="Caught" type="Area2D" parent="Body/HitboxGroup" index="4"]
+collision_layer = 192
+collision_mask = 0
+script = ExtResource( 6 )
+attack_recovery = 0.35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Caught" index="0"]
+position = Vector2( -20.352, -74.322 )
+shape = SubResource( 7 )
+
+[node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="5"]
 script = ExtResource( 10 )
 
 [node name="AttackboxGroup" parent="Body" index="2"]

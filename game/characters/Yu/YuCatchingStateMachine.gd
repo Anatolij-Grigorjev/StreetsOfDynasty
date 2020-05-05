@@ -22,15 +22,26 @@ func set_state(next_state: String):
 	
 func _get_next_state(delta: float) -> String:
 	
+	var attack_input: int = _get_attack_input()
 	
 	match(state):
 		"CatchIdle":
 			var catch_idle_state := get_state(state) as FiniteState
+			if (attack_input == C.AttackInputType.NORMAL):
+				return "CatchAttack"
+				
 			if (not catch_idle_state.is_state_over):
 				return NO_STATE
-			caught_character.is_caught = false
-			parent_state.sub_fsm_over = true
+				
+			_end_sub_fsm()
 			return NO_STATE
+		"CatchAttack":
+			var finite_state = state_nodes[state] as FiniteState
+			if (not finite_state.is_state_over):
+				return NO_STATE
+				
+			_end_sub_fsm()
+			return finite_state.next_state
 		_:
 			breakpoint
 			return NO_STATE
@@ -55,3 +66,14 @@ func _align_caught_catch_points():
 	caught_character.global_position += directed_move
 	#reduce y to catcher
 	caught_character.global_position.y = entity.global_position.y
+
+
+func _get_attack_input() -> int:
+	if (Input.is_action_just_pressed("attack_normal")):
+		return C.AttackInputType.NORMAL
+	return C.AttackInputType.NONE
+	
+	
+func _end_sub_fsm():
+	caught_character.is_caught = false
+	parent_state.sub_fsm_over = true

@@ -1,0 +1,42 @@
+{
+	"state_animation": "catch_attack",
+    "attackboxes_timeline": [
+        {
+            "time": 0.1,
+            "enable": true,
+            "area": "CatchAttack1"
+        },
+        {
+            "time": 0.4,
+            "enable": false,
+            "area": "CatchAttack1"
+        },
+        {
+            "time": 0.5,
+            "enable": true,
+            "area": "CatchAttack1"
+        },
+        {
+            "time": 0.8,
+            "enable": false,
+            "area": "CatchAttack1"
+        },
+        {
+            "time": 1.0,
+            "enable": true,
+            "area": "CatchAttack2"
+        },
+        {
+            "time": 1.3,
+            "enable": false,
+            "area": "CatchAttack2"
+        }
+    ],
+    "hitboxes_timeline": [
+        {
+            "time": 0.0,
+            "enable": true,
+            "area": "AttackA2_2"
+        }
+    ]
+}
