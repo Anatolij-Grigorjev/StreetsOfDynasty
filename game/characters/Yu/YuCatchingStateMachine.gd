@@ -41,6 +41,7 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 				
 			_end_sub_fsm()
+			parent_state.next_parent_state = "AttackA2"
 			return finite_state.next_state
 		_:
 			breakpoint

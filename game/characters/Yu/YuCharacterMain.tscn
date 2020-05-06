@@ -155,15 +155,14 @@ script = ExtResource( 6 )
 state_params_filepath = "res://characters/Yu/state_data/catch_attack.json"
 hitbox_areas_timeline_path = NodePath("../../../../Body/HitboxGroup/HitboxTimeline")
 attackbox_areas_timeline_path = NodePath("../../../../Body/AttackboxGroup/AttackboxTimeline")
-state_commit_end_sec = 1.6
-state_length_sec = 1.6
+state_commit_end_sec = 0.8
+state_length_sec = 0.8
 next_state = "CatchIdle"
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-offset = Vector2( -122.713, 12.7595 )
 frame = 2
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
@@ -335,7 +334,7 @@ __meta__ = {
 
 [node name="AttackA2" type="Area2D" parent="Body/AttackboxGroup" index="1"]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 96
 script = ExtResource( 10 )
 damage_amount = 67.0
 target_move = Vector2( 150, 0 )
@@ -348,7 +347,7 @@ shape = SubResource( 11 )
 collision_layer = 0
 collision_mask = 128
 script = ExtResource( 10 )
-damage_amount = 5.0
+damage_amount = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/CatchAttack1" index="0"]
 position = Vector2( 105.77, -141.765 )

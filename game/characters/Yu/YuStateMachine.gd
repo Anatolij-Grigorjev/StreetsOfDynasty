@@ -82,7 +82,7 @@ func _get_next_state(delta: float) -> String:
 			if (not catching_state.sub_fsm_over):
 				return NO_STATE
 			
-			return "Idle"
+			return catching_state.next_parent_state
 		"HurtLow":
 			var hurt_state = state_nodes[state] as FiniteState
 			if (not hurt_state.is_state_over):

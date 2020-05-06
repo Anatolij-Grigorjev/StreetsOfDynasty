@@ -5,6 +5,7 @@ A type of state that manages an internal FSM that handles substates
 Distinct from having a state with composite state aspects
 """
 export(String) var initial_state := StateMachine.NO_STATE
+export(String) var next_parent_state := "Idle"
 
 onready var sub_fsm: StateMachine = get_node("FSM")
 
@@ -21,6 +22,7 @@ func process_state(delta: float):
 func enter_state(prev_state: String):
 	.enter_state(prev_state)
 	#start FSM
+	next_parent_state = "Idle"
 	sub_fsm.state = initial_state
 	
 	
