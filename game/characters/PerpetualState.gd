@@ -24,7 +24,8 @@ onready var hitbox_areas_timeline: AreaGroupTimeline = get_node(hitbox_areas_tim
 #reference to the areas timeline if valid path provided
 onready var attackbox_areas_timeline: AreaGroupTimeline = get_node(attackbox_areas_timeline_path)
 onready var tween: Tween = get_node(tween_path)
-
+#next state character transitions into if this state ends
+export(String) var next_state: String = StateMachine.NO_STATE
 
 #group id for timeline processing
 var attackbox_group_id: String = ""

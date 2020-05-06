@@ -14,9 +14,6 @@ export(float) var state_commit_end_sec := 0.93
 #total length of finite state. after this amount elapses character
 #forcefully transitions to configured 'next_state' or Idle
 export(float) var state_length_sec := 1.0
-#next state character transitions into if state length elapsed with no
-#external input
-export(String) var next_state: String
 
 #current elapsed state time
 var state_time: float = 0.0

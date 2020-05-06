@@ -31,6 +31,11 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	._on_hitbox_hit(hit_connect)
 	hit_effects.invoke_hit_effects(hit_connect)
 	
+	
+func _set_caught(got_caught: bool):
+	._set_caught(got_caught)
+	fsm.set_post_caught_state("Falling")
+
 
 func _to_string():
 	return "[%s]" % name

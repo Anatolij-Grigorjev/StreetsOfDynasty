@@ -19,6 +19,11 @@ func set_state(next_state: String):
 	.set_state(next_state)
 	if (is_instance_valid($Logger)):
 		$Logger.info("'{}' -> '{}'", [previous_state, next_state])
+		
+		
+func set_post_caught_state(post_caught_state: String):
+	var caught_state = get_state("Caught") as PerpetualState
+	caught_state.next_state = post_caught_state
 	
 
 func _set_target(new_target: Node2D):
@@ -57,7 +62,8 @@ func _get_next_state(delta: float) -> String:
 				return "WaitIdle"
 		"Caught":
 			if (not caught):
-				return "Falling"
+				var caught_state = get_state(state) as PerpetualState
+				return caught_state.next_state
 			
 			return NO_STATE
 		"Hurt":
@@ -85,6 +91,7 @@ func _get_next_state(delta: float) -> String:
 		_:
 			breakpoint
 			return NO_STATE
+
 
 
 func _get_move_direction() -> Vector2:

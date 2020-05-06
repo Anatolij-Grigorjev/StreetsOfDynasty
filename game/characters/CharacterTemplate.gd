@@ -26,7 +26,7 @@ onready var caught_point: Position2D = $Body/CaughtPoint
 
 
 var is_hurting = false
-var is_caught = false
+var is_caught = false setget _set_caught
 var catching_hitbox = null
 
 
@@ -102,3 +102,7 @@ func _handle_receive_damage(hit_connect: HitConnect):
 		self, damage_taken, health
 	])
 	emit_signal("damage_received", damage_taken, health, total_health)
+	
+	
+func _set_caught(got_caught: bool):
+	is_caught = got_caught

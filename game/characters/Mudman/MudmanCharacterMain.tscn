@@ -33,13 +33,13 @@ extents = Vector2( 37.801, 74.3964 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 37.1226, 65.5772 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 37.123, 65 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 63.58, 18.768 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
@@ -66,9 +66,9 @@ script = ExtResource( 11 )
 script = ExtResource( 4 )
 state_params_filepath = "res://characters/Mudman/state_data/hurt.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
+next_state = "Idle"
 state_commit_end_sec = 0.6
 state_length_sec = 0.6
-next_state = "Idle"
 
 [node name="HurtStateAspect" type="Node" parent="FSM/Hurt" index="0"]
 script = ExtResource( 7 )
@@ -80,8 +80,8 @@ move_easing = 2
 [node name="Falling" type="Node" parent="FSM" index="3"]
 script = ExtResource( 4 )
 state_params_filepath = "res://characters/Mudman/state_data/falling.json"
-state_commit_end_sec = 1.0
 next_state = "Idle"
+state_commit_end_sec = 1.0
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
 script = ExtResource( 13 )
@@ -108,6 +108,7 @@ naming_scheme = 1
 script = ExtResource( 3 )
 state_params_filepath = "res://characters/Mudman/state_data/caught.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
+next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 position = Vector2( 0, -75 )
@@ -173,7 +174,7 @@ attack_recovery = 0.35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Caught" index="0"]
 position = Vector2( -20.352, -74.322 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="5"]
 script = ExtResource( 10 )
@@ -186,7 +187,7 @@ position = Vector2( 60.676, -103.885 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( -7.462, 12.513 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CurrentState" type="Label" parent="." index="3"]
 margin_left = -61.6584
@@ -194,7 +195,7 @@ margin_top = -279.002
 margin_right = 38.3416
 margin_bottom = -254.002
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -212,7 +213,7 @@ margin_top = -308.801
 margin_right = 37.876
 margin_bottom = -283.801
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
