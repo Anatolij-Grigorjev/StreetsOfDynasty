@@ -31,9 +31,15 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	
 	#hit damage label
 	var label = _build_damage_label(hit_connect)
-	label.position = spark.position + Utils.rand_point(25.0, 25.0)
+	label.global_position = (
+		#at spark pos
+		spark.global_position 
+		#with some randomness
+		+ owner.facing * Utils.rand_point(25.0, 25.0)
+	)
 	#set_damage requires label in tree
-	add_child(label)
+	_add_at_scene_root(label)
+	
 	label.set_damage(-hit_connect.attack_damage)
 	
 	#hit particles
@@ -85,3 +91,7 @@ func _play_hit_sound():
 	sound_player.pitch_scale = rand_range(1 - pitch_scale, 1 + pitch_scale)
 	
 	sound_player.play()
+	
+	
+func _add_at_scene_root(node: Node):
+	get_tree().get_root().add_child(node)

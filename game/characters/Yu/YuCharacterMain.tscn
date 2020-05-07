@@ -322,7 +322,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 damage_type = 1
-damage_amount = 56.0
+damage_amount = 16.0
 target_move = Vector2( -35, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
@@ -336,7 +336,7 @@ __meta__ = {
 collision_layer = 0
 collision_mask = 96
 script = ExtResource( 10 )
-damage_amount = 67.0
+damage_amount = 20.0
 target_move = Vector2( 150, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
