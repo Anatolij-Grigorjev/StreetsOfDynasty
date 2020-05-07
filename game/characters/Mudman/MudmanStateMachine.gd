@@ -7,6 +7,7 @@ var target: Node2D
 
 var hurt_move: Vector2 = Vector2.ZERO
 var next_hurt_state = "Hurt"
+var post_caught_state = "Falling"
 
 func _ready():
 	._ready()
@@ -22,8 +23,7 @@ func set_state(next_state: String):
 		
 		
 func set_post_caught_state(post_caught_state: String):
-	var caught_state = get_state("Caught") as PerpetualState
-	caught_state.next_state = post_caught_state
+	self.post_caught_state = post_caught_state
 	
 
 func _set_target(new_target: Node2D):
@@ -62,8 +62,7 @@ func _get_next_state(delta: float) -> String:
 				return "WaitIdle"
 		"Caught":
 			if (not caught):
-				var caught_state = get_state(state) as PerpetualState
-				return caught_state.next_state
+				return post_caught_state
 			
 			return NO_STATE
 		"Hurt":

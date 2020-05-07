@@ -41,7 +41,7 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 				
 			_end_sub_fsm()
-			caught_character.fsm.set_post_caught_state("Hurt")
+			caught_character.set_post_caught_state("Hurt")
 			parent_state.next_parent_state = "AttackA2"
 			return finite_state.next_state
 		_:

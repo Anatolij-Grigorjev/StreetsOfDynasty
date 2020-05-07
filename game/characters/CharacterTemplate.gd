@@ -106,3 +106,7 @@ func _handle_receive_damage(hit_connect: HitConnect):
 	
 func _set_caught(got_caught: bool):
 	is_caught = got_caught
+	
+
+func set_post_caught_state(post_caught_state: String):
+	fsm.set_post_caught_state(post_caught_state)
