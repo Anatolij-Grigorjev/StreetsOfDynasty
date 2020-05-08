@@ -8,6 +8,10 @@ var LoggerFactory = preload("res://Logger.tscn")
 """
 Global logging facility for classes
 """
+const DRAW_TYPE_LINE = 'line'
+const DRAW_TYPE_CIRCLE = 'circle'
+
+
 var LOG: Logger
 
 var draw_q: Array = []
@@ -30,12 +34,13 @@ func _process(delta):
 func _draw():
 	for drawing in draw_q:
 		LOG.info("Drawing item {}", [drawing])
-		var color = drawing.color if drawing.has('color') else Color.red
+		
+		var color = Utils.get_or_default(drawing, 'color', Color.red)
 		match(drawing.type):
-			'line':
+			DRAW_TYPE_LINE:
 				draw_line(drawing.from, drawing.to, color, 15.0)
 				break
-			'circle':
+			DRAW_TYPE_CIRCLE:
 				draw_circle(drawing.center, drawing.radius, color)
 				break
 			_:

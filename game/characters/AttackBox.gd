@@ -72,9 +72,10 @@ func _entity_in_radius(hitbox_owner: Node2D) -> bool:
 	var attacker_position = owner.global_position
 	var receiver_position = hitbox_owner.global_position
 	Debug.add_global_draw({
-		'type': 'line',
+		'type': Debug.DRAW_TYPE_LINE,
 		'from': attacker_position,
-		'to': receiver_position
+		'to': receiver_position,
+		'color': Color.red
 	})
 	var distance = abs(attacker_position.y - receiver_position.y)
 	print("%s distance to %s: %s" % [attacker_position, receiver_position, distance] )

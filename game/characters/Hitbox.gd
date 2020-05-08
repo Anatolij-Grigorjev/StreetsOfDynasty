@@ -54,3 +54,10 @@ func _on_area_entered(area: Area2D):
 		var pos = owner.global_position
 		if (abs(target_pos.y - pos.y) <= catch_radius):
 			emit_signal("hitbox_catch", area)
+		else:
+			Debug.add_global_draw({
+				'type': Debug.DRAW_TYPE_LINE,
+				'from': target_pos,
+				'to': pos,
+				'color': Color.blue
+			})
