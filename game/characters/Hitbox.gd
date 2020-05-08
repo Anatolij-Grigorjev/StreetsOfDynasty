@@ -9,7 +9,8 @@ signal hitbox_hit(hit_connect)
 signal hitbox_catch(enemy_hitbox)
 
 export(float) var attack_recovery: float = 0.5
-export(String) var hit_anim: String = "hit"
+export(float) var catch_radius: float = 35.77
+
 onready var shape: CollisionPolygon2D = get_child(0)
 
 var recent_attacks: Dictionary = {}
@@ -49,4 +50,7 @@ func _to_string():
 func _on_area_entered(area: Area2D):
 	if (area.owner != owner and 
 	not area.owner.invincibility):
-		emit_signal("hitbox_catch", area)
+		var target_pos = area.owner.global_position
+		var pos = owner.global_position
+		if (abs(target_pos.y - pos.y) <= catch_radius):
+			emit_signal("hitbox_catch", area)
