@@ -59,5 +59,6 @@ func _on_area_entered(area: Area2D):
 				'type': Debug.DRAW_TYPE_LINE,
 				'from': target_pos,
 				'to': pos,
-				'color': Color.blue
+				'color': Color.blue,
+				'duration': 0.5
 			})

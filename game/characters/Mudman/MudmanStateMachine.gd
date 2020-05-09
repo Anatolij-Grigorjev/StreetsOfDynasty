@@ -69,6 +69,9 @@ func _get_next_state(delta: float) -> String:
 			#reset hurting if hit again
 			if (hurting):
 				return next_hurt_state
+			#possible to be caught while hurting
+			if (caught):
+				return "Caught"
 			var hurt_state = get_state(state) as FiniteState
 			if (not hurt_state.is_state_over):
 				return NO_STATE

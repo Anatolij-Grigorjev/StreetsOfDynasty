@@ -29,6 +29,12 @@ func add_global_draw(draw_item: Dictionary):
 	
 func _process(delta):
 	update()
+	#clear drawings that expired by duration
+	for drawing in draw_q:
+		if (drawing.has('duration')):
+			drawing.duration -= delta
+		if (Utils.get_or_default(drawing, 'duration', 0.0) <= 0.0):
+			draw_q.erase(drawing)
 	
 	
 func _draw():
@@ -46,4 +52,3 @@ func _draw():
 			_:
 				LOG.warn("Unsupported drawing type {}", drawing.type)
 				breakpoint
-	draw_q.clear()
