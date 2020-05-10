@@ -25,9 +25,16 @@ during this hit.
 The direction is based on facing of attacker, not attacked
 """
 export(Vector2) var target_move = Vector2.ZERO
+"""
+How long cooldown between hitting same hitbox with this same attackbox
+"""
+export(float) var attack_recovery: float = 0.5
 
 var known_hitboxes = []
 onready var shape: CollisionPolygon2D = get_child(0)
+
+
+var recent_attacks: Dictionary = {}
 
 
 func _ready():
@@ -43,10 +50,42 @@ process hit on all hitboxes not currently disabled
 func process_attack() -> void:
 	for node in known_hitboxes:
 		var hitbox := node as Hitbox
-		if (not hitbox.shape.disabled
+		if (
+			#hitbox is enabled
+			not hitbox.shape.disabled
+			#attack is within range
 			and _entity_in_radius(hitbox.owner)
-			and not hitbox.owner.invincibility):
+			#enemy not currently invincible
+			and not hitbox.owner.invincibility
+			#attack didnt already hit recently
+			and not recent_attacks.has(hitbox)
+		):
 			hitbox.process_hit(self)
+			_record_hitbox_recovery(hitbox)
+			
+			
+
+func _record_hitbox_recovery(hitbox: Hitbox):
+	recent_attacks[hitbox] = attack_recovery
+
+
+func _process(delta: float):
+	_process_hitbox_recovery(delta)
+	
+
+"""
+Recover attack cooldowns for hitboxes
+"""
+func _process_hitbox_recovery(delta: float):
+	var recovered_hitboxes = []
+	for hitbox in recent_attacks:
+		recent_attacks[hitbox] -= delta
+		if (recent_attacks[hitbox] <= 0.0):
+			recovered_hitboxes.append(hitbox)
+	for hitbox in recovered_hitboxes:
+		Debug.LOG.info("%s can hit %s", [self, hitbox])
+		recent_attacks.erase(hitbox)
+	
 
 
 func _on_area_entered(area: Area2D) -> void:
