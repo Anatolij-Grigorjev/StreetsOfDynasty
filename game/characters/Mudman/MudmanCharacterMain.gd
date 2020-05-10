@@ -10,6 +10,7 @@ onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackT
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var current_state_lbl: Label = $CurrentState
 onready var current_position_lbl: Label = $CurrentPosition
+onready var current_stability_lbl: Label = $CurrentStability
 onready var healthbar = $Body/MudmanCharacterRig/HealthBar
 
 
@@ -22,6 +23,7 @@ func _ready():
 
 func _process(delta):
 	current_position_lbl.text = "%3.3f;%3.3f" % [global_position.x, global_position.y]
+	current_stability_lbl.text = "ST: %d" % stability
 
 
 func _on_FSM_state_changed(old_state: String, new_state: String):

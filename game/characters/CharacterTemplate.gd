@@ -11,9 +11,19 @@ signal damage_received(damage, health, total_health)
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)
 export(Vector2) var sprite_size: Vector2 = Vector2.ZERO
 export(float) var total_health: float = 150
+"""
+points of upwards stability. with less than some % the character 
+will go to hurting state when the hit is received (rapid recovery), 
+with the points expired the character will fall (recovering all)
+"""
+export(float) var total_stability: float = 100
+export(float) var stability_recovery_per_sec: float = 10
+
+
 var velocity = Vector2()
 var facing: int = 1 setget set_facing
 var health := total_health
+var stability := total_stability
 var invincibility := false
 
 
@@ -25,7 +35,7 @@ onready var catch_point: Position2D = $Body/CatchPoint
 onready var caught_point: Position2D = $Body/CaughtPoint
 
 
-var is_hurting = false
+var is_hit = false
 var is_caught = false setget _set_caught
 var catching_hitbox = null
 
@@ -41,7 +51,17 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	pass
+	_process_stability_recovery(delta)
+	
+	
+func _process_stability_recovery(delta: float):
+	if (stability < total_stability):
+		var recovery_this_frame := stability_recovery_per_sec * delta
+		if (fsm.is_fall_state):
+			recovery_this_frame = total_stability
+		elif (fsm.is_hurt_state):
+			recovery_this_frame *= 3
+		stability = clamp(stability + recovery_this_frame, 0.0, total_stability)
 	
 	
 func set_facing(new_facing: int):
@@ -70,7 +90,8 @@ func do_movement_slide(velocity: Vector2):
 func _on_hitbox_hit(hit_connect: HitConnect):
 	#character level indicator if a hurt-state is happening
 	#gets reset when a state with a child HurtStateAspect exits
-	is_hurting = true
+	is_hit = true
+	stability -= hit_connect.attack_disruption
 	_handle_receive_damage(hit_connect)
 	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	

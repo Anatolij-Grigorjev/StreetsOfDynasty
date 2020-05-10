@@ -15,6 +15,10 @@ Amount of raw damage dealt by attack
 """
 export(float) var damage_amount = 0
 """
+How much does this attack disrupt target stability
+"""
+export(float) var disruption = 15.7
+"""
 Attack vertical reach limit, regardless of attackbox size
 Limited by attackbox actually overlapping hitbox
 """

@@ -6,8 +6,11 @@ onready var blinker: Node = get_node("../InvincibilityBlinker")
 var target: Node2D
 
 var hurt_move: Vector2 = Vector2.ZERO
-var next_hurt_state = "Hurt"
 var post_caught_state = "Falling"
+
+var is_hurt_state = false
+var is_fall_state = false
+
 
 func _ready():
 	._ready()
@@ -33,24 +36,28 @@ func _set_target(new_target: Node2D):
 func _get_next_state(delta: float) -> String:
 	
 	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
-	var hurting: bool = entity.is_hurting
+	var was_hit: bool = entity.is_hit
 	var caught:bool = entity.is_caught
 	
-	if (hurting):
-		_build_next_hurt_state()
+	var next_hit_state = NO_STATE
+	if (was_hit):
+		next_hit_state = _build_next_hit_receive_state()
+		_resolve_hit_move(next_hit_state)
+		entity.is_hit = false
+		
 		
 	match(state):
 		"Idle":
-			if (hurting):
-				return next_hurt_state
+			if (was_hit):
+				return next_hit_state
 			if(caught):
 				return "Caught"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			return NO_STATE
 		"Walk":
-			if (hurting):
-				return next_hurt_state
+			if (was_hit):
+				return next_hit_state
 			if(caught):
 				return "Caught"
 			if (move_direction == Vector2.ZERO):
@@ -67,8 +74,8 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"Hurt":
 			#reset hurting if hit again
-			if (hurting):
-				return next_hurt_state
+			if (was_hit):
+				return next_hit_state
 			#possible to be caught while hurting
 			if (caught):
 				return "Caught"
@@ -113,18 +120,30 @@ func _on_character_damage_received(damage: float, health: float, total_healt: fl
 		
 		
 		
-func _build_next_hurt_state():
-	if (abs(hurt_move.x) > 40):
-		next_hurt_state = "Falling"
-	else:
-		next_hurt_state = "Hurt"
+func _build_next_hit_receive_state() -> String:
 	
-	if (hurt_move):
-		var hurt_state_node = state_nodes[next_hurt_state]
+	var stability = entity.stability
+	
+	if (stability > 50):
+		is_hurt_state = false
+		return NO_STATE
+	elif (stability > 0):
+		is_hurt_state = true
+		return "Hurt"
+	else:
+		is_hurt_state = true
+		is_fall_state = true
+		return "Falling"
+	
+	
+	
+func _resolve_hit_move(next_hit_state: String):
+	if (hurt_move and next_hit_state != NO_STATE):
+		var hurt_state_node = state_nodes[next_hit_state]
 		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
 		if (moved_aspect):
 			moved_aspect.move_impulse = hurt_move
-			hurt_move = Vector2.ZERO
+		hurt_move = Vector2.ZERO
 	
 	
 func _start_blinking(duration = blinker.duration):

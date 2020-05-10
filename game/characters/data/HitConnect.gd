@@ -12,6 +12,7 @@ var receiver: Node2D
 var attack_facing: int
 var attack_damage_type: int
 var attack_damage: float
+var attack_disruption: float
 
 
 func _init(hitbox, attackbox, attack_damage):
@@ -23,3 +24,4 @@ func _init(hitbox, attackbox, attack_damage):
 	self.attack_facing = attacker.facing
 	self.attack_damage_type = attackbox.damage_type
 	self.attack_damage = attack_damage
+	self.attack_disruption = attackbox.disruption
