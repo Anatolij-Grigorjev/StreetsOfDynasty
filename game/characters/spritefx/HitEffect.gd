@@ -4,6 +4,8 @@ class_name HitEffect
 Hit effects sprite that has several effect children 
 which all play to juice the hit
 """
+signal color_flash_hit_received(color, duration)
+
 var Spark = preload("res://characters/spritefx/Spark.tscn")
 var DamageLabel = preload("res://characters/DamageLabel.tscn")
 
@@ -39,7 +41,6 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	)
 	#set_damage requires label in tree
 	_add_at_scene_root(label)
-	
 	label.set_damage(-hit_connect.attack_damage)
 	
 	#hit particles
@@ -47,6 +48,12 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	
 	#hit sound
 	_play_hit_sound()
+	
+	#hit color flash
+	_flash_receiver_color()
+	
+	#feel hit impact
+	_time_hit_impact(hit_connect)
 	
 	#hit screenshake
 	screen_shake.request_screen_shake()
@@ -91,6 +98,23 @@ func _play_hit_sound():
 	sound_player.pitch_scale = rand_range(1 - pitch_scale, 1 + pitch_scale)
 	
 	sound_player.play()
+	
+	
+func _flash_receiver_color():
+	emit_signal("color_flash_hit_received", label_color, 0.1)
+	
+	
+func _time_hit_impact(hit_details: HitConnect):
+	var slowing_damage = clamp(
+		hit_details.attack_damage - C.LOW_IMPACT_ATTACK_DAMAGE, 
+		0, hit_details.attack_damage
+	)
+	var slow_down = 100.0/(100.0 + slowing_damage)
+	if (slow_down < 1.0):
+		var prev_scale = Engine.time_scale
+		Engine.time_scale *= slow_down
+		yield(get_tree().create_timer(0.1 * Engine.time_scale), "timeout")
+		Engine.time_scale = prev_scale
 	
 	
 func _add_at_scene_root(node: Node):

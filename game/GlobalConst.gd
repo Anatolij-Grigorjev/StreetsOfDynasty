@@ -23,3 +23,8 @@ enum CharacterMoveType {
 	MOVE_SLIDE = 0,
 	MOVE_COLLIDE = 1
 }
+
+"""
+Attack damage low enough not to cause impact on timescale
+"""
+const LOW_IMPACT_ATTACK_DAMAGE = 10.0

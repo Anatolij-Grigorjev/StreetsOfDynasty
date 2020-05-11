@@ -41,3 +41,11 @@ func _set_caught(got_caught: bool):
 
 func _to_string():
 	return "[%s]" % name
+
+
+func _on_HitEffect_color_flash_hit_received(color: Color, duration: float):
+	var sprite_node = rig.get_node("Sprite")
+	sprite_node.use_parent_material = false
+	sprite_node.material.set_shader_param("modulate", Color.black)
+	yield(get_tree().create_timer(duration), "timeout")
+	sprite_node.use_parent_material = true

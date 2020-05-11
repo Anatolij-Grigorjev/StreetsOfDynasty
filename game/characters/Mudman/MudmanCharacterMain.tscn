@@ -248,3 +248,5 @@ __meta__ = {
 
 [node name="InvincibilityBlinker" parent="." index="6" instance=ExtResource( 19 )]
 blink_frequency = 5
+[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffect" to="." method="_on_HitEffect_color_flash_hit_received"]
+[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffect" to="." method="_on_HitEffect_color_flash_hit_received"]

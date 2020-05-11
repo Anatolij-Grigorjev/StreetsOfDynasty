@@ -1,7 +1,23 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+render_mode blend_mix;
+uniform vec4 modulate : hint_color;
+
+void fragment() {
+	COLOR = vec4(modulate.rgb, texture(TEXTURE, UV).a * modulate.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/modulate = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 
 [node name="CharacterRigTemplate" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+use_parent_material = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
