@@ -311,7 +311,7 @@ __meta__ = {
 }
 damage_type = 1
 damage_amount = 16.0
-disruption = 20.0
+disruption = 40.0
 target_move = Vector2( -35, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]

@@ -17,7 +17,8 @@ will go to hurting state when the hit is received (rapid recovery),
 with the points expired the character will fall (recovering all)
 """
 export(float) var total_stability: float = 100
-export(float) var stability_recovery_per_sec: float = 10
+export(float) var idle_stability_recovery_per_sec: float = 5
+export(float) var hurt_stability_recovery_per_sec: float = 20
 
 
 var velocity = Vector2()
@@ -56,11 +57,11 @@ func _process(delta: float) -> void:
 	
 func _process_stability_recovery(delta: float):
 	if (stability < total_stability):
-		var recovery_this_frame := stability_recovery_per_sec * delta
+		var recovery_this_frame := idle_stability_recovery_per_sec * delta
 		if (fsm.is_fall_state):
 			recovery_this_frame = total_stability
 		elif (fsm.is_hurt_state):
-			recovery_this_frame *= 3
+			recovery_this_frame = hurt_stability_recovery_per_sec
 		stability = clamp(stability + recovery_this_frame, 0.0, total_stability)
 	
 	

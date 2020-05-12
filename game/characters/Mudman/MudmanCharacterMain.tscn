@@ -46,6 +46,7 @@ bg_color = Color( 0, 0, 0, 1 )
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 move_speed = Vector2( 200, 100 )
+hurt_stability_recovery_per_sec = 10.0
 
 [node name="FSM" parent="." index="0"]
 script = ExtResource( 8 )

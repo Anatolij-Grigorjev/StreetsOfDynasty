@@ -44,15 +44,20 @@ func process_state(delta: float):
 
 func exit_state(next_state: String):
 	.exit_state(next_state)
-	move_tween.stop_all()
-	move_tween.remove_all()
-	current_impulse = Vector2.ZERO
+	_stop_all_movement()
 
 
 func _build_move_tween() -> Tween:
 	var tween = Tween.new()
 	add_child(tween)
 	return tween
+	
+
+func _stop_all_movement():
+	move_tween.stop_all()
+	move_tween.remove_all()
+	current_impulse = Vector2.ZERO
+	move_impulse = Vector2.ZERO
 	
 	
 func _get_move_easing_tween_props() -> Array:
