@@ -6,6 +6,7 @@ Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
 signal damage_received(damage, health, total_health)
+signal died
 
 
 export(Vector2) var move_speed: Vector2 = Vector2(4 * 64, 2 * 64)

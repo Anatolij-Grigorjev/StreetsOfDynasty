@@ -10,6 +10,11 @@ export(Vector2) var corpse_offset = Vector2.ZERO
 onready var state: FiniteState = get_parent()
 	
 	
+func enter_state(prev_state: String):
+	.enter_state(prev_state)
+	entity.emit_signal("died")
+
+	
 func exit_state(next_state: String):
 	.exit_state(next_state)
 	_leave_corpse()
