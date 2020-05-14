@@ -118,8 +118,10 @@ next_state = "Falling"
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 position = Vector2( 0, -75 )
 
-[node name="HealthBar" parent="Body/MudmanCharacterRig" index="2" instance=ExtResource( 9 )]
-position = Vector2( -80, -175 )
+[node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
+position = Vector2( -80.8488, -164.185 )
+
+[node name="HealthBar" parent="Body/MudmanCharacterRig/HealthbarHolder" index="0" instance=ExtResource( 9 )]
 tween_bar_delay = 0.15
 tween_bar_move = 0.25
 

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 """
 Management of health bar as the amount of health in it is adjusted
 """
@@ -21,9 +21,6 @@ func set_total(new_total: float):
 	
 	reduce_tween_bar.max_value = new_total
 	reduce_tween_bar.value = new_total
-	
-	$BarBG.max_value = new_total
-	$BarBG.value = new_total
 	
 	
 func set_new_value(new_value: float):

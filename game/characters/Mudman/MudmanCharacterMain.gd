@@ -11,7 +11,7 @@ onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var current_state_lbl: Label = $CurrentState
 onready var current_position_lbl: Label = $CurrentPosition
 onready var current_stability_lbl: Label = $CurrentStability
-onready var healthbar = $Body/MudmanCharacterRig/HealthBar
+onready var healthbar = $Body/MudmanCharacterRig/HealthbarHolder/HealthBar
 
 
 func _ready():
