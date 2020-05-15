@@ -20,15 +20,18 @@ custom_constants/margin_right = 25
 custom_constants/margin_top = 25
 custom_constants/margin_left = 25
 custom_constants/margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HUDTop" type="HBoxContainer" parent="Margin25"]
+[node name="ScreenParts" type="VBoxContainer" parent="Margin25"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 1255.0
 margin_bottom = 695.0
 
-[node name="RemoteCharacterHealthBar" parent="Margin25/HUDTop" instance=ExtResource( 1 )]
-margin_bottom = 670.0
-rect_min_size = Vector2( 0, 0 )
+[node name="ScreenTop" type="HBoxContainer" parent="Margin25/ScreenParts"]
+margin_right = 1230.0
+margin_bottom = 15.0
 
-[editable path="Margin25/HUDTop/RemoteCharacterHealthBar"]
+[node name="RemoteCharacterHealthBar" parent="Margin25/ScreenParts/ScreenTop" instance=ExtResource( 1 )]
