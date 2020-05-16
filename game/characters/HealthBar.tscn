@@ -4,6 +4,18 @@
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color( 0, 0, 0, 0.333333 )
+shadow_size = 3
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
@@ -38,13 +50,18 @@ shadow_size = 3
 anti_aliasing = false
 
 [node name="HealthBar" type="Panel"]
+margin_right = 150.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 150, 15 )
 custom_styles/panel = SubResource( 6 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BarReduceBG" type="ProgressBar" parent="."]
-margin_right = 150.0
-margin_bottom = 15.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 150, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -58,8 +75,8 @@ __meta__ = {
 }
 
 [node name="MainBar" type="ProgressBar" parent="."]
-margin_right = 150.0
-margin_bottom = 15.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 150, 15 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
