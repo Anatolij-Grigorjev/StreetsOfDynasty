@@ -10,6 +10,7 @@ var post_caught_state = "Falling"
 
 var is_hurt_state = false
 var is_fall_state = false
+var should_die = false
 
 
 func _ready():
@@ -45,7 +46,10 @@ func _get_next_state(delta: float) -> String:
 		_resolve_hit_move(next_hit_state)
 		entity.is_hit = false
 		
-		
+	var next_state = _check_should_die()
+	if (next_state != NO_STATE):
+		return next_state
+	
 	match(state):
 		"Idle":
 			if (was_hit):
@@ -112,11 +116,7 @@ func _get_move_direction() -> Vector2:
 		
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
 	if (health <= 0.0):
-		var hurt_states := [
-			"Hurt", "Falling"
-		]
-		for hurt_state in hurt_states:
-			state_nodes[hurt_state].next_state = "Dying"
+		should_die = true
 		
 		
 		
@@ -126,9 +126,11 @@ func _build_next_hit_receive_state() -> String:
 	
 	if (stability > 50):
 		is_hurt_state = false
+		is_fall_state = false
 		return NO_STATE
 	elif (stability > 0):
 		is_hurt_state = true
+		is_fall_state = false
 		return "Hurt"
 	else:
 		is_hurt_state = true
@@ -148,3 +150,16 @@ func _resolve_hit_move(next_hit_state: String):
 	
 func _start_blinking(duration = blinker.duration):
 	blinker.start(duration)
+	
+	
+func _check_should_die():
+	if (should_die):
+		should_die = false
+		if (state != "Dying"):
+			#should transition to dying
+			return "Dying"
+		else:
+			#already dying, just reset flag
+			return NO_STATE
+	#not dying yet
+	return NO_STATE
