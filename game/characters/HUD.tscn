@@ -32,80 +32,69 @@ margin_bottom = 695.0
 
 [node name="ScreenTop" type="HBoxContainer" parent="Margin25/ScreenParts"]
 margin_right = 1230.0
-margin_bottom = 70.0
+margin_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 15
 
 [node name="Lifebar" type="HBoxContainer" parent="Margin25/ScreenParts/ScreenTop"]
-margin_right = 1230.0
-margin_bottom = 70.0
+margin_right = 817.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 15
+size_flags_stretch_ratio = 2.0
+custom_constants/separation = 5
 
 [node name="Avatar" type="TextureRect" parent="Margin25/ScreenParts/ScreenTop/Lifebar"]
-margin_right = 110.0
-margin_bottom = 70.0
+margin_right = 95.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 5
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RemoteCharacterHealthBar" parent="Margin25/ScreenParts/ScreenTop/Lifebar" instance=ExtResource( 1 )]
-margin_left = 125.0
-margin_right = 1230.0
-margin_bottom = 70.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin25/ScreenParts/ScreenTop/Lifebar"]
+margin_left = 100.0
+margin_right = 817.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
+size_flags_stretch_ratio = 15.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer"]
+margin_right = 717.0
+margin_bottom = 17.0
+size_flags_vertical = 3
+
+[node name="RemoteCharacterHealthBar" parent="Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 21.0
+margin_right = 717.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
 
+[node name="ReferenceRect2" type="ReferenceRect" parent="Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer"]
+margin_top = 42.0
+margin_right = 717.0
+margin_bottom = 60.0
+size_flags_vertical = 3
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Margin25/ScreenParts/ScreenTop"]
+margin_left = 821.0
+margin_right = 1230.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
 [node name="ReferenceRect" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 74.0
-margin_right = 1230.0
-margin_bottom = 144.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect2" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 148.0
-margin_right = 1230.0
-margin_bottom = 218.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect3" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 222.0
-margin_right = 1230.0
-margin_bottom = 292.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect4" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 296.0
-margin_right = 1230.0
-margin_bottom = 366.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect5" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 370.0
-margin_right = 1230.0
-margin_bottom = 440.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect6" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 444.0
-margin_right = 1230.0
-margin_bottom = 514.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect7" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 518.0
-margin_right = 1230.0
-margin_bottom = 588.0
-size_flags_vertical = 3
-
-[node name="ReferenceRect8" type="ReferenceRect" parent="Margin25/ScreenParts"]
-margin_top = 592.0
+margin_top = 64.0
 margin_right = 1230.0
 margin_bottom = 670.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
