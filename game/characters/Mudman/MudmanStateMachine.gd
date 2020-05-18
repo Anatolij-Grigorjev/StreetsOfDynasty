@@ -154,12 +154,14 @@ func _start_blinking(duration = blinker.duration):
 	
 func _check_should_die():
 	if (should_die):
-		should_die = false
-		if (state != "Dying"):
+		if (_can_move_to_dying_state(state)):
+			should_die = false
 			#should transition to dying
 			return "Dying"
-		else:
-			#already dying, just reset flag
-			return NO_STATE
 	#not dying yet
 	return NO_STATE
+
+
+func _can_move_to_dying_state(state: String) -> bool:
+	#only die if not held caught or already dying
+	return state != "Dying" and state != "Caught"
