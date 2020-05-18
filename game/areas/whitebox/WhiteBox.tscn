@@ -122,6 +122,6 @@ position = Vector2( 541.509, 473.445 )
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="RemoteCharacterHealthBar" parent="CanvasLayer/HUD/Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer" index="1"]
-character_node_path = NodePath("../../../../../../../../YSort/MudmanCharacterMain")
+character_node_path = NodePath("../../../../../../../../YSort/YuCharacterMain")
 
 [editable path="CanvasLayer/HUD"]
