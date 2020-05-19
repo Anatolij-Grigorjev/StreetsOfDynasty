@@ -1,7 +1,10 @@
 extends Node
 class_name StateMachine
 """
-Abstract state machine interface
+Abstract state machine interface. A state machine lifecycle can be applied
+to any kind of entity.
+For lifecycles tailored for characters see
+CharacterStateMachineTemplate.gd
 """
 signal state_changed(old_state, new_state)
 

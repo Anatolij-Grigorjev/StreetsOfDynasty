@@ -29,6 +29,7 @@ func _process(delta):
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	current_state_lbl.text = new_state
 	
+	
 func _on_hitbox_hit(hit_connect: HitConnect):
 	._on_hitbox_hit(hit_connect)
 	hit_effects.invoke_hit_effects(hit_connect)

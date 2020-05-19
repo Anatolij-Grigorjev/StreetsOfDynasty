@@ -1,3 +1,17 @@
 {
-	"state_animation": "falling"
+	"state_animation": "falling",
+	"hitboxes_timeline": [
+		{
+			"time": 0.15,
+			"enable": true,
+			"area": "Falling"
+		}
+	],
+	"attackboxes_timeline": [
+		{
+			"time": 0.0,
+			"enable": true,
+			"area": "Falling"
+		}
+	]
 }

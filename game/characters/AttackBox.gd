@@ -54,16 +54,7 @@ process hit on all hitboxes not currently disabled
 func process_attack() -> void:
 	for node in known_hitboxes:
 		var hitbox := node as Hitbox
-		if (
-			#hitbox is enabled
-			not hitbox.shape.disabled
-			#attack is within range
-			and _entity_in_radius(hitbox.owner)
-			#enemy not currently invincible
-			and not hitbox.owner.invincibility
-			#attack didnt already hit recently
-			and not recent_attacks.has(hitbox)
-		):
+		if (_hitbox_can_be_hit(hitbox)):
 			hitbox.process_hit(self)
 			_record_hitbox_recovery(hitbox)
 			
@@ -124,6 +115,19 @@ func _entity_in_radius(hitbox_owner: Node2D) -> bool:
 	print("%s distance to %s: %s" % [attacker_position, receiver_position, distance] )
 	var does_hit = distance <= radius
 	return does_hit
+	
+	
+func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:
+	return (
+		#hitbox is enabled
+		not hitbox.shape.disabled
+		#attack is within range
+		and _entity_in_radius(hitbox.owner)
+		#enemy not currently invincible
+		and not hitbox.owner.invincibility
+		#attack didnt already hit recently
+		and not recent_attacks.has(hitbox)
+	)
 	
 	
 func _to_string():

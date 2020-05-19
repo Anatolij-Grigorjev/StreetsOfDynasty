@@ -1,16 +1,9 @@
-extends StateMachine
+extends CharacterStateMachineTemplate
 
 
 onready var blinker: Node = get_node("../InvincibilityBlinker")
 
 var target: Node2D
-
-var hurt_move: Vector2 = Vector2.ZERO
-var post_caught_state = "Falling"
-
-var is_hurt_state = false
-var is_fall_state = false
-var should_die = false
 
 
 func _ready():
@@ -24,10 +17,6 @@ func set_state(next_state: String):
 	.set_state(next_state)
 	if (is_instance_valid($Logger)):
 		$Logger.info("'{}' -> '{}'", [previous_state, next_state])
-		
-		
-func set_post_caught_state(post_caught_state: String):
-	self.post_caught_state = post_caught_state
 	
 
 func _set_target(new_target: Node2D):

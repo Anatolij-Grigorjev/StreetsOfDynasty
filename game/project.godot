@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://GlobalConst.gd"
 }, {
+"base": "StateMachine",
+"class": "CharacterStateMachineTemplate",
+"language": "GDScript",
+"path": "res://characters/CharacterStateMachineTemplate.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CharacterTemplate",
 "language": "GDScript",
@@ -141,6 +146,7 @@ _global_script_class_icons={
 "AttackStatePhaseAspect": "",
 "AttackTypeHitEffects": "",
 "C": "",
+"CharacterStateMachineTemplate": "",
 "CharacterTemplate": "",
 "DyingStateAspect": "",
 "FallStateAspect": "",
@@ -233,6 +239,7 @@ debug2={
 2d_physics/layer_6="normal_attack"
 2d_physics/layer_7="hurt_attack"
 2d_physics/layer_8="caught_attack"
+2d_physics/layer_9="falling_attack"
 
 [logging]
 

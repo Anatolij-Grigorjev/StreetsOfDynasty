@@ -15,7 +15,7 @@ func _ready():
 
 func _on_hitbox_hit(hit_connect: HitConnect):
 	._on_hitbox_hit(hit_connect)
-	LOG.info("Connected hit: {}!" % hit_connect)
+	LOG.info("Connected hit: {}!", [hit_connect])
 	
 	
 func _on_FSM_state_changed(old_state: String, new_state: String):

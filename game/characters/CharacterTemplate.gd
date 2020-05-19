@@ -29,7 +29,7 @@ var stability := total_stability
 var invincibility := false
 
 
-onready var fsm: StateMachine = $FSM
+onready var fsm: CharacterStateMachineTemplate = $FSM
 onready var body: Node2D = $Body
 onready var hitboxes: AreaGroup = $Body/HitboxGroup
 onready var attackboxes: AreaGroup = $Body/AttackboxGroup
