@@ -21,7 +21,7 @@ func exit_state(next_state: String):
 	entity.queue_free()
 	
 	
-func _leave_corpse():
+func _leave_corpse() -> Node2D:
 	#build
 	var corpse := _build_facing_position_aware_corpse()
 	
@@ -30,6 +30,7 @@ func _leave_corpse():
 	corpses_node.add_child(corpse)
 	
 	Debug.LOG.info("%s leaving corpse at %s", [entity, corpse.global_position])
+	return corpse
 	
 	
 func _build_facing_position_aware_corpse() -> Node2D:
