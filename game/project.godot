@@ -236,10 +236,14 @@ debug2={
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="body_feet"
-2d_physics/layer_6="normal_attack"
-2d_physics/layer_7="hurt_attack"
-2d_physics/layer_8="caught_attack"
-2d_physics/layer_9="falling_attack"
+2d_physics/layer_6="enemy_normal"
+2d_physics/layer_7="enemy_hurt"
+2d_physics/layer_8="enemy_caught"
+2d_physics/layer_9="enemy_falling"
+2d_physics/layer_10="player_normal"
+2d_physics/layer_11="player_hurt"
+2d_physics/layer_12="player_caught"
+2d_physics/layer_13="player_falling"
 
 [logging]
 
