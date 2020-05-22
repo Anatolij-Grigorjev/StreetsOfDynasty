@@ -27,4 +27,4 @@ enum CharacterMoveType {
 """
 Attack damage low enough not to cause impact on timescale
 """
-const LOW_IMPACT_ATTACK_DAMAGE = 10.0
+const LOW_IMPACT_ATTACK_DAMAGE = 1.0

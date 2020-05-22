@@ -86,7 +86,7 @@ static func shape2rect(collider: CollisionShape2D) -> Rect2:
 
 """
 Get the current rectangular overlap of 2 collision polygons that 
-have rectnagle shapes
+have rectangle shapes
 """
 static func get_collision_rects_overlap(
 	collider_a: CollisionShape2D, 
@@ -108,3 +108,11 @@ static func get_node_by_tag(tag: String) -> Node:
 		return nodes[0]
 	else:
 		return null
+		
+
+"""
+Use the current in-scene node to access tree and add 'new_node'
+at scene root
+"""
+static func add_at_scene_root(invoker: Node, new_node: Node):
+	invoker.get_tree().get_root().add_child(new_node)
