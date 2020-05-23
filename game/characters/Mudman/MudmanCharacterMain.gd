@@ -20,6 +20,11 @@ func _ready():
 	
 	connect("damage_received", fsm, "_on_character_damage_received")
 	
+	for hitbox in hitboxes.get_children():
+		var typed_hitbox: Hitbox = hitbox as Hitbox
+		if (is_instance_valid(typed_hitbox)):
+			typed_hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
+	
 
 func _process(delta):
 	current_position_lbl.text = "%3.3f;%3.3f" % [global_position.x, global_position.y]
@@ -28,11 +33,6 @@ func _process(delta):
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	current_state_lbl.text = new_state
-	
-	
-func _on_hitbox_hit(hit_connect: HitConnect):
-	._on_hitbox_hit(hit_connect)
-	hit_effects.invoke_hit_effects(hit_connect)
 	
 	
 func _set_caught(got_caught: bool):
@@ -44,9 +44,9 @@ func _to_string():
 	return "[%s]" % name
 
 
-func _on_HitEffect_color_flash_hit_received(color: Color, duration: float):
+func _on_HitEffect_flash_hit_received(color: Color, duration: float):
 	var sprite_node = rig.get_node("Sprite")
 	sprite_node.use_parent_material = false
-	sprite_node.material.set_shader_param("modulate", Color.black)
+	sprite_node.material.set_shader_param("modulate", color)
 	yield(get_tree().create_timer(duration), "timeout")
 	sprite_node.use_parent_material = true

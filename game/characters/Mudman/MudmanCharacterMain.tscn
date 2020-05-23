@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -13,9 +13,9 @@
 [ext_resource path="res://characters/WalkStateAspect.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/MovedStateAspect.gd" type="Script" id=13]
-[ext_resource path="res://characters/AttackTypeHitEffects.gd" type="Script" id=14]
-[ext_resource path="res://characters/spritefx/BleedingHitEffect.tscn" type="PackedScene" id=15]
-[ext_resource path="res://characters/spritefx/BluntHitEffect.tscn" type="PackedScene" id=16]
+[ext_resource path="res://characters/hit_effects/AttackTypeHitEffects.gd" type="Script" id=14]
+[ext_resource path="res://characters/hit_effects/HitEffects.gd" type="Script" id=15]
+[ext_resource path="res://characters/hit_effects/SparkHitEffect.tscn" type="PackedScene" id=16]
 [ext_resource path="res://characters/DyingStateAspect.gd" type="Script" id=17]
 [ext_resource path="res://characters/Mudman/MudmanCorpse.tscn" type="PackedScene" id=18]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=19]
@@ -23,6 +23,11 @@
 [ext_resource path="res://characters/FallStateAspect.gd" type="Script" id=21]
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=22]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=23]
+[ext_resource path="res://characters/hit_effects/FlashColorHitEffect.tscn" type="PackedScene" id=24]
+[ext_resource path="res://characters/hit_effects/TimeScaleHitEffect.tscn" type="PackedScene" id=25]
+[ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=26]
+[ext_resource path="res://characters/hit_effects/SoundFXHitEffect.tscn" type="PackedScene" id=27]
+[ext_resource path="res://characters/hit_effects/ScreenShakeHitEffect.tscn" type="PackedScene" id=28]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -39,16 +44,16 @@ extents = Vector2( 37.1226, 65.5772 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 37.123, 65 )
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 96.3256, 48.4078 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 96.3256, 48.4078 )
-
 [sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 96.3256, 48.4078 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 96.3256, 48.4078 )
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 63.58, 18.768 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
@@ -143,11 +148,43 @@ tween_bar_move = 0.25
 [node name="AttackTypeHitEffects" type="Node2D" parent="Body/MudmanCharacterRig" index="3"]
 script = ExtResource( 14 )
 
-[node name="BluntHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="0" instance=ExtResource( 16 )]
+[node name="BluntHitEffects" type="Node2D" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="0"]
+script = ExtResource( 15 )
+
+[node name="SparkHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="0" instance=ExtResource( 16 )]
+spark_anim = "blunt"
 label_color = Color( 0.870588, 1, 0.00784314, 1 )
 
-[node name="BleedingHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="1" instance=ExtResource( 15 )]
+[node name="FlashColorHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="1" instance=ExtResource( 24 )]
+flash_color = Color( 0.870588, 1, 0.00784314, 1 )
+
+[node name="TimeScaleHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="2" instance=ExtResource( 25 )]
+timescale_damage_threshold = 0.0
+timescale_duration = 0.2
+
+[node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="3" instance=ExtResource( 27 )]
+HitSoundFx = ExtResource( 26 )
+
+[node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="4" instance=ExtResource( 28 )]
+
+[node name="BleedingHitEffects" type="Node2D" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="1"]
+script = ExtResource( 15 )
+
+[node name="SparkHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="0" instance=ExtResource( 16 )]
+spark_anim = "bleeding"
 label_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+
+[node name="FlashColorHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="1" instance=ExtResource( 24 )]
+flash_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
+
+[node name="TimeScaleHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="2" instance=ExtResource( 25 )]
+timescale_damage_threshold = 10.0
+timescale_duration = 0.2
+
+[node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="3" instance=ExtResource( 27 )]
+HitSoundFx = ExtResource( 26 )
+
+[node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="4" instance=ExtResource( 28 )]
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
@@ -209,7 +246,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Falling" index="0"]
 position = Vector2( -27.6325, -55.254 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="6"]
 script = ExtResource( 10 )
@@ -225,7 +262,7 @@ damage_amount = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/Falling" index="0"]
 position = Vector2( -27.6325, -55.254 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -238,7 +275,7 @@ position = Vector2( 60.676, -103.885 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( -7.462, 12.513 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="CurrentState" type="Label" parent="." index="3"]
 margin_left = -61.6584
@@ -246,7 +283,7 @@ margin_top = -279.002
 margin_right = 38.3416
 margin_bottom = -254.002
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 7 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -264,7 +301,7 @@ margin_top = -305.899
 margin_right = 100.897
 margin_bottom = -280.899
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 7 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -282,7 +319,7 @@ margin_top = -306.313
 margin_right = -0.682648
 margin_bottom = -281.313
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 7 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -296,7 +333,7 @@ __meta__ = {
 
 [node name="InvincibilityBlinker" parent="." index="6" instance=ExtResource( 19 )]
 blink_frequency = 5
-[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffect" to="." method="_on_HitEffect_color_flash_hit_received"]
-[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffect" to="." method="_on_HitEffect_color_flash_hit_received"]
+[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
+[connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 
 [editable path="Body/MudmanCharacterRig"]
