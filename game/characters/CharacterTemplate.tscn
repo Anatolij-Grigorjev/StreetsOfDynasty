@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://characters/AreaGroup.gd" type="Script" id=1]
-[ext_resource path="res://characters/StateMachine.gd" type="Script" id=2]
+[ext_resource path="res://characters/states/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://characters/CharacterTemplate.gd" type="Script" id=3]
 
 [node name="CharacterTemplate" type="KinematicBody2D"]
