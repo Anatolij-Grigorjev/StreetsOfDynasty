@@ -29,7 +29,6 @@
 [ext_resource path="res://characters/hit_effects/SoundFXHitEffect.tscn" type="PackedScene" id=27]
 [ext_resource path="res://characters/hit_effects/ScreenShakeHitEffect.tscn" type="PackedScene" id=28]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
 
@@ -160,8 +159,8 @@ label_color = Color( 0.870588, 1, 0.00784314, 1 )
 flash_color = Color( 0.870588, 1, 0.00784314, 1 )
 
 [node name="TimeScaleHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="2" instance=ExtResource( 25 )]
-timescale_damage_threshold = 0.0
-timescale_duration = 0.2
+timescale_damage_threshold = 10.0
+timescale_duration = 0.11
 
 [node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="3" instance=ExtResource( 27 )]
 HitSoundFx = ExtResource( 26 )
@@ -179,8 +178,8 @@ label_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 flash_color = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 
 [node name="TimeScaleHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="2" instance=ExtResource( 25 )]
-timescale_damage_threshold = 10.0
-timescale_duration = 0.2
+timescale_damage_threshold = 15.0
+timescale_duration = 0.15
 
 [node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="3" instance=ExtResource( 27 )]
 HitSoundFx = ExtResource( 26 )

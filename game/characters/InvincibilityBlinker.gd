@@ -28,6 +28,12 @@ func _ready():
 	])
 
 
+func _on_CharacterTemplate_state_changed(prev_state: String, next_state: String):
+	#character was fallen and is getting up
+	if (prev_state == "Falling" and next_state != "Dying"):
+		start()
+
+
 
 func start(duration = self.duration, frequency = self.blink_frequency):
 	self.duration = duration

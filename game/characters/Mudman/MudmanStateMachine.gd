@@ -1,8 +1,5 @@
 extends CharacterStateMachineTemplate
 
-
-onready var blinker: Node = get_node("../InvincibilityBlinker")
-
 var target: Node2D
 
 
@@ -12,6 +9,7 @@ func _ready():
 	if (get_tree().get_nodes_in_group("Player")):
 		var player = get_tree().get_nodes_in_group("Player")[0]
 		call_deferred("_set_target", player)
+		
 		
 func set_state(next_state: String):
 	.set_state(next_state)
@@ -80,8 +78,6 @@ func _get_next_state(delta: float) -> String:
 			var fall_state = get_state(state) as FiniteState
 			if (not fall_state.is_state_over):
 				return NO_STATE
-			if (fall_state.next_state != "Dying"):
-				_start_blinking(1.0)
 			return fall_state.next_state
 		"Dying":
 			var dying_state = get_state(state) as FiniteState
@@ -135,10 +131,6 @@ func _resolve_hit_move(next_hit_state: String):
 		if (moved_aspect):
 			moved_aspect.move_impulse = hurt_move
 		hurt_move = Vector2.ZERO
-	
-	
-func _start_blinking(duration = blinker.duration):
-	blinker.start(duration)
 	
 	
 func _check_should_die():

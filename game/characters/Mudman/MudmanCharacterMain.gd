@@ -20,10 +20,14 @@ func _ready():
 	
 	connect("damage_received", fsm, "_on_character_damage_received")
 	
+	fsm.connect("state_changed", $InvincibilityBlinker, "_on_CharacterTemplate_state_changed")
+	
 	for hitbox in hitboxes.get_children():
 		var typed_hitbox: Hitbox = hitbox as Hitbox
 		if (is_instance_valid(typed_hitbox)):
 			typed_hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
+			
+	
 	
 
 func _process(delta):
