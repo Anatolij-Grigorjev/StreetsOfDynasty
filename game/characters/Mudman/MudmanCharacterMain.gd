@@ -2,8 +2,6 @@ extends CharacterTemplate
 """
 Main behavior script for Mudman
 """
-var Corpse = preload("res://characters/Mudman/MudmanCharacterRig.tscn")
-
 
 onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
@@ -11,12 +9,14 @@ onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var current_state_lbl: Label = $CurrentState
 onready var current_position_lbl: Label = $CurrentPosition
 onready var current_stability_lbl: Label = $CurrentStability
-onready var healthbar = $Body/MudmanCharacterRig/HealthbarHolder/HealthBar
 
 
 func _ready():
+	
+	var healthbar = $Body/MudmanCharacterRig/HealthbarHolder/HealthBar
 	connect("damage_received", healthbar, "_on_character_damage_received")
 	healthbar.set_total(total_health)
+	
 	
 	connect("damage_received", fsm, "_on_character_damage_received")
 	

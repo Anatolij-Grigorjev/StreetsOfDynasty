@@ -35,6 +35,10 @@ func _process(delta):
 			drawing.duration -= delta
 		if (Utils.get_or_default(drawing, 'duration', 0.0) <= 0.0):
 			draw_q.erase(drawing)
+			
+			
+func get_debug1_pressed() -> bool:
+	return Input.is_action_just_pressed("debug1")
 	
 	
 func _draw():

@@ -27,7 +27,7 @@ func _process(delta):
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
-	var hurting: bool = false
+	var hurting: bool = Debug.get_debug1_pressed()
 	
 	match(state):
 		"Idle":
