@@ -8,8 +8,6 @@ for things like being hurt, moved, caught, killed
 var hurt_move: Vector2 = Vector2.ZERO
 var post_caught_state = NO_STATE
 
-var is_hurt_state = false
-var is_fall_state = false
 var should_die = false
 
 

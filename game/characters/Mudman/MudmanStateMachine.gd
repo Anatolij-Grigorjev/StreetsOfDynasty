@@ -3,6 +3,9 @@ extends CharacterStateMachineTemplate
 var target: Node2D
 
 
+var next_hit_receive_state: String = NO_STATE
+
+
 func _ready():
 	._ready()
 	call_deferred("set_state", "Idle")
@@ -24,12 +27,13 @@ func _set_target(new_target: Node2D):
 func _get_next_state(delta: float) -> String:
 	
 	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
-	var was_hit: bool = entity.is_hit
-	var caught:bool = entity.is_caught
+	
+	var was_hit = false
+	var caught = false
 	
 	var next_hit_state = NO_STATE
 	if (was_hit):
-		next_hit_state = _build_next_hit_receive_state()
+		next_hit_state = _build_next_hit_receive_state(0.0)
 		_resolve_hit_move(next_hit_state)
 		entity.is_hit = false
 		
@@ -104,22 +108,17 @@ func _on_character_damage_received(damage: float, health: float, total_healt: fl
 		should_die = true
 		
 		
+func _on_character_reduce_stability(prev: float, current: float, total: float):
+	next_hit_receive_state = _build_next_hit_receive_state(current)	
 		
-func _build_next_hit_receive_state() -> String:
-	
-	var stability = entity.stability
+		
+func _build_next_hit_receive_state(stability: float) -> String:
 	
 	if (stability > 50):
-		is_hurt_state = false
-		is_fall_state = false
 		return NO_STATE
 	elif (stability > 0):
-		is_hurt_state = true
-		is_fall_state = false
 		return "Hurt"
 	else:
-		is_hurt_state = true
-		is_fall_state = true
 		return "Falling"
 	
 	
