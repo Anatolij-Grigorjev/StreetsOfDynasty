@@ -6,7 +6,9 @@ Accepts lists of exceptions
 """
 export(float) var duration = 2.0
 export(int) var blink_frequency = 2
-export(String) var pre_blink_state = "Falling"
+export(Array, String) var pre_blink_states = [
+	"Falling"
+]
 export(Array, NodePath) var dont_blink_sprites = []  
 
 
@@ -31,7 +33,8 @@ func _ready():
 
 func _on_CharacterTemplate_state_changed(prev_state: String, next_state: String):
 	#character was fallen and is getting up
-	if (prev_state == pre_blink_state and next_state != pre_blink_state):
+	if (prev_state in pre_blink_states 
+		and not (next_state in pre_blink_states)):
 		start()
 
 

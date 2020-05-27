@@ -411,5 +411,5 @@ __meta__ = {
 script = ExtResource( 12 )
 
 [node name="InvincibilityBlinker" parent="." index="6" instance=ExtResource( 18 )]
-pre_blink_state = "HurtLow"
+pre_blink_states = [ "Falling", "HurtLow" ]
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
