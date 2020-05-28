@@ -3,9 +3,6 @@ extends CharacterStateMachineTemplate
 var target: Node2D
 
 
-var next_hit_receive_state: String = NO_STATE
-
-
 func _ready():
 	._ready()
 	call_deferred("set_state", "Idle")
@@ -26,16 +23,20 @@ func _set_target(new_target: Node2D):
 	
 func _get_next_state(delta: float) -> String:
 	
-	var move_direction = Vector2.ZERO#_get_move_direction() if target else Vector2.ZERO
+	var move_direction = Vector2.ZERO
 	
-	var was_hit = false
-	var caught = false
+	var was_hit = got_hit
+	var was_caught = got_caught
 	
-	var next_hit_state = NO_STATE
+	var hit_react_state = NO_STATE
 	if (was_hit):
-		next_hit_state = _build_next_hit_receive_state(0.0)
-		_resolve_hit_move(next_hit_state)
-		entity.is_hit = false
+		hit_react_state = next_hit_react_state
+		next_hit_react_state = NO_STATE
+		
+		_resolve_hit_move(hit_react_move, hit_react_state)
+		hit_react_move = Vector2.ZERO
+		
+		got_hit = false
 		
 	var next_state = _check_should_die()
 	if (next_state != NO_STATE):
@@ -44,16 +45,16 @@ func _get_next_state(delta: float) -> String:
 	match(state):
 		"Idle":
 			if (was_hit):
-				return next_hit_state
-			if(caught):
+				return hit_react_state
+			if(was_caught):
 				return "Caught"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			return NO_STATE
 		"Walk":
 			if (was_hit):
-				return next_hit_state
-			if(caught):
+				return hit_react_state
+			if(was_caught):
 				return "Caught"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
@@ -63,16 +64,16 @@ func _get_next_state(delta: float) -> String:
 			else:
 				return "WaitIdle"
 		"Caught":
-			if (not caught):
+			if (not was_caught):
 				return post_caught_state
 			
 			return NO_STATE
 		"Hurt":
 			#reset hurting if hit again
 			if (was_hit):
-				return next_hit_state
+				return hit_react_state
 			#possible to be caught while hurting
-			if (caught):
+			if (was_caught):
 				return "Caught"
 			var hurt_state = get_state(state) as FiniteState
 			if (not hurt_state.is_state_over):
@@ -93,14 +94,6 @@ func _get_next_state(delta: float) -> String:
 		_:
 			breakpoint
 			return NO_STATE
-
-
-
-func _get_move_direction() -> Vector2:
-	if (is_instance_valid(target)):
-		return entity.global_position.direction_to(target.global_position)
-	else:
-		return Vector2.ZERO
 		
 		
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
@@ -109,7 +102,7 @@ func _on_character_damage_received(damage: float, health: float, total_healt: fl
 		
 		
 func _on_character_reduce_stability(prev: float, current: float, total: float):
-	next_hit_receive_state = _build_next_hit_receive_state(current)	
+	next_hit_react_state = _build_next_hit_receive_state(current)
 		
 		
 func _build_next_hit_receive_state(stability: float) -> String:
@@ -123,13 +116,12 @@ func _build_next_hit_receive_state(stability: float) -> String:
 	
 	
 	
-func _resolve_hit_move(next_hit_state: String):
-	if (hurt_move and next_hit_state != NO_STATE):
-		var hurt_state_node = state_nodes[next_hit_state]
+func _resolve_hit_move(hit_react_move: Vector2, hit_react_state: String):
+	if (hit_react_move and hit_react_state != NO_STATE):
+		var hurt_state_node = state_nodes[hit_react_state]
 		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
 		if (moved_aspect):
-			moved_aspect.move_impulse = hurt_move
-		hurt_move = Vector2.ZERO
+			moved_aspect.move_impulse = hit_react_move
 	
 	
 func _check_should_die():
