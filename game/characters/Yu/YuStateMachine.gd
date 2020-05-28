@@ -45,11 +45,7 @@ func _get_next_state(delta: float) -> String:
 				return "Idle"
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
-			if (entity.catching_hitbox):
-				_prepare_catching_fsm(entity.catching_hitbox)
-				#clear catching
-				entity.catching_hitbox = null
-				return "Catching"
+			#TODO: "Catching"???
 			return NO_STATE
 		"AttackA1":
 			if (hurting):

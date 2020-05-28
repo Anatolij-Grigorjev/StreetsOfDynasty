@@ -2,6 +2,8 @@ extends CharacterTemplate
 """
 Main behavior script for Mudman
 """
+var idle_stability_recovery_per_sec: float = 5
+var hurt_stability_recovery_per_sec: float = 20
 
 onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
@@ -28,7 +30,16 @@ func _ready():
 			typed_hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
 			
 	
-	
+
+func _get_stability_recovery_per_sec() -> float:
+	if (stability > 50):
+		return idle_stability_recovery_per_sec
+	elif (stability > 0):
+		return hurt_stability_recovery_per_sec
+	else:
+		return total_stability
+
+
 
 func _process(delta):
 	current_position_lbl.text = "%3.3f;%3.3f" % [global_position.x, global_position.y]

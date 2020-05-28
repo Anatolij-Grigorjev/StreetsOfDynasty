@@ -21,8 +21,6 @@ will go to hurting state when the hit is received (rapid recovery),
 with the points expired the character will fall (recovering all)
 """
 export(float) var total_stability: float = 100
-export(float) var idle_stability_recovery_per_sec: float = 5
-export(float) var hurt_stability_recovery_per_sec: float = 20
 
 
 var velocity = Vector2()
