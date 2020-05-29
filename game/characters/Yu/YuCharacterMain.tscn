@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -18,6 +18,10 @@
 [ext_resource path="res://characters/states/state_aspects/MovedStateAspect.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=18]
+[ext_resource path="res://characters/live_data/CharacterStabilityLabel.gd" type="Script" id=19]
+[ext_resource path="res://characters/live_data/CharacterPositionLabel.gd" type="Script" id=20]
+[ext_resource path="res://characters/live_data/CharacterDataDisplayLabels.gd" type="Script" id=21]
+[ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -375,41 +379,63 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="CurrentState" type="Label" parent="." index="3"]
-margin_left = -81.5811
-margin_top = -406.772
-margin_right = 18.4189
-margin_bottom = -381.772
-rect_min_size = Vector2( 100, 25 )
-rect_scale = Vector2( 1.5, 1.5 )
-custom_styles/normal = SubResource( 15 )
-text = "<NO_STATE>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="CurrentPosition" type="Label" parent="." index="4"]
-margin_left = -82.1806
-margin_top = -446.337
-margin_right = 17.8194
-margin_bottom = -421.337
-rect_min_size = Vector2( 100, 25 )
-rect_scale = Vector2( 1.5, 1.5 )
-custom_styles/normal = SubResource( 15 )
-text = "<NO_STATE>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="Logger" type="Node" parent="." index="5"]
+[node name="Logger" type="Node" parent="." index="3"]
 script = ExtResource( 12 )
 
-[node name="InvincibilityBlinker" parent="." index="6" instance=ExtResource( 18 )]
+[node name="InvincibilityBlinker" parent="." index="4" instance=ExtResource( 18 )]
 pre_blink_states = [ "Falling", "HurtLow" ]
+
+[node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="5"]
+script = ExtResource( 21 )
+
+[node name="CharacterPositionLabel" type="Label" parent="CharacterDataDisplayLabels" index="0"]
+margin_left = -149.552
+margin_top = -427.967
+margin_right = -49.5517
+margin_bottom = -402.967
+rect_min_size = Vector2( 100, 25 )
+rect_scale = Vector2( 1.5, 1.5 )
+custom_styles/normal = SubResource( 15 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CharacterStabilityLabel" type="Label" parent="CharacterDataDisplayLabels" index="1"]
+margin_left = -1.18565
+margin_top = -429.429
+margin_right = 98.8143
+margin_bottom = -404.429
+rect_min_size = Vector2( 100, 25 )
+rect_scale = Vector2( 1.5, 1.5 )
+custom_styles/normal = SubResource( 15 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CharacterStateLabel" type="Label" parent="CharacterDataDisplayLabels" index="2"]
+margin_left = -72.0798
+margin_top = -390.693
+margin_right = 27.9202
+margin_bottom = -365.693
+rect_min_size = Vector2( 100, 25 )
+rect_scale = Vector2( 1.5, 1.5 )
+custom_styles/normal = SubResource( 15 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]

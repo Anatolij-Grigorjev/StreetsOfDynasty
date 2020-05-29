@@ -33,7 +33,7 @@ func _get_next_state(delta: float) -> String:
 		hit_react_state = next_hit_react_state
 		next_hit_react_state = NO_STATE
 		
-		_resolve_hit_move(hit_react_move, hit_react_state)
+		_apply_hit_react_move(hit_react_move, hit_react_state)
 		hit_react_move = Vector2.ZERO
 		
 		got_hit = false
@@ -115,8 +115,7 @@ func _build_next_hit_receive_state(stability: float) -> String:
 		return "Falling"
 	
 	
-	
-func _resolve_hit_move(hit_react_move: Vector2, hit_react_state: String):
+func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
 	if (hit_react_move and hit_react_state != NO_STATE):
 		var hurt_state_node = state_nodes[hit_react_state]
 		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')

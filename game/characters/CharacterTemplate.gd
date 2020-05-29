@@ -6,7 +6,7 @@ Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
 signal got_hit(hit_connect)
-signal damage_received(damage, health, total_health)
+signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
 signal hit_displaced(displacement)
 signal died
@@ -44,8 +44,13 @@ func _ready() -> void:
 	for hitbox in hitboxes.get_children():
 		var typed_hitbox: Hitbox = hitbox as Hitbox
 		if (is_instance_valid(typed_hitbox)):
-			typed_hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
-			typed_hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
+			_connect_hitbox_signals(typed_hitbox)
+	
+	
+func _connect_hitbox_signals(hitbox: Hitbox):
+	hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
+	hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
+
 	
 	
 func _process(delta: float) -> void:
@@ -87,38 +92,39 @@ func do_movement_slide(velocity: Vector2):
 	
 	
 func _on_hitbox_hit(hit_connect: HitConnect):
-	#character level indicator if a hurt-state is happening
-	#gets reset when a state with a child HurtStateAspect exits
 	emit_signal("got_hit", hit_connect)
-	_handle_reduce_stability(hit_connect)
-	_handle_receive_damage(hit_connect)
-	_handle_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
+	
+	var prev_stability = stability
+	_reduce_stability(hit_connect)
+	emit_signal("stability_reduced", prev_stability, stability, total_stability)
+	
+	_receive_damage(hit_connect)
+	emit_signal("damage_received", hit_connect.attack_damage, health, total_health)
+	
+	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
+	emit_signal("hit_displaced", displacement)
 	
 	
-	
-func _handle_hit_displacement(attackbox: AttackBox, attack_facing: int):
+func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
 		print(
 			"target_move: %s, attacker facing: %s, target facing: %s" % 
 			[attackbox.target_move, attackbox.owner.facing, facing]
 		)
 		var displacement = attackbox.target_move * attack_facing
-		emit_signal("hit_displaced", displacement)
+		return displacement
 		
 		
-func _handle_reduce_stability(hit_connect: HitConnect):
-	var prev_stability = stability
-	stability = prev_stability - hit_connect.attack_disruption
-	emit_signal("stability_reduced", prev_stability, stability, total_stability)
+func _reduce_stability(hit_connect: HitConnect):
+	stability = clamp(stability - hit_connect.attack_disruption, 0, total_stability)
 	
 
-func _handle_receive_damage(hit_connect: HitConnect):
+func _receive_damage(hit_connect: HitConnect):
 	var damage_taken = hit_connect.attack_damage
 	health = clamp(health - damage_taken, 0.0, total_health)
 	Debug.LOG.info("{} Received {} damage, health is {}", [
 		self, damage_taken, health
 	])
-	emit_signal("damage_received", damage_taken, health, total_health)
 
 
 func _on_FSM_state_changed(old_state: String, new_state: String):

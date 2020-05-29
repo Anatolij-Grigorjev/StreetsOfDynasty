@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -28,6 +28,10 @@
 [ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=26]
 [ext_resource path="res://characters/hit_effects/SoundFXHitEffect.tscn" type="PackedScene" id=27]
 [ext_resource path="res://characters/hit_effects/ScreenShakeHitEffect.tscn" type="PackedScene" id=28]
+[ext_resource path="res://characters/live_data/CharacterStabilityLabel.gd" type="Script" id=29]
+[ext_resource path="res://characters/live_data/CharacterPositionLabel.gd" type="Script" id=30]
+[ext_resource path="res://characters/live_data/CharacterDataDisplayLabels.gd" type="Script" id=31]
+[ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=32]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.4063, 87.6463 )
@@ -276,63 +280,69 @@ position = Vector2( 60.676, -103.885 )
 position = Vector2( -7.462, 12.513 )
 shape = SubResource( 8 )
 
-[node name="CurrentState" type="Label" parent="." index="3"]
-margin_left = -61.6584
-margin_top = -279.002
-margin_right = 38.3416
-margin_bottom = -254.002
-rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
-custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
-text = "<NO_STATE>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="CurrentPosition" type="Label" parent="." index="4"]
-margin_left = 0.896629
-margin_top = -305.899
-margin_right = 100.897
-margin_bottom = -280.899
-rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
-custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
-text = "<NO_STATE>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="CurrentStability" type="Label" parent="." index="5"]
-margin_left = -100.683
-margin_top = -306.313
-margin_right = -0.682648
-margin_bottom = -281.313
-rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
-custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
-text = "<NO_STATE>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="InvincibilityBlinker" parent="." index="6" instance=ExtResource( 19 )]
+[node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]
 duration = 1.0
 blink_frequency = 5
+
+[node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="4"]
+script = ExtResource( 31 )
+
+[node name="CharacterPositionLabel" type="Label" parent="CharacterDataDisplayLabels" index="0"]
+margin_left = -98.9305
+margin_top = -288.32
+margin_right = 1.06947
+margin_bottom = -263.32
+rect_min_size = Vector2( 100, 25 )
+custom_styles/normal = SubResource( 9 )
+custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CharacterStabilityLabel" type="Label" parent="CharacterDataDisplayLabels" index="1"]
+margin_left = 0.905502
+margin_top = -288.32
+margin_right = 100.906
+margin_bottom = -263.32
+rect_min_size = Vector2( 100, 25 )
+custom_styles/normal = SubResource( 9 )
+custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="CharacterStateLabel" type="Label" parent="CharacterDataDisplayLabels" index="2"]
+margin_left = -57.6649
+margin_top = -265.69
+margin_right = 42.3351
+margin_bottom = -240.69
+rect_min_size = Vector2( 100, 25 )
+custom_styles/normal = SubResource( 9 )
+custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "<NO_STATE>"
+align = 1
+valign = 1
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 

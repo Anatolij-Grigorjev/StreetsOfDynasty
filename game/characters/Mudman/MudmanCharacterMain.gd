@@ -8,9 +8,6 @@ var hurt_stability_recovery_per_sec: float = 20
 onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
-onready var current_state_lbl: Label = $CurrentState
-onready var current_position_lbl: Label = $CurrentPosition
-onready var current_stability_lbl: Label = $CurrentStability
 
 
 func _ready():
@@ -19,17 +16,17 @@ func _ready():
 	connect("damage_received", healthbar, "_on_character_damage_received")
 	healthbar.set_total(total_health)
 	
+	fsm.connect("state_changed", $InvincibilityBlinker, "_on_CharacterTemplate_state_changed")
 	
 	connect("damage_received", fsm, "_on_character_damage_received")
 	
-	fsm.connect("state_changed", $InvincibilityBlinker, "_on_CharacterTemplate_state_changed")
+
 	
-	for hitbox in hitboxes.get_children():
-		var typed_hitbox: Hitbox = hitbox as Hitbox
-		if (is_instance_valid(typed_hitbox)):
-			typed_hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
-			
-	
+
+func _connect_hitbox_signals(hitbox: Hitbox):
+	._connect_hitbox_signals(hitbox)
+	hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
+
 
 func _get_stability_recovery_per_sec() -> float:
 	if (stability > 50):
@@ -40,14 +37,8 @@ func _get_stability_recovery_per_sec() -> float:
 		return total_stability
 
 
-
-func _process(delta):
-	current_position_lbl.text = "%3.3f;%3.3f" % [global_position.x, global_position.y]
-	current_stability_lbl.text = "ST: %d" % stability
-
-
 func _on_FSM_state_changed(old_state: String, new_state: String):
-	current_state_lbl.text = new_state
+	pass
 	
 	
 func _set_caught(got_caught: bool):
