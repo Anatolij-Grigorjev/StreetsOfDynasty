@@ -9,6 +9,7 @@ signal got_hit(hit_connect)
 signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
 signal hit_displaced(displacement)
+signal got_caught(catcher)
 signal died
 
 
@@ -41,16 +42,11 @@ onready var caught_point: Position2D = $Body/CaughtPoint
 func _ready() -> void:
 	
 	fsm.connect("state_changed", self, "_on_FSM_state_changed")
+	
 	for hitbox in hitboxes.get_children():
-		var typed_hitbox: Hitbox = hitbox as Hitbox
-		if (is_instance_valid(typed_hitbox)):
-			_connect_hitbox_signals(typed_hitbox)
-	
-	
-func _connect_hitbox_signals(hitbox: Hitbox):
-	hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
-	hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
-
+		if (hitbox as Hitbox):
+			hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
+			hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
 	
 	
 func _process(delta: float) -> void:
@@ -103,6 +99,12 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	emit_signal("hit_displaced", displacement)
+	
+	
+func _on_hitbox_catch(caught_hitbox: Hitbox):
+	var character = caught_hitbox.owner as CharacterTemplate
+	if (character):
+		character.emit_signal("got_caught", self)
 	
 	
 func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):

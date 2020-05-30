@@ -103,10 +103,21 @@ func _on_character_damage_received(damage: float, health: float, total_healt: fl
 		
 func _on_character_reduce_stability(prev: float, current: float, total: float):
 	next_hit_react_state = _build_next_hit_receive_state(current)
-		
-		
-func _build_next_hit_receive_state(stability: float) -> String:
 	
+
+func _on_character_got_hit(hit_connect: HitConnect):
+	got_hit = true
+	
+	
+func _on_character_got_caught(catcher: CharacterTemplate):
+	got_caught = true
+	
+
+func _on_character_hit_displaced(displacement: Vector2):
+	hit_react_move = displacement
+
+
+func _build_next_hit_receive_state(stability: float) -> String:
 	if (stability > 50):
 		return NO_STATE
 	elif (stability > 0):

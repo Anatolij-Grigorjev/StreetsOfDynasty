@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=6]
-[ext_resource path="res://characters/states/state_aspects/HurtStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
@@ -20,7 +19,6 @@
 [ext_resource path="res://characters/Mudman/MudmanCorpse.tscn" type="PackedScene" id=18]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=19]
 [ext_resource path="res://characters/Mudman/DyingState.gd" type="Script" id=20]
-[ext_resource path="res://characters/states/state_aspects/FallStateAspect.gd" type="Script" id=21]
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=22]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=23]
 [ext_resource path="res://characters/hit_effects/FlashColorHitEffect.tscn" type="PackedScene" id=24]
@@ -88,10 +86,7 @@ next_state = "Idle"
 state_commit_end_sec = 0.6
 state_length_sec = 0.6
 
-[node name="HurtStateAspect" type="Node" parent="FSM/Hurt" index="0"]
-script = ExtResource( 7 )
-
-[node name="MovedStateAspect" type="Node" parent="FSM/Hurt" index="1"]
+[node name="MovedStateAspect" type="Node" parent="FSM/Hurt" index="0"]
 script = ExtResource( 13 )
 move_easing = 2
 
@@ -106,12 +101,6 @@ state_commit_end_sec = 1.0
 [node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
 script = ExtResource( 13 )
 move_easing = 2
-
-[node name="HurtStateAspect" type="Node" parent="FSM/Falling" index="1"]
-script = ExtResource( 7 )
-
-[node name="FallStateAspect" type="Node" parent="FSM/Falling" index="2"]
-script = ExtResource( 21 )
 
 [node name="Dying" type="Node" parent="FSM" index="4"]
 script = ExtResource( 20 )
