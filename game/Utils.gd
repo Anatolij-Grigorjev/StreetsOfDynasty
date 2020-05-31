@@ -116,3 +116,19 @@ at scene root
 """
 static func add_at_scene_root(invoker: Node, new_node: Node):
 	invoker.get_tree().get_root().add_child(new_node)
+	
+	
+"""
+Format template params of  message, handle both regular and 
+logback-style message params
+"""
+static func format_message(message: String, params: Array) -> String:
+	if (not message):
+		return ""
+	if (not params):
+		return message
+	
+	#handle logback-style messages
+	var internal_template = message.replace("{}", "%s")
+	
+	return internal_template % params

@@ -23,6 +23,7 @@ var draw_q: Array = []
 
 func _ready():
 	LOG = LoggerFactory.instance()
+	LOG.skip_stackframes = 4
 	add_child(LOG)
 	self.z_index = 999
 	
@@ -46,6 +47,18 @@ func get_debug1_pressed() -> bool:
 	return Input.is_action_just_pressed("debug1")
 	
 	
+func log_debug(message: String, params: Array = []):
+	_log_with_available(Logger.LogLevel.DEBUG, message, params)
+	
+
+func log_info(message: String, params: Array = []):
+	_log_with_available(Logger.LogLevel.INFO, message, params)
+	
+
+func log_warn(message: String, params: Array = []):
+	_log_with_available(Logger.LogLevel.WARN, message, params)
+	
+	
 func _draw():
 	for drawing in draw_q:
 		LOG.info("Drawing item {}", [drawing])
@@ -61,3 +74,18 @@ func _draw():
 			_:
 				LOG.warn("Unsupported drawing type {}", drawing.type)
 				breakpoint
+
+
+func _log_with_available(log_level: int, message: String, params: Array):
+	if (is_instance_valid(LOG)):
+		_log_by_logger(log_level, message, params)
+	else:
+		_log_by_print("DEFAULT", message, params)
+
+
+func _log_by_logger(log_level: int, message: String, params: Array):
+	LOG._log_at_level(log_level, message, params)
+	
+	
+func _log_by_print(log_level: String, message: String, params: Array):
+	print("!!! %s: %s", [log_level, Utils.format_message(message, params)])

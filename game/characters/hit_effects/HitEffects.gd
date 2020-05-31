@@ -15,7 +15,7 @@ func _ready():
 		if (hit_effect):
 			hit_effects.append(hit_effect)
 			
-	Debug.LOG.info("{} registered {} hit effects!", [self.name, hit_effects.size()])
+	Debug.log_info("{} registered {} hit effects!", [self.name, hit_effects.size()])
 
 
 func invoke_hit_fx(hit_connect: HitConnect):

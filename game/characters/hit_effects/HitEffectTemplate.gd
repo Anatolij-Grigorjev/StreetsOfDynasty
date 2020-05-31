@@ -5,5 +5,5 @@ Abstract interface for valid hit effects to use when being invoked
 """
 
 func invoke_hit_fx(hit_connect: HitConnect):
-	Debug.LOG.info("perform hit effect!")
+	Debug.log_info("perform hit effect!")
 	breakpoint

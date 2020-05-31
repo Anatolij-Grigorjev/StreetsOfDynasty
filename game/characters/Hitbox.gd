@@ -15,7 +15,7 @@ onready var shape: CollisionPolygon2D = get_child(0)
 
 func _ready():
 	if (collision_mask):
-		Debug.LOG.info("%s can make catch signals on mask %s", [self, collision_mask])
+		Debug.log_info("%s can make catch signals on mask %s", [self, collision_mask])
 		connect("area_entered", self, "_on_area_entered")
 
 

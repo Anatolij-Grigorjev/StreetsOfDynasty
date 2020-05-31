@@ -29,7 +29,7 @@ func _leave_corpse() -> Node2D:
 	var corpses_node = Utils.get_node_by_tag("corpses")
 	corpses_node.add_child(corpse)
 	
-	Debug.LOG.info("%s leaving corpse at %s", [entity, corpse.global_position])
+	Debug.log_info("%s leaving corpse at %s", [entity, corpse.global_position])
 	return corpse
 	
 	

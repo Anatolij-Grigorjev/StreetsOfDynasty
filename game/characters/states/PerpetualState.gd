@@ -116,7 +116,7 @@ func _move_with_state(
 	) / time_divisor
 	var move_method := _get_move_method(move_type)
 	entity.call(move_method, facing_aware_move_impulse)
-	Debug.LOG.info("%s.%s(%s) for %ss", [entity, move_method, facing_aware_move_impulse, move_duration])
+	Debug.log_info("%s.%s(%s) for %ss", [entity, move_method, facing_aware_move_impulse, move_duration])
 	yield(get_tree().create_timer(move_duration), "timeout")
 	entity.call(move_method, Vector2.ZERO)
 	

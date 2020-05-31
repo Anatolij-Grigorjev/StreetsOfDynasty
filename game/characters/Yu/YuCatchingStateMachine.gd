@@ -16,7 +16,7 @@ func _ready():
 
 func set_state(next_state: String):
 	.set_state(next_state)
-	Debug.LOG.info("'{}' -> '{}'", [previous_state, next_state])
+	Debug.log_info("'{}' -> '{}'", [previous_state, next_state])
 	
 	
 func _get_next_state(delta: float) -> String:

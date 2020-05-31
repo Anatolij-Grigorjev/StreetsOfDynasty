@@ -78,7 +78,7 @@ func _process_hitbox_recovery(delta: float):
 		if (recent_attacks[hitbox] <= 0.0):
 			recovered_hitboxes.append(hitbox)
 	for hitbox in recovered_hitboxes:
-		Debug.LOG.info("%s can hit %s", [self, hitbox])
+		Debug.log_info("%s can hit %s", [self, hitbox])
 		recent_attacks.erase(hitbox)
 	
 

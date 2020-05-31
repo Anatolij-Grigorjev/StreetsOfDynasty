@@ -25,7 +25,7 @@ func _ready():
 	for exclude_sprite in dont_blink_sprites:
 		blink_sprites.erase(exclude_sprite)
 	
-	Debug.LOG.info("{} Blinker collected {}(-{}) sprites!", [
+	Debug.log_info("{} Blinker collected {}(-{}) sprites!", [
 		entity,
 		blink_sprites.size(), dont_blink_sprites.size()
 	])

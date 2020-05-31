@@ -54,6 +54,12 @@ Should the name of this logger be resolved only by parent node
 or by using owner of entire hierarchy
 """
 export(NamingScheme) var naming_scheme = NamingScheme.PARENT
+"""
+Number of stackframes to reduce when printing which method invokes the log
+Should help adjusting based on internal logging callstack
+"""
+export(int) var skip_stackframes = 2
+
 
 """
 Log descriptor
@@ -137,7 +143,7 @@ func _log_at_level(level: int, message: String, params: Array) -> void:
 	# frame 1 would be the log level wrapper
 	# frame 2 is then the method that invoked the logging
 	# might have fewer frames if logger tested standalone
-	var stack_frame_idx := min(2, call_stack.size() - 1)
+	var stack_frame_idx := min(skip_stackframes, call_stack.size() - 1)
 	var current_stack_frame : Dictionary = call_stack[stack_frame_idx]
 	var resolved_message: String = _resolve_message_params(message, params)
 	
@@ -166,15 +172,7 @@ func _format_datetime_dict(datetime_dict: Dictionary) -> String:
 
 
 func _resolve_message_params(message: String, params: Array) -> String:
-	if (not message):
-		return ""
-	if (not params):
-		return message
-	
-	#handle logback-style messages
-	var internal_template = message.replace("{}", "%s")
-	
-	return internal_template % params
+	return Utils.format_message(message, params)
 	
 
 func _can_log_at_level(level: int) -> bool:

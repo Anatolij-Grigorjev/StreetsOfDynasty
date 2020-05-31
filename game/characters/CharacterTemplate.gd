@@ -126,7 +126,7 @@ func _reduce_stability(hit_connect: HitConnect):
 func _receive_damage(hit_connect: HitConnect):
 	var damage_taken = hit_connect.attack_damage
 	health = clamp(health - damage_taken, 0.0, total_health)
-	Debug.LOG.info("{} Received {} damage, health is {}", [
+	Debug.log_info("{} Received {} damage, health is {}", [
 		self, damage_taken, health
 	])
 
