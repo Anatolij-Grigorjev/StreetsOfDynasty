@@ -8,6 +8,7 @@ signal next_attack_input_changed(next_attack_input)
 
 
 var next_attack_input: int = C.AttackInputType.NONE
+var has_caught: bool = false
 
 
 func _ready():
@@ -16,8 +17,8 @@ func _ready():
 
 func set_state(next_state: String):
 	.set_state(next_state)
-	if (entity and is_instance_valid(entity.LOG)):
-		entity.LOG.info("'{}' -> '{}'", [previous_state, next_state])
+	if (is_instance_valid(Debug.LOG)):
+		Debug.LOG.info("'{}' -> '{}'", [previous_state, next_state])
 		
 		
 func _process(delta):
@@ -28,6 +29,9 @@ func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
 	var hurting: bool = Debug.get_debug1_pressed()
+	
+	var is_catching = has_caught
+	has_caught = false
 	
 	match(state):
 		"Idle":
@@ -45,7 +49,8 @@ func _get_next_state(delta: float) -> String:
 				return "Idle"
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
-			#TODO: "Catching"???
+			if (is_catching):
+				return "Catching"
 			return NO_STATE
 		"AttackA1":
 			if (hurting):
@@ -120,9 +125,15 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		emit_signal("next_attack_input_changed", next_attack_input)
 
 
-func _prepare_catching_fsm(caught_hitbox: Hitbox):
-	var state_node = get_state("Catching") as StateMachineState
-	state_node.sub_fsm.caught_character = caught_hitbox.owner
+func _on_character_caught_character(caught: CharacterTemplate):
+	if (_can_start_catching()):
+		var catching_fsm = $Catching/FSM
+		catching_fsm.caught_character = caught
+		has_caught = true
+		
+
+func _can_start_catching() -> bool:
+	return state == "Walking" || state == "Idle"
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

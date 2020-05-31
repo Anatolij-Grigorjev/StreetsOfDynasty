@@ -13,8 +13,8 @@ func _ready():
 		
 func set_state(next_state: String):
 	.set_state(next_state)
-	if (is_instance_valid($Logger)):
-		$Logger.info("'{}' -> '{}'", [previous_state, next_state])
+	if (is_instance_valid(Debug.LOG)):
+		Debug.LOG.info("'{}' -> '{}'", [previous_state, next_state])
 	
 
 func _set_target(new_target: Node2D):

@@ -10,6 +10,7 @@ signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
 signal hit_displaced(displacement)
 signal got_caught(catcher)
+signal caught_character(caught)
 signal died
 
 
@@ -105,6 +106,7 @@ func _on_hitbox_catch(caught_hitbox: Hitbox):
 	var character = caught_hitbox.owner as CharacterTemplate
 	if (character):
 		character.emit_signal("got_caught", self)
+		emit_signal("caught_character", character)
 	
 	
 func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):

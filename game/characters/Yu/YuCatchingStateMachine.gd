@@ -16,8 +16,7 @@ func _ready():
 
 func set_state(next_state: String):
 	.set_state(next_state)
-	if (entity and is_instance_valid(entity.LOG)):
-		entity.LOG.info("'{}' -> '{}'", [previous_state, next_state])
+	Debug.LOG.info("'{}' -> '{}'", [previous_state, next_state])
 	
 	
 func _get_next_state(delta: float) -> String:
@@ -54,7 +53,6 @@ set caught character context for all substates
 """
 func _set_caught_character(character: CharacterTemplate):
 	caught_character = character
-	caught_character.is_caught = true
 	_align_caught_catch_points()
 
 

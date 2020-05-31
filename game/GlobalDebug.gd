@@ -3,16 +3,21 @@ extends Node2D
 This class will provde global drawable debug facilities
 for any in the project
 """
-var LoggerFactory = preload("res://Logger.tscn")
 
 """
 Global logging facility for classes
+"""
+var LoggerFactory = preload("res://Logger.tscn")
+var LOG: Logger
+
+
+"""
+Draw shape constants allowed for basic debug shapes onscreen
 """
 const DRAW_TYPE_LINE = 'line'
 const DRAW_TYPE_CIRCLE = 'circle'
 
 
-var LOG: Logger
 
 var draw_q: Array = []
 
