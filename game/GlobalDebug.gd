@@ -80,7 +80,7 @@ func _log_with_available(log_level: int, message: String, params: Array):
 	if (is_instance_valid(LOG)):
 		_log_by_logger(log_level, message, params)
 	else:
-		_log_by_print("DEFAULT", message, params)
+		_log_by_print("<INIT>", message, params)
 
 
 func _log_by_logger(log_level: int, message: String, params: Array):
@@ -88,4 +88,4 @@ func _log_by_logger(log_level: int, message: String, params: Array):
 	
 	
 func _log_by_print(log_level: String, message: String, params: Array):
-	print("!!! %s: %s", [log_level, Utils.format_message(message, params)])
+	print("%s: %s" % [log_level, Utils.format_message(message, params)])

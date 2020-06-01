@@ -17,7 +17,7 @@ func _ready():
 
 func set_state(next_state: String):
 	.set_state(next_state)
-	Debug.log_info("'{}' -> '{}'", [previous_state, next_state])
+	Debug.log_info("{}: '{}' -> '{}'", [owner, previous_state, next_state])
 		
 		
 func _process(delta):
@@ -81,7 +81,8 @@ func _get_next_state(delta: float) -> String:
 			var catching_state = state_nodes[state] as StateMachineState
 			if (not catching_state.sub_fsm_over):
 				return NO_STATE
-			
+			#reset sub fsm state after read
+			catching_state.sub_fsm_over = false
 			return catching_state.next_parent_state
 		"HurtLow":
 			var hurt_state = state_nodes[state] as FiniteState
@@ -132,7 +133,7 @@ func _on_character_caught_character(caught: CharacterTemplate):
 		
 
 func _can_start_catching() -> bool:
-	return state == "Walking" || state == "Idle"
+	return state == "Walk" || state == "Idle"
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

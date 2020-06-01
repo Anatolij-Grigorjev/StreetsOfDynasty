@@ -40,7 +40,7 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 				
 			_end_sub_fsm()
-			caught_character.set_post_caught_state("Hurt")
+			caught_character.emit_signal("got_released", "Hurt")
 			parent_state.next_parent_state = "AttackA2"
 			return finite_state.next_state
 		_:
@@ -75,5 +75,4 @@ func _get_attack_input() -> int:
 	
 	
 func _end_sub_fsm():
-	caught_character.is_caught = false
 	parent_state.sub_fsm_over = true

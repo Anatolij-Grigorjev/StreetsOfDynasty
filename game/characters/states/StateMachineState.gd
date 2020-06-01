@@ -7,7 +7,7 @@ Distinct from having a state with composite state aspects
 export(String) var initial_state := StateMachine.NO_STATE
 export(String) var next_parent_state := "Idle"
 
-onready var sub_fsm: StateMachine = get_node("FSM")
+onready var sub_fsm: StateMachine = $FSM
 
 """
 set by sub FSM to exit this state

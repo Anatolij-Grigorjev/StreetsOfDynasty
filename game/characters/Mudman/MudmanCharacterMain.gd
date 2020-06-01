@@ -22,6 +22,7 @@ func _ready():
 	connect("got_hit", fsm, "_on_character_got_hit")
 	connect("hit_displaced", fsm, "_on_character_hit_displaced")
 	connect("got_caught", fsm, "_on_character_got_caught")
+	connect("got_released", fsm, "_on_character_got_released")
 	
 	
 	var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
@@ -44,7 +45,7 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 
 
 func _to_string():
-	return "[%s]" % name
+	return name
 
 
 func _on_HitEffect_flash_hit_received(color: Color, duration: float):

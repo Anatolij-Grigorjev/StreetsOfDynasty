@@ -13,7 +13,7 @@ func _ready():
 		
 func set_state(next_state: String):
 	.set_state(next_state)
-	Debug.log_info("'{}' -> '{}'", [previous_state, next_state])
+	Debug.log_info("{}: '{}' -> '{}'", [owner, previous_state, next_state])
 	
 
 func _set_target(new_target: Node2D):
@@ -26,6 +26,7 @@ func _get_next_state(delta: float) -> String:
 	
 	var was_hit = got_hit
 	var was_caught = got_caught
+	var was_released = got_released
 	
 	var hit_react_state = NO_STATE
 	if (was_hit):
@@ -63,8 +64,9 @@ func _get_next_state(delta: float) -> String:
 			else:
 				return "WaitIdle"
 		"Caught":
-			if (not was_caught):
-				return post_caught_state
+			if (was_released):
+				var state_node: PerpetualState = state_nodes[state]
+				return state_node.next_state
 			
 			return NO_STATE
 		"Hurt":
@@ -110,6 +112,12 @@ func _on_character_got_hit(hit_connect: HitConnect):
 	
 func _on_character_got_caught(catcher: CharacterTemplate):
 	got_caught = true
+	
+	
+func _on_character_got_released(post_caught_state: String):
+	got_released = true
+	var caught_state_node = state_nodes["Caught"]
+	caught_state_node.next_state = post_caught_state
 	
 
 func _on_character_hit_displaced(displacement: Vector2):
