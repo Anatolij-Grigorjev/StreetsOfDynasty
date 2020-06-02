@@ -8,7 +8,7 @@ signal next_attack_input_changed(next_attack_input)
 
 
 var next_attack_input: int = C.AttackInputType.NONE
-var has_caught: bool = false
+var has_caught := SingleReadVar.new(false)
 
 
 func _ready():
@@ -29,8 +29,7 @@ func _get_next_state(delta: float) -> String:
 	var attack_input: int = _get_attack_input()
 	var hurting: bool = Debug.get_debug1_pressed()
 	
-	var is_catching = has_caught
-	has_caught = false
+	var is_catching = has_caught.read_and_reset()
 	
 	match(state):
 		"Idle":
@@ -129,7 +128,7 @@ func _on_character_caught_character(caught: CharacterTemplate):
 	if (_can_start_catching()):
 		var catching_fsm = $Catching/FSM
 		catching_fsm.caught_character = caught
-		has_caught = true
+		has_caught.current_value = true
 		
 
 func _can_start_catching() -> bool:

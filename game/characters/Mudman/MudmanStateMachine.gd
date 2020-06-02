@@ -24,19 +24,17 @@ func _get_next_state(delta: float) -> String:
 	
 	var move_direction = Vector2.ZERO
 	
-	var was_hit = got_hit
-	var was_caught = got_caught
-	var was_released = got_released
+	var was_hit = got_hit.read_and_reset()
+	var was_caught = got_caught.read_and_reset()
+	var was_released = got_released.read_and_reset()
 	
 	var hit_react_state = NO_STATE
 	if (was_hit):
-		hit_react_state = next_hit_react_state
-		next_hit_react_state = NO_STATE
-		
-		_apply_hit_react_move(hit_react_move, hit_react_state)
-		hit_react_move = Vector2.ZERO
-		
-		got_hit = false
+		hit_react_state = next_hit_react_state.read_and_reset()		
+		_apply_hit_react_move(
+			hit_react_move.read_and_reset(), 
+			hit_react_state
+		)
 		
 	var next_state = _check_got_killed()
 	if (next_state != NO_STATE):
@@ -99,29 +97,29 @@ func _get_next_state(delta: float) -> String:
 		
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
 	if (health <= 0.0):
-		got_killed = true
+		got_killed.current_value = true
 		
 		
 func _on_character_reduce_stability(prev: float, current: float, total: float):
-	next_hit_react_state = _build_next_hit_receive_state(current)
+	next_hit_react_state.current_value = _build_next_hit_receive_state(current)
 	
 
 func _on_character_got_hit(hit_connect: HitConnect):
-	got_hit = true
+	got_hit.current_value = true
 	
 	
 func _on_character_got_caught(catcher: CharacterTemplate):
-	got_caught = true
+	got_caught.current_value = true
 	
 	
 func _on_character_got_released(post_caught_state: String):
-	got_released = true
+	got_released.current_value = true
 	var caught_state_node = state_nodes["Caught"]
 	caught_state_node.next_state = post_caught_state
 	
 
 func _on_character_hit_displaced(displacement: Vector2):
-	hit_react_move = displacement
+	hit_react_move.current_value = displacement
 
 
 func _build_next_hit_receive_state(stability: float) -> String:
@@ -142,11 +140,10 @@ func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
 	
 	
 func _check_got_killed():
-	if (got_killed):
-		if (_can_move_to_dying_state(state)):
-			got_killed = false
-			#should transition to dying
-			return "Dying"
+	if (_can_move_to_dying_state(state) 
+		and got_killed.read_and_reset()):
+		#should transition to dying
+		return "Dying"
 	#not dying yet
 	return NO_STATE
 

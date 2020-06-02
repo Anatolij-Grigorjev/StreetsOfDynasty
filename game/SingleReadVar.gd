@@ -26,6 +26,6 @@ func peek():
 Read current value, mutating back to stable state
 """
 func read_and_reset():
-	var read_val = self.current_value
+	var read_val = current_value
 	self.current_value = stable_value
 	return read_val
