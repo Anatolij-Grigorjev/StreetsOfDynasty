@@ -38,7 +38,7 @@ func _get_next_state(delta: float) -> String:
 		
 		got_hit = false
 		
-	var next_state = _check_should_die()
+	var next_state = _check_got_killed()
 	if (next_state != NO_STATE):
 		return next_state
 	
@@ -99,7 +99,7 @@ func _get_next_state(delta: float) -> String:
 		
 func _on_character_damage_received(damage: float, health: float, total_healt: float):
 	if (health <= 0.0):
-		should_die = true
+		got_killed = true
 		
 		
 func _on_character_reduce_stability(prev: float, current: float, total: float):
@@ -141,10 +141,10 @@ func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
 			moved_aspect.move_impulse = hit_react_move
 	
 	
-func _check_should_die():
-	if (should_die):
+func _check_got_killed():
+	if (got_killed):
 		if (_can_move_to_dying_state(state)):
-			should_die = false
+			got_killed = false
 			#should transition to dying
 			return "Dying"
 	#not dying yet

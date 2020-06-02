@@ -7,7 +7,7 @@ for things like being hurt, moved, caught, killed
 
 var hit_react_move: Vector2 = Vector2.ZERO
 
-var should_die = false
+var got_killed: bool = false
 var got_hit: bool = false
 var got_caught: bool = false
 var got_released: bool = false
