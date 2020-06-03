@@ -251,6 +251,7 @@ collision_layer = 0
 collision_mask = 96
 script = ExtResource( 23 )
 damage_amount = 20.0
+disruption = 60.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/Falling" index="0"]
 position = Vector2( -27.6325, -55.254 )

@@ -11,9 +11,8 @@ func invoke_hit_fx(hit_connect: HitConnect):
 		return
 	var slow_down = 100.0/(100.0 + hit_connect.attack_damage)
 	if (slow_down < 1.0):
-		var prev_scale = Engine.time_scale
 		Engine.time_scale *= slow_down
 		#duration here is not scaled by slowdown
 		#this way the impact is felt harder for bigger slowdown
 		yield(get_tree().create_timer(timescale_duration), "timeout")
-		Engine.time_scale = prev_scale
+		Engine.time_scale = 1.0

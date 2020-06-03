@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://FPSLabel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="FPSLabel" type="Label"]
+margin_right = 145.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 150, 60 )
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0.870588, 1, 0.00784314, 1 )
+text = "24.567 FPS"
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

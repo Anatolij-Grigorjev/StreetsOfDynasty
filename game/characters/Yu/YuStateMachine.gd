@@ -2,11 +2,6 @@ extends CharacterStateMachineTemplate
 """
 Yu main state machine
 """
-
-
-signal next_attack_input_changed(next_attack_input)
-
-
 var next_attack_input: int = C.AttackInputType.NONE
 var has_caught := SingleReadVar.new(false)
 
@@ -121,7 +116,6 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		and attack_input != C.AttackInputType.NONE
 	):
 		next_attack_input = attack_input
-		emit_signal("next_attack_input_changed", next_attack_input)
 
 
 func _on_character_caught_character(caught: CharacterTemplate):
