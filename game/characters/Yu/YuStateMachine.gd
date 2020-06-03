@@ -132,7 +132,7 @@ func _on_character_caught_character(caught: CharacterTemplate):
 		
 
 func _can_start_catching() -> bool:
-	return state == "Walk" || state == "Idle"
+	return state == "Walk"
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:
