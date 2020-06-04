@@ -2,5 +2,7 @@
 
 [ext_resource path="res://characters/hit_effects/TimeScaleHitEffect.gd" type="Script" id=1]
 
-[node name="TimeScaleHitEffect" type="Node2D"]
+[node name="TimeScaleHitEffect" type="Node2D" groups=[
+"timescalers",
+]]
 script = ExtResource( 1 )
