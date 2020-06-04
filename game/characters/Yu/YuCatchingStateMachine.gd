@@ -39,9 +39,9 @@ func _get_next_state(delta: float) -> String:
 			if (not finite_state.is_state_over):
 				return NO_STATE
 				
-			_end_sub_fsm()
 			caught_character.emit_signal("got_released", "Hurt")
 			parent_state.next_parent_state = "AttackA2"
+			_end_sub_fsm()
 			return finite_state.next_state
 		_:
 			breakpoint
@@ -52,6 +52,9 @@ func _get_next_state(delta: float) -> String:
 set caught character context for all substates
 """
 func _set_caught_character(character: CharacterTemplate):
+	#had somebody also caught
+	if (is_instance_valid(caught_character)):
+		caught_character.emit_signal("got_released", "Idle")
 	caught_character = character
 	_align_caught_catch_points()
 
@@ -76,3 +79,4 @@ func _get_attack_input() -> int:
 	
 func _end_sub_fsm():
 	parent_state.sub_fsm_over = true
+	caught_character = null

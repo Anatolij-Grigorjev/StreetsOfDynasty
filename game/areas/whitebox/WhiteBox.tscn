@@ -118,7 +118,7 @@ position = Vector2( 541.509, 473.445 )
 position = Vector2( 453.104, 381.154 )
 
 [node name="MudmanCharacterMain3" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 440.475, 511.333 )
+position = Vector2( 542.075, 472.018 )
 
 [node name="MudmanCharacterMain4" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 509.45, 417.099 )
