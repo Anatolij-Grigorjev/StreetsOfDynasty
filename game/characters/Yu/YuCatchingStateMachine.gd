@@ -78,5 +78,5 @@ func _get_attack_input() -> int:
 	
 	
 func _end_sub_fsm():
-	parent_state.sub_fsm_over = true
 	caught_character = null
+	parent_state.sub_fsm_over = true

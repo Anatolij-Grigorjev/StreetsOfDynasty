@@ -13,7 +13,6 @@ func _ready():
 	connect("got_hit", fsm, "_on_character_got_hit")
 	connect("hit_displaced", fsm, "_on_character_hit_displaced")
 	connect("got_caught", fsm, "_on_character_got_caught")
-	connect("caught_character", fsm, "_on_character_caught_character")
 	
 
 func _on_hitbox_hit(hit_connect: HitConnect):

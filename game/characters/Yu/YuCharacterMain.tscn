@@ -439,3 +439,4 @@ __meta__ = {
 "_editor_description_": ""
 }
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
+[connection signal="hitbox_catch" from="Body/HitboxGroup/Walk" to="FSM" method="_on_Walk_hitbox_catch"]

@@ -91,7 +91,7 @@ func _process(delta):
 	var hit_dict := _get_raycast_checks_hit_dict()
 	#use hit position to move there
 	if (_is_hit_position_valid(hit_dict)):
-		print("RAYCAST: got valid hit info %s" % hit_dict)
+		Debug.log_debug("RAYCAST: got valid hit info %s" % hit_dict)
 		_move_towards_hit_position(hit_dict.collider.global_position)
 		#disable physics to stop further checking
 		set_process(false)

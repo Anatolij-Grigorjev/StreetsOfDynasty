@@ -48,7 +48,6 @@ func _ready() -> void:
 	for hitbox in hitboxes.get_children():
 		if (hitbox as Hitbox):
 			hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
-			hitbox.connect("hitbox_catch", self, "_on_hitbox_catch")
 	
 	
 func _process(delta: float) -> void:
@@ -102,12 +101,6 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	emit_signal("hit_displaced", displacement)
 	
-	
-func _on_hitbox_catch(caught_hitbox: Hitbox):
-	var character = caught_hitbox.owner as CharacterTemplate
-	if (character):
-		character.emit_signal("got_caught", self)
-		emit_signal("caught_character", character)
 	
 	
 func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):

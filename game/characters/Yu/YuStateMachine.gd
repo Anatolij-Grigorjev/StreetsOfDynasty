@@ -118,15 +118,23 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		next_attack_input = attack_input
 
 
-func _on_character_caught_character(caught: CharacterTemplate):
-	if (_can_start_catching()):
-		var catching_fsm = $Catching/FSM
-		catching_fsm.caught_character = caught
+func _on_Walk_hitbox_catch(caught_hitbox: Hitbox):
+	var caught_character = caught_hitbox.owner as CharacterTemplate
+	if (not is_instance_valid(caught_character)):
+		return 
+	var catching_fsm = $Catching/FSM
+	if (_can_start_catching(catching_fsm)):
+		catching_fsm.caught_character = caught_character
 		has_caught.current_value = true
+		caught_character.emit_signal("got_caught", self)
 		
 
-func _can_start_catching() -> bool:
-	return state == "Walk"
+func _can_start_catching(catching_fsm: StateMachine) -> bool:
+	return (
+		state == "Walk" 
+		and 
+		not is_instance_valid(catching_fsm.caught_character)
+	)
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:
