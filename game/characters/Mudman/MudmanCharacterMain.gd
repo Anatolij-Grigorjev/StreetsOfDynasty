@@ -7,6 +7,7 @@ var hurt_stability_recovery_per_sec: float = 20
 
 onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
+onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
 
 
 func _ready():
@@ -23,12 +24,7 @@ func _ready():
 	connect("hit_displaced", fsm, "_on_character_hit_displaced")
 	connect("got_caught", fsm, "_on_character_got_caught")
 	connect("got_released", fsm, "_on_character_got_released")
-	
-	
-	var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
-	for hitbox in hitboxes.get_children():
-		if (hitbox as Hitbox):
-			hitbox.connect("hitbox_hit", hit_effects, "invoke_hit_effects")
+
 	
 
 func _get_stability_recovery_per_sec() -> float:
@@ -54,3 +50,14 @@ func _on_HitEffect_flash_hit_received(color: Color, duration: float):
 	sprite_node.material.set_shader_param("modulate", color)
 	yield(get_tree().create_timer(duration), "timeout")
 	sprite_node.use_parent_material = true
+	
+	
+func _on_hitbox_hit(hit_connect: HitConnect):
+	._on_hitbox_hit(hit_connect)
+	
+	var invoke_effects: Array = _get_invoke_effects()
+	hit_effects.invoke_hit_effects(hit_connect, invoke_effects)
+
+
+func _get_invoke_effects() -> Array:
+	return []

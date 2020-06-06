@@ -20,11 +20,11 @@ func _ready():
 			hit_effects.append(child)
 	
 	
-func invoke_hit_effects(hit_connect: HitConnect):
+func invoke_hit_effects(hit_connect: HitConnect, invoke_named: Array = []):
 	var effect_idx = damage_type_effect_idx_map[hit_connect.attack_damage_type]
 	var hit_effect = hit_effects[effect_idx] as HitEffects
 	if (hit_effect):
-		hit_effect.invoke_hit_fx(hit_connect)
+		hit_effect.invoke_hit_fx(hit_connect, invoke_named)
 	else:
-		print("No hit effects found for idx %s in effects array %s" % [effect_idx, hit_effects])
+		Debug.log_warn("No hit effects found for idx {} in effects array {}", [effect_idx, hit_effects])
 		breakpoint

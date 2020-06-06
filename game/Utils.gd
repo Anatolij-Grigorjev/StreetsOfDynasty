@@ -132,3 +132,18 @@ static func format_message(message: String, params: Array) -> String:
 	var internal_template = message.replace("{}", "%s")
 	
 	return internal_template % params
+	
+	
+"""
+Join all array members into a single string using 
+their string representation.
+Empty string returned for empty inputs. never null
+"""
+static func join_to_string(elems: Array) -> String:
+	if (elems == null or elems.empty()):
+		return ""
+	var cont_string: String = ""
+	for elem in elems:
+		cont_string += ("%s" % elem)
+	
+	return cont_string
