@@ -57,7 +57,7 @@ extents = Vector2( 201.246, 46.767 )
 extents = Vector2( 138.288, 44.0404 )
 
 [sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 40.1046, 129.494 )
+extents = Vector2( 67.1864, 96.5775 )
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 138.288, 44 )
@@ -173,6 +173,7 @@ state_length_sec = 0.8
 position = Vector2( 0, -150 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
+visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
@@ -313,6 +314,7 @@ script = ExtResource( 8 )
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup" index="0"]
+visible = false
 collision_layer = 0
 collision_mask = 32
 script = ExtResource( 10 )
@@ -332,6 +334,7 @@ __meta__ = {
 }
 
 [node name="AttackA2" type="Area2D" parent="Body/AttackboxGroup" index="1"]
+visible = false
 collision_layer = 0
 collision_mask = 96
 script = ExtResource( 10 )
@@ -350,10 +353,11 @@ script = ExtResource( 10 )
 damage_amount = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/CatchAttack1" index="0"]
-position = Vector2( 105.77, -141.765 )
+position = Vector2( 115.78, -189.433 )
 shape = SubResource( 12 )
 
 [node name="CatchAttack2" type="Area2D" parent="Body/AttackboxGroup" index="3"]
+visible = false
 collision_layer = 0
 collision_mask = 128
 script = ExtResource( 10 )
