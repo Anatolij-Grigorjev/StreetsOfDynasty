@@ -42,8 +42,6 @@ func _get_next_state(delta: float) -> String:
 				return "Idle"
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
-			if (is_catching):
-				return "Catching"
 			return NO_STATE
 		"AttackA1":
 			if (hurting):
@@ -118,7 +116,7 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		next_attack_input = attack_input
 
 
-func _on_Walk_hitbox_catch(caught_hitbox: Hitbox):
+func _on_Hitbox_catch(caught_hitbox: Hitbox):
 	var caught_character = caught_hitbox.owner as CharacterTemplate
 	if (not is_instance_valid(caught_character)):
 		return 
