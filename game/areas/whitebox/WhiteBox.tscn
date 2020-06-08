@@ -110,27 +110,11 @@ shape = SubResource( 4 )
 [node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 260.245, 449.422 )
 scale = Vector2( 0.7, 0.7 )
+collision_mask = 1
 
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 503.695, 431.048 )
-
-[node name="MudmanCharacterMain2" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 445.083, 330.736 )
-
-[node name="MudmanCharacterMain3" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 575.305, 533.895 )
-
-[node name="MudmanCharacterMain4" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 392.571, 473.247 )
-
-[node name="MudmanCharacterMain5" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 637.787, 319.7 )
-
-[node name="MudmanCharacterMain6" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 739.77, 537.415 )
-
-[node name="MudmanCharacterMain7" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 711.123, 389.598 )
+collision_mask = 1
 
 [node name="Corpses" type="YSort" parent="YSort" groups=[
 "corpses",

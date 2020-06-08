@@ -173,7 +173,6 @@ state_length_sec = 0.8
 position = Vector2( 0, -150 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
-visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
@@ -339,8 +338,7 @@ collision_layer = 0
 collision_mask = 96
 script = ExtResource( 10 )
 damage_amount = 20.0
-disruption = 80.0
-target_move = Vector2( 150, 0 )
+disruption = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
 position = Vector2( 147.093, -196.714 )
