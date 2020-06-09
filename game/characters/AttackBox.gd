@@ -38,7 +38,7 @@ var known_hitboxes = []
 onready var shape: CollisionPolygon2D = get_child(0)
 
 
-var recent_attacks: Dictionary = {}
+var recent_attacks: RecentItemsDictionary = RecentItemsDictionary.new(attack_recovery)
 
 
 func _ready():
@@ -61,25 +61,11 @@ func process_attack() -> void:
 			
 
 func _record_hitbox_recovery(hitbox: Hitbox):
-	recent_attacks[hitbox] = attack_recovery
+	recent_attacks.add_item(hitbox.owner)
 
 
 func _process(delta: float):
-	_process_hitbox_recovery(delta)
-	
-
-"""
-Recover attack cooldowns for hitboxes
-"""
-func _process_hitbox_recovery(delta: float):
-	var recovered_hitboxes = []
-	for hitbox in recent_attacks:
-		recent_attacks[hitbox] -= delta
-		if (recent_attacks[hitbox] <= 0.0):
-			recovered_hitboxes.append(hitbox)
-	for hitbox in recovered_hitboxes:
-		Debug.log_info("%s can hit %s", [self, hitbox])
-		recent_attacks.erase(hitbox)
+	recent_attacks.process(delta)
 	
 
 
@@ -126,7 +112,7 @@ func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:
 		#enemy not currently invincible
 		and not hitbox.owner.invincibility
 		#attack didnt already hit recently
-		and not recent_attacks.has(hitbox)
+		and not recent_attacks.has_item(hitbox.owner)
 	)
 	
 	
