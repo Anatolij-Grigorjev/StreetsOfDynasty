@@ -32,4 +32,4 @@ func process_state(delta: float):
 	
 	entity.velocity.x = lerp(entity.velocity.x, move_speed.x * move_direction.x, 0.5)
 	entity.velocity.y = lerp(entity.velocity.y, move_speed.y * move_direction.y, 0.75)
-	entity.do_movement_slide(entity.velocity)
+	entity.velocity = entity.do_movement_slide(entity.velocity)

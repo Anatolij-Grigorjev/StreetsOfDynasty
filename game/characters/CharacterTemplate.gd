@@ -75,8 +75,8 @@ func set_facing(new_facing: int):
 This makes sure action tweens move character via velocity
 and dont ignore kinematic collisions
 """
-func do_movement_collide(velocity: Vector2):
-	move_and_collide(velocity)
+func do_movement_collide(velocity: Vector2) -> KinematicCollision2D:
+	return move_and_collide(velocity)
 	
 
 """
@@ -84,8 +84,8 @@ func do_movement_collide(velocity: Vector2):
 This makes sure action tweens move character via velocity
 and dont ignore kinematic collisions
 """
-func do_movement_slide(velocity: Vector2):
-	move_and_slide(velocity, Vector2.UP)
+func do_movement_slide(velocity: Vector2) -> Vector2:
+	return move_and_slide(velocity, Vector2.UP)
 	
 	
 func _on_hitbox_hit(hit_connect: HitConnect):
