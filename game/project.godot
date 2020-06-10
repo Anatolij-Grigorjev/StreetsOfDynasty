@@ -284,7 +284,7 @@ debug2={
 [layer_names]
 
 2d_physics/layer_1="terrain"
-2d_physics/layer_2="body_feet"
+2d_physics/layer_2="body_presence"
 2d_physics/layer_6="enemy_normal"
 2d_physics/layer_7="enemy_hurt"
 2d_physics/layer_8="enemy_caught"

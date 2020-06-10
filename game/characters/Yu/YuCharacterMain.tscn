@@ -63,7 +63,7 @@ extents = Vector2( 67.1864, 96.5775 )
 extents = Vector2( 138.288, 44 )
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 70, 36.272 )
+extents = Vector2( 58.2059, 5 )
 
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0, 0, 0, 1 )
@@ -173,6 +173,7 @@ state_length_sec = 0.8
 position = Vector2( 0, -150 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
+visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
@@ -310,6 +311,7 @@ __meta__ = {
 script = ExtResource( 8 )
 
 [node name="AttackboxGroup" parent="Body" index="2"]
+visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup" index="0"]
@@ -339,7 +341,6 @@ collision_mask = 96
 script = ExtResource( 10 )
 damage_amount = 20.0
 disruption = 15.0
-attack_recovery = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
 position = Vector2( 147.093, -196.714 )
@@ -376,7 +377,7 @@ script = ExtResource( 8 )
 position = Vector2( 75.9019, -196.513 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0, 25 )
+position = Vector2( 0, 45 )
 shape = SubResource( 14 )
 __meta__ = {
 "_editor_description_": ""
