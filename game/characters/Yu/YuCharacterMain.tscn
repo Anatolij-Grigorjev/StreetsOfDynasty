@@ -98,15 +98,10 @@ attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTim
 tween_path = NodePath("../../Body/Tween")
 next_state = "Idle"
 
-[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="0"]
-script = ExtResource( 5 )
-move_speed = Vector2( 5, 9 )
-change_facing = false
-
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="1"]
+[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 14 )
 
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 15 )
 collision_mask = 96
 
@@ -120,13 +115,9 @@ next_state = "Idle"
 state_commit_end_sec = 0.73
 state_length_sec = 0.8
 
-[node name="WalkStateAspect" type="Node" parent="FSM/AttackA2" index="0"]
-script = ExtResource( 5 )
-move_speed = Vector2( 7, 2 )
-change_facing = false
-
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA2" index="1"]
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA2" index="0"]
 script = ExtResource( 15 )
+max_move = 50.0
 collision_mask = 96
 
 [node name="HurtLow" type="Node" parent="FSM" index="4"]
@@ -173,7 +164,6 @@ state_length_sec = 0.8
 position = Vector2( 0, -150 )
 
 [node name="HitboxGroup" parent="Body" index="1"]
-visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
@@ -311,7 +301,6 @@ __meta__ = {
 script = ExtResource( 8 )
 
 [node name="AttackboxGroup" parent="Body" index="2"]
-visible = false
 entity_path = NodePath("../../../YuCharacterMain/Body")
 
 [node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup" index="0"]
@@ -324,8 +313,7 @@ __meta__ = {
 }
 damage_type = 1
 damage_amount = 16.0
-disruption = 40.0
-target_move = Vector2( -35, 0 )
+target_move = Vector2( 32, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
 position = Vector2( 232.488, -177.854 )
@@ -340,7 +328,7 @@ collision_layer = 0
 collision_mask = 96
 script = ExtResource( 10 )
 damage_amount = 20.0
-disruption = 15.0
+target_move = Vector2( 80, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
 position = Vector2( 147.093, -196.714 )

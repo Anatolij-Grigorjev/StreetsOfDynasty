@@ -28,7 +28,7 @@ func _ready():
 	
 
 func _get_stability_recovery_per_sec() -> float:
-	if (stability > 50):
+	if (stability > 90):
 		return idle_stability_recovery_per_sec
 	elif (stability > 0):
 		return hurt_stability_recovery_per_sec

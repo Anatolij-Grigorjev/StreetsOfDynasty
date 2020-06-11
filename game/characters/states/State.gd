@@ -11,6 +11,7 @@ turns off physics by default to get processed via FSM
 # not explicit due to cyclic type loading
 var fsm setget _set_fsm
 var entity: Node setget _set_entity
+var state_active: bool = false
 
 
 onready var state_aspects: Array = []
@@ -18,6 +19,7 @@ onready var state_aspects: Array = []
 
 func _ready():
 	state_aspects = _filter_state_aspects()
+	state_active = false
 	set_process(false)
 	set_physics_process(false)
 
@@ -28,11 +30,13 @@ func process_state(delta: float):
 	
 	
 func enter_state(prev_state: String):
+	state_active = true
 	for aspect in state_aspects:
 		aspect.enter_state(prev_state)
 	
 	
 func exit_state(next_state: String):
+	state_active = false
 	for aspect in state_aspects:
 		aspect.exit_state(next_state)
 		

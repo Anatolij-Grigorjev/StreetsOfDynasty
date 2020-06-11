@@ -12,6 +12,10 @@ how much max movement can character do towards enemy
 """
 export(float) var max_move := 100.67
 """
+Smallest distance from this to target that should remain
+"""
+export(float) var min_target_distance := 25.5
+"""
 how big is the raycasting arc for checking 
 (from -radius to + radius)
 """
@@ -46,7 +50,7 @@ func _build_rays_arc():
 	rays_array.name = "MoveToEnemyAspectRays"
 	#add tree to character
 	entity.body.add_child(rays_array)
-	rays_array.position = Vector2(0, -entity.sprite_size.y / 2)
+	rays_array.position = Vector2(entity.sprite_size.x / 4, -entity.sprite_size.y / 2)
 	
 	#add rays
 	direct_ray = _build_raycast_to(Vector2(check_enemy_max_distance, 0))
@@ -121,9 +125,11 @@ func _move_towards_hit_position(hit_position: Vector2):
 	var position := entity.global_position as Vector2
 	var moved_position := position.move_toward(hit_position, max_move)
 	print("moving from %s to %s up to %s" % [position, hit_position, moved_position])
+	var needed_movement := (moved_position - position)
+	var needed_movement_distanced := needed_movement - Vector2(min_target_distance, 0)
 	#move for this much impulse in 0.15 seconds
 	state._move_with_state(
-		(moved_position - position), 
+		needed_movement_distanced,
 		0.15,
 		0.0,
 		C.CharacterMoveType.MOVE_COLLIDE

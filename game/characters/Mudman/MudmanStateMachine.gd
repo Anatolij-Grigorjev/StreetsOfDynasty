@@ -123,7 +123,7 @@ func _on_character_hit_displaced(displacement: Vector2):
 
 
 func _build_next_hit_receive_state(stability: float) -> String:
-	if (stability > 50):
+	if (stability > 90):
 		return NO_STATE
 	elif (stability > 0):
 		return "Hurt"

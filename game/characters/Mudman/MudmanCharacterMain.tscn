@@ -70,6 +70,10 @@ script = ExtResource( 3 )
 state_params_filepath = "res://characters/Mudman/state_data/idle.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
 
+[node name="MovedStateAspect" type="Node" parent="FSM/Idle" index="0"]
+script = ExtResource( 13 )
+move_easing = 2
+
 [node name="Walk" type="Node" parent="FSM" index="1"]
 script = ExtResource( 3 )
 state_params_filepath = "res://characters/Mudman/state_data/walk.json"
@@ -77,6 +81,10 @@ hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
 
 [node name="WalkStateAspect" type="Node" parent="FSM/Walk" index="0"]
 script = ExtResource( 11 )
+
+[node name="MovedStateAspect" type="Node" parent="FSM/Walk" index="1"]
+script = ExtResource( 13 )
+move_easing = 2
 
 [node name="Hurt" type="Node" parent="FSM" index="2"]
 script = ExtResource( 4 )
@@ -179,7 +187,6 @@ HitSoundFx = ExtResource( 26 )
 [node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="4" instance=ExtResource( 28 )]
 
 [node name="HitboxGroup" parent="Body" index="1"]
-visible = false
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
 
 [node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
@@ -245,7 +252,6 @@ shape = SubResource( 6 )
 script = ExtResource( 10 )
 
 [node name="AttackboxGroup" parent="Body" index="2"]
-visible = false
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
 
 [node name="Falling" type="Area2D" parent="Body/AttackboxGroup" index="0"]
