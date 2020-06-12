@@ -62,8 +62,27 @@ func _get_next_state(delta: float) -> String:
 			if (hurting):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
+			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			if (next_attack_input == C.AttackInputType.NORMAL):
+				_clear_next_attack_input()
+				return "AttackA3"
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
+			return NO_STATE
+		"AttackA3":
+			if (hurting):
+				return "HurtLow"
+			var attack_state = state_nodes[state] as FiniteState
+			_cache_next_attack_input(attack_input, attack_state)
+			if (not attack_state.can_change_state):
+				return NO_STATE
+			if (next_attack_input == C.AttackInputType.NORMAL):
+				_clear_next_attack_input()
+				return "AttackA3"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_state.is_state_over):
