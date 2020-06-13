@@ -129,22 +129,22 @@ collision_mask = 96
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA2" index="1"]
 script = ExtResource( 14 )
 
-[node name="AttackA3" type="Node" parent="FSM" index="4"]
+[node name="AttackB2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
 state_params_filepath = "res://characters/Yu/state_data/attack_a3.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
 tween_path = NodePath("../../Body/Tween")
-next_state = "Idle"
+next_state = "AttackA1"
 state_commit_end_sec = 0.5
 state_length_sec = 0.7
 
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA3" index="0"]
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackB2" index="0"]
 script = ExtResource( 15 )
 max_move = 35.0
 collision_mask = 96
 
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA3" index="1"]
+[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2" index="1"]
 script = ExtResource( 14 )
 
 [node name="HurtLow" type="Node" parent="FSM" index="5"]
@@ -264,13 +264,13 @@ script = ExtResource( 9 )
 position = Vector2( -35.6056, -153.104 )
 shape = SubResource( 5 )
 
-[node name="AttackA3" type="Area2D" parent="Body/HitboxGroup" index="5"]
+[node name="AttackB2" type="Area2D" parent="Body/HitboxGroup" index="5"]
 visible = false
 collision_layer = 512
 collision_mask = 0
 script = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA3" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackB2" index="0"]
 position = Vector2( -2.37372, -156.071 )
 shape = SubResource( 17 )
 
@@ -375,14 +375,14 @@ target_move = Vector2( 80, 0 )
 position = Vector2( 147.093, -196.714 )
 shape = SubResource( 11 )
 
-[node name="AttackA3" type="Area2D" parent="Body/AttackboxGroup" index="2"]
+[node name="AttackB2" type="Area2D" parent="Body/AttackboxGroup" index="2"]
 visible = false
 collision_layer = 0
 collision_mask = 96
 script = ExtResource( 10 )
 damage_amount = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA3" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackB2" index="0"]
 position = Vector2( 115.78, -189.433 )
 shape = SubResource( 16 )
 
@@ -484,6 +484,5 @@ __meta__ = {
 "_editor_description_": ""
 }
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
-[connection signal="visibility_changed" from="Body/AttackboxGroup/AttackA3" to="." method="_on_AttackA3_visibility_changed"]
 
 [editable path="Body/YuCharacterRig"]

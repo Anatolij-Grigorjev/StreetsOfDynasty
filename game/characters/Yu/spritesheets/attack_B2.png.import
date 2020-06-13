@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attack_A3.png-e4eb277ee2fd94d24a8b22580f0ceb00.stex"
+path="res://.import/attack_B2.png-3f95f971ec0cb40d8508d1bebc2f0ede.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Yu/spritesheets/attack_A3.png"
-dest_files=[ "res://.import/attack_A3.png-e4eb277ee2fd94d24a8b22580f0ceb00.stex" ]
+source_file="res://characters/Yu/spritesheets/attack_B2.png"
+dest_files=[ "res://.import/attack_B2.png-3f95f971ec0cb40d8508d1bebc2f0ede.stex" ]
 
 [params]
 

@@ -1,5 +1,5 @@
 {
-	"state_animation": "attack_a3",
+	"state_animation": "attack_b2",
 	"state_move_tiles": {
 		"x": 0.25,
 		"y": 0,
@@ -9,24 +9,24 @@
         {
             "time": 0.3,
             "enable": true,
-            "area": "AttackA3"
+            "area": "AttackB2"
         },
         {
             "time": 0.5,
             "enable": false,
-            "area": "AttackA3"
+            "area": "AttackB2"
         }
     ],
     "hitboxes_timeline": [
     	{
             "time": 0.0,
             "enable": true,
-            "area": "AttackA3"
+            "area": "AttackB2"
         },
         {
             "time": 0.7,
             "enable": false,
-            "area": "AttackA3"
+            "area": "AttackB2"
         }
     ]
 }

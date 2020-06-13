@@ -2,8 +2,13 @@ extends CharacterStateMachineTemplate
 """
 Yu main state machine
 """
+const MAX_CONSECUTIVE_B2_HITS = 5
+
+
 var next_attack_input: int = C.AttackInputType.NONE
 var has_caught := SingleReadVar.new(false)
+
+var consecutive_b2_hits : int = 0
 
 
 func _ready():
@@ -65,27 +70,33 @@ func _get_next_state(delta: float) -> String:
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
-			if (next_attack_input == C.AttackInputType.NORMAL):
+			if (next_attack_input == C.AttackInputType.SPECIAL):
 				_clear_next_attack_input()
-				return "AttackA3"
+				consecutive_b2_hits = 1
+				return "AttackB2"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_state.is_state_over):
 				return _next_or_default(attack_state)
 			return NO_STATE
-		"AttackA3":
+		"AttackB2":
 			if (hurting):
+				consecutive_b2_hits = 0
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
-			if (next_attack_input == C.AttackInputType.NORMAL):
+			if (next_attack_input == C.AttackInputType.SPECIAL
+				and consecutive_b2_hits < MAX_CONSECUTIVE_B2_HITS):
 				_clear_next_attack_input()
-				return "AttackA3"
+				consecutive_b2_hits += 1
+				return "AttackB2"
 			if (move_direction != Vector2.ZERO):
+				consecutive_b2_hits = 0
 				return "Walk"
 			if (attack_state.is_state_over):
+				consecutive_b2_hits = 0
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"Catching":
@@ -115,6 +126,8 @@ func _get_move_direction() -> Vector2:
 func _get_attack_input() -> int:
 	if (Input.is_action_just_pressed("attack_normal")):
 		return C.AttackInputType.NORMAL
+	if (Input.is_action_just_pressed("attack_special")):
+		return C.AttackInputType.SPECIAL
 	return C.AttackInputType.NONE
 	
 	

@@ -86,6 +86,9 @@ func enter_state(prev_state: String):
 	
 func exit_state(next_state: String):
 	.exit_state(next_state)
+	if (state_params.state_animation != ""):
+		#reset animation in case it needs to replayed
+		entity.anim.stop(true)
 	
 
 func set_hitboxes_timeline(timeline_items: Array):

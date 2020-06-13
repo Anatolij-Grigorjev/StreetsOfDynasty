@@ -9,10 +9,10 @@
 [ext_resource path="res://characters/Yu/animations/idle.tres" type="Animation" id=7]
 [ext_resource path="res://characters/Yu/animations/walk.tres" type="Animation" id=8]
 [ext_resource path="res://characters/Yu/spritesheets/attack_A2.png" type="Texture" id=9]
-[ext_resource path="res://characters/Yu/spritesheets/attack_A3.png" type="Texture" id=10]
+[ext_resource path="res://characters/Yu/spritesheets/attack_B2.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
-resource_name = "attack_a3"
+resource_name = "attack_b2"
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -407,13 +407,12 @@ tracks/4/keys = {
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 10 )
-offset = Vector2( -88.5826, -0.091548 )
+offset = Vector2( -89.5886, 7.03887 )
 hframes = 7
-frame = 6
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.105184 )
 position = Vector2( 231.353, -70.2303 )
 rotation = -2.90924
 texture = ExtResource( 4 )
@@ -426,7 +425,7 @@ __meta__ = {
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
 anims/attack_a2 = ExtResource( 3 )
-anims/attack_a3 = SubResource( 1 )
+anims/attack_b2 = SubResource( 1 )
 anims/catch_attack = SubResource( 2 )
 anims/catching = SubResource( 3 )
 anims/hurt_low = ExtResource( 6 )
@@ -435,7 +434,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource( 1 )
-pitch_scale = 2.0
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }
