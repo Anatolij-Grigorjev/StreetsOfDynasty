@@ -1,0 +1,52 @@
+{
+	"state_animation": "attack_b2f",
+	"state_move_tiles": {
+        "x": 0.15,
+        "y": 0,
+        "duration": 0.15
+    },
+    "attackboxes_timeline": [
+        {
+            "time": 0.8,
+            "enable": true,
+            "area": "AttackB2F"
+        },
+        {
+            "time": 1.1,
+            "enable": false,
+            "area": "AttackB2F"
+        }
+    ],
+    "hitboxes_timeline": [
+        {
+            "time": 0.0,
+            "enable": true,
+            "area": "AttackB2F_1"
+        },
+        {
+            "time": 0.8,
+            "enable": false,
+            "area": "AttackB2F_1"
+        },
+        {
+            "time": 0.8,
+            "enable": true,
+            "area": "AttackB2F_2"
+        },
+        {
+            "time": 1.2,
+            "enable": false,
+            "area": "AttackB2F_2"
+        },
+        {
+            "time": 1.2,
+            "enable": true,
+            "area": "AttackB2F_1"
+        },
+        {
+            "time": 1.4,
+            "enable": false,
+            "area": "AttackB2F_1"
+        }
+    ]
+}

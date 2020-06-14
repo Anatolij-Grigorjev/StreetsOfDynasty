@@ -99,6 +99,17 @@ func _get_next_state(delta: float) -> String:
 				consecutive_b2_hits = 0
 				return _next_or_default(attack_state)
 			return NO_STATE
+		"AttackB2F":
+			if (hurting):
+				return "HurtLow"
+			var attack_state = state_nodes[state] as FiniteState
+			if (not attack_state.can_change_state):
+				return NO_STATE
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
+			return NO_STATE
 		"Catching":
 			var catching_state = state_nodes[state] as StateMachineState
 			if (not catching_state.sub_fsm_over):
