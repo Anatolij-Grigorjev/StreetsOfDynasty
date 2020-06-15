@@ -208,8 +208,11 @@ state_length_sec = 0.8
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-offset = Vector2( -48.064, -5.8661 )
-frame = 12
+offset = Vector2( -69.6703, 0.57772 )
+frame = 0
+
+[node name="FXPlayer" parent="Body/YuCharacterRig" index="3"]
+pitch_scale = 1.06307
 
 [node name="HitboxGroup" parent="Body" index="1"]
 entity_path = NodePath("../../../YuCharacterMain/Body")
@@ -439,7 +442,7 @@ shape = SubResource( 16 )
 [node name="AttackB2F" type="Area2D" parent="Body/AttackboxGroup" index="3"]
 visible = false
 collision_layer = 0
-collision_mask = 96
+collision_mask = 352
 script = ExtResource( 10 )
 damage_type = 1
 damage_amount = 33.0

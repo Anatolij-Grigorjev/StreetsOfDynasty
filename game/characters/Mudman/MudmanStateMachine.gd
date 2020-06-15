@@ -84,7 +84,10 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			return fall_state.next_state
 		"Fallen":
-			return NO_STATE
+			var fallen_state = get_state(state) as FiniteState
+			if (not fallen_state.is_state_over):
+				return NO_STATE
+			return fallen_state.next_state
 		"Dying":
 			var dying_state = get_state(state) as FiniteState
 			if (not dying_state.is_state_over):
