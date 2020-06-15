@@ -6,7 +6,6 @@
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=6]
-[ext_resource path="res://characters/Mudman/spritesheets/idle.png" type="Texture" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=10]
@@ -48,6 +47,9 @@ extents = Vector2( 37.123, 65 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 96.3256, 48.4078 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 120.143, 38.7073 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 96.3256, 48.4078 )
@@ -103,14 +105,20 @@ script = ExtResource( 4 )
 state_params_filepath = "res://characters/Mudman/state_data/falling.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
 attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackTimeline")
-next_state = "Idle"
+next_state = "Fallen"
 state_commit_end_sec = 1.0
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
 script = ExtResource( 13 )
 move_easing = 2
 
-[node name="Dying" type="Node" parent="FSM" index="4"]
+[node name="Fallen" type="Node" parent="FSM" index="4"]
+script = ExtResource( 3 )
+state_params_filepath = "res://characters/Mudman/state_data/fallen.json"
+hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
+next_state = "Idle"
+
+[node name="Dying" type="Node" parent="FSM" index="5"]
 script = ExtResource( 20 )
 state_params_filepath = "res://characters/Mudman/state_data/dying.json"
 state_commit_end_sec = 1.0
@@ -120,11 +128,11 @@ state_length_sec = 0.5
 script = ExtResource( 17 )
 CorpseScene = ExtResource( 18 )
 
-[node name="Logger" type="Node" parent="FSM" index="5"]
+[node name="Logger" type="Node" parent="FSM" index="6"]
 script = ExtResource( 12 )
 naming_scheme = 1
 
-[node name="Caught" type="Node" parent="FSM" index="6"]
+[node name="Caught" type="Node" parent="FSM" index="7"]
 script = ExtResource( 3 )
 state_params_filepath = "res://characters/Mudman/state_data/caught.json"
 hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HurtTimeline")
@@ -132,12 +140,6 @@ next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 position = Vector2( 0, -75 )
-
-[node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
-position = Vector2( -0.707703, 0 )
-texture = ExtResource( 7 )
-offset = Vector2( -17.8076, -30.1916 )
-hframes = 5
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )
@@ -240,6 +242,7 @@ position = Vector2( -20.352, -74.322 )
 shape = SubResource( 5 )
 
 [node name="Falling" type="Area2D" parent="Body/HitboxGroup" index="5"]
+visible = false
 collision_layer = 256
 collision_mask = 0
 script = ExtResource( 6 )
@@ -248,10 +251,20 @@ script = ExtResource( 6 )
 position = Vector2( -27.6325, -55.254 )
 shape = SubResource( 6 )
 
-[node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="6"]
+[node name="Fallen" type="Area2D" parent="Body/HitboxGroup" index="6"]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Fallen" index="0"]
+position = Vector2( 5.19697, 8.77252 )
+shape = SubResource( 10 )
+
+[node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="7"]
 script = ExtResource( 10 )
 
 [node name="AttackboxGroup" parent="Body" index="2"]
+visible = false
 entity_path = NodePath("../../../MudmanCharacterMain/Body")
 
 [node name="Falling" type="Area2D" parent="Body/AttackboxGroup" index="0"]
@@ -281,6 +294,7 @@ shape = SubResource( 8 )
 [node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]
 duration = 1.0
 blink_frequency = 5
+pre_blink_states = [ "Fallen" ]
 
 [node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="4"]
 script = ExtResource( 31 )

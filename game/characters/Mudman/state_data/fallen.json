@@ -1,0 +1,10 @@
+{
+	"state_animation": "fallen",
+	"hitboxes_timeline": [
+		{
+			"time": 0.0,
+			"enable": true,
+			"area": "Fallen"
+		}
+	]
+}
