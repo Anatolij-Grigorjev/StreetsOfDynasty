@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -11,6 +11,24 @@
 [ext_resource path="res://characters/Yu/spritesheets/attack_A2.png" type="Texture" id=9]
 [ext_resource path="res://characters/Yu/spritesheets/attack_B2.png" type="Texture" id=10]
 [ext_resource path="res://characters/Yu/spritesheets/attack_B2F.png" type="Texture" id=11]
+[ext_resource path="res://characters/spritefx/attack_blunt_spark.png" type="Texture" id=12]
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform vec4 modulate : hint_color;
+uniform float mix_coef: hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.rgb = mix(color.rgb, modulate.rgb, mix_coef);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/modulate = Color( 0.996078, 0.996078, 0.992157, 1 )
+shader_param/mix_coef = 0.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -126,9 +144,10 @@ tracks/8/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "attack_b2f"
 length = 1.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -311,8 +330,104 @@ tracks/14/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("TrailFX2:texture")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("TrailFX2:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("TrailFX2:vframes")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("TrailFX2:hframes")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("TrailFX2:frame")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0.4, 0.45, 0.5, 0.55, 0.6, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("Sprite:use_parent_material")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("Sprite:material:shader_param/modulate")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Color( 0.996078, 0.996078, 0.992157, 1 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("Sprite:material:shader_param/mix_coef")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0.3, 0.65, 0.75 ),
+"transitions": PoolRealArray( 0.287175, 1.23114, 1 ),
+"update": 0,
+"values": [ 0.15, 0.75, 0.0 ]
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -476,7 +591,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -542,6 +657,7 @@ tracks/4/keys = {
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
+material = SubResource( 9 )
 texture = ExtResource( 11 )
 offset = Vector2( -73.1231, 2.24004 )
 hframes = 15
@@ -558,19 +674,27 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="TrailFX2" type="Sprite" parent="." index="2"]
+visible = false
+position = Vector2( -117.324, -89.7181 )
+texture = ExtResource( 12 )
+vframes = 2
+hframes = 3
+frame = 5
+
+[node name="AnimationPlayer" parent="." index="3"]
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
 anims/attack_a2 = ExtResource( 3 )
 anims/attack_b2 = SubResource( 1 )
-anims/attack_b2f = SubResource( 4 )
-anims/catch_attack = SubResource( 2 )
-anims/catching = SubResource( 3 )
+anims/attack_b2f = SubResource( 2 )
+anims/catch_attack = SubResource( 3 )
+anims/catching = SubResource( 4 )
 anims/hurt_low = ExtResource( 6 )
 anims/idle = ExtResource( 7 )
 anims/walk = ExtResource( 8 )
 
-[node name="FXPlayer" type="AudioStreamPlayer" parent="." index="3"]
+[node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
 pitch_scale = 1.25
 __meta__ = {
