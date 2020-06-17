@@ -48,16 +48,16 @@ extents = Vector2( 37.123, 65 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 96.3256, 48.4078 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 120.143, 38.7073 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 96.3256, 48.4078 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 60, 5 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
@@ -260,7 +260,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Fallen" index="0"]
 position = Vector2( 5.19697, 8.77252 )
-shape = SubResource( 10 )
+shape = SubResource( 7 )
 
 [node name="HurtTimeline" type="Node2D" parent="Body/HitboxGroup" index="7"]
 script = ExtResource( 10 )
@@ -278,7 +278,7 @@ disruption = 60.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/Falling" index="0"]
 position = Vector2( -27.6325, -55.254 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -291,7 +291,7 @@ position = Vector2( 60.676, -103.885 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 10 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]
 duration = 1.0
@@ -307,7 +307,7 @@ margin_top = -288.32
 margin_right = 1.06947
 margin_bottom = -263.32
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -326,7 +326,7 @@ margin_top = -288.32
 margin_right = 100.906
 margin_bottom = -263.32
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -345,7 +345,7 @@ margin_top = -265.69
 margin_right = 42.3351
 margin_bottom = -240.69
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )

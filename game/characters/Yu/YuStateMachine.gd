@@ -73,6 +73,7 @@ func _get_next_state(delta: float) -> String:
 			if (next_attack_input == C.AttackInputType.SPECIAL):
 				_clear_next_attack_input()
 				consecutive_b2_hits = 1
+				_start_special_flash()
 				return "AttackB2"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
@@ -158,6 +159,10 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 	):
 		next_attack_input = attack_input
 
+func _start_special_flash():
+	var flasher = get_node("../Body/YuCharacterRig/Sprite/SpriteColorFlash")
+	flasher._do_color_flash(Color.blue, 0.2, 0.8, 0.5)
+
 
 func _on_Hitbox_catch(caught_hitbox: Hitbox):
 	var caught_character = caught_hitbox.owner as CharacterTemplate
@@ -183,3 +188,5 @@ func _next_or_default(state: FiniteState, default: String = "Idle") -> String:
 		return state.next_state
 	else:
 		return default
+		
+

@@ -12,23 +12,8 @@
 [ext_resource path="res://characters/Yu/spritesheets/attack_B2.png" type="Texture" id=10]
 [ext_resource path="res://characters/Yu/spritesheets/attack_B2F.png" type="Texture" id=11]
 [ext_resource path="res://characters/spritefx/attack_blunt_spark.png" type="Texture" id=12]
-
-[sub_resource type="Shader" id=8]
-code = "shader_type canvas_item;
-
-uniform vec4 modulate : hint_color;
-uniform float mix_coef: hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, modulate.rgb, mix_coef);
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
-shader_param/modulate = Color( 0.996078, 0.996078, 0.992157, 1 )
-shader_param/mix_coef = 0.0
+[ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=13]
+[ext_resource path="res://characters/SpriteColorFlash.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -391,40 +376,44 @@ tracks/19/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 tracks/20/type = "value"
-tracks/20/path = NodePath("Sprite:use_parent_material")
+tracks/20/path = NodePath("TrailFX2:position")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = {
-"times": PoolRealArray( 0.3, 0.75 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -127.162, -82.3864 ) ]
 }
-tracks/21/type = "value"
-tracks/21/path = NodePath("Sprite:material:shader_param/modulate")
+tracks/21/type = "method"
+tracks/21/path = NodePath("ScreenShakeRequestor")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/imported = false
 tracks/21/enabled = true
 tracks/21/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.85 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Color( 0.996078, 0.996078, 0.992157, 1 ) ]
+"values": [ {
+"args": [ 0.3, 20, 20.0, 2 ],
+"method": "request_screen_shake"
+} ]
 }
-tracks/22/type = "value"
-tracks/22/path = NodePath("Sprite:material:shader_param/mix_coef")
+tracks/22/type = "method"
+tracks/22/path = NodePath("Sprite/SpriteColorFlash")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
 tracks/22/enabled = true
 tracks/22/keys = {
-"times": PoolRealArray( 0.3, 0.65, 0.75 ),
-"transitions": PoolRealArray( 0.287175, 1.23114, 1 ),
-"update": 0,
-"values": [ 0.15, 0.75, 0.0 ]
+"times": PoolRealArray( 0.35 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Color( 0.117647, 0.0117647, 0.839216, 1 ), 0.4, 0.8, 0.75 ],
+"method": "_do_color_flash"
+} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -657,11 +646,14 @@ tracks/4/keys = {
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
-material = SubResource( 9 )
+material = null
 texture = ExtResource( 11 )
 offset = Vector2( -73.1231, 2.24004 )
 hframes = 15
 frame = 14
+
+[node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
+script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
@@ -676,7 +668,7 @@ __meta__ = {
 
 [node name="TrailFX2" type="Sprite" parent="." index="2"]
 visible = false
-position = Vector2( -117.324, -89.7181 )
+position = Vector2( -127.162, -82.3864 )
 texture = ExtResource( 12 )
 vframes = 2
 hframes = 3
@@ -700,3 +692,6 @@ pitch_scale = 1.25
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="ScreenShakeRequestor" type="Node" parent="." index="5"]
+script = ExtResource( 13 )
