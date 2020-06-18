@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://characters/spritefx/attack_blunt_spark.png" type="Texture" id=12]
 [ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=13]
 [ext_resource path="res://characters/SpriteColorFlash.gd" type="Script" id=14]
+[ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -402,7 +403,7 @@ tracks/21/keys = {
 } ]
 }
 tracks/22/type = "method"
-tracks/22/path = NodePath("Sprite/SpriteColorFlash")
+tracks/22/path = NodePath("SpriteColorFlashRequestor")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
@@ -412,7 +413,7 @@ tracks/22/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ Color( 0.117647, 0.0117647, 0.839216, 1 ), 0.4, 0.8, 0.75 ],
-"method": "_do_color_flash"
+"method": "request_color_flash"
 } ]
 }
 
@@ -648,9 +649,9 @@ tracks/4/keys = {
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 11 )
-offset = Vector2( -73.1231, 2.24004 )
+offset = Vector2( -63.4192, -8.83245 )
 hframes = 15
-frame = 14
+frame = 3
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -695,3 +696,6 @@ __meta__ = {
 
 [node name="ScreenShakeRequestor" type="Node" parent="." index="5"]
 script = ExtResource( 13 )
+
+[node name="SpriteColorFlashRequestor" type="Node" parent="." index="6"]
+script = ExtResource( 15 )

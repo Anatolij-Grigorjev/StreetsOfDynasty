@@ -13,7 +13,7 @@ onready var tween: Tween = _create_tween()
 onready var material = SpriteShaderMaterial.duplicate(true)
 
 func _ready():
-	pass
+	call_deferred("_register_color_flashers")
 	
 	
 func _do_color_flash(color = Color.blue, total_duration = 0.3, max_blend = 0.8, buildup_slice = 0.7):
@@ -52,3 +52,8 @@ func _create_tween() -> Tween:
 	var tween := Tween.new()
 	add_child(tween)
 	return tween
+	
+
+func _register_color_flashers():
+	for flash_requestor in get_tree().get_nodes_in_group("color_flashers"):
+		flash_requestor.connect("color_flash_requested", self, "_do_color_flash")

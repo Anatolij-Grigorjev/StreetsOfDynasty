@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://characters/live_data/CharacterPositionLabel.gd" type="Script" id=20]
 [ext_resource path="res://characters/live_data/CharacterDataDisplayLabels.gd" type="Script" id=21]
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
+[ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -203,6 +204,9 @@ attackbox_areas_timeline_path = NodePath("../../../../Body/AttackboxGroup/Attack
 next_state = "CatchIdle"
 state_commit_end_sec = 0.8
 state_length_sec = 0.8
+
+[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="8"]
+script = ExtResource( 23 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
