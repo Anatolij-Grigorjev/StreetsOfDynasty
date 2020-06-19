@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://characters/live_data/CharacterDataDisplayLabels.gd" type="Script" id=21]
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
+[ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )
@@ -207,6 +208,7 @@ state_length_sec = 0.8
 
 [node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="8"]
 script = ExtResource( 23 )
+flash_sound = ExtResource( 24 )
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )

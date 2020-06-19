@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=13]
 [ext_resource path="res://characters/SpriteColorFlash.gd" type="Script" id=14]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
+[ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -689,7 +690,6 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
-pitch_scale = 1.25
 __meta__ = {
 "_editor_description_": ""
 }
@@ -699,3 +699,4 @@ script = ExtResource( 13 )
 
 [node name="SpriteColorFlashRequestor" type="Node" parent="." index="6"]
 script = ExtResource( 15 )
+flash_sound = ExtResource( 16 )
