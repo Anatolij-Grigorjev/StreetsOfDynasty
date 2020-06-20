@@ -15,7 +15,7 @@
 [ext_resource path="res://ScreenShakeRequestor.gd" type="Script" id=13]
 [ext_resource path="res://characters/SpriteColorFlash.gd" type="Script" id=14]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
-[ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=16]
+[ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"

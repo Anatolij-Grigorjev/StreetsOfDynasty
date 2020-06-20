@@ -23,7 +23,7 @@
 [ext_resource path="res://characters/live_data/CharacterDataDisplayLabels.gd" type="Script" id=21]
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
-[ext_resource path="res://characters/blunt_hit_heavy1.wav" type="AudioStream" id=24]
+[ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.2845, 178.026 )

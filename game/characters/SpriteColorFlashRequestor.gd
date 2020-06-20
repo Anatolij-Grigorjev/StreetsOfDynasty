@@ -14,6 +14,7 @@ export(float) var buildup_slice := 0.7
 
 
 onready var audio_player: AudioStreamPlayer = _create_audio_player()
+var audio_length: float = 0.0
 
 func _ready():
 	add_to_group("color_flashers", true)
@@ -21,10 +22,16 @@ func _ready():
 	set_physics_process(false)
 	audio_player.stream = flash_sound
 	audio_player.autoplay = false
-	audio_player.pitch_scale = 2.5
+	audio_player.volume_db = 0.5
+	audio_length = flash_sound.get_length()
+	
+	
 	
 	
 func request_color_flash(color = Color.blue, total_duration = 0.3, max_blend = 0.8, buildup_slice = 0.7):
+	#pitch no lower than 0.9
+	var duration_pitch = max(audio_length / total_duration, 0.9)
+	audio_player.pitch_scale = duration_pitch
 	audio_player.play(0)
 	emit_signal("color_flash_requested", color, total_duration, max_blend, buildup_slice)
 	
