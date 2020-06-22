@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -16,6 +16,11 @@
 [ext_resource path="res://characters/SpriteColorFlash.gd" type="Script" id=14]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=16]
+[ext_resource path="res://characters/AttackBox.gd" type="Script" id=17]
+[ext_resource path="res://characters/AreaGroup.gd" type="Script" id=18]
+[ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
+[ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=20]
+[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -645,14 +650,68 @@ tracks/4/keys = {
 "values": [ 6 ]
 }
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 201.246, 46.767 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 138.288, 44.0404 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 67.1864, 96.5775 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 27.6888, 184.146 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 67.1864, 96.5775 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 138.288, 44 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 38.2845, 178.026 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 52.6578, 185.16 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 69.0345, 194.518 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 49.9709, 151.65 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 52.938, 149.277 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 49.9709, 151.65 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 43.0194, 161.963 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 87.4801, 103.608 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 42.1761, 150.383 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 55.0357, 149.606 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 82.7745, 127.069 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 85.375, 97.5963 )
+
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 11 )
-offset = Vector2( -63.4192, -8.83245 )
-hframes = 15
-frame = 3
+texture = ExtResource( 20 )
+offset = Vector2( -247.915, -11.3247 )
+hframes = 11
+frame = 1
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -661,9 +720,10 @@ script = ExtResource( 14 )
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
-position = Vector2( 98.2338, -66.2318 )
-rotation = 0.017968
-texture = ExtResource( 4 )
+position = Vector2( 231.353, -70.2303 )
+rotation = -2.90924
+texture = ExtResource( 21 )
+flip_h = true
 __meta__ = {
 "_editor_description_": ""
 }
@@ -700,3 +760,267 @@ script = ExtResource( 13 )
 [node name="SpriteColorFlashRequestor" type="Node" parent="." index="6"]
 script = ExtResource( 15 )
 flash_sound = ExtResource( 16 )
+
+[node name="AttackboxGroup" type="Node2D" parent="." index="7"]
+position = Vector2( -5, 150 )
+script = ExtResource( 18 )
+entity_path = NodePath("")
+
+[node name="AttackA1" type="Area2D" parent="AttackboxGroup" index="0"]
+visible = false
+collision_layer = 0
+collision_mask = 96
+script = ExtResource( 17 )
+__meta__ = {
+"_editor_description_": ""
+}
+damage_type = 1
+damage_amount = 16.0
+target_move = Vector2( 32, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA1" index="0"]
+position = Vector2( 232.488, -177.854 )
+shape = SubResource( 13 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AttackA2" type="Area2D" parent="AttackboxGroup" index="1"]
+visible = false
+collision_layer = 0
+collision_mask = 96
+script = ExtResource( 17 )
+damage_amount = 20.0
+target_move = Vector2( 80, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA2" index="0"]
+position = Vector2( 147.093, -196.714 )
+shape = SubResource( 14 )
+
+[node name="AttackB2" type="Area2D" parent="AttackboxGroup" index="2"]
+visible = false
+collision_layer = 0
+collision_mask = 96
+script = ExtResource( 17 )
+damage_amount = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2" index="0"]
+position = Vector2( 115.78, -189.433 )
+shape = SubResource( 15 )
+
+[node name="AttackB2F" type="Area2D" parent="AttackboxGroup" index="3"]
+visible = false
+collision_layer = 0
+collision_mask = 352
+script = ExtResource( 17 )
+damage_type = 1
+damage_amount = 33.0
+disruption = 100.0
+target_move = Vector2( 80, 0 )
+attack_recovery = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2F" index="0"]
+position = Vector2( 182.471, -142.193 )
+shape = SubResource( 16 )
+
+[node name="CatchAttack1" type="Area2D" parent="AttackboxGroup" index="4"]
+visible = false
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 17 )
+damage_amount = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
+position = Vector2( 115.78, -189.433 )
+shape = SubResource( 17 )
+
+[node name="CatchAttack2" type="Area2D" parent="AttackboxGroup" index="5"]
+visible = false
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 17 )
+damage_amount = 15.0
+target_move = Vector2( 175, -5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack2" index="0"]
+position = Vector2( 147.093, -196.714 )
+shape = SubResource( 18 )
+
+[node name="HitboxGroup" type="Node2D" parent="." index="8"]
+position = Vector2( 10, 160 )
+script = ExtResource( 18 )
+entity_path = NodePath("")
+
+[node name="Idle" type="Area2D" parent="HitboxGroup" index="0"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Idle" index="0"]
+position = Vector2( 3.1915, -160.209 )
+shape = SubResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Walk" type="Area2D" parent="HitboxGroup" index="1"]
+visible = false
+collision_layer = 512
+collision_mask = 96
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Walk" index="0"]
+position = Vector2( -18.3044, -143.205 )
+shape = SubResource( 20 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AttackA1" type="Area2D" parent="HitboxGroup" index="2"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA1" index="0"]
+position = Vector2( -10.6253, -145.493 )
+shape = SubResource( 21 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AttackA2_1" type="Area2D" parent="HitboxGroup" index="3"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA2_1" index="0"]
+position = Vector2( -2.37372, -156.071 )
+shape = SubResource( 22 )
+
+[node name="AttackA2_2" type="Area2D" parent="HitboxGroup" index="4"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA2_2" index="0"]
+position = Vector2( -35.6056, -153.104 )
+shape = SubResource( 5 )
+
+[node name="AttackB2" type="Area2D" parent="HitboxGroup" index="5"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2" index="0"]
+position = Vector2( -2.37372, -156.071 )
+shape = SubResource( 6 )
+
+[node name="AttackB2F_1" type="Area2D" parent="HitboxGroup" index="6"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2F_1" index="0"]
+position = Vector2( 1.10745, -151.873 )
+shape = SubResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AttackB2F_2" type="Area2D" parent="HitboxGroup" index="7"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2F_2" index="0"]
+position = Vector2( 7.35971, -136.589 )
+shape = SubResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HurtLow1" type="Area2D" parent="HitboxGroup" index="8"]
+visible = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/HurtLow1" index="0"]
+position = Vector2( -13.8321, -176.36 )
+shape = SubResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HurtLow2" type="Area2D" parent="HitboxGroup" index="9"]
+visible = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/HurtLow2" index="0"]
+position = Vector2( -37.2366, -142.12 )
+shape = SubResource( 10 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HurtLow3" type="Area2D" parent="HitboxGroup" index="10"]
+visible = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/HurtLow3" index="0"]
+position = Vector2( -62.8082, -119.149 )
+shape = SubResource( 11 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HurtLow4" type="Area2D" parent="HitboxGroup" index="11"]
+visible = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/HurtLow4" index="0"]
+position = Vector2( -86.2128, -119.582 )
+shape = SubResource( 12 )
+__meta__ = {
+"_editor_description_": ""
+}

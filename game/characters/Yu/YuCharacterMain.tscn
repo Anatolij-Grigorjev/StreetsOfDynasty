@@ -25,16 +25,16 @@
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 38.2845, 178.026 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 52.6578, 185.16 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 69.0345, 194.518 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 49.9709, 151.65 )
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -79,10 +79,10 @@ extents = Vector2( 67.1864, 96.5775 )
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 138.288, 44 )
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 58.2059, 5 )
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="YuCharacterMain" groups=[
@@ -234,7 +234,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle" index="0"]
 position = Vector2( 3.1915, -160.209 )
-shape = SubResource( 1 )
+shape = SubResource( 19 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -250,7 +250,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Walk" index="0"]
 position = Vector2( -18.3044, -143.205 )
-shape = SubResource( 2 )
+shape = SubResource( 20 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -266,7 +266,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA1" index="0"]
 position = Vector2( -10.6253, -145.493 )
-shape = SubResource( 3 )
+shape = SubResource( 21 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -279,7 +279,7 @@ script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_1" index="0"]
 position = Vector2( -2.37372, -156.071 )
-shape = SubResource( 4 )
+shape = SubResource( 22 )
 
 [node name="AttackA2_2" type="Area2D" parent="Body/HitboxGroup" index="4"]
 visible = false
@@ -493,7 +493,7 @@ position = Vector2( 75.9019, -196.513 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 45 )
-shape = SubResource( 19 )
+shape = SubResource( 23 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -514,7 +514,7 @@ margin_right = -49.5517
 margin_bottom = -402.967
 rect_min_size = Vector2( 100, 25 )
 rect_scale = Vector2( 1.5, 1.5 )
-custom_styles/normal = SubResource( 20 )
+custom_styles/normal = SubResource( 24 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -531,7 +531,7 @@ margin_right = 98.8143
 margin_bottom = -404.429
 rect_min_size = Vector2( 100, 25 )
 rect_scale = Vector2( 1.5, 1.5 )
-custom_styles/normal = SubResource( 20 )
+custom_styles/normal = SubResource( 24 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -548,7 +548,7 @@ margin_right = 27.9202
 margin_bottom = -365.693
 rect_min_size = Vector2( 100, 25 )
 rect_scale = Vector2( 1.5, 1.5 )
-custom_styles/normal = SubResource( 20 )
+custom_styles/normal = SubResource( 24 )
 text = "<NO_STATE>"
 align = 1
 valign = 1

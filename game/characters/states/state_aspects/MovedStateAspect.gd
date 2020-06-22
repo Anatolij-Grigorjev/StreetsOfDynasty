@@ -13,6 +13,7 @@ enum Easing {
 	ALL_IN = 2
 }
 export(Vector2) var move_impulse: Vector2 = Vector2.ZERO
+export(float) var move_duration: float = TWEEN_DURATION
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
@@ -30,8 +31,8 @@ func enter_state(prev_state: String):
 	#this leaves control over when that velocity is used
 	move_tween.interpolate_property(
 		self, 'current_impulse', 
-		move_impulse * 1 / TWEEN_DURATION, Vector2.ZERO,
-		TWEEN_DURATION, transition_easing[0], transition_easing[1]
+		move_impulse * 1 / move_duration, Vector2.ZERO,
+		move_duration, transition_easing[0], transition_easing[1]
 	)
 	move_tween.start()
 	
