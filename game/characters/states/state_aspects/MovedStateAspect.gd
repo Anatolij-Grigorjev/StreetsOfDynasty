@@ -17,7 +17,7 @@ export(float) var move_duration: float = TWEEN_DURATION
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
-onready var move_tween: Tween = _build_move_tween()
+onready var move_tween: Tween = _set_move_tween()
 
 var current_impulse: Vector2 = Vector2.ZERO
 
@@ -48,9 +48,12 @@ func exit_state(next_state: String):
 	_stop_all_movement()
 
 
-func _build_move_tween() -> Tween:
-	var tween = Tween.new()
-	add_child(tween)
+func _set_move_tween() -> Tween:
+	var tween: Tween = fsm.get_node('StatesTween') as Tween
+	if (not tween):
+		tween = Tween.new()
+		tween.name = 'StatesTween'
+		fsm.add_child(tween)
 	return tween
 	
 

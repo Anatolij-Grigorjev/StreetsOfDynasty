@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
 [ext_resource path="res://characters/states/state_aspects/HurtStateAspect.gd" type="Script" id=7]
-[ext_resource path="res://characters/AreaGroupTimeline.gd" type="Script" id=8]
-[ext_resource path="res://characters/Hitbox.gd" type="Script" id=9]
-[ext_resource path="res://characters/AttackBox.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
@@ -24,60 +21,6 @@
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
-
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 38.2845, 178.026 )
-
-[sub_resource type="RectangleShape2D" id=20]
-extents = Vector2( 52.6578, 185.16 )
-
-[sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 69.0345, 194.518 )
-
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 49.9709, 151.65 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 52.938, 149.277 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 49.9709, 151.65 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 43.0194, 161.963 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 87.4801, 103.608 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 42.1761, 150.383 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 55.0357, 149.606 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 82.7745, 127.069 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 85.375, 97.5963 )
-
-[sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 201.246, 46.767 )
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 138.288, 44.0404 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 67.1864, 96.5775 )
-
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 27.6888, 184.146 )
-
-[sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 67.1864, 96.5775 )
-
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 138.288, 44 )
 
 [sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 58.2059, 5 )
@@ -96,23 +39,16 @@ script = ExtResource( 1 )
 
 [node name="Idle" type="Node" parent="FSM" index="0"]
 script = ExtResource( 4 )
-state_params_filepath = "res://characters/Yu/state_data/idle.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 
 [node name="Walk" type="Node" parent="FSM" index="1"]
 script = ExtResource( 4 )
-state_params_filepath = "res://characters/Yu/state_data/walk.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 
 [node name="WalkStateAspect" type="Node" parent="FSM/Walk" index="0"]
 script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/attack_a1.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-tween_path = NodePath("../../Body/Tween")
+tween_path = NodePath("../StatesTween")
 next_state = "Idle"
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
@@ -124,10 +60,7 @@ collision_mask = 96
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/attack_a2.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-tween_path = NodePath("../../Body/Tween")
+tween_path = NodePath("../StatesTween")
 next_state = "Idle"
 state_commit_end_sec = 0.73
 state_length_sec = 0.8
@@ -142,10 +75,7 @@ script = ExtResource( 14 )
 
 [node name="AttackB2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/attack_b2.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-tween_path = NodePath("../../Body/Tween")
+tween_path = NodePath("../StatesTween")
 next_state = "AttackB2F"
 state_commit_end_sec = 0.5
 state_length_sec = 0.7
@@ -155,10 +85,7 @@ script = ExtResource( 14 )
 
 [node name="AttackB2F" type="Node" parent="FSM" index="5"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/attack_b2f.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
-attackbox_areas_timeline_path = NodePath("../../Body/AttackboxGroup/AttackboxTimeline")
-tween_path = NodePath("../../Body/Tween")
+tween_path = NodePath("../StatesTween")
 next_state = "Idle"
 state_commit_end_sec = 1.5
 state_length_sec = 1.7
@@ -168,8 +95,6 @@ script = ExtResource( 14 )
 
 [node name="HurtLow" type="Node" parent="FSM" index="6"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/hurt_low.json"
-hitbox_areas_timeline_path = NodePath("../../Body/HitboxGroup/HitboxTimeline")
 next_state = "Idle"
 state_commit_end_sec = 1.0
 state_length_sec = 1.2
@@ -191,17 +116,12 @@ entity_path = NodePath("../../..")
 
 [node name="CatchIdle" type="Node" parent="FSM/Catching/FSM" index="0"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/catch_idle.json"
-hitbox_areas_timeline_path = NodePath("../../../../Body/HitboxGroup/HitboxTimeline")
 next_state = "CatchIdle"
 state_commit_end_sec = 5.0
 state_length_sec = 5.0
 
 [node name="CatchAttack" type="Node" parent="FSM/Catching/FSM" index="1"]
 script = ExtResource( 6 )
-state_params_filepath = "res://characters/Yu/state_data/catch_attack.json"
-hitbox_areas_timeline_path = NodePath("../../../../Body/HitboxGroup/HitboxTimeline")
-attackbox_areas_timeline_path = NodePath("../../../../Body/AttackboxGroup/AttackboxTimeline")
 next_state = "CatchIdle"
 state_commit_end_sec = 0.8
 state_length_sec = 0.8
@@ -209,6 +129,8 @@ state_length_sec = 0.8
 [node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="8"]
 script = ExtResource( 23 )
 flash_sound = ExtResource( 24 )
+
+[node name="StatesTween" type="Tween" parent="FSM" index="9"]
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
@@ -220,275 +142,7 @@ frame = 0
 [node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
 pitch_scale = 1.06307
 
-[node name="HitboxGroup" parent="Body" index="1"]
-entity_path = NodePath("../../../YuCharacterMain/Body")
-
-[node name="Idle" type="Area2D" parent="Body/HitboxGroup" index="0"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Idle" index="0"]
-position = Vector2( 3.1915, -160.209 )
-shape = SubResource( 19 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Walk" type="Area2D" parent="Body/HitboxGroup" index="1"]
-visible = false
-collision_layer = 512
-collision_mask = 96
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/Walk" index="0"]
-position = Vector2( -18.3044, -143.205 )
-shape = SubResource( 20 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AttackA1" type="Area2D" parent="Body/HitboxGroup" index="2"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA1" index="0"]
-position = Vector2( -10.6253, -145.493 )
-shape = SubResource( 21 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AttackA2_1" type="Area2D" parent="Body/HitboxGroup" index="3"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_1" index="0"]
-position = Vector2( -2.37372, -156.071 )
-shape = SubResource( 22 )
-
-[node name="AttackA2_2" type="Area2D" parent="Body/HitboxGroup" index="4"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackA2_2" index="0"]
-position = Vector2( -35.6056, -153.104 )
-shape = SubResource( 5 )
-
-[node name="AttackB2" type="Area2D" parent="Body/HitboxGroup" index="5"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackB2" index="0"]
-position = Vector2( -2.37372, -156.071 )
-shape = SubResource( 6 )
-
-[node name="AttackB2F_1" type="Area2D" parent="Body/HitboxGroup" index="6"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackB2F_1" index="0"]
-position = Vector2( 1.10745, -151.873 )
-shape = SubResource( 7 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AttackB2F_2" type="Area2D" parent="Body/HitboxGroup" index="7"]
-visible = false
-collision_layer = 512
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/AttackB2F_2" index="0"]
-position = Vector2( 7.35971, -136.589 )
-shape = SubResource( 8 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HurtLow1" type="Area2D" parent="Body/HitboxGroup" index="8"]
-visible = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/HurtLow1" index="0"]
-position = Vector2( -13.8321, -176.36 )
-shape = SubResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HurtLow2" type="Area2D" parent="Body/HitboxGroup" index="9"]
-visible = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/HurtLow2" index="0"]
-position = Vector2( -37.2366, -142.12 )
-shape = SubResource( 10 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HurtLow3" type="Area2D" parent="Body/HitboxGroup" index="10"]
-visible = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/HurtLow3" index="0"]
-position = Vector2( -62.8082, -119.149 )
-shape = SubResource( 11 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HurtLow4" type="Area2D" parent="Body/HitboxGroup" index="11"]
-visible = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/HitboxGroup/HurtLow4" index="0"]
-position = Vector2( -86.2128, -119.582 )
-shape = SubResource( 12 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HitboxTimeline" type="Node2D" parent="Body/HitboxGroup" index="12"]
-script = ExtResource( 8 )
-
-[node name="AttackboxGroup" parent="Body" index="2"]
-entity_path = NodePath("../../../YuCharacterMain/Body")
-
-[node name="AttackA1" type="Area2D" parent="Body/AttackboxGroup" index="0"]
-visible = false
-collision_layer = 0
-collision_mask = 96
-script = ExtResource( 10 )
-__meta__ = {
-"_editor_description_": ""
-}
-damage_type = 1
-damage_amount = 16.0
-target_move = Vector2( 32, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA1" index="0"]
-position = Vector2( 232.488, -177.854 )
-shape = SubResource( 13 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AttackA2" type="Area2D" parent="Body/AttackboxGroup" index="1"]
-visible = false
-collision_layer = 0
-collision_mask = 96
-script = ExtResource( 10 )
-damage_amount = 20.0
-target_move = Vector2( 80, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackA2" index="0"]
-position = Vector2( 147.093, -196.714 )
-shape = SubResource( 14 )
-
-[node name="AttackB2" type="Area2D" parent="Body/AttackboxGroup" index="2"]
-visible = false
-collision_layer = 0
-collision_mask = 96
-script = ExtResource( 10 )
-damage_amount = 10.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackB2" index="0"]
-position = Vector2( 115.78, -189.433 )
-shape = SubResource( 15 )
-
-[node name="AttackB2F" type="Area2D" parent="Body/AttackboxGroup" index="3"]
-visible = false
-collision_layer = 0
-collision_mask = 352
-script = ExtResource( 10 )
-damage_type = 1
-damage_amount = 33.0
-disruption = 100.0
-target_move = Vector2( 80, 0 )
-attack_recovery = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/AttackB2F" index="0"]
-position = Vector2( 182.471, -142.193 )
-shape = SubResource( 16 )
-
-[node name="CatchAttack1" type="Area2D" parent="Body/AttackboxGroup" index="4"]
-visible = false
-collision_layer = 0
-collision_mask = 128
-script = ExtResource( 10 )
-damage_amount = 10.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/CatchAttack1" index="0"]
-position = Vector2( 115.78, -189.433 )
-shape = SubResource( 17 )
-
-[node name="CatchAttack2" type="Area2D" parent="Body/AttackboxGroup" index="5"]
-visible = false
-collision_layer = 0
-collision_mask = 128
-script = ExtResource( 10 )
-damage_amount = 15.0
-target_move = Vector2( 175, -5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackboxGroup/CatchAttack2" index="0"]
-position = Vector2( 147.093, -196.714 )
-shape = SubResource( 18 )
-
-[node name="AttackboxTimeline" type="Node2D" parent="Body/AttackboxGroup" index="6"]
-script = ExtResource( 8 )
-
-[node name="Tween" type="Tween" parent="Body" index="3"]
-
-[node name="CatchPoint" parent="Body" index="4"]
+[node name="CatchPoint" parent="Body" index="1"]
 position = Vector2( 75.9019, -196.513 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]

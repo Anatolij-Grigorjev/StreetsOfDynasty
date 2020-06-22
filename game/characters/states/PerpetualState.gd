@@ -9,10 +9,6 @@ own State-like lifecycles
 
 #animation to be played during state
 export(String) var state_animation
-#reference to the hitbox groups timeline to animate hitbox groups
-export(NodePath) var hitbox_areas_timeline_path
-#reference to the attack groups timeline to animate attack groups
-export(NodePath) var attackbox_areas_timeline_path
 #path to tween node to help character movement during state
 export(NodePath) var tween_path
 #preserve velocity from previous state
@@ -30,9 +26,7 @@ var hitbox_group_id: String = ""
 
 
 func _ready():
-	
-	_set_move_impulse(state_params)
-	_set_areagroup_timelines(state_params)
+	pass
 	
 
 func process_state(delta: float):
@@ -43,40 +37,18 @@ func process_state(delta: float):
 	
 func enter_state(prev_state: String):
 	.enter_state(prev_state)
-	if (is_instance_valid(hitbox_areas_timeline)):
-		hitbox_areas_timeline.reset(hitbox_group_id)
-	if (is_instance_valid(attackbox_areas_timeline)):
-		attackbox_areas_timeline.reset(attackbox_group_id)
-	
 	if (not keep_velocity):
 		entity.velocity = Vector2()
-	
-	entity.attackboxes.disable_all_areas()
-	entity.hitboxes.disable_all_areas()
-	if (state_params.state_move_impulse != Vector2.ZERO):
-		_move_with_state(
-			state_params.state_move_impulse, 
-			state_params.state_move_duration
-		)
-	if (state_params.state_animation != ""):
-		entity.anim.play(state_params.state_animation)
+
+	if (state_animation != ""):
+		entity.anim.play(state_animation)
 	
 	
 func exit_state(next_state: String):
 	.exit_state(next_state)
-	if (state_params.state_animation != ""):
+	if (state_animation != ""):
 		#reset animation in case it needs to replayed
 		entity.anim.stop(true)
-	
-
-func set_hitboxes_timeline(timeline_items: Array):
-	assert(is_instance_valid(hitbox_areas_timeline))
-	hitbox_areas_timeline.add_group_timeline(hitbox_group_id, timeline_items)
-	
-
-func set_attackboxes_timeline(timeline_items: Array):
-	assert(is_instance_valid(attackbox_areas_timeline))
-	attackbox_areas_timeline.add_group_timeline(attackbox_group_id, timeline_items)
 	
 
 func _move_with_state(
@@ -113,29 +85,3 @@ func _get_move_method(move_type: int) -> String:
 			print("Unknown movement type constant: %s" % move_type)
 			breakpoint
 	return ""
-
-
-		
-func _set_move_impulse(state_params: Dictionary):
-	if (state_params.has("state_move_tiles")):
-		var state_move_tiles: Dictionary = state_params.state_move_tiles as Dictionary
-		assert(state_move_tiles != null)
-		state_params.state_move_impulse = _build_entity_move_impulse(state_move_tiles)
-		state_params.state_move_duration = Utils.get_or_default(state_move_tiles, "duration", 0.2)
-		
-		
-func _build_entity_move_impulse(state_move_tiles: Dictionary) -> Vector2:
-	var move_in_tiles := Utils.dict2vector(state_move_tiles)
-	return Vector2(
-		move_in_tiles.x * owner.move_speed.x,
-		move_in_tiles.y * owner.move_speed.y
-	)
-
-
-func _set_areagroup_timelines(state_params: Dictionary):
-	if (state_params.has('hitboxes_timeline')):
-		hitbox_group_id = name
-		set_hitboxes_timeline(state_params.hitboxes_timeline)
-	if (state_params.has('attackboxes_timeline')):
-		attackbox_group_id = name
-		set_attackboxes_timeline(state_params.attackboxes_timeline)
