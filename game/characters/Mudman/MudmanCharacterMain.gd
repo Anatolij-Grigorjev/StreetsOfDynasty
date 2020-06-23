@@ -5,7 +5,6 @@ Main behavior script for Mudman
 var idle_stability_recovery_per_sec: float = 5
 var hurt_stability_recovery_per_sec: float = 20
 
-onready var rig: Node2D = $Body/MudmanCharacterRig
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
 

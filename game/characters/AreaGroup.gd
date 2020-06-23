@@ -6,6 +6,8 @@ using this area group node
 This group node supports setting one active area or disabling/enabling
 specific areas by node name
 """
+signal area_changed(prev_area_name, next_area_name)
+
 export(NodePath) var entity_path := NodePath("..")
 export(String) var active_area := "" setget switch_to_area
 
@@ -24,9 +26,11 @@ func _ready() -> void:
 Switch to a specific named area and disable all others
 """
 func switch_to_area(area_name: String) -> void:
+	var prev_area = active_area
 	disable_all_areas()
 	enable_area(area_name)
 	active_area = area_name
+	emit_signal("area_changed", prev_area, active_area)
 	
 
 """

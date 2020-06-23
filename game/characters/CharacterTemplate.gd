@@ -35,8 +35,9 @@ var invincibility := false
 
 onready var fsm: CharacterStateMachineTemplate = $FSM
 onready var body: Node2D = $Body
-onready var hitboxes: AreaGroup = $Body/HitboxGroup
-onready var attackboxes: AreaGroup = $Body/AttackboxGroup
+onready var rig: Node2D = _get_rig_node()
+onready var hitboxes: AreaGroup = rig.get_node('HitboxGroup')
+onready var attackboxes: AreaGroup = rig.get_node('AttackboxGroup')
 onready var catch_point: Position2D = $Body/CatchPoint
 onready var caught_point: Position2D = $Body/CaughtPoint
 
@@ -127,3 +128,12 @@ func _receive_damage(hit_connect: HitConnect):
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	pass
+	
+	
+func _get_rig_node() -> Node2D:
+	for node in body.get_children():
+		if (node.name.find('CharacterRig') > -1):
+			return node
+	print("Not found character rig in body nodes! Nodes are: %s" % body.get_children())
+	breakpoint
+	return null

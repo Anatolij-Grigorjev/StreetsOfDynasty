@@ -9,20 +9,11 @@ own State-like lifecycles
 
 #animation to be played during state
 export(String) var state_animation
-#path to tween node to help character movement during state
-export(NodePath) var tween_path
 #preserve velocity from previous state
 export(bool) var keep_velocity: bool = false
 
-
-onready var tween: Tween = get_node(tween_path)
 #next state character transitions into if this state ends
 export(String) var next_state: String = StateMachine.NO_STATE
-
-#group id for timeline processing
-var attackbox_group_id: String = ""
-#group id for timeline processing
-var hitbox_group_id: String = ""
 
 
 func _ready():

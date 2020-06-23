@@ -17,9 +17,13 @@ export(float) var move_duration: float = TWEEN_DURATION
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
-onready var move_tween: Tween = _set_move_tween()
+var move_tween: Tween
 
 var current_impulse: Vector2 = Vector2.ZERO
+
+
+func _ready():
+	call_deferred("_set_move_tween")
 
 
 func enter_state(prev_state: String):
@@ -54,7 +58,8 @@ func _set_move_tween() -> Tween:
 		tween = Tween.new()
 		tween.name = 'StatesTween'
 		fsm.add_child(tween)
-	return tween
+	move_tween = tween
+	return move_tween
 	
 
 func _stop_all_movement():

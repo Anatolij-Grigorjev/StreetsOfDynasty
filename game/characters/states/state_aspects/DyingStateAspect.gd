@@ -7,7 +7,7 @@ before leaving behind corpse
 export(PackedScene) var CorpseScene
 export(Vector2) var corpse_offset = Vector2.ZERO
 
-onready var state: FiniteState = get_parent()
+onready var state: State = get_parent()
 	
 	
 func enter_state(prev_state: String):

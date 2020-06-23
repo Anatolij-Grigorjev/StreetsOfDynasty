@@ -6,7 +6,7 @@
 [ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=4]
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=5]
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform vec4 modulate : hint_color;
@@ -18,13 +18,12 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/modulate = Color( 0.913725, 0.0156863, 0.0156863, 1 )
 shader_param/mix_coef = 1.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "caught"
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -111,8 +110,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "dying"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -199,8 +197,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.498039, 0.498039, 0.498039, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "fallen"
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -275,7 +272,7 @@ tracks/5/keys = {
 "values": [ Vector2( -30.7643, -3.46134 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -350,7 +347,7 @@ tracks/5/keys = {
 "values": [ Vector2( -30.7643, -3.46134 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -437,7 +434,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -524,7 +521,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -615,19 +612,18 @@ tracks/6/keys = {
 [node name="MudmanCharacterRig" instance=ExtResource( 1 )]
 
 [node name="Sprite" parent="." index="0"]
-material = SubResource( 9 )
-position = Vector2( 0.132568, 2.00882 )
+material = SubResource( 2 )
+position = Vector2( -0.707703, 0 )
 rotation = -0.0124779
-texture = ExtResource( 5 )
-offset = Vector2( -30.7643, -3.46134 )
-hframes = 4
-frame = 3
+texture = ExtResource( 2 )
+offset = Vector2( -17.8076, -30.1916 )
+hframes = 5
 
 [node name="AnimationPlayer" parent="." index="1"]
-anims/caught = SubResource( 1 )
-anims/dying = SubResource( 2 )
-anims/fallen = SubResource( 3 )
-anims/falling = SubResource( 4 )
-anims/hurt = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/walk = SubResource( 7 )
+anims/caught = SubResource( 3 )
+anims/dying = SubResource( 4 )
+anims/fallen = SubResource( 5 )
+anims/falling = SubResource( 6 )
+anims/hurt = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/walk = SubResource( 9 )
