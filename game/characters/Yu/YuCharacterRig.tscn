@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -17,9 +17,7 @@
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=16]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=17]
-[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
-[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -133,6 +131,37 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath("HitboxGroup")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "AttackB2" ],
+"method": "switch_to_area"
+} ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath("AttackboxGroup")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "AttackB2" ],
+"method": "switch_to_area"
+}, {
+"args": [ "AttackB2" ],
+"method": "disable_area"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -421,6 +450,43 @@ tracks/22/keys = {
 "method": "request_color_flash"
 } ]
 }
+tracks/23/type = "method"
+tracks/23/path = NodePath("HitboxGroup")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ "AttackB2F_1" ],
+"method": "switch_to_area"
+}, {
+"args": [ "AttackB2F_2" ],
+"method": "switch_to_area"
+}, {
+"args": [ "AttackB2F_1" ],
+"method": "switch_to_area"
+} ]
+}
+tracks/24/type = "method"
+tracks/24/path = NodePath("AttackboxGroup")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0.8, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "AttackB2F" ],
+"method": "switch_to_area"
+}, {
+"args": [ "AttackB2F" ],
+"method": "disable_area"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.8
@@ -707,9 +773,10 @@ extents = Vector2( 85.375, 97.5963 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 18 )
-offset = Vector2( -58.468, 4.86353 )
-hframes = 5
+texture = ExtResource( 11 )
+offset = Vector2( -12.7559, -15.6804 )
+hframes = 15
+frame = 11
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -717,11 +784,9 @@ script = ExtResource( 14 )
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
-show_behind_parent = true
-position = Vector2( 231.353, -70.2303 )
-rotation = -2.90924
-texture = ExtResource( 21 )
-flip_h = true
+position = Vector2( 98.2338, -66.2318 )
+rotation = 0.017968
+texture = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -748,6 +813,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
+pitch_scale = 1.25
 __meta__ = {
 "_editor_description_": ""
 }
