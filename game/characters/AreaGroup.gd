@@ -26,7 +26,7 @@ func _ready() -> void:
 Switch to a specific named area and disable all others
 """
 func switch_to_area(area_name: String) -> void:
-	var prev_area = active_area
+	var prev_area = null if active_area.empty() else active_area
 	disable_all_areas()
 	enable_area(area_name)
 	active_area = area_name

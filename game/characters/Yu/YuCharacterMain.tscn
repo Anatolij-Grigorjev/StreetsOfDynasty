@@ -23,7 +23,7 @@
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 58.2059, 5 )
+extents = Vector2( 60, 5 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -55,6 +55,7 @@ next_state = "Idle"
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 14 )
+attack_area_names = [ "AttackA1" ]
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 15 )
@@ -74,6 +75,7 @@ collision_mask = 96
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA2" index="1"]
 script = ExtResource( 14 )
+attack_area_names = [ "AttackA2" ]
 
 [node name="AttackB2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
@@ -147,7 +149,6 @@ offset = Vector2( -69.6703, 0.57772 )
 pitch_scale = 1.06307
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
-position = Vector2( 0, 0 )
 entity_path = NodePath("..")
 
 [node name="CatchPoint" parent="Body" index="1"]

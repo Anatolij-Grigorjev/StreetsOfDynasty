@@ -97,7 +97,7 @@ script = ExtResource( 3 )
 next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
-position = Vector2( 0, -75 )
+position = Vector2( 0, -40 )
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )
@@ -150,7 +150,7 @@ HitSoundFx = ExtResource( 26 )
 position = Vector2( 60.676, -103.885 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0, 10 )
+position = Vector2( 0, 45 )
 shape = SubResource( 1 )
 
 [node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]

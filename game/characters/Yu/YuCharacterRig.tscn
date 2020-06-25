@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=16]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=17]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
+[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -715,28 +716,28 @@ tracks/4/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 201.246, 46.767 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 138.288, 44.0404 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 67.1864, 96.5775 )
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 27.6888, 184.146 )
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 70.1337, 184.146 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 67.1864, 96.5775 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 138.288, 44 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 38.2845, 178.026 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 52.6578, 185.16 )
 
 [sub_resource type="RectangleShape2D" id=13]
@@ -773,20 +774,20 @@ extents = Vector2( 85.375, 97.5963 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 11 )
-offset = Vector2( -12.7559, -15.6804 )
-hframes = 15
-frame = 11
+texture = ExtResource( 9 )
+offset = Vector2( -122.713, 12.7595 )
+hframes = 8
+frame = 1
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 98.2338, -66.2318 )
 rotation = 0.017968
-texture = ExtResource( 4 )
+texture = ExtResource( 21 )
+flip_h = true
 __meta__ = {
 "_editor_description_": ""
 }
@@ -813,7 +814,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
-pitch_scale = 1.25
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }
@@ -826,7 +827,6 @@ script = ExtResource( 15 )
 flash_sound = ExtResource( 16 )
 
 [node name="AttackboxGroup" parent="." index="7"]
-position = Vector2( -5, 150 )
 entity_path = NodePath("")
 
 [node name="AttackA1" type="Area2D" parent="AttackboxGroup" index="0"]
@@ -842,8 +842,8 @@ damage_amount = 16.0
 target_move = Vector2( 32, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA1" index="0"]
-position = Vector2( 232.488, -177.854 )
-shape = SubResource( 5 )
+position = Vector2( 235, -30 )
+shape = SubResource( 23 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -857,8 +857,8 @@ damage_amount = 20.0
 target_move = Vector2( 80, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA2" index="0"]
-position = Vector2( 147.093, -196.714 )
-shape = SubResource( 6 )
+position = Vector2( 135, -40 )
+shape = SubResource( 24 )
 
 [node name="AttackB2" type="Area2D" parent="AttackboxGroup" index="2"]
 visible = false
@@ -868,8 +868,8 @@ script = ExtResource( 17 )
 damage_amount = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2" index="0"]
-position = Vector2( 115.78, -189.433 )
-shape = SubResource( 7 )
+position = Vector2( 116, -53 )
+shape = SubResource( 25 )
 
 [node name="AttackB2F" type="Area2D" parent="AttackboxGroup" index="3"]
 visible = false
@@ -883,8 +883,8 @@ target_move = Vector2( 80, 0 )
 attack_recovery = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2F" index="0"]
-position = Vector2( 182.471, -142.193 )
-shape = SubResource( 8 )
+position = Vector2( 150, -20 )
+shape = SubResource( 26 )
 
 [node name="CatchAttack1" type="Area2D" parent="AttackboxGroup" index="4"]
 visible = false
@@ -895,7 +895,7 @@ damage_amount = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
 position = Vector2( 115.78, -189.433 )
-shape = SubResource( 9 )
+shape = SubResource( 27 )
 
 [node name="CatchAttack2" type="Area2D" parent="AttackboxGroup" index="5"]
 visible = false
@@ -907,10 +907,9 @@ target_move = Vector2( 175, -5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack2" index="0"]
 position = Vector2( 147.093, -196.714 )
-shape = SubResource( 10 )
+shape = SubResource( 28 )
 
 [node name="HitboxGroup" parent="." index="8"]
-position = Vector2( 10, 160 )
 entity_path = NodePath("")
 
 [node name="Idle" type="Area2D" parent="HitboxGroup" index="0"]
@@ -923,8 +922,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Idle" index="0"]
-position = Vector2( 3.1915, -160.209 )
-shape = SubResource( 11 )
+shape = SubResource( 29 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -939,8 +937,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Walk" index="0"]
-position = Vector2( -18.3044, -143.205 )
-shape = SubResource( 12 )
+shape = SubResource( 30 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -955,7 +952,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA1" index="0"]
-position = Vector2( -10.6253, -145.493 )
 shape = SubResource( 13 )
 __meta__ = {
 "_editor_description_": ""
@@ -968,7 +964,6 @@ collision_mask = 0
 script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA2_1" index="0"]
-position = Vector2( -2.37372, -156.071 )
 shape = SubResource( 14 )
 
 [node name="AttackA2_2" type="Area2D" parent="HitboxGroup" index="4"]
@@ -978,7 +973,7 @@ collision_mask = 0
 script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA2_2" index="0"]
-position = Vector2( -35.6056, -153.104 )
+position = Vector2( -35, 0 )
 shape = SubResource( 15 )
 
 [node name="AttackB2" type="Area2D" parent="HitboxGroup" index="5"]
@@ -988,7 +983,6 @@ collision_mask = 0
 script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2" index="0"]
-position = Vector2( -2.37372, -156.071 )
 shape = SubResource( 16 )
 
 [node name="AttackB2F_1" type="Area2D" parent="HitboxGroup" index="6"]
@@ -1001,7 +995,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2F_1" index="0"]
-position = Vector2( 1.10745, -151.873 )
 shape = SubResource( 17 )
 __meta__ = {
 "_editor_description_": ""
@@ -1017,7 +1010,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2F_2" index="0"]
-position = Vector2( 7.35971, -136.589 )
 shape = SubResource( 18 )
 __meta__ = {
 "_editor_description_": ""

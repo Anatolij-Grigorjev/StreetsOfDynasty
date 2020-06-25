@@ -159,6 +159,7 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 	):
 		next_attack_input = attack_input
 
+
 func _start_special_flash():
 	var flasher = $SpriteColorFlashRequestor
 	flasher.request_color_flash(Color.blue, 0.2, 0.8, 0.5)

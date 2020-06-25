@@ -22,14 +22,17 @@ func _connect_signals():
 
 
 func _on_attackbox_group_area_changed(prev_area_name, next_area_name):
-	if (
-		not (
-			attack_area_names.has(prev_area_name) 
-			or attack_area_names.has(next_area_name)
-		)
-	):
+	if (_area_transition_unrelated(prev_area_name, next_area_name)):
 		return
 	if (prev_area_name and not next_area_name):
 		attack_phase = C.AttackPhase.WIND_DOWN
 	elif (not prev_area_name and next_area_name):
 		attack_phase = C.AttackPhase.HIT
+		
+		
+func _area_transition_unrelated(prev_area_name, next_area_name) -> bool:
+	return (
+		(not attack_area_names.has(prev_area_name))
+			and
+		(not attack_area_names.has(next_area_name))
+	)
