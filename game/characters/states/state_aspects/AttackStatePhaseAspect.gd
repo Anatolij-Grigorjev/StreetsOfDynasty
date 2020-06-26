@@ -5,7 +5,10 @@ This state aspect is intended to use for attack states
 this will follow singlas from attackbox timeline and set the 
 correct phase based on those changes
 """
-export(Array, String) var attack_area_names := []
+export(Dictionary) var phase_toggle_patterns = {
+	C.AttackPhase.HIT: [],
+	C.AttackPhase.WIND_DOWN: []
+}
 
 onready var attack_state: FiniteState = get_parent()
 var attack_phase: int
@@ -18,21 +21,22 @@ func _ready():
 	
 func _connect_signals():
 	var attack_area_group = attack_state.entity.attackboxes as AreaGroup
-	attack_area_group.connect("area_changed", self, "_on_attackbox_group_area_changed")
+	attack_area_group.connect("area_toggled", self, "_on_attackbox_group_area_toggled")
 
 
-func _on_attackbox_group_area_changed(prev_area_name, next_area_name):
-	if (_area_transition_unrelated(prev_area_name, next_area_name)):
-		return
-	if (prev_area_name and not next_area_name):
-		attack_phase = C.AttackPhase.WIND_DOWN
-	elif (not prev_area_name and next_area_name):
-		attack_phase = C.AttackPhase.HIT
+func _on_attackbox_group_area_toggled(area_name, enabled):
+	var next_phase = _get_next_attack_phase()
+	if (next_phase > 0):
+		var next_phase_pattern: Array = phase_toggle_patterns[next_phase]
+		if (_event_matches_pattern(area_name, enabled, next_phase_pattern)):
+			attack_phase = next_phase
 		
 		
-func _area_transition_unrelated(prev_area_name, next_area_name) -> bool:
-	return (
-		(not attack_area_names.has(prev_area_name))
-			and
-		(not attack_area_names.has(next_area_name))
-	)
+func _get_next_attack_phase() -> int:
+	return (attack_phase + 1) if attack_phase < C.AttackPhase.WIND_DOWN else 0
+	
+	
+func _event_matches_pattern(event_area_name, event_enabled, pattern_array) -> bool:
+	if (pattern_array == null or pattern_array.empty()):
+		return false
+	return pattern_array[0] == event_area_name and pattern_array[1] == event_enabled

@@ -1,12 +1,12 @@
 extends Node2D
 class_name AreaGroup
 """
-If areas are put as children of this node they can be managed
-using this area group node
+This node can manage direct Area child nodes by enabling/disabling
+their collider areas.
 This group node supports setting one active area or disabling/enabling
 specific areas by node name
 """
-signal area_changed(prev_area_name, next_area_name)
+signal area_toggled(area_name, enabled)
 
 export(NodePath) var entity_path := NodePath("..")
 export(String) var active_area := "" setget switch_to_area
@@ -26,11 +26,8 @@ func _ready() -> void:
 Switch to a specific named area and disable all others
 """
 func switch_to_area(area_name: String) -> void:
-	var prev_area = null if active_area.empty() else active_area
 	disable_all_areas()
 	enable_area(area_name)
-	active_area = area_name
-	emit_signal("area_changed", prev_area, active_area)
 	
 
 """
@@ -49,14 +46,16 @@ func disable_area(area_name: String):
 		
 func _toggle_area_enabled(area_name: String, enable: bool) -> void:
 	if (all_areas.has(area_name)):
-		_get_area_shape(all_areas[area_name]).disabled = not enable
-		all_areas[area_name].visible = enable
+		var area_shape = _get_area_shape(all_areas[area_name])
+		if (area_shape.disabled != (not enable)):
+			area_shape.disabled = not enable
+			all_areas[area_name].visible = enable
+			emit_signal("area_toggled", area_name, enable)
 
 
 func disable_all_areas() -> void:
 	for area_name in all_areas:
-		_get_area_shape(all_areas[area_name]).disabled = true
-		all_areas[area_name].visible = false
+		_toggle_area_enabled(area_name, false)
 		
 		
 func get_enabled_areas() -> Array:
