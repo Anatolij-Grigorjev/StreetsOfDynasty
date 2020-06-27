@@ -5,18 +5,20 @@ This state aspect is intended to use for attack states
 this will follow singlas from attackbox timeline and set the 
 correct phase based on those changes
 """
-export(Dictionary) var phase_toggle_patterns = {
-	C.AttackPhase.HIT: [],
-	C.AttackPhase.WIND_DOWN: []
-}
+export(Dictionary) var custom_phase_toggle_patterns = {}
 
 onready var attack_state: FiniteState = get_parent()
 var attack_phase: int
+var phase_toggle_patterns: Dictionary = {}
 
 
 func _ready():
 	call_deferred("_connect_signals")
 	attack_phase = C.AttackPhase.WIND_UP
+	if (custom_phase_toggle_patterns.empty()):
+		phase_toggle_patterns = _build_default_phase_toggle_patterns()
+	else:
+		phase_toggle_patterns = custom_phase_toggle_patterns
 	
 	
 func _connect_signals():
@@ -40,3 +42,10 @@ func _event_matches_pattern(event_area_name, event_enabled, pattern_array) -> bo
 	if (pattern_array == null or pattern_array.empty()):
 		return false
 	return pattern_array[0] == event_area_name and pattern_array[1] == event_enabled
+	
+	
+func _build_default_phase_toggle_patterns() -> Dictionary:
+	return {
+		C.AttackPhase.HIT: [attack_state.name, true],
+		C.AttackPhase.WIND_DOWN: [attack_state.name, false]
+	}

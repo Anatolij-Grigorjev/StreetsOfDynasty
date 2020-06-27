@@ -55,14 +55,15 @@ next_state = "Idle"
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 14 )
-phase_toggle_patterns = {
-1: [ "AttackA1", true ],
-2: [ "AttackA1", false ]
-}
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 15 )
 collision_mask = 96
+
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+script = ExtResource( 5 )
+move_speed = Vector2( 35, 10 )
+change_facing = false
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )
@@ -81,10 +82,6 @@ script = ExtResource( 14 )
 __meta__ = {
 "_editor_description_": ""
 }
-phase_toggle_patterns = {
-1: [ "AttackA2", true ],
-2: [ "AttackA2", false ]
-}
 
 [node name="AttackB2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
@@ -97,10 +94,6 @@ state_length_sec = 0.7
 script = ExtResource( 14 )
 __meta__ = {
 "_editor_description_": ""
-}
-phase_toggle_patterns = {
-1: [ "AttackB2", true ],
-2: [ "AttackB2", false ]
 }
 
 [node name="AttackB2F" type="Node" parent="FSM" index="5"]

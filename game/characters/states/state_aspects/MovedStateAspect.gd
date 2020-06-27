@@ -5,15 +5,13 @@ A state aspect that allows a character to be moved by
 a controlled motion with aspects like facing/speed/etc 
 set by the external mover
 """
-const TWEEN_DURATION = 0.25
-
 enum Easing {
 	GENTLE = 0,
 	HALFWAY = 1,
 	ALL_IN = 2
 }
 export(Vector2) var move_impulse: Vector2 = Vector2.ZERO
-export(float) var move_duration: float = TWEEN_DURATION
+export(float) var move_duration: float = 0.25
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
@@ -28,6 +26,7 @@ func _ready():
 
 func enter_state(prev_state: String):
 	.enter_state(prev_state)
+	Debug.log_info("move impulse: %s", [move_impulse])
 	if (move_impulse == Vector2.ZERO):
 		return
 	var transition_easing = _get_move_easing_tween_props()
@@ -66,7 +65,6 @@ func _stop_all_movement():
 	move_tween.stop_all()
 	move_tween.remove_all()
 	current_impulse = Vector2.ZERO
-	move_impulse = Vector2.ZERO
 	
 	
 func _get_move_easing_tween_props() -> Array:
