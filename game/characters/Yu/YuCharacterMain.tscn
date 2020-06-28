@@ -96,6 +96,11 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackB2" index="1"]
+script = ExtResource( 5 )
+move_speed = Vector2( 45, 5 )
+change_facing = false
+
 [node name="AttackB2F" type="Node" parent="FSM" index="5"]
 script = ExtResource( 6 )
 state_animation = "attack_b2f"

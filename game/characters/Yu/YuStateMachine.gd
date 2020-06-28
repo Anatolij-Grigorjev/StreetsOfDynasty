@@ -93,9 +93,6 @@ func _get_next_state(delta: float) -> String:
 				_clear_next_attack_input()
 				consecutive_b2_hits += 1
 				return "AttackB2"
-			if (move_direction != Vector2.ZERO):
-				consecutive_b2_hits = 0
-				return "Walk"
 			if (attack_state.is_state_over):
 				consecutive_b2_hits = 0
 				return _next_or_default(attack_state)
