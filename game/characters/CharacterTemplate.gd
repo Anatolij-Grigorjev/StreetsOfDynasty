@@ -108,7 +108,7 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
 		print(
 			"target_move: %s, attacker facing: %s, target facing: %s" % 
-			[attackbox.target_move, attackbox.owner.facing, facing]
+			[attackbox.target_move, attackbox._get_owner_entity().facing, facing]
 		)
 		var displacement = attackbox.target_move * attack_facing
 		return displacement

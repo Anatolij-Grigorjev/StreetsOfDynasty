@@ -31,10 +31,12 @@ func _to_string():
 	
 	
 func _on_area_entered(area: Area2D):
-	if (area.owner != owner and 
-	not area.owner.invincibility):
-		var target_pos = area.owner.global_position
-		var pos = owner.global_position
+	var enemy_hitbox_owner = _get_owner_entity(area)
+	var this_hitbox_owner = _get_owner_entity()
+	if (enemy_hitbox_owner != this_hitbox_owner and 
+	not enemy_hitbox_owner.invincibility):
+		var target_pos = enemy_hitbox_owner.global_position
+		var pos = this_hitbox_owner.global_position
 		if (abs(target_pos.y - pos.y) <= catch_radius):
 			emit_signal("hitbox_catch", area)
 		else:
@@ -45,3 +47,11 @@ func _on_area_entered(area: Area2D):
 				'color': Color.blue,
 				'duration': 0.5
 			})
+			
+			
+func _get_owner_entity(area: Area2D = self) -> Node2D:
+	var area_group: AreaGroup = area.get_parent() as AreaGroup
+	if (not area_group):
+		print("parent not areagroup!")
+		breakpoint
+	return area_group.entity as Node2D

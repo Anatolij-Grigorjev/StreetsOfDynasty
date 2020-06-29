@@ -19,8 +19,8 @@ func _init(hitbox, attackbox, attack_damage):
 	self.hitbox = hitbox
 	self.attackbox = attackbox
 	self.overlap = Utils.get_collision_rects_overlap(hitbox.shape, attackbox.shape)
-	self.attacker = attackbox.owner
-	self.receiver = hitbox.owner
+	self.attacker = attackbox._get_owner_entity()
+	self.receiver = hitbox._get_owner_entity()
 	self.attack_facing = attacker.facing
 	self.attack_damage_type = attackbox.damage_type
 	self.attack_damage = attack_damage

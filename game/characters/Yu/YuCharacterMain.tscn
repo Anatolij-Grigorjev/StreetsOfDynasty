@@ -163,7 +163,10 @@ offset = Vector2( -69.6703, 0.57772 )
 pitch_scale = 1.06307
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
-entity_path = NodePath("..")
+entity_path = NodePath("../../..")
+
+[node name="HitboxGroup" parent="Body/YuCharacterRig" index="8"]
+entity_path = NodePath("../../..")
 
 [node name="CatchPoint" parent="Body" index="1"]
 position = Vector2( 75.9019, -196.513 )
