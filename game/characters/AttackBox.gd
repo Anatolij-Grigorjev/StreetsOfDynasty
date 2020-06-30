@@ -61,7 +61,7 @@ func process_attack() -> void:
 			
 
 func _record_hitbox_recovery(hitbox: Hitbox):
-	recent_attacks.add_item(_get_owner_entity(hitbox))
+	recent_attacks.add_item(Utils.get_areagroup_area_owner(hitbox))
 
 
 func _process(delta: float):
@@ -81,8 +81,8 @@ func _on_area_exited(area: Area2D) -> void:
 	
 	
 func _is_valid_hitbox(area: Area2D) -> bool:
-	var this_owner = _get_owner_entity()
-	var area_owner = _get_owner_entity(area)
+	var this_owner = Utils.get_areagroup_area_owner(self)
+	var area_owner = Utils.get_areagroup_area_owner(area)
 	return (
 		is_instance_valid(area) 
 		and area is Hitbox
@@ -91,7 +91,7 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 	
 	
 func _entity_in_radius(hitbox_owner: Node2D) -> bool:
-	var this_owner = _get_owner_entity()
+	var this_owner = Utils.get_areagroup_area_owner(self)
 	var attacker_position = this_owner.global_position
 	var receiver_position = hitbox_owner.global_position
 	Debug.add_global_draw({
@@ -107,7 +107,7 @@ func _entity_in_radius(hitbox_owner: Node2D) -> bool:
 	
 	
 func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:
-	var hitbox_owner = _get_owner_entity(hitbox)
+	var hitbox_owner = Utils.get_areagroup_area_owner(hitbox)
 	return (
 		#hitbox is enabled
 		not hitbox.shape.disabled
@@ -121,12 +121,4 @@ func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:
 	
 	
 func _to_string():
-	return "AB[%s:%s]" % [_get_owner_entity(), name]
-	
-	
-func _get_owner_entity(area: Area2D = self) -> Node2D:
-	var area_group: AreaGroup = area.get_parent() as AreaGroup
-	if (not area_group):
-		print("parent not areagroup!")
-		breakpoint
-	return area_group.entity as Node2D
+	return "AB[%s:%s]" % [Utils.get_areagroup_area_owner(self), name]

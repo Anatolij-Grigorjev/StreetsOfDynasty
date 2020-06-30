@@ -56,14 +56,14 @@ next_state = "Idle"
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 14 )
 
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
-script = ExtResource( 15 )
-collision_mask = 96
-
-[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 5 )
 move_speed = Vector2( 35, 10 )
 change_facing = false
+
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+script = ExtResource( 15 )
+collision_mask = 96
 
 [node name="AttackA2" type="Node" parent="FSM" index="3"]
 script = ExtResource( 6 )

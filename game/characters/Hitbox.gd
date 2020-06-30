@@ -31,8 +31,8 @@ func _to_string():
 	
 	
 func _on_area_entered(area: Area2D):
-	var enemy_hitbox_owner = _get_owner_entity(area)
-	var this_hitbox_owner = _get_owner_entity()
+	var enemy_hitbox_owner = Utils.get_areagroup_area_owner(area)
+	var this_hitbox_owner = Utils.get_areagroup_area_owner(self)
 	if (enemy_hitbox_owner != this_hitbox_owner and 
 	not enemy_hitbox_owner.invincibility):
 		var target_pos = enemy_hitbox_owner.global_position
@@ -47,11 +47,3 @@ func _on_area_entered(area: Area2D):
 				'color': Color.blue,
 				'duration': 0.5
 			})
-			
-			
-func _get_owner_entity(area: Area2D = self) -> Node2D:
-	var area_group: AreaGroup = area.get_parent() as AreaGroup
-	if (not area_group):
-		print("parent not areagroup!")
-		breakpoint
-	return area_group.entity as Node2D

@@ -147,3 +147,16 @@ static func join_to_string(elems: Array) -> String:
 		cont_string += ("%s" % elem)
 	
 	return cont_string
+	
+
+"""
+Attempt to resolve owner entity of this area which is assumed
+a child of an AreaGroup node.
+In case an entity is not resolved the function returns null
+"""
+static func get_areagroup_area_owner(area: Area2D) -> Node2D:
+	var area_group: AreaGroup = area.get_parent() as AreaGroup
+	if (not area_group):
+		print("parent not areagroup!")
+		return null
+	return area_group.entity as Node2D

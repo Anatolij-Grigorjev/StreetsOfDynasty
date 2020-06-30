@@ -28,8 +28,8 @@ export(float) var total_stability: float = 100
 
 var velocity = Vector2()
 var facing: int = 1 setget set_facing
-var health := total_health
-var stability := total_stability
+var health : float
+var stability : float
 var invincibility := false
 
 
@@ -43,6 +43,8 @@ onready var caught_point: Position2D = $Body/CaughtPoint
 
 
 func _ready() -> void:
+	health = total_health
+	stability = total_stability
 	
 	fsm.connect("state_changed", self, "_on_FSM_state_changed")
 	
@@ -108,7 +110,7 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
 		print(
 			"target_move: %s, attacker facing: %s, target facing: %s" % 
-			[attackbox.target_move, attackbox._get_owner_entity().facing, facing]
+			[attackbox.target_move, Utils.get_areagroup_area_owner(attackbox).facing, facing]
 		)
 		var displacement = attackbox.target_move * attack_facing
 		return displacement
