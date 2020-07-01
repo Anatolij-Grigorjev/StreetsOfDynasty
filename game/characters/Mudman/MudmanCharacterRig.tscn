@@ -708,13 +708,13 @@ extents = Vector2( 120.143, 38.7073 )
 [node name="MudmanCharacterRig" instance=ExtResource( 1 )]
 
 [node name="Sprite" parent="." index="0"]
+self_modulate = Color( 0.498039, 0.498039, 0.498039, 1 )
 material = SubResource( 2 )
-position = Vector2( 0.132568, 2.00882 )
+position = Vector2( 1.95236, 18.3814 )
 rotation = -0.0124779
-texture = ExtResource( 5 )
-offset = Vector2( -30.7643, -3.46134 )
-hframes = 4
-frame = 3
+texture = ExtResource( 3 )
+offset = Vector2( -4.53467, -35.8119 )
+hframes = 6
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/caught = SubResource( 3 )

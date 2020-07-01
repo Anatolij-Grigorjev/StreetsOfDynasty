@@ -108,12 +108,12 @@ shape = SubResource( 4 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 199.514, 429.942 )
+position = Vector2( 199.514, 431 )
 scale = Vector2( 0.75, 0.75 )
 collision_mask = 1
 
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 503.695, 431.048 )
+position = Vector2( 503.695, 431 )
 collision_mask = 1
 
 [node name="Corpses" type="YSort" parent="YSort" groups=[

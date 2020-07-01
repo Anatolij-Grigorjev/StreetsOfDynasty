@@ -84,7 +84,6 @@ region_rect = Rect2( 308, 42, 140, 64 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.498039, 0.498039, 0.498039, 1 )
-position = Vector2( 0.144592, 2.50217 )
 texture = ExtResource( 1 )
 offset = Vector2( -31.0676, -94.665 )
 region_enabled = true

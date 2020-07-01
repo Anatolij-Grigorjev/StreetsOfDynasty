@@ -95,6 +95,7 @@ state_animation = "dying"
 [node name="DyingStateAspect" type="Node" parent="FSM/Dying" index="0"]
 script = ExtResource( 17 )
 CorpseScene = ExtResource( 18 )
+corpse_offset = Vector2( 0, 20 )
 
 [node name="Logger" type="Node" parent="FSM" index="6"]
 script = ExtResource( 12 )
@@ -105,10 +106,10 @@ script = ExtResource( 3 )
 next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
-position = Vector2( 0, -40 )
+position = Vector2( 0, -52 )
 
 [node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
-position = Vector2( -0.707703, 0 )
+rotation = 0.0
 texture = ExtResource( 6 )
 offset = Vector2( -17.8076, -30.1916 )
 hframes = 5
@@ -168,7 +169,7 @@ entity_path = NodePath("../../..")
 position = Vector2( 60.676, -103.885 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0, 45 )
+position = Vector2( 0, 40 )
 shape = SubResource( 1 )
 
 [node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]
