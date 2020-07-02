@@ -716,28 +716,28 @@ tracks/4/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="RectangleShape2D" id=23]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 201.246, 46.767 )
 
-[sub_resource type="RectangleShape2D" id=24]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 138.288, 44.0404 )
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 67.1864, 96.5775 )
 
-[sub_resource type="RectangleShape2D" id=26]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 70.1337, 184.146 )
 
-[sub_resource type="RectangleShape2D" id=27]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 67.1864, 96.5775 )
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 138.288, 44 )
 
-[sub_resource type="RectangleShape2D" id=29]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 38.2845, 178.026 )
 
-[sub_resource type="RectangleShape2D" id=30]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 52.6578, 185.16 )
 
 [sub_resource type="RectangleShape2D" id=13]
@@ -843,7 +843,7 @@ target_move = Vector2( 32, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA1" index="0"]
 position = Vector2( 235, -30 )
-shape = SubResource( 23 )
+shape = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -858,7 +858,7 @@ target_move = Vector2( 80, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA2" index="0"]
 position = Vector2( 135, -40 )
-shape = SubResource( 24 )
+shape = SubResource( 6 )
 
 [node name="AttackB2" type="Area2D" parent="AttackboxGroup" index="2"]
 visible = false
@@ -869,7 +869,7 @@ damage_amount = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2" index="0"]
 position = Vector2( 116, -53 )
-shape = SubResource( 25 )
+shape = SubResource( 7 )
 
 [node name="AttackB2F" type="Area2D" parent="AttackboxGroup" index="3"]
 visible = false
@@ -884,7 +884,7 @@ attack_recovery = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2F" index="0"]
 position = Vector2( 150, -20 )
-shape = SubResource( 26 )
+shape = SubResource( 8 )
 
 [node name="CatchAttack1" type="Area2D" parent="AttackboxGroup" index="4"]
 visible = false
@@ -895,7 +895,7 @@ damage_amount = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
 position = Vector2( 115.78, -189.433 )
-shape = SubResource( 27 )
+shape = SubResource( 9 )
 
 [node name="CatchAttack2" type="Area2D" parent="AttackboxGroup" index="5"]
 visible = false
@@ -907,7 +907,7 @@ target_move = Vector2( 175, -5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack2" index="0"]
 position = Vector2( 147.093, -196.714 )
-shape = SubResource( 28 )
+shape = SubResource( 10 )
 
 [node name="HitboxGroup" parent="." index="8"]
 entity_path = NodePath("")
@@ -922,7 +922,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Idle" index="0"]
-shape = SubResource( 29 )
+shape = SubResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -937,7 +937,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Walk" index="0"]
-shape = SubResource( 30 )
+shape = SubResource( 12 )
 __meta__ = {
 "_editor_description_": ""
 }

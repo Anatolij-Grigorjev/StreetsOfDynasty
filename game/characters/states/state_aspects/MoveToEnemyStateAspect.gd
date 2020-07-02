@@ -96,7 +96,8 @@ func _process(delta):
 	#use hit position to move there
 	if (_is_hit_position_valid(hit_dict)):
 		Debug.log_debug("RAYCAST: got valid hit info %s" % hit_dict)
-		_move_towards_hit_position(hit_dict.collider.global_position)
+		var hit_owner = Utils.get_areagroup_area_owner(hit_dict.collider)
+		_move_towards_hit_position(hit_owner.global_position)
 		#disable physics to stop further checking
 		set_process(false)
 	
@@ -121,10 +122,10 @@ func _is_hit_position_valid(hit_dict: Dictionary) -> bool:
 	return hit_dict.has("hit") && hit_dict.hit
 	
 	
-func _move_towards_hit_position(hit_position: Vector2):
+func _move_towards_hit_position(hit_owner_position: Vector2):
 	var position := entity.global_position as Vector2
-	var moved_position := position.move_toward(hit_position, max_move)
-	print("moving from %s to %s up to %s" % [position, hit_position, moved_position])
+	var moved_position := position.move_toward(hit_owner_position, max_move)
+	print("moving from %s to %s up to %s" % [position, hit_owner_position, moved_position])
 	var needed_movement := (moved_position - position)
 	var needed_movement_distanced := needed_movement - Vector2(min_target_distance, 0)
 	#move for this much impulse in 0.15 seconds
@@ -141,6 +142,7 @@ func _check_ray_in_front() -> Dictionary:
 	
 
 func _check_ray(ray: RayCast2D) -> Dictionary:
+
 	return {
 		'hit': ray.is_colliding(),
 		'position': ray.get_collision_point(),

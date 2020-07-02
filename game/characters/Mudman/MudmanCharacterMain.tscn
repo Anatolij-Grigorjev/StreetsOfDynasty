@@ -36,7 +36,6 @@ bg_color = Color( 0, 0, 0, 1 )
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 move_speed = Vector2( 200, 100 )
-total_health = 1.0
 
 [node name="FSM" parent="." index="0"]
 script = ExtResource( 8 )
@@ -113,7 +112,6 @@ rotation = 0.0
 texture = ExtResource( 6 )
 offset = Vector2( -17.8076, -30.1916 )
 hframes = 5
-frame = 0
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )

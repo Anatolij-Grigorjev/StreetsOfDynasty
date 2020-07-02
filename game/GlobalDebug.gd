@@ -67,10 +67,8 @@ func _draw():
 		match(drawing.type):
 			DRAW_TYPE_LINE:
 				draw_line(drawing.from, drawing.to, color, 15.0)
-				break
 			DRAW_TYPE_CIRCLE:
 				draw_circle(drawing.center, drawing.radius, color)
-				break
 			_:
 				LOG.warn("Unsupported drawing type {}", drawing.type)
 				breakpoint
