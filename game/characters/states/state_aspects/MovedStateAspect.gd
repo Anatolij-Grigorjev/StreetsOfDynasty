@@ -10,8 +10,23 @@ enum Easing {
 	HALFWAY = 1,
 	ALL_IN = 2
 }
+
+"""
+The total movement impulse that this aspect will communicate
+to entity via dedicated FSM mover tween
+"""
 export(Vector2) var move_impulse: Vector2 = Vector2.ZERO
+"""
+Amount of time there should be movement in seconds
+"""
 export(float) var move_duration: float = 0.25
+"""
+If true the aspect will keep impulse provided during previous
+invocation. 
+This way any state with this aspect will keep moving 
+even without new explicit impulse
+"""
+export(bool) var preserve_impulse: bool = false
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
@@ -65,6 +80,8 @@ func _stop_all_movement():
 	move_tween.stop_all()
 	move_tween.remove_all()
 	current_impulse = Vector2.ZERO
+	if (not preserve_impulse):
+		move_impulse = Vector2.ZERO
 	
 	
 func _get_move_easing_tween_props() -> Array:

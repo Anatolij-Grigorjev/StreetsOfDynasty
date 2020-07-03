@@ -114,6 +114,8 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 		)
 		var displacement = attackbox.target_move * attack_facing
 		return displacement
+	else:
+		return Vector2.ZERO
 		
 		
 func _reduce_stability(hit_connect: HitConnect):

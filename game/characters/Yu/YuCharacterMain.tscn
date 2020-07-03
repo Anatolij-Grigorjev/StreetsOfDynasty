@@ -161,7 +161,6 @@ position = Vector2( 0, -150 )
 texture = ExtResource( 8 )
 offset = Vector2( -58.468, 4.86353 )
 hframes = 5
-frame = 0
 
 [node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
 pitch_scale = 1.0
