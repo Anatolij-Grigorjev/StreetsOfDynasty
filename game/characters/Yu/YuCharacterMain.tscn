@@ -112,7 +112,18 @@ state_length_sec = 1.7
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2F" index="0"]
 script = ExtResource( 14 )
 
-[node name="HurtLow" type="Node" parent="FSM" index="6"]
+[node name="CatchAttack" type="Node" parent="FSM" index="6"]
+script = ExtResource( 6 )
+state_animation = "catching"
+next_state = "Idle"
+state_commit_end_sec = 0.5
+state_length_sec = 0.5
+
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/CatchAttack" index="0"]
+script = ExtResource( 15 )
+collision_mask = 96
+
+[node name="HurtLow" type="Node" parent="FSM" index="7"]
 script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
@@ -126,7 +137,7 @@ script = ExtResource( 7 )
 script = ExtResource( 16 )
 move_easing = 2
 
-[node name="Catching" type="Node" parent="FSM" index="7"]
+[node name="Catching" type="Node" parent="FSM" index="8"]
 script = ExtResource( 13 )
 initial_state = "CatchIdle"
 
@@ -148,11 +159,11 @@ next_state = "CatchIdle"
 state_commit_end_sec = 0.8
 state_length_sec = 0.8
 
-[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="8"]
+[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="9"]
 script = ExtResource( 23 )
 flash_sound = ExtResource( 24 )
 
-[node name="StatesTween" type="Tween" parent="FSM" index="9"]
+[node name="StatesTween" type="Tween" parent="FSM" index="10"]
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
@@ -160,10 +171,6 @@ position = Vector2( 0, -150 )
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
 texture = ExtResource( 8 )
 offset = Vector2( -58.468, 4.86353 )
-hframes = 5
-
-[node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
-pitch_scale = 1.0
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")

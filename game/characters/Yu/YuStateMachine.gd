@@ -75,6 +75,9 @@ func _get_next_state(delta: float) -> String:
 				consecutive_b2_hits = 1
 				_start_special_flash()
 				return "AttackB2"
+			if (next_attack_input == C.AttackInputType.NORMAL):
+				_clear_next_attack_input()
+				return "CatchAttack"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_state.is_state_over):
@@ -98,6 +101,17 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"AttackB2F":
+			if (hurting):
+				return "HurtLow"
+			var attack_state = state_nodes[state] as FiniteState
+			if (not attack_state.can_change_state):
+				return NO_STATE
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
+			return NO_STATE
+		"CatchAttack":
 			if (hurting):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState

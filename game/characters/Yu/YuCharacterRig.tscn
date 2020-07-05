@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=15]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=16]
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=17]
+[ext_resource path="res://characters/Yu/spritesheets/catch_attack.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 
@@ -653,7 +654,101 @@ tracks/12/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=23]
+resource_name = "catching"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 18 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -56.5521, 7.87216 ), Vector2( -19.3668, 8.51006 ), Vector2( 27.9136, 7.21226 ), Vector2( -81.3963, 1.91117 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("SpriteColorFlashRequestor")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Color( 0.117647, 0.843137, 0.792157, 1 ), 0.2, 0.7, null ],
+"method": "request_color_flash"
+} ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("HitboxGroup")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "CatchAttack" ],
+"method": "switch_to_area"
+} ]
+}
+
 [sub_resource type="Animation" id=4]
+resource_name = "caught"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -758,6 +853,9 @@ extents = Vector2( 43.0194, 161.963 )
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 87.4801, 103.608 )
 
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 54.5391, 167.59 )
+
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 42.1761, 150.383 )
 
@@ -774,18 +872,18 @@ extents = Vector2( 85.375, 97.5963 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 9 )
-offset = Vector2( -122.713, 12.7595 )
-hframes = 8
-frame = 1
+texture = ExtResource( 18 )
+offset = Vector2( -81.3963, 1.91117 )
+hframes = 5
+frame = 4
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-position = Vector2( 98.2338, -66.2318 )
-rotation = 0.017968
+position = Vector2( 231.353, -70.2303 )
+rotation = -2.90924
 texture = ExtResource( 21 )
 flip_h = true
 __meta__ = {
@@ -807,14 +905,14 @@ anims/attack_a2 = ExtResource( 3 )
 anims/attack_b2 = SubResource( 1 )
 anims/attack_b2f = SubResource( 2 )
 anims/catch_attack = SubResource( 3 )
-anims/catching = SubResource( 4 )
+anims/catching = SubResource( 23 )
+anims/caught = SubResource( 4 )
 anims/hurt_low = ExtResource( 6 )
 anims/idle = ExtResource( 7 )
 anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
-pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1015,7 +1113,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow1" type="Area2D" parent="HitboxGroup" index="8"]
+[node name="CatchAttack" type="Area2D" parent="HitboxGroup" index="8"]
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/CatchAttack" index="0"]
+position = Vector2( 8.57861, 16.4972 )
+shape = SubResource( 24 )
+
+[node name="HurtLow1" type="Area2D" parent="HitboxGroup" index="9"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1031,7 +1138,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow2" type="Area2D" parent="HitboxGroup" index="9"]
+[node name="HurtLow2" type="Area2D" parent="HitboxGroup" index="10"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1047,7 +1154,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow3" type="Area2D" parent="HitboxGroup" index="10"]
+[node name="HurtLow3" type="Area2D" parent="HitboxGroup" index="11"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1063,7 +1170,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow4" type="Area2D" parent="HitboxGroup" index="11"]
+[node name="HurtLow4" type="Area2D" parent="HitboxGroup" index="12"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
