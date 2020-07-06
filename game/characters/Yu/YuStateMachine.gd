@@ -5,7 +5,7 @@ Yu main state machine
 const MAX_CONSECUTIVE_B2_HITS = 5
 
 
-var next_attack_input: int = C.AttackInputType.NONE
+var pressed_attack_input: SingleReadVar = SingleReadVar.new(C.AttackInputType.NONE)
 var has_caught := SingleReadVar.new(false)
 
 var consecutive_b2_hits : int = 0
@@ -55,8 +55,8 @@ func _get_next_state(delta: float) -> String:
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			var next_attack_input = pressed_attack_input.read_and_reset()
 			if (next_attack_input == C.AttackInputType.NORMAL):
-				_clear_next_attack_input()
 				return "AttackA2"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
@@ -70,13 +70,12 @@ func _get_next_state(delta: float) -> String:
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			var next_attack_input = pressed_attack_input.read_and_reset()
 			if (next_attack_input == C.AttackInputType.SPECIAL):
-				_clear_next_attack_input()
 				consecutive_b2_hits = 1
 				_start_special_flash()
 				return "AttackB2"
 			if (next_attack_input == C.AttackInputType.NORMAL):
-				_clear_next_attack_input()
 				return "CatchAttack"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
@@ -91,9 +90,9 @@ func _get_next_state(delta: float) -> String:
 			_cache_next_attack_input(attack_input, attack_state)
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			var next_attack_input = pressed_attack_input.read_and_reset()
 			if (next_attack_input == C.AttackInputType.SPECIAL
 				and consecutive_b2_hits < MAX_CONSECUTIVE_B2_HITS):
-				_clear_next_attack_input()
 				consecutive_b2_hits += 1
 				return "AttackB2"
 			if (attack_state.is_state_over):
@@ -152,11 +151,6 @@ func _get_attack_input() -> int:
 	if (Input.is_action_just_pressed("attack_special")):
 		return C.AttackInputType.SPECIAL
 	return C.AttackInputType.NONE
-	
-	
-func _clear_next_attack_input():
-	next_attack_input = C.AttackInputType.NONE
-	emit_signal("next_attack_input_changed", next_attack_input)
 			
 			
 func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
@@ -168,7 +162,7 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		attack_phase_aspect.attack_phase != C.AttackPhase.WIND_UP
 		and attack_input != C.AttackInputType.NONE
 	):
-		next_attack_input = attack_input
+		pressed_attack_input.current_value = attack_input
 
 
 func _start_special_flash():
