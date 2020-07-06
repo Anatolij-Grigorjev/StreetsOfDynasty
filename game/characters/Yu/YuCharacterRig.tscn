@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://characters/AttackBox.gd" type="Script" id=17]
 [ext_resource path="res://characters/Yu/spritesheets/catch_attack.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
+[ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
@@ -746,6 +747,23 @@ tracks/6/keys = {
 "method": "switch_to_area"
 } ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath("CatchboxGroup")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "CatchAttack" ],
+"method": "switch_to_area"
+}, {
+"args": [ "CatchAttack" ],
+"method": "disable_area"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "caught"
@@ -868,14 +886,16 @@ extents = Vector2( 82.7745, 127.069 )
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 85.375, 97.5963 )
 
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 67.2838, 39.07 )
+
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 18 )
-offset = Vector2( -81.3963, 1.91117 )
+offset = Vector2( -56.5521, 7.87216 )
 hframes = 5
-frame = 4
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -1185,3 +1205,13 @@ shape = SubResource( 22 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="CatchAttack" type="Area2D" parent="CatchboxGroup" index="0"]
+visible = false
+collision_layer = 0
+collision_mask = 96
+script = ExtResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CatchboxGroup/CatchAttack" index="0"]
+position = Vector2( 162.381, -102.415 )
+shape = SubResource( 25 )
