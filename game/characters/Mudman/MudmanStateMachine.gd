@@ -30,7 +30,7 @@ func _get_next_state(delta: float) -> String:
 	
 	var hit_react_state = NO_STATE
 	if (was_hit):
-		hit_react_state = next_hit_react_state.read_and_reset()		
+		hit_react_state = next_hit_react_state.read_and_reset()
 		_apply_hit_react_move(
 			hit_react_move.read_and_reset(), 
 			hit_react_state
@@ -62,9 +62,11 @@ func _get_next_state(delta: float) -> String:
 			else:
 				return "WaitIdle"
 		"Caught":
+			if (was_hit):
+				return hit_react_state
 			if (was_released):
 				var state_node: PerpetualState = state_nodes[state]
-				return state_node.next_state
+				return "Falling"
 			
 			return NO_STATE
 		"Hurt":
@@ -119,8 +121,6 @@ func _on_character_got_caught(catcher: CharacterTemplate):
 	
 func _on_character_got_released(post_caught_state: String):
 	got_released.current_value = true
-	var caught_state_node = state_nodes["Caught"]
-	caught_state_node.next_state = post_caught_state
 	
 
 func _on_character_hit_displaced(displacement: Vector2):

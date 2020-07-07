@@ -29,8 +29,6 @@ func _get_next_state(delta: float) -> String:
 	var attack_input: int = _get_attack_input()
 	var hurting: bool = Debug.get_debug1_pressed()
 	
-	var is_catching = has_caught.read_and_reset()
-	
 	match(state):
 		"Idle":
 			if (hurting):
@@ -113,10 +111,25 @@ func _get_next_state(delta: float) -> String:
 		"CatchAttack":
 			if (hurting):
 				return "HurtLow"
+			var catching_state = state_nodes[state] as FiniteState
+			if (not catching_state.can_change_state):
+				return NO_STATE
+			if (has_caught.read_and_reset()):
+				return "CaughtAttack1"
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
+			if (catching_state.is_state_over):
+				return _next_or_default(catching_state)
+			return NO_STATE
+		"CaughtAttack1":
+			if (hurting):
+				#TODO: caught character emit got released
+				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
 				return NO_STATE
 			if (move_direction != Vector2.ZERO):
+				#TODO: caught character emit got released
 				return "Walk"
 			if (attack_state.is_state_over):
 				return _next_or_default(attack_state)
@@ -170,23 +183,13 @@ func _start_special_flash():
 	flasher.request_color_flash(Color.blue, 0.2, 0.8, 0.5)
 
 
-func _on_Hitbox_catch(caught_hitbox: Hitbox):
-	var caught_character = caught_hitbox.owner as CharacterTemplate
+func _on_Catchbox_caught(caught_hitbox: Hitbox):
+	var caught_character = Utils.get_areagroup_area_owner(caught_hitbox) as CharacterTemplate
 	if (not is_instance_valid(caught_character)):
 		return 
-	var catching_fsm = $Catching/FSM
-	if (_can_start_catching(catching_fsm)):
-		catching_fsm.caught_character = caught_character
-		has_caught.current_value = true
-		caught_character.emit_signal("got_caught", self)
-		
-
-func _can_start_catching(catching_fsm: StateMachine) -> bool:
-	return (
-		state == "Walk" 
-		and 
-		not is_instance_valid(catching_fsm.caught_character)
-	)
+	has_caught.current_value = true
+	caught_character.emit_signal("got_caught", entity)
+	
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

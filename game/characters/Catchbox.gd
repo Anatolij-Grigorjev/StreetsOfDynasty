@@ -11,10 +11,17 @@ export(float) var catch_radius: float = 35.77
 
 
 func _ready():
+	Debug.log_info("%s can make catch signals on mask %s", [self, collision_mask])
 	connect("area_entered", self, "_on_area_entered")
+	
+
+func _to_string() -> String:
+	return "CB[%s:%s]" % [owner.name, name]
 	
 	
 func _on_area_entered(area: Area2D):
+	if (not visible): 
+		return
 	var enemy_hitbox_owner = Utils.get_areagroup_area_owner(area)
 	var this_hitbox_owner = Utils.get_areagroup_area_owner(self)
 	if (enemy_hitbox_owner != this_hitbox_owner and 
