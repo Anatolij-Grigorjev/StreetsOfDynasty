@@ -117,6 +117,8 @@ func _on_character_got_hit(hit_connect: HitConnect):
 	
 func _on_character_got_caught(catcher: CharacterTemplate):
 	got_caught.current_value = true
+	if (_can_be_caught_in_state(state)):
+		entity.facing = -catcher.facing
 	
 	
 func _on_character_got_released(post_caught_state: String):
@@ -156,3 +158,7 @@ func _check_got_killed():
 func _can_move_to_dying_state(state: String) -> bool:
 	#only die if not held caught or already dying
 	return state != "Dying" and state != "Caught"
+	
+
+func _can_be_caught_in_state(state: String) -> bool:
+	return not ["Falling", "Fallen", "Dying", "Caught"].has(state)

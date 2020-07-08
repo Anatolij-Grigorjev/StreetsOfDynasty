@@ -110,6 +110,20 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath("HitboxGroup")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Caught" ],
+"method": "switch_to_area"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.5
@@ -712,7 +726,7 @@ extents = Vector2( 37.801, 95.1473 )
 extents = Vector2( 57.3858, 80.9497 )
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 37.123, 65 )
+extents = Vector2( 53.2525, 104.823 )
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 96.3256, 48.4078 )
@@ -724,10 +738,10 @@ extents = Vector2( 120.143, 38.7073 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
-position = Vector2( 0.132568, 2.00882 )
+position = Vector2( -2.86569, -6.87122 )
 rotation = -0.0124779
-texture = ExtResource( 5 )
-offset = Vector2( -30.7643, -3.46134 )
+texture = ExtResource( 4 )
+offset = Vector2( -31.2202, -23.3204 )
 hframes = 4
 frame = 3
 
@@ -786,6 +800,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Caught" index="0"]
+position = Vector2( 17.3002, -11.0721 )
 shape = SubResource( 13 )
 
 [node name="Falling" type="Area2D" parent="HitboxGroup" index="5"]

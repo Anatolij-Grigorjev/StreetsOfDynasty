@@ -24,6 +24,7 @@ var draw_q: Array = []
 func _ready():
 	LOG = LoggerFactory.instance()
 	LOG.skip_stackframes = 4
+	LOG.enabled_levels.append(Logger.LogLevel.DEBUG)
 	add_child(LOG)
 	self.z_index = 999
 	

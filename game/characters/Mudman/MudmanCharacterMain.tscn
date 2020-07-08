@@ -102,6 +102,7 @@ naming_scheme = 1
 
 [node name="Caught" type="Node" parent="FSM" index="7"]
 script = ExtResource( 3 )
+state_animation = "caught"
 next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
