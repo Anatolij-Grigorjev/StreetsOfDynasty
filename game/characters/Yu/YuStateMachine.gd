@@ -7,6 +7,7 @@ const MAX_CONSECUTIVE_B2_HITS = 5
 
 var pressed_attack_input: SingleReadVar = SingleReadVar.new(C.AttackInputType.NONE)
 var has_caught := SingleReadVar.new(false)
+var caught_character: CharacterTemplate = null
 
 var consecutive_b2_hits : int = 0
 
@@ -123,13 +124,13 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"CaughtAttack1":
 			if (hurting):
-				#TODO: caught character emit got released
+				_release_caught_character()
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			_release_caught_character()
 			if (move_direction != Vector2.ZERO):
-				#TODO: caught character emit got released
 				return "Walk"
 			if (attack_state.is_state_over):
 				return _next_or_default(attack_state)
@@ -189,7 +190,20 @@ func _on_Catchbox_caught(caught_hitbox: Hitbox):
 		return 
 	has_caught.current_value = true
 	caught_character.emit_signal("got_caught", entity)
+	self.caught_character = caught_character
 	
+	
+func _release_caught_character():
+	if (
+		is_instance_valid(self.caught_character)
+		and _is_character_caught(self.caught_character)
+	):
+		self.caught_character.emit_signal("got_released")
+		
+
+func _is_character_caught(character: CharacterTemplate) -> bool:
+	var fsm = character.fsm
+	return fsm.state == "Caught"
 
 
 func _next_or_default(state: FiniteState, default: String = "Idle") -> String:

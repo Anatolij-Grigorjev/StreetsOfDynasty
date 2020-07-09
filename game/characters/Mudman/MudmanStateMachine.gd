@@ -121,7 +121,7 @@ func _on_character_got_caught(catcher: CharacterTemplate):
 		entity.facing = -catcher.facing
 	
 	
-func _on_character_got_released(post_caught_state: String):
+func _on_character_got_released():
 	got_released.current_value = true
 	
 

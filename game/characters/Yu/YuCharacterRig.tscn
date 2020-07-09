@@ -668,7 +668,7 @@ tracks/13/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.117647, 0.843137, 0.792157, 1 ) ]
+"values": [ Color( 0.286275, 0.286275, 0.290196, 1 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -858,7 +858,7 @@ extents = Vector2( 67.1864, 96.5775 )
 extents = Vector2( 70.1337, 184.146 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 67.1864, 227.407 )
+extents = Vector2( 56.4489, 226.794 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 38.2845, 178.026 )
@@ -907,9 +907,8 @@ extents = Vector2( 67.2838, 190.972 )
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 22 )
-offset = Vector2( -86.7092, -1.53237 )
+offset = Vector2( -15.1655, -26.054 )
 hframes = 8
-frame = 7
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -927,12 +926,11 @@ __meta__ = {
 
 [node name="TrailFX2" type="Sprite" parent="." index="2"]
 visible = false
-modulate = Color( 0.117647, 0.843137, 0.792157, 1 )
+modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -63.6727, 80.9823 )
 texture = ExtResource( 12 )
 vframes = 2
 hframes = 3
-frame = 5
 
 [node name="AnimationPlayer" parent="." index="3"]
 method_call_mode = 1
@@ -1022,6 +1020,7 @@ shape = SubResource( 8 )
 
 [node name="CatchAttack1" type="Area2D" parent="AttackboxGroup" index="4"]
 visible = false
+position = Vector2( 0.774231, 0 )
 collision_layer = 0
 collision_mask = 128
 script = ExtResource( 17 )
@@ -1031,7 +1030,7 @@ radius = 50.0
 target_move = Vector2( 256, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
-position = Vector2( 101.485, -19.8472 )
+position = Vector2( 95.2914, -21.3957 )
 shape = SubResource( 9 )
 
 [node name="HitboxGroup" parent="." index="8"]

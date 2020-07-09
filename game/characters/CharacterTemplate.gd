@@ -10,7 +10,7 @@ signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
 signal hit_displaced(displacement)
 signal got_caught(catcher)
-signal got_released(post_caught_state)
+signal got_released()
 signal caught_character(caught)
 signal died
 
