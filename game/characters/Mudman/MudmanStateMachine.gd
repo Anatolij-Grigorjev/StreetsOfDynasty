@@ -143,7 +143,7 @@ func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
 		var hurt_state_node = state_nodes[hit_react_state]
 		var moved_aspect = hurt_state_node.get_node('MovedStateAspect')
 		if (moved_aspect):
-			moved_aspect.move_impulse = hit_react_move
+			moved_aspect.set_move_impulses(hit_react_move)
 	
 	
 func _check_got_killed():
