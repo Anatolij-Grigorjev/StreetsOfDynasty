@@ -32,6 +32,8 @@ var health : float
 var stability : float
 var invincibility := false
 
+var rig_lifting := false
+var rig_neutral_poistion: Vector2 = Vector2.ZERO
 
 onready var fsm: CharacterStateMachineTemplate = $FSM
 onready var body: Node2D = $Body
@@ -51,16 +53,26 @@ func _ready() -> void:
 	for hitbox in hitboxes.get_children():
 		if (hitbox as Hitbox):
 			hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
+			
+	rig_neutral_poistion = rig.position
 	
 	
 func _process(delta: float) -> void:
 	_process_stability_recovery(delta)
+	_adjust_rig_position(delta)
 	
 	
 func _process_stability_recovery(delta: float):
 	if (stability < total_stability):
 		var recovery_this_frame := _get_stability_recovery_per_sec() * delta
 		stability = clamp(stability + recovery_this_frame, 0.0, total_stability)
+		
+		
+func _adjust_rig_position(delta: float):
+	if (rig.position != rig_neutral_poistion and not rig_lifting):
+		rig.position = lerp(rig.position, rig_neutral_poistion, delta)
+		if (rig.position.distance_squared_to(rig_neutral_poistion) < 10):
+			rig.position = rig_neutral_poistion
 	
 	
 func _get_stability_recovery_per_sec() -> float:
@@ -89,6 +101,15 @@ and dont ignore kinematic collisions
 """
 func do_movement_slide(velocity: Vector2) -> Vector2:
 	return move_and_slide(velocity, Vector2.UP)
+	
+	
+"""
+Move the character rig according to the impulse without 
+moving actual character tree position
+"""
+func lift_rig_impulse(impulse: Vector2):
+	rig.position += impulse
+	pass
 	
 	
 func _on_hitbox_hit(hit_connect: HitConnect):

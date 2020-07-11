@@ -971,7 +971,7 @@ __meta__ = {
 }
 damage_type = 1
 damage_amount = 16.0
-target_move = Vector2( 10, 0 )
+target_move = Vector2( 25, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackA1" index="0"]
 position = Vector2( 235, -30 )
@@ -1027,7 +1027,7 @@ script = ExtResource( 17 )
 damage_amount = 10.0
 disruption = 200.0
 radius = 50.0
-target_move = Vector2( 256, 0 )
+target_move = Vector2( 256, -100 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
 position = Vector2( 95.2914, -21.3957 )

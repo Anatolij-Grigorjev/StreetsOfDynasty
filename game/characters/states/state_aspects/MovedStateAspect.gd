@@ -33,7 +33,8 @@ export(Easing) var move_easing: int = Easing.HALFWAY
 
 var move_tween: Tween
 
-var current_impulse: Vector2 = Vector2.ZERO
+var horiz_current_impulse: float = 0.0
+var vert_current_impulse: float = 0.0
 
 
 func _ready():
@@ -50,18 +51,27 @@ func enter_state(prev_state: String):
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
 	move_tween.interpolate_property(
-		self, 'current_impulse', 
-		Vector2(horiz_move_impulse * 1 / move_duration, 0), Vector2.ZERO,
+		self, 'horiz_current_impulse', 
+		horiz_move_impulse * 1 / move_duration, 0.0,
+		move_duration, transition_easing[0], transition_easing[1]
+	)
+	move_tween.interpolate_property(
+		self, 'vert_current_impulse',
+		vert_current_impulse * 1 / move_duration, 0.0,
 		move_duration, transition_easing[0], transition_easing[1]
 	)
 	move_tween.start()
+	entity.rig_lifting = true
 	
 
 func process_state(delta: float):
 	.process_state(delta)
-	if (current_impulse != Vector2.ZERO):
-		entity.do_movement_collide(current_impulse * delta)
-
+	if (horiz_current_impulse != 0.0):
+		entity.do_movement_collide(Vector2(horiz_current_impulse, 0.0) * delta)
+	if (vert_current_impulse != 0.0):
+		entity.lift_rig_impulse(Vector2(0, vert_current_impulse * delta))
+		
+		
 
 func exit_state(next_state: String):
 	.exit_state(next_state)
@@ -75,13 +85,15 @@ func _set_move_tween() -> Tween:
 		tween.name = 'StatesTween'
 		fsm.add_child(tween)
 	move_tween = tween
+	move_tween.connect("tween_completed", self, "_on_StatesTween_tween_completed")
 	return move_tween
 	
 
 func _stop_all_movement():
 	move_tween.stop_all()
 	move_tween.remove_all()
-	current_impulse = Vector2.ZERO
+	horiz_current_impulse = 0.0
+	vert_current_impulse = 0.0
 	if (not preserve_impulse):
 		horiz_move_impulse = 0.0
 		vert_move_impulse = 0.0
@@ -109,3 +121,9 @@ func set_move_impulses(impulse: Vector2):
 
 func get_joined_impulse() -> Vector2:
 	return Vector2(horiz_move_impulse, vert_move_impulse)
+
+
+func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
+	var path_string = key.get_concatenated_subnames()
+	if (path_string.find('vert_current_impulse') > -1):
+		entity.rig_lifting = false
