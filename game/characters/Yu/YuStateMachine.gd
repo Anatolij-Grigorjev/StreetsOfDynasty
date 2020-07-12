@@ -29,6 +29,8 @@ func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
 	var hurting: bool = Debug.get_debug1_pressed()
+	if (Debug.get_debug2_pressed()):
+		return "CatchAttack"
 	
 	match(state):
 		"Idle":

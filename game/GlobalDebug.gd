@@ -47,6 +47,9 @@ func _process(delta):
 func get_debug1_pressed() -> bool:
 	return Input.is_action_just_pressed("debug1")
 	
+func get_debug2_pressed() -> bool:
+	return Input.is_action_just_pressed("debug2")
+	
 	
 func log_debug(message: String, params: Array = []):
 	_log_with_available(Logger.LogLevel.DEBUG, message, params)

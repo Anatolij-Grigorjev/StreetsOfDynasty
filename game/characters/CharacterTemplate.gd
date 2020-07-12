@@ -108,8 +108,8 @@ Move the character rig according to the impulse without
 moving actual character tree position
 """
 func lift_rig_impulse(impulse: Vector2):
+	Debug.log_info("Character sent up with impulse %s", [impulse])
 	rig.position += impulse
-	pass
 	
 	
 func _on_hitbox_hit(hit_connect: HitConnect):

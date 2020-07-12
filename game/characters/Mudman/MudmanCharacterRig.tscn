@@ -738,10 +738,9 @@ extents = Vector2( 120.143, 38.7073 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
-position = Vector2( -2.86569, -6.87122 )
 rotation = -0.0124779
-texture = ExtResource( 4 )
-offset = Vector2( -31.2202, -23.3204 )
+texture = ExtResource( 5 )
+offset = Vector2( -30.7643, -3.46134 )
 hframes = 4
 frame = 3
 

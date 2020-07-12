@@ -50,16 +50,18 @@ func enter_state(prev_state: String):
 	var transition_easing = _get_move_easing_tween_props()
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
-	move_tween.interpolate_property(
-		self, 'horiz_current_impulse', 
-		horiz_move_impulse * 1 / move_duration, 0.0,
-		move_duration, transition_easing[0], transition_easing[1]
-	)
-	move_tween.interpolate_property(
-		self, 'vert_current_impulse',
-		vert_current_impulse * 1 / move_duration, 0.0,
-		move_duration, transition_easing[0], transition_easing[1]
-	)
+	if (horiz_move_impulse != 0.0):
+		move_tween.interpolate_property(
+			self, 'horiz_current_impulse', 
+			horiz_move_impulse * 1 / move_duration, 0.0,
+			move_duration, transition_easing[0], transition_easing[1]
+		)
+	if (vert_move_impulse != 0.0):
+		move_tween.interpolate_property(
+			self, 'vert_current_impulse',
+			vert_move_impulse * 1 / move_duration, 0.0,
+			move_duration, transition_easing[0], transition_easing[1]
+		)
 	move_tween.start()
 	entity.rig_lifting = true
 	
@@ -69,7 +71,7 @@ func process_state(delta: float):
 	if (horiz_current_impulse != 0.0):
 		entity.do_movement_collide(Vector2(horiz_current_impulse, 0.0) * delta)
 	if (vert_current_impulse != 0.0):
-		entity.lift_rig_impulse(Vector2(0, vert_current_impulse * delta))
+		entity.lift_rig_impulse(Vector2(0, vert_current_impulse) * delta)
 		
 		
 
