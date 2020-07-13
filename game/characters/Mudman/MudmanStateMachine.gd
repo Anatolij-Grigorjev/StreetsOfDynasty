@@ -118,7 +118,15 @@ func _on_character_got_hit(hit_connect: HitConnect):
 func _on_character_got_caught(catcher: CharacterTemplate):
 	got_caught.current_value = true
 	if (_can_be_caught_in_state(state)):
-		entity.facing = -catcher.facing
+		_prepare_look_caught(catcher)
+
+
+func _prepare_look_caught(catcher: CharacterTemplate):
+	var caught: CharacterTemplate = entity as CharacterTemplate
+	caught.facing = -catcher.facing
+	var distance = (caught.caught_point.global_position - catcher.catch_point.global_position)
+	catcher.global_position += Vector2(distance.x, 0.0)
+	
 	
 	
 func _on_character_got_released():

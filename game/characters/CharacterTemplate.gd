@@ -70,7 +70,7 @@ func _process_stability_recovery(delta: float):
 		
 func _adjust_rig_position(delta: float):
 	if (rig.position != rig_neutral_poistion and not rig_lifting):
-		rig.position = lerp(rig.position, rig_neutral_poistion, delta)
+		rig.position = lerp(rig.position, rig_neutral_poistion, 1.0 - delta)
 		if (rig.position.distance_squared_to(rig_neutral_poistion) < 10):
 			rig.position = rig_neutral_poistion
 	
