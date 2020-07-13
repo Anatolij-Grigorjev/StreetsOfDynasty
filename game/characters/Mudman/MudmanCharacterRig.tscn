@@ -260,7 +260,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0.132568, 2.00882 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:rotation_degrees")
@@ -284,7 +284,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -30.7643, -3.46134 ) ]
+"values": [ Vector2( -30, -20 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath("HitboxGroup")
@@ -347,10 +347,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.132568, 2.00882 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0.132568, 2.00882 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:rotation_degrees")
@@ -361,7 +361,7 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ -0.71493 ]
 }
 tracks/5/type = "value"
@@ -371,10 +371,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -30.7643, -3.46134 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -30.7643, -3.46134 ), Vector2( -30, -40 ), Vector2( -60, -25 ), Vector2( -30, -20 ) ]
 }
 tracks/6/type = "method"
 tracks/6/path = NodePath("HitboxGroup")
@@ -740,7 +740,7 @@ extents = Vector2( 120.143, 38.7073 )
 material = SubResource( 2 )
 rotation = -0.0124779
 texture = ExtResource( 5 )
-offset = Vector2( -30.7643, -3.46134 )
+offset = Vector2( -30, -20 )
 hframes = 4
 frame = 3
 
@@ -813,11 +813,10 @@ position = Vector2( 1.4198, 33.3644 )
 shape = SubResource( 14 )
 
 [node name="Fallen" type="Area2D" parent="HitboxGroup" index="6"]
-visible = false
 collision_layer = 256
 collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Fallen" index="0"]
-position = Vector2( 0, 85 )
+position = Vector2( 0, 65 )
 shape = SubResource( 15 )
