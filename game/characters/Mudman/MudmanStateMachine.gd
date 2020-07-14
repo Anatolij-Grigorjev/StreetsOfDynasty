@@ -2,6 +2,7 @@ extends CharacterStateMachineTemplate
 
 var target: Node2D
 
+var fall_finished: SingleReadVar = SingleReadVar.new(false)
 
 func _ready():
 	._ready()
@@ -81,8 +82,8 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			return hurt_state.next_state
 		"Falling":
-			var fall_state = get_state(state) as FiniteState
-			if (not fall_state.is_state_over):
+			var fall_state = get_state(state) as PerpetualState
+			if (not fall_finished.current_value):
 				return NO_STATE
 			return fall_state.next_state
 		"Fallen":
@@ -135,6 +136,10 @@ func _on_character_got_released():
 
 func _on_character_hit_displaced(displacement: Vector2):
 	hit_react_move.current_value = displacement
+	
+
+func _on_Character_fall_finished():
+	fall_finished.current_value = true
 
 
 func _build_next_hit_receive_state(stability: float) -> String:

@@ -11,6 +11,8 @@ enum Easing {
 	ALL_IN = 2
 }
 
+signal fall_started(vert_impulse)
+
 """
 The total movement impulse that this aspect will communicate
 to entity via dedicated FSM mover tween
@@ -62,8 +64,10 @@ func enter_state(prev_state: String):
 			vert_move_impulse * 1 / move_duration, 0.0,
 			move_duration, transition_easing[0], transition_easing[1]
 		)
+		entity.rig_lifting = true
+		emit_signal("fall_started", vert_move_impulse)
 	move_tween.start()
-	entity.rig_lifting = true
+	
 	
 
 func process_state(delta: float):

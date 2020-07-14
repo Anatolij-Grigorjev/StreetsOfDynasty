@@ -21,12 +21,15 @@ const DRAW_TYPE_CIRCLE = 'circle'
 
 var draw_q: Array = []
 
+var screen_shake_requestor: ScreenShakeRequestor
+
 func _ready():
 	LOG = LoggerFactory.instance()
 	LOG.skip_stackframes = 4
 	LOG.enabled_levels.append(Logger.LogLevel.DEBUG)
 	add_child(LOG)
 	self.z_index = 999
+	call_deferred("_cache_shake_requestor")
 	
 	
 func add_global_draw(draw_item: Dictionary):
@@ -49,6 +52,13 @@ func get_debug1_pressed() -> bool:
 	
 func get_debug2_pressed() -> bool:
 	return Input.is_action_just_pressed("debug2")
+	
+
+func request_screenshake(duration = 0.2, frequency = 15, amplitude = 10, priority = 1):
+	if (is_instance_valid(screen_shake_requestor)):
+		screen_shake_requestor.request_screen_shake(duration, frequency, amplitude, priority)
+	else:
+		log_warn("No cached shake requestor, check prev warnings!")
 	
 	
 func log_debug(message: String, params: Array = []):
@@ -91,3 +101,11 @@ func _log_by_logger(log_level: int, message: String, params: Array):
 	
 func _log_by_print(log_level: String, message: String, params: Array):
 	print("%s: %s" % [log_level, Utils.format_message(message, params)])
+	
+	
+func _cache_shake_requestor():
+	var all_shakers: Array = get_tree().get_nodes_in_group("camera_shakers")
+	if (all_shakers.empty()):
+		log_warn("No registered active screen shake requestors, nothing will cache!")
+	else:
+		screen_shake_requestor = all_shakers[0]
