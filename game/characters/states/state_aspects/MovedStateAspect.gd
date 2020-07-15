@@ -30,6 +30,11 @@ This way any state with this aspect will keep moving
 even without new explicit impulse
 """
 export(bool) var preserve_impulse: bool = false
+"""
+If true the aspect will keep the rig lifted when the impulse provides
+a negative vertical velocity
+"""
+export(bool) var keep_in_air: bool = false
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
@@ -37,6 +42,12 @@ var move_tween: Tween
 
 var horiz_current_impulse: float = 0.0
 var vert_current_impulse: float = 0.0
+
+"""
+flag that THIS aspect is the one that started the common tween
+not to consume signals for others
+"""
+var tween_starter: bool = false
 
 
 func _ready():
@@ -49,6 +60,8 @@ func enter_state(prev_state: String):
 	Debug.log_info("move impulse: %s", [move_impulse])
 	if (move_impulse == Vector2.ZERO):
 		return
+	#a tween will start now
+	tween_starter = true
 	var transition_easing = _get_move_easing_tween_props()
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
@@ -130,6 +143,12 @@ func get_joined_impulse() -> Vector2:
 
 
 func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
+	#guard others consuming this signal
+	if (not tween_starter):
+		return
+	#reset tween starting state to not consume more signals
+	tween_starter = false
 	var path_string = key.get_concatenated_subnames()
-	if (path_string.find('vert_current_impulse') > -1):
-		entity.rig_lifting = false
+	if (not keep_in_air):
+		if (path_string.find('vert_current_impulse') > -1):
+			entity.rig_lifting = false
