@@ -47,7 +47,7 @@ var vert_current_impulse: float = 0.0
 flag that THIS aspect is the one that started the common tween
 not to consume signals for others
 """
-var tween_starter: bool = false
+var tweens_running: int = 0
 
 
 func _ready():
@@ -60,8 +60,8 @@ func enter_state(prev_state: String):
 	Debug.log_info("move impulse: %s", [move_impulse])
 	if (move_impulse == Vector2.ZERO):
 		return
-	#a tween will start now
-	tween_starter = true
+	#reset tweens semaphore
+	tweens_running = 0
 	var transition_easing = _get_move_easing_tween_props()
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
@@ -71,12 +71,14 @@ func enter_state(prev_state: String):
 			horiz_move_impulse * 1 / move_duration, 0.0,
 			move_duration, transition_easing[0], transition_easing[1]
 		)
+		tweens_running += 1
 	if (vert_move_impulse != 0.0):
 		move_tween.interpolate_property(
 			self, 'vert_current_impulse',
 			vert_move_impulse * 1 / move_duration, 0.0,
 			move_duration, transition_easing[0], transition_easing[1]
 		)
+		tweens_running += 1
 		entity.rig_lifting = true
 		emit_signal("fall_started", vert_move_impulse)
 	move_tween.start()
@@ -143,11 +145,11 @@ func get_joined_impulse() -> Vector2:
 
 
 func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
-	#guard others consuming this signal
-	if (not tween_starter):
+	#if no tweens running in this instance we ignore signal
+	if (tweens_running == 0):
 		return
-	#reset tween starting state to not consume more signals
-	tween_starter = false
+	#reduce num of locked tweens
+	tweens_running -= 1
 	var path_string = key.get_concatenated_subnames()
 	if (not keep_in_air):
 		if (path_string.find('vert_current_impulse') > -1):
