@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
+[ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=23]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -906,16 +907,16 @@ extents = Vector2( 67.2838, 190.972 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 22 )
-offset = Vector2( -15.1655, -26.054 )
-hframes = 8
+texture = ExtResource( 23 )
+offset = Vector2( -32.6065, 8.52183 )
+hframes = 5
+frame = 1
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 231.353, -70.2303 )
 rotation = -2.90924
 texture = ExtResource( 21 )

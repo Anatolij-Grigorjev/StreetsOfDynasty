@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://characters/states/PerpetualState.gd" type="Script" id=4]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
-[ext_resource path="res://characters/states/state_aspects/HurtStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=8]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
@@ -135,12 +134,9 @@ script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
 state_commit_end_sec = 1.0
-state_length_sec = 1.2
+state_length_sec = 1.0
 
-[node name="HurtEndStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
-script = ExtResource( 7 )
-
-[node name="MovedStateAspect" type="Node" parent="FSM/HurtLow" index="1"]
+[node name="MovedStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
 script = ExtResource( 16 )
 move_easing = 2
 
@@ -179,7 +175,6 @@ position = Vector2( 0, -150 )
 texture = ExtResource( 8 )
 offset = Vector2( -247.915, -11.3247 )
 hframes = 11
-frame = 1
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")
@@ -204,7 +199,10 @@ __meta__ = {
 script = ExtResource( 12 )
 
 [node name="InvincibilityBlinker" parent="." index="4" instance=ExtResource( 18 )]
+duration = 1.5
+blink_frequency = 3
 pre_blink_states = [ "Falling", "HurtLow" ]
+dont_blink_sprites_paths = [ NodePath("../Body/YuCharacterRig/TrailFX"), NodePath("../Body/YuCharacterRig/TrailFX2") ]
 
 [node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="5"]
 script = ExtResource( 21 )

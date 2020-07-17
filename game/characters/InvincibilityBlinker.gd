@@ -9,7 +9,7 @@ export(int) var blink_frequency = 2
 export(Array, String) var pre_blink_states = [
 	"Falling"
 ]
-export(Array, NodePath) var dont_blink_sprites = []  
+export(Array, NodePath) var dont_blink_sprites_paths = []  
 
 
 onready var duration_timer: Timer = $Duration
@@ -19,16 +19,24 @@ onready var entity = get_parent()
 var blink_sprites := []
 
 var sprites_visible := true setget set_sprites_visible
+var dont_blink_sprites: Array = []
 
 func _ready():
 	blink_sprites = _collect_entity_sprites(entity)
+	var all_collected_num = blink_sprites.size()
+	dont_blink_sprites = _collect_exclusions()
 	for exclude_sprite in dont_blink_sprites:
 		blink_sprites.erase(exclude_sprite)
 	
-	Debug.log_info("{} Blinker collected {}(-{}) sprites!", [
+	Debug.log_info("{} Blinker collected {}({}-{}) sprites!", [
 		entity,
-		blink_sprites.size(), dont_blink_sprites.size()
+		blink_sprites.size(), 
+		all_collected_num, dont_blink_sprites.size()
 	])
+	for sprite in dont_blink_sprites:
+		Debug.log_info("Exclude: {}.{}", [sprite.owner.name, sprite.name])
+	for sprite in blink_sprites:
+		Debug.log_info("Include: {}.{}", [sprite.owner.name, sprite.name])
 
 
 func _on_CharacterTemplate_state_changed(prev_state: String, next_state: String):
@@ -85,6 +93,17 @@ func _collect_entity_sprites(root: Node) -> Array:
 func _append_if_sprite(array, node):
 	if (node is Sprite):
 		array.append(node)
+
+
+func _collect_exclusions() -> Array:
+	var found_nodes := []
+	for path in dont_blink_sprites_paths:
+		var node = get_node(path)
+		if (is_instance_valid(node)):
+			found_nodes.push_back(node)
+		
+	return found_nodes
+
 
 
 func _on_Duration_timeout():

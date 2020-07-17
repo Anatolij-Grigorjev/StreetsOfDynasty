@@ -28,13 +28,13 @@ func _process(delta):
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
-	var hurting: bool = Debug.get_debug1_pressed()
+	var was_hit = got_hit.read_and_reset()
 	if (Debug.get_debug2_pressed()):
 		return "CatchAttack"
 	
 	match(state):
 		"Idle":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
@@ -42,7 +42,7 @@ func _get_next_state(delta: float) -> String:
 				return "AttackA1"
 			return NO_STATE
 		"Walk":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			if (move_direction == Vector2.ZERO):
 				return "Idle"
@@ -50,7 +50,7 @@ func _get_next_state(delta: float) -> String:
 				return "AttackA1"
 			return NO_STATE
 		"AttackA1":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			_cache_next_attack_input(attack_input, attack_state)
@@ -65,7 +65,7 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"AttackA2":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			_cache_next_attack_input(attack_input, attack_state)
@@ -84,7 +84,7 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"AttackB2":
-			if (hurting):
+			if (was_hit):
 				consecutive_b2_hits = 0
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
@@ -101,7 +101,7 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"AttackB2F":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
@@ -112,7 +112,7 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(attack_state)
 			return NO_STATE
 		"CatchAttack":
-			if (hurting):
+			if (was_hit):
 				return "HurtLow"
 			var catching_state = state_nodes[state] as FiniteState
 			if (not catching_state.can_change_state):
@@ -125,7 +125,7 @@ func _get_next_state(delta: float) -> String:
 				return _next_or_default(catching_state)
 			return NO_STATE
 		"CaughtAttack1":
-			if (hurting):
+			if (was_hit):
 				_release_caught_character()
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
@@ -193,6 +193,10 @@ func _on_Catchbox_caught(caught_hitbox: Hitbox):
 	has_caught.current_value = true
 	caught_character.emit_signal("got_caught", entity)
 	self.caught_character = caught_character
+	
+	
+func _on_character_got_hit(hit_connect: HitConnect):
+	got_hit.current_value = true
 	
 	
 func _release_caught_character():

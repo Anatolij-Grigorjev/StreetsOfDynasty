@@ -18,6 +18,15 @@ func _ready():
 func _on_hitbox_hit(hit_connect: HitConnect):
 	._on_hitbox_hit(hit_connect)
 	LOG.info("Connected hit: {}!", [hit_connect])
+	
+
+func _process(delta):
+	if (Debug.get_debug1_pressed()):
+		emit_signal("got_hit", HitConnect.new(
+			$Body/YuCharacterRig/HitboxGroup/Idle,
+			$Body/YuCharacterRig/AttackboxGroup/AttackA1,
+			rand_range(7.0, 14.0)
+		))
 		
 		
 func _to_string() -> String:
