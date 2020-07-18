@@ -52,8 +52,19 @@ static func dict2vector(dict: Dictionary) -> Vector2:
 		return Vector2(dict.x, dict.y)
 	else:
 		return Vector2.ZERO
+	
 		
-		
+"""
+Create a shallow copy of source_dict to preserve original before
+manipulations of the keyset
+"""
+static func copy_dict(source_dict: Dictionary) -> Dictionary:
+	var result_dict := {}
+	for key in source_dict:
+		result_dict[key] = source_dict[key]
+	return result_dict
+
+
 """
 Merge keys from 2 dictionaries into a new one (does not alter param dicts). 
 Conflicts resolved in favor of second dictionary
@@ -111,11 +122,11 @@ static func get_node_by_tag(tag: String) -> Node:
 		
 
 """
-Use the current in-scene node to access tree and add 'new_node'
+Use the global Debug singleton node to access tree and add 'new_node'
 at scene root
 """
-static func add_at_scene_root(invoker: Node, new_node: Node):
-	invoker.get_tree().get_root().add_child(new_node)
+static func add_at_scene_root(new_node: Node):
+	Debug.get_tree().get_root().add_child(new_node)
 	
 	
 """

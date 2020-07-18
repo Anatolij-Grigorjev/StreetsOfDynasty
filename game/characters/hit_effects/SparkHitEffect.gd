@@ -29,7 +29,7 @@ func invoke_hit_fx(hit_connect: HitConnect):
 		+ hit_connect.receiver.facing * Utils.rand_point(25.0, 25.0)
 	)
 	#set_damage requires label in tree
-	Utils.add_at_scene_root(self, label)
+	Utils.add_at_scene_root(label)
 	label.set_damage(-hit_connect.attack_damage)
 	
 	#hit particles

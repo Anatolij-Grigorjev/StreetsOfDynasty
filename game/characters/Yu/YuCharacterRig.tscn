@@ -907,6 +907,7 @@ extents = Vector2( 67.2838, 190.972 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
+position = Vector2( 0, 10 )
 texture = ExtResource( 23 )
 offset = Vector2( -32.6065, 8.52183 )
 hframes = 5
@@ -917,6 +918,7 @@ script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 231.353, -70.2303 )
 rotation = -2.90924
 texture = ExtResource( 21 )
