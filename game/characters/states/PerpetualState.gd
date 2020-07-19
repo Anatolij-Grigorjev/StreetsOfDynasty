@@ -6,6 +6,8 @@ Properties loaded from a property source
 State can be a composite for substates or state aspects that supply their
 own State-like lifecycles
 """
+signal state_animation_finished(anim_name)
+
 
 #animation to be played during state
 export(String) var state_animation
@@ -17,7 +19,7 @@ export(String) var next_state: String = StateMachine.NO_STATE
 
 
 func _ready():
-	pass
+	call_deferred("_setup_animation_finished_signal")
 	
 
 func process_state(delta: float):
@@ -76,3 +78,12 @@ func _get_move_method(move_type: int) -> String:
 			print("Unknown movement type constant: %s" % move_type)
 			breakpoint
 	return ""
+	
+	
+func _on_AnimationPlayer_animation_finished(anim_name: String):
+	if (anim_name == state_animation):
+		emit_signal("state_animation_finished", anim_name)
+
+
+func _setup_animation_finished_signal():
+	entity.anim.connect("animation_finished", self, "_on_AnimationPlayer_animation_finished")

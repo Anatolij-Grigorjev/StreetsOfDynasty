@@ -10,6 +10,7 @@ func _ready():
 	if (get_tree().get_nodes_in_group("Player")):
 		var player = get_tree().get_nodes_in_group("Player")[0]
 		call_deferred("_set_target", player)
+	_connect_falling_without_rig_lift_check()
 		
 		
 func set_state(next_state: String):
@@ -175,3 +176,13 @@ func _can_move_to_dying_state(state: String) -> bool:
 
 func _can_be_caught_in_state(state: String) -> bool:
 	return not ["Falling", "Fallen", "Dying", "Caught"].has(state)
+	
+	
+func _connect_falling_without_rig_lift_check():
+	var falling_state := state_nodes["Falling"] as PerpetualState
+	falling_state.connect("state_animation_finished", self, "_on_Falling_animation_finished")
+	
+
+func _on_Falling_animation_finished(falling_anim: String):
+	if (not entity.rig_custom_position):
+		fall_finished.current_value = true
