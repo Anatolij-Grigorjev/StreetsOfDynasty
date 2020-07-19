@@ -5,7 +5,7 @@
 [ext_resource path="res://characters/states/PerpetualState.gd" type="Script" id=3]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
-[ext_resource path="res://characters/Mudman/spritesheets/idle.png" type="Texture" id=6]
+[ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=6]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=11]
@@ -108,10 +108,9 @@ next_state = "Falling"
 position = Vector2( 0, -52 )
 
 [node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
-rotation = 0.0
+position = Vector2( -2.86569, -6.87122 )
 texture = ExtResource( 6 )
-offset = Vector2( -17.8076, -30.1916 )
-hframes = 5
+offset = Vector2( -31.2202, -23.3204 )
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )
@@ -163,8 +162,11 @@ HitSoundFx = ExtResource( 26 )
 [node name="HitboxGroup" parent="Body/MudmanCharacterRig" index="5"]
 entity_path = NodePath("../../..")
 
+[node name="CatchPoint" parent="Body" index="1"]
+position = Vector2( 0.622498, -90.2646 )
+
 [node name="CaughtPoint" parent="Body" index="2"]
-position = Vector2( 60.676, -103.885 )
+position = Vector2( 67.5237, -113.845 )
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 40 )

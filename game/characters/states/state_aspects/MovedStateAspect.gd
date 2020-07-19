@@ -11,7 +11,9 @@ enum Easing {
 	ALL_IN = 2
 }
 
-signal fall_started(vert_impulse)
+signal vert_move_started(vert_impulse)
+signal vert_move_finished()
+
 
 """
 The total movement impulse that this aspect will communicate
@@ -52,6 +54,7 @@ var tweens_running: int = 0
 
 func _ready():
 	call_deferred("_set_move_tween")
+	call_deferred("_set_vert_move_entity_signals")
 
 
 func enter_state(prev_state: String):
@@ -79,8 +82,7 @@ func enter_state(prev_state: String):
 			move_duration, transition_easing[0], transition_easing[1]
 		)
 		tweens_running += 1
-		entity.rig_lifting = true
-		emit_signal("fall_started", vert_move_impulse)
+		emit_signal("vert_move_started", vert_move_impulse)
 	move_tween.start()
 	
 	
@@ -153,4 +155,9 @@ func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
 	var path_string = key.get_concatenated_subnames()
 	if (not keep_in_air):
 		if (path_string.find('vert_current_impulse') > -1):
-			entity.rig_lifting = false
+			emit_signal("vert_move_finished")
+			
+			
+func _set_vert_move_entity_signals():
+	connect("vert_move_started", entity, "_on_MovedAspect_vert_move_started")
+	connect("vert_move_finished", entity, "_on_MovedAspect_vert_move_finished")

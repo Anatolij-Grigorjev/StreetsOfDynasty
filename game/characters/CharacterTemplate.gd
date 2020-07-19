@@ -33,7 +33,7 @@ var health : float
 var stability : float
 var invincibility := false
 
-var rig_lifting := false
+var rig_custom_position := false
 var rig_neutral_poistion: Vector2 = Vector2.ZERO
 
 onready var fsm: CharacterStateMachineTemplate = $FSM
@@ -61,7 +61,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	_process_stability_recovery(delta)
-	_adjust_rig_position(delta)
+	_correct_rig_position(delta)
 	
 	
 func _process_stability_recovery(delta: float):
@@ -70,10 +70,10 @@ func _process_stability_recovery(delta: float):
 		stability = clamp(stability + recovery_this_frame, 0.0, total_stability)
 		
 		
-func _adjust_rig_position(delta: float):
-	if (rig.position != rig_neutral_poistion and not rig_lifting):
+func _correct_rig_position(delta: float):
+	if (rig.position != rig_neutral_poistion and not rig_custom_position):
 		rig.position = lerp(rig.position, rig_neutral_poistion, 0.5 - delta)
-		if (rig.position.distance_squared_to(rig_neutral_poistion) < 10):
+		if (rig.position.distance_to(rig_neutral_poistion) < 5):
 			rig.position = rig_neutral_poistion
 			#shake screen for emphasis
 			Debug.request_screenshake()
@@ -158,6 +158,14 @@ func _receive_damage(hit_connect: HitConnect):
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	pass
+	
+
+func _on_MovedAspect_vert_move_started(vert_impulse: float):
+	rig_custom_position = true
+	
+	
+func _on_MovedAspect_vert_move_finished():
+	rig_custom_position = false
 	
 	
 func _get_rig_node() -> Node2D:
