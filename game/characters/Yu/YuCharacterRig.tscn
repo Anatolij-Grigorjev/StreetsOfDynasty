@@ -1030,7 +1030,7 @@ script = ExtResource( 17 )
 damage_amount = 10.0
 disruption = 200.0
 radius = 50.0
-target_move = Vector2( 256, -512 )
+target_move = Vector2( 512, -512 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/CatchAttack1" index="0"]
 position = Vector2( 95.2914, -21.3957 )

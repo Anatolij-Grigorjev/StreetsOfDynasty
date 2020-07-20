@@ -2,9 +2,9 @@ extends State
 class_name PerpetualState
 """
 Type of state that goes on until an external trigger forces a change
-Properties loaded from a property source
-State can be a composite for substates or state aspects that supply their
-own State-like lifecycles
+Provides character state specific conveniences - state animation,
+flag for velocity entering state, cached next state for character 
+FSM simplification
 """
 signal state_animation_finished(anim_name)
 

@@ -302,7 +302,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.7
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -742,7 +742,7 @@ rotation = -0.0124779
 texture = ExtResource( 5 )
 offset = Vector2( -30, -20 )
 hframes = 4
-frame = 3
+frame = 2
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/caught = SubResource( 3 )

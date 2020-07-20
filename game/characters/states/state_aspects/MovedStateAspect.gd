@@ -32,11 +32,7 @@ This way any state with this aspect will keep moving
 even without new explicit impulse
 """
 export(bool) var preserve_impulse: bool = false
-"""
-If true the aspect will keep the rig lifted when the impulse provides
-a negative vertical velocity
-"""
-export(bool) var keep_in_air: bool = false
+
 export(Easing) var move_easing: int = Easing.HALFWAY
 
 
@@ -69,10 +65,15 @@ func enter_state(prev_state: String):
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
 	if (horiz_move_impulse != 0.0):
+		var h_move_duration = move_duration
+		#if there is lift and fall, strech horiz movement to cover both
+		if (vert_move_impulse != 0.0):
+			h_move_duration *= 1.3
+		
 		move_tween.interpolate_property(
 			self, 'horiz_current_impulse', 
-			horiz_move_impulse * 1 / move_duration, 0.0,
-			move_duration, transition_easing[0], transition_easing[1]
+			horiz_move_impulse * 1 / h_move_duration, 0.0,
+			h_move_duration, transition_easing[0], transition_easing[1]
 		)
 		tweens_running += 1
 	if (vert_move_impulse != 0.0):
@@ -153,9 +154,8 @@ func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
 	#reduce num of locked tweens
 	tweens_running -= 1
 	var path_string = key.get_concatenated_subnames()
-	if (not keep_in_air):
-		if (path_string.find('vert_current_impulse') > -1):
-			emit_signal("vert_move_finished")
+	if (path_string.find('vert_current_impulse') > -1):
+		emit_signal("vert_move_finished")
 			
 			
 func _set_vert_move_entity_signals():

@@ -4,8 +4,10 @@ class_name State
 Abstract state machine state interface. 
 Nodes implementing this can be children of a state machine
 This node allows referencing the parent state machine and root entity
-turns off physics by default to get processed via FSM
+turns off physics by default to get processed ONLY via FSM
 
+Supports StateAspects children - all children extending the State interface
+will also be processed during the steps of this state's lifecycle
 """
 # type should be derived from StateMachine, 
 # not explicit due to cyclic type loading
