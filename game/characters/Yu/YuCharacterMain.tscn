@@ -120,6 +120,7 @@ state_length_sec = 0.5
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/CatchAttack" index="0"]
 script = ExtResource( 15 )
+min_target_distance = 50.0
 collision_mask = 96
 
 [node name="CaughtAttack1" type="Node" parent="FSM" index="7"]

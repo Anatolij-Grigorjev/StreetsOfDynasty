@@ -138,7 +138,7 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 			"target_move: %s, attacker facing: %s, target facing: %s" % 
 			[attackbox.target_move, Utils.get_areagroup_area_owner(attackbox).facing, facing]
 		)
-		var displacement = attackbox.target_move * attack_facing
+		var displacement = Vector2(attackbox.target_move.x * attack_facing, attackbox.target_move.y)
 		return displacement
 	else:
 		return Vector2.ZERO
