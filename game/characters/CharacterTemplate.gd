@@ -12,6 +12,7 @@ signal hit_displaced(displacement)
 signal got_caught(catcher)
 signal got_released()
 signal caught_character(caught)
+signal moved_to_catching_pos(caught_character)
 signal fall_finished
 signal died
 

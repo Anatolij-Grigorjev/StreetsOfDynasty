@@ -128,6 +128,7 @@ func _prepare_look_caught(catcher: CharacterTemplate):
 	caught.facing = -catcher.facing
 	var distance = (caught.caught_point.global_position - catcher.catch_point.global_position)
 	catcher.global_position += Vector2(distance.x, 0.0)
+	catcher.emit_signal("moved_to_catching_pos", caught)
 	
 	
 	

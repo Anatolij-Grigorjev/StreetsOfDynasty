@@ -2,8 +2,20 @@ extends State
 class_name AttackStatePhaseAspect
 """
 This state aspect is intended to use for attack states
-this will follow singlas from attackbox timeline and set the 
-correct phase based on those changes
+The aspect uses signals from the attackbox group to determine 
+the current phase of the current attack.
+
+The default phases are mapped as follows:
+	
+	1. Attack starts in phase WIND_UP
+	2. When the attackbox of state name becomes active,
+	 the attack moves to HIT
+	3. When the attackbox of state name becomes inactive, 
+	 the attack moes to WIND_DOWN 
+	
+These defaults can be overriden by providing a custom
+phase toggle patterns mapping 
+(useful for states where the attackbox name is different)
 """
 export(Dictionary) var custom_phase_toggle_patterns = {}
 
