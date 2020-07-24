@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -22,7 +22,82 @@
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
-[ext_resource path="res://characters/Yu/spritesheets/hurt_low.png" type="Texture" id=23]
+[ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=24]
+
+[sub_resource type="Animation" id=26]
+resource_name = "attack_b1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -116.64, -126.35 ), Vector2( -82.4018, -135.061 ), Vector2( -114.325, -180.755 ), Vector2( -68.9037, -175.483 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_b2"
@@ -907,11 +982,10 @@ extents = Vector2( 67.2838, 190.972 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-position = Vector2( 0, 10 )
-texture = ExtResource( 23 )
-offset = Vector2( -32.6065, 8.52183 )
-hframes = 5
-frame = 1
+texture = ExtResource( 24 )
+offset = Vector2( -68.9037, -175.483 )
+hframes = 10
+frame = 3
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -939,6 +1013,7 @@ hframes = 3
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
 anims/attack_a2 = ExtResource( 3 )
+anims/attack_b1 = SubResource( 26 )
 anims/attack_b2 = SubResource( 1 )
 anims/attack_b2f = SubResource( 2 )
 anims/catch_attack = SubResource( 3 )
