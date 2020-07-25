@@ -20,7 +20,6 @@
 [ext_resource path="res://characters/Yu/spritesheets/catch_attack.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
-[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
 [ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=24]
 
@@ -69,10 +68,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:offset")
@@ -81,10 +80,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -116.64, -126.35 ), Vector2( -82.4018, -135.061 ), Vector2( -114.325, -180.755 ), Vector2( -68.9037, -175.483 ) ]
+"values": [ Vector2( -116.64, -126.35 ), Vector2( -82.4018, -135.061 ), Vector2( -114.325, -180.755 ), Vector2( -68.9037, -175.483 ), Vector2( -122.876, -95.6659 ), Vector2( -135.849, -99.0915 ), Vector2( -50.6697, -111.214 ), Vector2( -50.6697, -111.214 ), Vector2( -61.1575, -141.973 ), Vector2( -87.7967, -167.762 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite:position")
@@ -93,10 +92,48 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TrailFX:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TrailFX2:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath("HitboxGroup")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "AttackB1" ],
+"method": "switch_to_area"
+} ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -945,6 +982,9 @@ extents = Vector2( 52.6578, 185.16 )
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 69.0345, 194.518 )
 
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 40.6224, 183.898 )
+
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 49.9709, 151.65 )
 
@@ -983,20 +1023,18 @@ extents = Vector2( 67.2838, 190.972 )
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 24 )
-offset = Vector2( -68.9037, -175.483 )
+offset = Vector2( -116.64, -126.35 )
 hframes = 10
-frame = 3
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 231.353, -70.2303 )
-rotation = -2.90924
-texture = ExtResource( 21 )
-flip_h = true
+modulate = Color( 1, 1, 1, 0.493636 )
+position = Vector2( 98.2338, -66.2318 )
+rotation = 0.017968
+texture = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1004,10 +1042,11 @@ __meta__ = {
 [node name="TrailFX2" type="Sprite" parent="." index="2"]
 visible = false
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -63.6727, 80.9823 )
+position = Vector2( -127.162, -82.3864 )
 texture = ExtResource( 12 )
 vframes = 2
 hframes = 3
+frame = 5
 
 [node name="AnimationPlayer" parent="." index="3"]
 method_call_mode = 1
@@ -1025,6 +1064,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
+pitch_scale = 1.25
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1159,7 +1199,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AttackA2_1" type="Area2D" parent="HitboxGroup" index="3"]
+[node name="AttackB1" type="Area2D" parent="HitboxGroup" index="3"]
+visible = false
+collision_layer = 512
+collision_mask = 0
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB1" index="0"]
+shape = SubResource( 27 )
+
+[node name="AttackA2_1" type="Area2D" parent="HitboxGroup" index="4"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1168,7 +1217,7 @@ script = ExtResource( 19 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackA2_1" index="0"]
 shape = SubResource( 14 )
 
-[node name="AttackA2_2" type="Area2D" parent="HitboxGroup" index="4"]
+[node name="AttackA2_2" type="Area2D" parent="HitboxGroup" index="5"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1178,7 +1227,7 @@ script = ExtResource( 19 )
 position = Vector2( -35, 0 )
 shape = SubResource( 15 )
 
-[node name="AttackB2" type="Area2D" parent="HitboxGroup" index="5"]
+[node name="AttackB2" type="Area2D" parent="HitboxGroup" index="6"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1187,7 +1236,7 @@ script = ExtResource( 19 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/AttackB2" index="0"]
 shape = SubResource( 16 )
 
-[node name="AttackB2F_1" type="Area2D" parent="HitboxGroup" index="6"]
+[node name="AttackB2F_1" type="Area2D" parent="HitboxGroup" index="7"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1202,7 +1251,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AttackB2F_2" type="Area2D" parent="HitboxGroup" index="7"]
+[node name="AttackB2F_2" type="Area2D" parent="HitboxGroup" index="8"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1217,7 +1266,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="CatchAttack" type="Area2D" parent="HitboxGroup" index="8"]
+[node name="CatchAttack" type="Area2D" parent="HitboxGroup" index="9"]
 visible = false
 collision_layer = 512
 collision_mask = 0
@@ -1227,7 +1276,7 @@ script = ExtResource( 19 )
 position = Vector2( 8.57861, 16.4972 )
 shape = SubResource( 24 )
 
-[node name="HurtLow1" type="Area2D" parent="HitboxGroup" index="9"]
+[node name="HurtLow1" type="Area2D" parent="HitboxGroup" index="10"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1243,7 +1292,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow2" type="Area2D" parent="HitboxGroup" index="10"]
+[node name="HurtLow2" type="Area2D" parent="HitboxGroup" index="11"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1259,7 +1308,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow3" type="Area2D" parent="HitboxGroup" index="11"]
+[node name="HurtLow3" type="Area2D" parent="HitboxGroup" index="12"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
@@ -1275,7 +1324,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="HurtLow4" type="Area2D" parent="HitboxGroup" index="12"]
+[node name="HurtLow4" type="Area2D" parent="HitboxGroup" index="13"]
 visible = false
 collision_layer = 1024
 collision_mask = 0
