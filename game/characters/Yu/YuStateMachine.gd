@@ -57,8 +57,22 @@ func _get_next_state(delta: float) -> String:
 			if (not attack_state.can_change_state):
 				return NO_STATE
 			var next_attack_input = pressed_attack_input.read_and_reset()
+			if (next_attack_input == C.AttackInputType.SPECIAL):
+				_start_special_flash()
+				return "AttackB1"
 			if (next_attack_input == C.AttackInputType.NORMAL):
 				return "AttackA2"
+			if (move_direction != Vector2.ZERO):
+				return "Walk"
+			if (attack_state.is_state_over):
+				return _next_or_default(attack_state)
+			return NO_STATE
+		"AttackB1":
+			if (was_hit):
+				return "HurtLow"
+			var attack_state = state_nodes[state] as FiniteState
+			if (not attack_state.can_change_state):
+				return NO_STATE
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_state.is_state_over):

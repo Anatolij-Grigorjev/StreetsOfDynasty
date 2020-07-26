@@ -13,7 +13,7 @@ signal got_caught(catcher)
 signal got_released()
 signal caught_character(caught)
 signal moved_to_catching_pos(caught_character)
-signal fall_finished
+signal rig_position_corrected
 signal died
 
 
@@ -51,7 +51,7 @@ func _ready() -> void:
 	stability = total_stability
 	
 	fsm.connect("state_changed", self, "_on_FSM_state_changed")
-	connect("fall_finished", fsm, "_on_Character_fall_finished")
+	connect("rig_position_corrected", fsm, "_on_Character_rig_position_corrected")
 	
 	for hitbox in hitboxes.get_children():
 		if (hitbox as Hitbox):
@@ -76,9 +76,7 @@ func _correct_rig_position(delta: float):
 		rig.position = lerp(rig.position, rig_neutral_poistion, 0.5 - delta)
 		if (rig.position.distance_to(rig_neutral_poistion) < 5):
 			rig.position = rig_neutral_poistion
-			#shake screen for emphasis
-			Debug.request_screenshake()
-			emit_signal("fall_finished")
+			emit_signal("rig_position_corrected")
 	
 	
 func _get_stability_recovery_per_sec() -> float:

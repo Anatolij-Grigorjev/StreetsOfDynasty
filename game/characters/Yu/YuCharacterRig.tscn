@@ -1023,8 +1023,9 @@ extents = Vector2( 67.2838, 190.972 )
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 24 )
-offset = Vector2( -116.64, -126.35 )
+offset = Vector2( -87.7967, -167.762 )
 hframes = 10
+frame = 9
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )

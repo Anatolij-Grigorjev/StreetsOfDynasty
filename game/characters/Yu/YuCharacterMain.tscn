@@ -65,7 +65,25 @@ change_facing = false
 script = ExtResource( 15 )
 collision_mask = 96
 
-[node name="AttackA2" type="Node" parent="FSM" index="3"]
+[node name="AttackB1" type="Node" parent="FSM" index="3"]
+script = ExtResource( 6 )
+state_animation = "attack_b1"
+next_state = "Idle"
+state_commit_end_sec = 1.0
+state_length_sec = 1.0
+
+[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB1" index="0"]
+script = ExtResource( 14 )
+custom_phase_toggle_patterns = {
+
+}
+
+[node name="MovedStateAspect" type="Node" parent="FSM/AttackB1" index="1"]
+script = ExtResource( 16 )
+horiz_move_impulse = 50.0
+vert_move_impulse = -500.0
+
+[node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
 state_animation = "attack_a2"
 next_state = "Idle"
@@ -83,7 +101,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="AttackB2" type="Node" parent="FSM" index="4"]
+[node name="AttackB2" type="Node" parent="FSM" index="5"]
 script = ExtResource( 6 )
 state_animation = "attack_b2"
 next_state = "AttackB2F"
@@ -101,7 +119,7 @@ script = ExtResource( 5 )
 move_speed = Vector2( 10, 5 )
 change_facing = false
 
-[node name="AttackB2F" type="Node" parent="FSM" index="5"]
+[node name="AttackB2F" type="Node" parent="FSM" index="6"]
 script = ExtResource( 6 )
 state_animation = "attack_b2f"
 next_state = "Idle"
@@ -111,7 +129,7 @@ state_length_sec = 1.7
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2F" index="0"]
 script = ExtResource( 14 )
 
-[node name="CatchAttack" type="Node" parent="FSM" index="6"]
+[node name="CatchAttack" type="Node" parent="FSM" index="7"]
 script = ExtResource( 6 )
 state_animation = "catching"
 next_state = "Idle"
@@ -124,14 +142,14 @@ max_move = 50.0
 min_target_distance = 50.0
 collision_mask = 96
 
-[node name="CaughtAttack1" type="Node" parent="FSM" index="7"]
+[node name="CaughtAttack1" type="Node" parent="FSM" index="8"]
 script = ExtResource( 6 )
 state_animation = "catch_attack"
 next_state = "Idle"
 state_commit_end_sec = 0.7
 state_length_sec = 0.8
 
-[node name="HurtLow" type="Node" parent="FSM" index="8"]
+[node name="HurtLow" type="Node" parent="FSM" index="9"]
 script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
@@ -142,7 +160,7 @@ state_length_sec = 1.0
 script = ExtResource( 16 )
 move_easing = 2
 
-[node name="Catching" type="Node" parent="FSM" index="9"]
+[node name="Catching" type="Node" parent="FSM" index="10"]
 script = ExtResource( 13 )
 initial_state = "CatchIdle"
 
@@ -164,17 +182,16 @@ next_state = "CatchIdle"
 state_commit_end_sec = 0.8
 state_length_sec = 0.8
 
-[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="10"]
+[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="11"]
 script = ExtResource( 23 )
 flash_sound = ExtResource( 24 )
 
-[node name="StatesTween" type="Tween" parent="FSM" index="11"]
+[node name="StatesTween" type="Tween" parent="FSM" index="12"]
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-position = Vector2( 0, 0 )
 texture = ExtResource( 7 )
 offset = Vector2( -16.8869, -12.6227 )
 hframes = 8
@@ -182,7 +199,6 @@ frame = 5
 
 [node name="TrailFX2" parent="Body/YuCharacterRig" index="2"]
 modulate = Color( 0.286275, 0.286275, 0.290196, 1 )
-frame = 5
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")

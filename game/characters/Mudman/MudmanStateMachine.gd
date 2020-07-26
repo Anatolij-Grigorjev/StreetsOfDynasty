@@ -140,8 +140,11 @@ func _on_character_hit_displaced(displacement: Vector2):
 	hit_react_move.current_value = displacement
 	
 
-func _on_Character_fall_finished():
-	fall_finished.current_value = true
+func _on_Character_rig_position_corrected():
+	if (state == "Falling"):
+		#screenshake about fall ended
+		Debug.request_screenshake(0.2, 25, 20)
+		fall_finished.current_value = true
 
 
 func _build_next_hit_receive_state(stability: float) -> String:
