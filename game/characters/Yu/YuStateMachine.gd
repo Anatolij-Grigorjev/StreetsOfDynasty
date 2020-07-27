@@ -73,6 +73,8 @@ func _get_next_state(delta: float) -> String:
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
 				return NO_STATE
+			#state will change, unset rig position
+			entity.rig_custom_position = false
 			if (move_direction != Vector2.ZERO):
 				return "Walk"
 			if (attack_state.is_state_over):

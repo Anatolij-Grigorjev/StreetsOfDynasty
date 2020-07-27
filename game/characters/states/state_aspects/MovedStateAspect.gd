@@ -26,10 +26,13 @@ Amount of time there should be movement in seconds
 """
 export(float) var move_duration: float = 0.25
 """
+Amount of time to pass before the movement tween is invoked
+"""
+export(float) var move_delay: float = 0.0
+"""
 If true the aspect will keep impulse provided during previous
 invocation. 
-This way any state with this aspect will keep moving 
-even without new explicit impulse
+This way an impulse set via inspector can be applied every invocation
 """
 export(bool) var preserve_impulse: bool = false
 
@@ -59,6 +62,9 @@ func enter_state(prev_state: String):
 	Debug.log_info("move impulse: %s", [move_impulse])
 	if (move_impulse == Vector2.ZERO):
 		return
+	#wait for delay to pass before movement
+	if (move_delay != 0.0):
+		yield(get_tree().create_timer(move_delay), "timeout")
 	#reset tweens semaphore
 	tweens_running = 0
 	var transition_easing = _get_move_easing_tween_props()
@@ -115,6 +121,9 @@ func _set_move_tween() -> Tween:
 
 func _stop_all_movement():
 	move_tween.stop_all()
+	#there was ongoing vertical movement
+	if (abs(vert_move_impulse) > 0.0):
+		emit_signal("vert_move_finished")
 	move_tween.remove_all()
 	horiz_current_impulse = 0.0
 	vert_current_impulse = 0.0

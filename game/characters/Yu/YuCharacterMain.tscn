@@ -81,7 +81,11 @@ custom_phase_toggle_patterns = {
 [node name="MovedStateAspect" type="Node" parent="FSM/AttackB1" index="1"]
 script = ExtResource( 16 )
 horiz_move_impulse = 50.0
-vert_move_impulse = -500.0
+vert_move_impulse = -250.0
+move_duration = 0.15
+move_delay = 0.4
+preserve_impulse = true
+move_easing = 2
 
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )

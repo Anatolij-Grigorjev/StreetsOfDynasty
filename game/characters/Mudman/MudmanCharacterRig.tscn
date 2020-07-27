@@ -738,11 +738,11 @@ extents = Vector2( 120.143, 38.7073 )
 
 [node name="Sprite" parent="." index="0"]
 material = SubResource( 2 )
+position = Vector2( 0.132568, 2.00882 )
 rotation = -0.0124779
 texture = ExtResource( 5 )
-offset = Vector2( -30, -20 )
+offset = Vector2( -30.7643, -3.46134 )
 hframes = 4
-frame = 2
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/caught = SubResource( 3 )

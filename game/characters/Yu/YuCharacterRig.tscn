@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://characters/Yu/spritesheets/catch_attack.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
+[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
 [ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=24]
 
@@ -1023,9 +1024,8 @@ extents = Vector2( 67.2838, 190.972 )
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 24 )
-offset = Vector2( -87.7967, -167.762 )
+offset = Vector2( -116.64, -126.35 )
 hframes = 10
-frame = 9
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -1035,7 +1035,8 @@ visible = false
 modulate = Color( 1, 1, 1, 0.493636 )
 position = Vector2( 98.2338, -66.2318 )
 rotation = 0.017968
-texture = ExtResource( 4 )
+texture = ExtResource( 21 )
+flip_h = true
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1065,7 +1066,6 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
-pitch_scale = 1.25
 __meta__ = {
 "_editor_description_": ""
 }
