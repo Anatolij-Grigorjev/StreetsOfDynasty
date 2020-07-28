@@ -72,9 +72,8 @@ func enter_state(prev_state: String):
 	#this leaves control over when that velocity is used
 	if (horiz_move_impulse != 0.0):
 		var h_move_duration = move_duration
-		#if there is lift and fall, strech horiz movement to cover both
 		if (vert_move_impulse != 0.0):
-			h_move_duration *= 1.3
+			h_move_duration = _adjust_horiz_duration_for_vert()
 		
 		move_tween.interpolate_property(
 			self, 'horiz_current_impulse', 
@@ -130,6 +129,7 @@ func _stop_all_movement():
 	if (not preserve_impulse):
 		horiz_move_impulse = 0.0
 		vert_move_impulse = 0.0
+		move_duration = 0.25
 	
 	
 func _get_move_easing_tween_props() -> Array:
@@ -154,6 +154,10 @@ func set_move_impulses(impulse: Vector2):
 
 func get_joined_impulse() -> Vector2:
 	return Vector2(horiz_move_impulse, vert_move_impulse)
+	
+	
+func _adjust_horiz_duration_for_vert() -> float:
+	return move_duration * 1.35
 
 
 func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
