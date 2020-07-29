@@ -162,10 +162,13 @@ func _apply_hit_react_move(hit_react_move: Vector2, hit_react_move_duration: flo
 	if (hit_react_move and hit_react_state != NO_STATE):
 		var hurt_state_node = state_nodes[hit_react_state]
 		var moved_aspect: MovedStateAspect = hurt_state_node.get_node('MovedStateAspect')
+		var moved_air_aspect: MovedAirStateAspect = hurt_state_node.get_node('MovedAirStateAspect')
 		if (moved_aspect):
-			moved_aspect.set_move_impulses(hit_react_move)
+			moved_aspect.move_impulse = Vector2(hit_react_move.x, 0.0)
+		if (moved_air_aspect):
+			moved_air_aspect.total_move_height = hit_react_move.y
 			if (hit_react_move_duration != 0.0):
-				moved_aspect.move_duration = hit_react_move_duration
+				moved_air_aspect.move_duration = hit_react_move_duration
 	
 	
 func _check_got_killed():

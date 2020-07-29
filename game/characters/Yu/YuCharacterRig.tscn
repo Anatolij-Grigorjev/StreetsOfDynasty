@@ -1222,6 +1222,7 @@ damage_amount = 27.0
 disruption = 100.0
 target_move = Vector2( 10, -500 )
 target_move_time = 0.7
+attack_recovery = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB1" index="0"]
 position = Vector2( 98.6643, -111.627 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
 [ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=6]
+[ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=11]
@@ -46,7 +47,6 @@ state_animation = "idle"
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Idle" index="0"]
 script = ExtResource( 13 )
-move_easing = 2
 
 [node name="Walk" type="Node" parent="FSM" index="1"]
 script = ExtResource( 3 )
@@ -57,7 +57,6 @@ script = ExtResource( 11 )
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Walk" index="1"]
 script = ExtResource( 13 )
-move_easing = 2
 
 [node name="Hurt" type="Node" parent="FSM" index="2"]
 script = ExtResource( 4 )
@@ -68,7 +67,6 @@ state_length_sec = 0.6
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Hurt" index="0"]
 script = ExtResource( 13 )
-move_easing = 2
 
 [node name="Falling" type="Node" parent="FSM" index="3"]
 script = ExtResource( 3 )
@@ -77,6 +75,10 @@ next_state = "Fallen"
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
 script = ExtResource( 13 )
+move_easing = 2
+
+[node name="MovedAirStateAspect" type="Node" parent="FSM/Falling" index="1"]
+script = ExtResource( 7 )
 move_easing = 2
 
 [node name="Fallen" type="Node" parent="FSM" index="4"]

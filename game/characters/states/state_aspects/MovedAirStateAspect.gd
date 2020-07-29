@@ -1,5 +1,5 @@
 extends State
-class_name MovedStateAspect
+class_name MovedAirStateAspect
 """
 A state aspect that allows a character to be moved by 
 a controlled motion with aspects like facing/speed/etc 
@@ -11,12 +11,14 @@ enum Easing {
 	ALL_IN = 2
 }
 
+signal vert_move_started(vert_impulse)
+signal vert_move_finished()
+
 
 """
-The total movement impulse that this aspect will communicate
-to entity via dedicated FSM mover tween
+The total air the aspect should make rig grab
 """
-export(Vector2) var move_impulse: Vector2 = Vector2.ZERO
+export(float) var total_move_height: float = 0.0
 """
 Amount of time there should be movement in seconds
 """
@@ -37,7 +39,7 @@ export(Easing) var move_easing: int = Easing.HALFWAY
 
 var move_tween: Tween
 
-var current_impulse: Vector2 = Vector2.ZERO
+var vert_current_impulse: float = 0.0
 
 """
 flag that THIS aspect is the one that started the common tween
@@ -53,8 +55,8 @@ func _ready():
 
 func enter_state(prev_state: String):
 	.enter_state(prev_state)
-	Debug.log_info("move impulse: %s", [move_impulse])
-	if (move_impulse == Vector2.ZERO):
+	Debug.log_info("vert move impulse: %s", [total_move_height])
+	if (total_move_height == 0.0):
 		return
 	#wait for delay to pass before movement
 	if (move_delay != 0.0):
@@ -64,20 +66,21 @@ func enter_state(prev_state: String):
 	var transition_easing = _get_move_easing_tween_props()
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
-
 	move_tween.interpolate_property(
-		self, 'current_impulse', 
-		move_impulse * 1 / move_duration, Vector2.ZERO,
+		self, 'vert_current_impulse',
+		total_move_height * 1 / move_duration, 0.0,
 		move_duration, transition_easing[0], transition_easing[1]
 	)
 	tweens_running += 1
+	emit_signal("vert_move_started", total_move_height)
 	move_tween.start()
+	
 	
 
 func process_state(delta: float):
 	.process_state(delta)
-	if (current_impulse != Vector2.ZERO):
-		entity.do_movement_collide(current_impulse * delta)
+	if (vert_current_impulse != 0.0):
+		entity.lift_rig_impulse(Vector2(0, vert_current_impulse) * delta)
 		
 		
 
@@ -99,9 +102,13 @@ func _set_move_tween() -> Tween:
 
 func _stop_all_movement():
 	move_tween.stop_all()
+	#there was ongoing vertical movement
+	if (abs(total_move_height) > 0.0):
+		emit_signal("vert_move_finished")
 	move_tween.remove_all()
+	vert_current_impulse = 0.0
 	if (not preserve_impulse):
-		move_impulse = Vector2.ZERO
+		total_move_height = 0.0
 	
 	
 func _get_move_easing_tween_props() -> Array:
@@ -117,11 +124,6 @@ func _get_move_easing_tween_props() -> Array:
 		_:
 			breakpoint
 			return [Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT]
-			
-	
-	
-func _adjust_horiz_duration_for_vert() -> float:
-	return move_duration * 1.35
 
 
 func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
@@ -130,3 +132,11 @@ func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
 		return
 	#reduce num of locked tweens
 	tweens_running -= 1
+	var path_string = key.get_concatenated_subnames()
+	if (path_string.find('vert_current_impulse') > -1):
+		emit_signal("vert_move_finished")
+			
+			
+func _set_vert_move_entity_signals():
+	connect("vert_move_started", entity, "_on_MovedAirAspect_vert_move_started")
+	connect("vert_move_finished", entity, "_on_MovedAirAspect_vert_move_finished")

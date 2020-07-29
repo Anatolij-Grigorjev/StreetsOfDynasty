@@ -159,11 +159,11 @@ func _on_FSM_state_changed(old_state: String, new_state: String):
 	pass
 	
 
-func _on_MovedAspect_vert_move_started(vert_impulse: float):
+func _on_MovedAirAspect_vert_move_started(vert_impulse: float):
 	rig_custom_position = true
 	
 	
-func _on_MovedAspect_vert_move_finished():
+func _on_MovedAirAspect_vert_move_finished():
 	rig_custom_position = false
 	
 	
