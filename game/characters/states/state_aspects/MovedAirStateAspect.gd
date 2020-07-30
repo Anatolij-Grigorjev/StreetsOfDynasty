@@ -132,9 +132,7 @@ func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
 		return
 	#reduce num of locked tweens
 	tweens_running -= 1
-	var path_string = key.get_concatenated_subnames()
-	if (path_string.find('vert_current_impulse') > -1):
-		emit_signal("vert_move_finished")
+	emit_signal("vert_move_finished")
 			
 			
 func _set_vert_move_entity_signals():

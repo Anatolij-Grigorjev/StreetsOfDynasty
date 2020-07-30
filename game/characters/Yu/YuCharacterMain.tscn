@@ -70,7 +70,6 @@ script = ExtResource( 6 )
 state_animation = "attack_b1"
 next_state = "Idle"
 state_commit_end_sec = 1.0
-state_length_sec = 1.0
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
@@ -152,7 +151,6 @@ script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
 state_commit_end_sec = 1.0
-state_length_sec = 1.0
 
 [node name="MovedStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
 script = ExtResource( 16 )
