@@ -68,7 +68,7 @@ func enter_state(prev_state: String):
 	#this leaves control over when that velocity is used
 	move_tween.interpolate_property(
 		self, 'vert_current_impulse',
-		total_move_height * 1 / move_duration, 0.0,
+		total_move_height, 0.0,
 		move_duration, transition_easing[0], transition_easing[1]
 	)
 	tweens_running += 1

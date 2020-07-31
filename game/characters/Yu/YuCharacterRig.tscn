@@ -1124,16 +1124,16 @@ extents = Vector2( 67.2838, 190.972 )
 [node name="Sprite" parent="." index="0"]
 material = null
 texture = ExtResource( 24 )
-offset = Vector2( -116.64, -126.35 )
+offset = Vector2( -122.876, -95.6659 )
 hframes = 10
+frame = 4
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
-visible = false
 position = Vector2( 65.8415, -119.599 )
-rotation = -0.36745
+rotation = -0.367449
 texture = ExtResource( 4 )
 flip_v = true
 __meta__ = {
