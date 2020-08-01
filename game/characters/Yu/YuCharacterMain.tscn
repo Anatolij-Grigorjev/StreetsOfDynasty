@@ -53,6 +53,7 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 state_animation = "attack_a1"
 next_state = "Idle"
+state_commit_end_anim_sec = 1.0
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 14 )
@@ -70,7 +71,7 @@ collision_mask = 96
 script = ExtResource( 6 )
 state_animation = "attack_b1"
 next_state = "Idle"
-state_commit_end_sec = 1.0
+state_commit_end_anim_sec = 1.0
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
@@ -93,8 +94,7 @@ move_easing = 2
 script = ExtResource( 6 )
 state_animation = "attack_a2"
 next_state = "Idle"
-state_commit_end_sec = 0.73
-state_length_sec = 0.8
+state_commit_end_anim_sec = 0.7
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA2" index="0"]
 script = ExtResource( 15 )
@@ -111,8 +111,7 @@ __meta__ = {
 script = ExtResource( 6 )
 state_animation = "attack_b2"
 next_state = "AttackB2F"
-state_commit_end_sec = 0.5
-state_length_sec = 0.7
+state_commit_end_anim_sec = 0.6
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2" index="0"]
 script = ExtResource( 14 )
@@ -129,8 +128,7 @@ change_facing = false
 script = ExtResource( 6 )
 state_animation = "attack_b2f"
 next_state = "Idle"
-state_commit_end_sec = 1.5
-state_length_sec = 1.7
+state_commit_end_anim_sec = 1.4
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2F" index="0"]
 script = ExtResource( 14 )
@@ -139,8 +137,7 @@ script = ExtResource( 14 )
 script = ExtResource( 6 )
 state_animation = "catching"
 next_state = "Idle"
-state_commit_end_sec = 0.3
-state_length_sec = 0.5
+state_commit_end_anim_sec = 1.1
 
 [node name="MoveToEnemyStateAspect" type="Node" parent="FSM/CatchAttack" index="0"]
 script = ExtResource( 15 )
@@ -152,14 +149,11 @@ collision_mask = 96
 script = ExtResource( 6 )
 state_animation = "catch_attack"
 next_state = "Idle"
-state_commit_end_sec = 0.7
-state_length_sec = 0.8
 
 [node name="HurtLow" type="Node" parent="FSM" index="9"]
 script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
-state_commit_end_sec = 1.0
 
 [node name="MovedStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
 script = ExtResource( 16 )
@@ -176,15 +170,11 @@ entity_path = NodePath("../../..")
 script = ExtResource( 6 )
 state_animation = "catching"
 next_state = "CatchIdle"
-state_commit_end_sec = 5.0
-state_length_sec = 5.0
 
 [node name="CatchAttack" type="Node" parent="FSM/Catching/FSM" index="1"]
 script = ExtResource( 6 )
 state_animation = "catch_attack"
 next_state = "CatchIdle"
-state_commit_end_sec = 0.8
-state_length_sec = 0.8
 
 [node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="11"]
 script = ExtResource( 23 )

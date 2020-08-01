@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://characters/Yu/spritesheets/catch_attack.png" type="Texture" id=18]
 [ext_resource path="res://characters/Hitbox.gd" type="Script" id=19]
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
+[ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
 [ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=24]
 
@@ -1123,18 +1124,22 @@ extents = Vector2( 67.2838, 190.972 )
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 24 )
-offset = Vector2( -122.876, -95.6659 )
-hframes = 10
-frame = 4
+texture = ExtResource( 22 )
+offset = Vector2( -27.8095, -16.2632 )
+hframes = 8
+frame = 2
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
 
 [node name="TrailFX" type="Sprite" parent="." index="1"]
-position = Vector2( 65.8415, -119.599 )
-rotation = -0.367449
-texture = ExtResource( 4 )
+visible = false
+modulate = Color( 1, 1, 1, 0.0588235 )
+show_behind_parent = true
+position = Vector2( 55.7294, -49.1013 )
+rotation = -3.16578
+texture = ExtResource( 21 )
+flip_h = true
 flip_v = true
 __meta__ = {
 "_editor_description_": ""
@@ -1142,8 +1147,8 @@ __meta__ = {
 
 [node name="TrailFX2" type="Sprite" parent="." index="2"]
 visible = false
-modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -127.162, -82.3864 )
+modulate = Color( 0.286275, 0.286275, 0.290196, 1 )
+position = Vector2( -63.6727, 80.9823 )
 texture = ExtResource( 12 )
 vframes = 2
 hframes = 3
@@ -1165,6 +1170,7 @@ anims/walk = ExtResource( 8 )
 
 [node name="FXPlayer" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource( 1 )
+pitch_scale = 1.75
 __meta__ = {
 "_editor_description_": ""
 }

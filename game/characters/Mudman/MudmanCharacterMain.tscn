@@ -62,8 +62,6 @@ script = ExtResource( 13 )
 script = ExtResource( 4 )
 state_animation = "hurt"
 next_state = "Idle"
-state_commit_end_sec = 0.6
-state_length_sec = 0.6
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Hurt" index="0"]
 script = ExtResource( 13 )
@@ -85,8 +83,6 @@ move_easing = 2
 script = ExtResource( 4 )
 state_animation = "fallen"
 next_state = "Idle"
-state_commit_end_sec = 5.0
-state_length_sec = 5.0
 
 [node name="Dying" type="Node" parent="FSM" index="5"]
 script = ExtResource( 4 )
