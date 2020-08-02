@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.gd" type="Script" id=1]
+
+[node name="AttackerImpactHitEffect" type="Node2D"]
+script = ExtResource( 1 )
+anim_slow_factor = 0.1
+anim_slow_duration = 0.1
+
+[node name="Timer" type="Timer" parent="."]

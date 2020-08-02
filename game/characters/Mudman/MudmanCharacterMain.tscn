@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=7]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.tscn" type="PackedScene" id=10]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/state_aspects/MovedStateAspect.gd" type="Script" id=13]
@@ -137,8 +138,6 @@ timescale_duration = 0.11
 [node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="3" instance=ExtResource( 27 )]
 HitSoundFx = ExtResource( 26 )
 
-[node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects" index="4" instance=ExtResource( 28 )]
-
 [node name="BleedingHitEffects" type="Node2D" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="1"]
 script = ExtResource( 15 )
 
@@ -155,7 +154,9 @@ timescale_damage_threshold = 15.0
 [node name="SoundFXHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="3" instance=ExtResource( 27 )]
 HitSoundFx = ExtResource( 26 )
 
-[node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects" index="4" instance=ExtResource( 28 )]
+[node name="ScreenShakeHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="2" instance=ExtResource( 28 )]
+
+[node name="AttackerImpactHitEffect" parent="Body/MudmanCharacterRig/AttackTypeHitEffects" index="3" instance=ExtResource( 10 )]
 
 [node name="HitboxGroup" parent="Body/MudmanCharacterRig" index="5"]
 entity_path = NodePath("../../..")

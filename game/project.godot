@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/hit_effects/AttackTypeHitEffects.gd"
 }, {
+"base": "HitEffectTemplate",
+"class": "AttackerImpactHitEffect",
+"language": "GDScript",
+"path": "res://characters/hit_effects/AttackerImpactHitEffect.gd"
+}, {
 "base": "Reference",
 "class": "C",
 "language": "GDScript",
@@ -199,6 +204,7 @@ _global_script_class_icons={
 "AttackBox": "",
 "AttackStatePhaseAspect": "",
 "AttackTypeHitEffects": "",
+"AttackerImpactHitEffect": "",
 "C": "",
 "Catchbox": "",
 "CharacterDataDisplayLabels": "",
