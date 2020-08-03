@@ -13,6 +13,7 @@ func _ready():
 	connect("got_hit", fsm, "_on_character_got_hit")
 	connect("hit_displaced", fsm, "_on_character_hit_displaced")
 	connect("got_caught", fsm, "_on_character_got_caught")
+	connect("landed_hit", self, "_on_landed_hit")
 	
 
 func _on_hitbox_hit(hit_connect: HitConnect):
@@ -35,3 +36,8 @@ func _to_string() -> String:
 func _on_MovedAspect_vert_move_finished():
 	if (fsm.state != "AttackB1"):
 		rig_custom_position = false
+		
+		
+func _on_landed_hit(hit_connect: HitConnect):
+	$Body/YuCharacterRig/AttackTypeHitEffects.invoke_hit_effects(hit_connect)
+	

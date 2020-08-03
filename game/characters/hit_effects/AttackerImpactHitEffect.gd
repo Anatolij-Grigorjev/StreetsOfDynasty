@@ -29,10 +29,13 @@ func _ready():
 	
 
 func invoke_hit_fx(hit_connect: HitConnect):
-	attacker = hit_connect.attacker
-	prev_attacker_anim_speed = attacker.anim.playback_speed
-	attacker.anim.playback_speed = anim_slow_factor
-	timer.start()
+	if (not timer.is_stopped()):
+		timer.wait_time += anim_slow_duration
+	else:
+		attacker = hit_connect.attacker
+		prev_attacker_anim_speed = attacker.anim.playback_speed
+		attacker.anim.playback_speed = anim_slow_factor
+		timer.start()
 	
 	
 func _on_anim_slowdown_timeout():

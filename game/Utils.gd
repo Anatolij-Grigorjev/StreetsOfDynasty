@@ -37,13 +37,24 @@ static func get_file_text(filepath: String) -> String:
 Get the value at specified key from dictionary. 
 If key not present return default
 """
-static func get_or_default(dict: Dictionary, key: String, default):
+static func get_or_default(dict: Dictionary, key: String, default = null):
 	if (dict != null and dict.has(key)):
 		return dict[key]
 	else: 
 		return default
-	
-	
+		
+
+"""
+Get value at nth array index with default fallback.
+If the index is out of bounds or array is null, default is returned
+"""
+static func nth_or_default(array: Array, idx: int, default = null):
+	if (array != null and array.size() > idx):
+		return array[idx]
+	else:
+		return default
+		
+		
 """
 Convert Object properties x and y into a vector2 object
 """

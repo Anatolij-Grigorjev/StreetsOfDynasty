@@ -6,6 +6,7 @@ Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
 signal got_hit(hit_connect)
+signal landed_hit(hit_connect)
 signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
 signal hit_displaced(displacement, displacement_time)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://characters/states/PerpetualState.gd" type="Script" id=4]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
-[ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=7]
+[ext_resource path="res://characters/hit_effects/AttackTypeHitEffects.gd" type="Script" id=7]
 [ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=8]
+[ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
@@ -186,13 +187,8 @@ flash_sound = ExtResource( 24 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-texture = ExtResource( 7 )
 offset = Vector2( -16.8869, -12.6227 )
-hframes = 8
 frame = 5
-
-[node name="TrailFX2" parent="Body/YuCharacterRig" index="2"]
-modulate = Color( 0.286275, 0.286275, 0.290196, 1 )
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")
@@ -202,6 +198,11 @@ entity_path = NodePath("../../..")
 
 [node name="CatchboxGroup" parent="Body/YuCharacterRig" index="9"]
 entity_path = NodePath("../../..")
+
+[node name="AttackTypeHitEffects" type="Node2D" parent="Body/YuCharacterRig" index="10"]
+script = ExtResource( 7 )
+
+[node name="AttackerImpactHitEffect" parent="Body/YuCharacterRig/AttackTypeHitEffects" index="0" instance=ExtResource( 9 )]
 
 [node name="CatchPoint" parent="Body" index="1"]
 position = Vector2( 75.9019, -196.513 )
