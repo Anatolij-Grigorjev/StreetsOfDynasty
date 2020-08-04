@@ -213,7 +213,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 4.75
+length = 4.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -713,22 +713,22 @@ tracks/7/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 58.8055, 95.8571 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 39.532, 88.51 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 37.801, 95.1473 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 57.3858, 80.9497 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 53.2525, 104.823 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 96.3256, 48.4078 )
 
 [sub_resource type="RectangleShape2D" id=16]
@@ -761,7 +761,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Idle" index="0"]
 position = Vector2( 7.09882, -14.1976 )
-shape = SubResource( 10 )
+shape = SubResource( 17 )
 
 [node name="Walk" type="Area2D" parent="HitboxGroup" index="1"]
 visible = false
@@ -770,7 +770,7 @@ collision_mask = 0
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Walk" index="0"]
-shape = SubResource( 11 )
+shape = SubResource( 18 )
 
 [node name="Hurt1" type="Area2D" parent="HitboxGroup" index="2"]
 visible = false
@@ -780,7 +780,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Hurt1" index="0"]
 position = Vector2( -2.83954, -17.0371 )
-shape = SubResource( 12 )
+shape = SubResource( 19 )
 
 [node name="Hurt2" type="Area2D" parent="HitboxGroup" index="3"]
 visible = false
@@ -790,7 +790,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Hurt2" index="0"]
 position = Vector2( -13.4877, 2.83954 )
-shape = SubResource( 13 )
+shape = SubResource( 20 )
 
 [node name="Caught" type="Area2D" parent="HitboxGroup" index="4"]
 visible = false
@@ -800,7 +800,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Caught" index="0"]
 position = Vector2( 17.3002, -11.0721 )
-shape = SubResource( 14 )
+shape = SubResource( 21 )
 
 [node name="Falling" type="Area2D" parent="HitboxGroup" index="5"]
 visible = false
@@ -810,7 +810,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxGroup/Falling" index="0"]
 position = Vector2( 1.4198, 33.3644 )
-shape = SubResource( 15 )
+shape = SubResource( 22 )
 
 [node name="Fallen" type="Area2D" parent="HitboxGroup" index="6"]
 collision_layer = 256

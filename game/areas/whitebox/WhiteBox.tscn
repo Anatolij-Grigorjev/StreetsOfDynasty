@@ -116,10 +116,6 @@ collision_mask = 1
 position = Vector2( 503.695, 431 )
 collision_mask = 1
 
-[node name="MudmanCharacterMain2" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 434.866, 391.336 )
-collision_mask = 1
-
 [node name="Corpses" type="YSort" parent="YSort" groups=[
 "corpses",
 ]]
