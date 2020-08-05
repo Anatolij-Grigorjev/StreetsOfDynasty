@@ -135,10 +135,15 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
 		print(
-			"target_move: %s, attacker facing: %s, target facing: %s" % 
+			"target_move impulse: %s, attacker facing: %s, target facing: %s" % 
 			[attackbox.target_move, Utils.get_areagroup_area_owner(attackbox).facing, facing]
 		)
-		var displacement = Vector2(attackbox.target_move.x * attack_facing, attackbox.target_move.y)
+		#we assume the supplies 'target_move' is an impulse
+		#impulse is change in velocity * mass
+		#mass is hit resistance (stability) so we get change in velocity by division
+		var stability_coef = max(stability / total_stability, 0.1)
+		var velocity = attackbox.target_move / stability_coef
+		var displacement = Vector2(velocity.x * attack_facing, velocity.y)
 		return displacement
 	else:
 		return Vector2.ZERO
