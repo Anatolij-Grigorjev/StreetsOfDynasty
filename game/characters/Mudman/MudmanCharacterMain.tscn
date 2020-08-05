@@ -73,7 +73,6 @@ next_state = "Fallen"
 
 [node name="MovedStateAspect" type="Node" parent="FSM/Falling" index="0"]
 script = ExtResource( 13 )
-move_easing = 2
 
 [node name="MovedAirStateAspect" type="Node" parent="FSM/Falling" index="1"]
 script = ExtResource( 7 )

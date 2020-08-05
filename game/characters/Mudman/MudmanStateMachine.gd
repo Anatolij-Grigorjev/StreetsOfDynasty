@@ -35,7 +35,6 @@ func _get_next_state(delta: float) -> String:
 		hit_react_state = next_hit_react_state.read_and_reset()
 		_apply_hit_react_move(
 			hit_react_move.read_and_reset(), 
-			hit_react_move_duration.read_and_reset(),
 			hit_react_state
 		)
 		
@@ -137,9 +136,8 @@ func _on_character_got_released():
 	got_released.current_value = true
 	
 
-func _on_character_hit_displaced(displacement: Vector2, displacement_time: float):
+func _on_character_hit_displaced(displacement: Vector2):
 	hit_react_move.current_value = displacement
-	hit_react_move_duration.current_value = displacement_time
 	
 
 func _on_Character_rig_position_corrected():
@@ -158,7 +156,7 @@ func _build_next_hit_receive_state(stability: float) -> String:
 		return "Falling"
 	
 	
-func _apply_hit_react_move(hit_react_move: Vector2, hit_react_move_duration: float, hit_react_state: String):
+func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
 	if (hit_react_move and hit_react_state != NO_STATE):
 		var hurt_state_node = state_nodes[hit_react_state]
 		var moved_aspect: MovedStateAspect = hurt_state_node.get_node('MovedStateAspect')
@@ -167,8 +165,6 @@ func _apply_hit_react_move(hit_react_move: Vector2, hit_react_move_duration: flo
 			moved_aspect.move_impulse = Vector2(hit_react_move.x, 0.0)
 		if (moved_air_aspect):
 			moved_air_aspect.total_move_height = hit_react_move.y
-			if (hit_react_move_duration != 0.0):
-				moved_air_aspect.move_duration = hit_react_move_duration
 	
 	
 func _check_got_killed():

@@ -30,11 +30,6 @@ The direction is based on facing of attacker, not attacked
 """
 export(Vector2) var target_move = Vector2.ZERO
 """
-Amount of time target should spend getting displaced form hit
-if set to 0.0 the default hit reaction time is used
-"""
-export(float) var target_move_time = 0.0
-"""
 How long cooldown between hitting same hitbox with this same attackbox
 """
 export(float) var attack_recovery: float = 0.5

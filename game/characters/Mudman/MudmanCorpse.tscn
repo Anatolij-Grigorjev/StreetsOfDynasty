@@ -76,8 +76,8 @@ tracks/4/keys = {
 
 [node name="Hole" type="Sprite" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -14.8299, 10.6367 )
-scale = Vector2( 1e-05, 1e-05 )
+position = Vector2( -30.133, 4.37046 )
+scale = Vector2( 0.966495, 0.966495 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 308, 42, 140, 64 )
@@ -87,7 +87,7 @@ self_modulate = Color( 0.498039, 0.498039, 0.498039, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( -31.0676, -94.665 )
 region_enabled = true
-region_rect = Rect2( 930, -90, 310, 256 )
+region_rect = Rect2( 930, 0, 310, 256 )
 __meta__ = {
 "_edit_lock_": true
 }

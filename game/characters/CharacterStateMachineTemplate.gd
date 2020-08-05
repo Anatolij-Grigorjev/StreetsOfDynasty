@@ -6,7 +6,6 @@ for things like being hurt, moved, caught, killed
 """
 
 var hit_react_move := SingleReadVar.new(Vector2.ZERO)
-var hit_react_move_duration := SingleReadVar.new(0.0)
 var next_hit_react_state := SingleReadVar.new(NO_STATE)
 
 var got_killed := SingleReadVar.new(false)

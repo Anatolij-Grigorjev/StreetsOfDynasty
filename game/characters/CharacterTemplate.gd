@@ -9,7 +9,7 @@ signal got_hit(hit_connect)
 signal landed_hit(hit_connect)
 signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
-signal hit_displaced(displacement, displacement_time)
+signal hit_displaced(displacement)
 signal got_caught(catcher)
 signal got_released()
 signal caught_character(caught)
@@ -128,7 +128,7 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	emit_signal("damage_received", hit_connect.attack_damage, health, total_health)
 	
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
-	emit_signal("hit_displaced", displacement, hit_connect.attackbox.target_move_time)
+	emit_signal("hit_displaced", displacement)
 	
 	
 	
