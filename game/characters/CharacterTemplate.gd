@@ -134,16 +134,17 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	
 func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 	if (attackbox.target_move != Vector2.ZERO):
-		print(
-			"target_move impulse: %s, attacker facing: %s, target facing: %s" % 
-			[attackbox.target_move, Utils.get_areagroup_area_owner(attackbox).facing, facing]
-		)
 		#we assume the supplies 'target_move' is an impulse
 		#impulse is change in velocity * mass
 		#mass is hit resistance (stability) so we get change in velocity by division
 		var stability_coef = max(stability / total_stability, 0.1)
-		var velocity = attackbox.target_move / stability_coef
+		#highest possible displacement impulse is twice the attack velocity
+		var velocity = _get_max_allowed_velocity(attackbox.target_move, stability_coef)
 		var displacement = Vector2(velocity.x * attack_facing, velocity.y)
+		print(
+			"target_move impulse: %s, target displacement: %s, attacker facing: %s, target facing: %s" % 
+			[attackbox.target_move, displacement, Utils.get_areagroup_area_owner(attackbox).facing, facing]
+		)
 		return displacement
 	else:
 		return Vector2.ZERO
@@ -159,6 +160,13 @@ func _receive_damage(hit_connect: HitConnect):
 	Debug.log_info("{} Received {} damage, health is {}", [
 		self, damage_taken, health
 	])
+
+
+func _get_max_allowed_velocity(target_move: Vector2, stability_coef: float) -> Vector2:
+	if (stability_coef < 0.5):
+		return target_move * 2.0
+	else:
+		return target_move / stability_coef
 
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
