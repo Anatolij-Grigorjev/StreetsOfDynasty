@@ -1222,7 +1222,7 @@ collision_layer = 0
 collision_mask = 96
 script = ExtResource( 17 )
 damage_amount = 27.0
-disruption = 100.0
+disruption = 99.0
 target_move = Vector2( 10, -500 )
 attack_recovery = 0.25
 
@@ -1249,7 +1249,7 @@ script = ExtResource( 17 )
 damage_type = 1
 damage_amount = 33.0
 disruption = 100.0
-target_move = Vector2( 80, 0 )
+target_move = Vector2( 80, -25 )
 attack_recovery = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackboxGroup/AttackB2F" index="0"]
