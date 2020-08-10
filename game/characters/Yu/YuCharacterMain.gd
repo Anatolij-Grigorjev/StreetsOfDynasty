@@ -32,10 +32,6 @@ func _process(delta):
 		
 func _to_string() -> String:
 	return name
-	
-func _on_MovedAspect_vert_move_finished():
-	if (fsm.state != "AttackB1"):
-		rig_custom_position = false
 		
 		
 func _on_landed_hit(hit_connect: HitConnect):

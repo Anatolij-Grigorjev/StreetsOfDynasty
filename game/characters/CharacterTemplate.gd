@@ -35,7 +35,7 @@ var health : float
 var stability : float
 var invincibility := false
 
-var rig_custom_position := false
+var rig_vertical_displacement: bool = false
 var rig_neutral_poistion: Vector2 = Vector2.ZERO
 
 onready var fsm: CharacterStateMachineTemplate = $FSM
@@ -45,6 +45,10 @@ onready var hitboxes: AreaGroup = rig.get_node('HitboxGroup')
 onready var attackboxes: AreaGroup = rig.get_node('AttackboxGroup')
 onready var catch_point: Position2D = $Body/CatchPoint
 onready var caught_point: Position2D = $Body/CaughtPoint
+
+
+var displacement_up_angle: float = 0.0
+var displacement_speed: float = 0.0
 
 
 func _ready() -> void:
@@ -73,10 +77,15 @@ func _process_stability_recovery(delta: float):
 		
 		
 func _correct_rig_position(delta: float):
-	if (rig.position != rig_neutral_poistion and not rig_custom_position):
-		rig.position = lerp(rig.position, rig_neutral_poistion, 0.5 - delta)
+	if (rig_vertical_displacement):
+		rig.position.y = (
+			(displacement_speed * delta * sin(displacement_up_angle))
+			 - 
+			(delta * delta * C.GRAVITY / 2)
+		)
 		if (rig.position.distance_to(rig_neutral_poistion) < 5):
 			rig.position = rig_neutral_poistion
+			rig_vertical_displacement = false
 			emit_signal("rig_position_corrected")
 	
 	
@@ -128,7 +137,33 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	emit_signal("damage_received", hit_connect.attack_damage, health, total_health)
 	
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
-	emit_signal("hit_displaced", displacement)
+	do_movement_collide(Vector2(displacement.x, 0.0))
+	if (displacement.y):
+		displacement_up_angle = atan(displacement.y / max(displacement.x, 1.0))
+		displacement_speed = displacement.y
+		rig_vertical_displacement = true
+	else:
+		displacement_speed = 0.0
+		displacement_up_angle = 0.0
+		rig_vertical_displacement = false
+	print(
+		""" 
+		target_move impulse: %s, 
+		target displacement: %s, 
+		attacker facing: %s, 
+		target facing: %s,
+		displacement_up_angle: %s,
+		displacement_speed: %s
+		""" % 
+			[
+				hit_connect.attackbox.target_move, 
+				displacement, 
+				Utils.get_areagroup_area_owner(hit_connect.attackbox).facing, 
+				facing,
+				displacement_up_angle,
+				displacement_speed
+			]
+	)
 	
 	
 	
@@ -141,10 +176,6 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 		#highest possible displacement impulse is twice the attack velocity
 		var velocity = _get_max_allowed_velocity(attackbox.target_move, stability_coef)
 		var displacement = Vector2(velocity.x * attack_facing, velocity.y)
-		print(
-			"target_move impulse: %s, target displacement: %s, attacker facing: %s, target facing: %s" % 
-			[attackbox.target_move, displacement, Utils.get_areagroup_area_owner(attackbox).facing, facing]
-		)
 		return displacement
 	else:
 		return Vector2.ZERO
@@ -171,14 +202,6 @@ func _get_max_allowed_velocity(target_move: Vector2, stability_coef: float) -> V
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
 	pass
-	
-
-func _on_MovedAirAspect_vert_move_started(vert_impulse: float):
-	rig_custom_position = true
-	
-	
-func _on_MovedAirAspect_vert_move_finished():
-	rig_custom_position = false
 	
 	
 func _get_rig_node() -> Node2D:

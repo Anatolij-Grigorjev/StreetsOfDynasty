@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -7,14 +7,12 @@
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
 [ext_resource path="res://characters/hit_effects/AttackTypeHitEffects.gd" type="Script" id=7]
-[ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=8]
 [ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
 [ext_resource path="res://characters/states/state_aspects/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/states/state_aspects/MoveToEnemyStateAspect.gd" type="Script" id=15]
-[ext_resource path="res://characters/states/state_aspects/MovedStateAspect.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=18]
 [ext_resource path="res://characters/live_data/CharacterStabilityLabel.gd" type="Script" id=19]
@@ -80,17 +78,6 @@ custom_phase_toggle_patterns = {
 
 }
 
-[node name="MovedStateAspect" type="Node" parent="FSM/AttackB1" index="1"]
-script = ExtResource( 16 )
-move_impulse = Vector2( 10, 0 )
-
-[node name="MovedAirStateAspect" type="Node" parent="FSM/AttackB1" index="2"]
-script = ExtResource( 8 )
-move_duration = 0.6
-move_delay = 0.4
-preserve_impulse = true
-move_easing = 2
-
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
 state_animation = "attack_a2"
@@ -155,9 +142,6 @@ next_state = "Idle"
 script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
-
-[node name="MovedStateAspect" type="Node" parent="FSM/HurtLow" index="0"]
-script = ExtResource( 16 )
 
 [node name="Catching" type="Node" parent="FSM" index="10"]
 script = ExtResource( 13 )

@@ -23,3 +23,5 @@ enum CharacterMoveType {
 	MOVE_SLIDE = 0,
 	MOVE_COLLIDE = 1
 }
+
+const GRAVITY = 9.8

@@ -189,5 +189,5 @@ func _connect_falling_without_rig_lift_check():
 	
 
 func _on_Falling_animation_finished(falling_anim: String):
-	if (not entity.rig_custom_position):
+	if (entity.rig_vertical_displacement):
 		fall_finished.current_value = true
