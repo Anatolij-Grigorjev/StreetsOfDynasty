@@ -26,7 +26,11 @@ var screen_shake_requestor: ScreenShakeRequestor
 func _ready():
 	LOG = LoggerFactory.instance()
 	LOG.skip_stackframes = 4
-	LOG.enabled_levels.append(Logger.LogLevel.DEBUG)
+	LOG.enabled_levels = [
+		Logger.LogLevel.DEBUG,
+		Logger.LogLevel.INFO,
+		Logger.LogLevel.WARN,
+	]
 	add_child(LOG)
 	self.z_index = 999
 	call_deferred("_cache_shake_requestor")

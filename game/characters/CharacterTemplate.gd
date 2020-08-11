@@ -5,6 +5,10 @@ Base class for game characters.
 Supports having hitboxes and attackboxes, receiving messages about
 damage (foreign attackbox contact on own hitbox), sets move speed
 """
+enum VertMovePhases {
+	LIFT, DROP, NONE
+}
+
 signal got_hit(hit_connect)
 signal landed_hit(hit_connect)
 signal damage_received(damage, remaining_health, total_health)
@@ -49,6 +53,9 @@ onready var caught_point: Position2D = $Body/CaughtPoint
 
 var displacement_up_angle: float = 0.0
 var displacement_speed: float = 0.0
+var max_displacement: float = 0.0
+var elapsed_fall_time: float = 0.0
+var vert_move_phase: int = VertMovePhases.NONE
 
 
 func _ready() -> void:
@@ -78,14 +85,23 @@ func _process_stability_recovery(delta: float):
 		
 func _correct_rig_position(delta: float):
 	if (rig_vertical_displacement):
-		rig.position.y = (
-			(displacement_speed * delta * sin(displacement_up_angle))
-			 - 
-			(delta * delta * C.GRAVITY / 2)
-		)
-		if (rig.position.distance_to(rig_neutral_poistion) < 5):
+		elapsed_fall_time += delta
+		var thrust_up
+		var pull_down
+		if (rig.position.y > max_displacement and vert_move_phase == VertMovePhases.LIFT):
+			thrust_up = (displacement_speed * elapsed_fall_time * sin(displacement_up_angle))
+			pull_down = -sign(thrust_up) * abs(Utils.sqr(elapsed_fall_time) * C.GRAVITY / 2)
+		else:
+			vert_move_phase = VertMovePhases.DROP
+			thrust_up = 0.0
+			pull_down = abs(Utils.sqr(elapsed_fall_time) * C.GRAVITY / 2)
+		print("position=%s|up=%s|down=%s" % [rig.position.y, thrust_up, pull_down])
+		rig.position.y += thrust_up + pull_down
+		if (rig.position.y > rig_neutral_poistion.y and abs(thrust_up) < abs(pull_down)):
 			rig.position = rig_neutral_poistion
 			rig_vertical_displacement = false
+			elapsed_fall_time = 0.0
+			vert_move_phase = VertMovePhases.NONE
 			emit_signal("rig_position_corrected")
 	
 	
@@ -139,12 +155,19 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
 	do_movement_collide(Vector2(displacement.x, 0.0))
 	if (displacement.y):
-		displacement_up_angle = atan(displacement.y / max(displacement.x, 1.0))
+		rig_neutral_poistion = rig.position
+		displacement_up_angle = abs(atan(displacement.y / max(displacement.x, 1.0)))
 		displacement_speed = displacement.y
+		max_displacement = displacement.y
 		rig_vertical_displacement = true
+		elapsed_fall_time = 0.0
+		vert_move_phase = VertMovePhases.LIFT
 	else:
+		vert_move_phase = VertMovePhases.NONE
 		displacement_speed = 0.0
 		displacement_up_angle = 0.0
+		elapsed_fall_time = 0.0
+		max_displacement = 0.0
 		rig_vertical_displacement = false
 	print(
 		""" 

@@ -24,4 +24,4 @@ enum CharacterMoveType {
 	MOVE_COLLIDE = 1
 }
 
-const GRAVITY = 9.8
+const GRAVITY = 98

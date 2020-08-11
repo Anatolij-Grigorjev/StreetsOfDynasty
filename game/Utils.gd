@@ -3,6 +3,13 @@ class_name Utils
 Static utility methods
 """
 
+
+"""
+Utility to square any number-like var
+"""
+static func sqr(num):
+	return num * num
+
 """
 Generate random Vector2 with coordinates between
 (-range_x;-range_y) and (range_x;range_y)
