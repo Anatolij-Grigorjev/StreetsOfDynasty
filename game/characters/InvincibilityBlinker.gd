@@ -7,7 +7,9 @@ Accepts lists of exceptions
 export(float) var duration = 2.0
 export(int) var blink_frequency = 2
 export(Array, String) var pre_blink_states = [
-	"Falling"
+	"Falling",
+	"Fallen",
+	"Dying"
 ]
 export(Array, NodePath) var dont_blink_sprites_paths = []  
 
@@ -26,8 +28,6 @@ func _ready():
 	
 	blink_sprites = _collect_blink_sprites(all_sprites_by_id, dont_blink_sprites)
 	
-	
-	
 	Debug.log_info("{} Blinker collected {}(={}-{}) sprite(-s)!", [
 		entity,
 		blink_sprites.size(), 
@@ -39,6 +39,7 @@ func _on_CharacterTemplate_state_changed(prev_state: String, next_state: String)
 	#character was fallen and is getting up
 	if (prev_state in pre_blink_states 
 		and not (next_state in pre_blink_states)):
+		Debug.log_info("[!!!BLINK!!!]: '{}' -> '{}'", [prev_state, next_state])
 		start()
 
 

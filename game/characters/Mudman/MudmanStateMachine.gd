@@ -33,12 +33,11 @@ func _get_next_state(delta: float) -> String:
 	var hit_react_state = NO_STATE
 	if (was_hit):
 		hit_react_state = next_hit_react_state.read_and_reset()
-		_apply_hit_react_move(
-			hit_react_move.read_and_reset(), 
-			hit_react_state
-		)
-		
-	var next_state = _check_got_killed()
+	
+	#check dying based on next hit react state
+	var next_state = _check_got_killed(
+		state if hit_react_state == NO_STATE else hit_react_state
+	)
 	if (next_state != NO_STATE):
 		return next_state
 	
@@ -136,10 +135,6 @@ func _on_character_got_released():
 	got_released.current_value = true
 	
 
-func _on_character_hit_displaced(displacement: Vector2):
-	hit_react_move.current_value = displacement
-	
-
 func _on_Character_rig_position_corrected():
 	if (state == "Falling"):
 		#screenshake about fall ended
@@ -156,17 +151,8 @@ func _build_next_hit_receive_state(stability: float) -> String:
 		return "Falling"
 	
 	
-func _apply_hit_react_move(hit_react_move: Vector2, hit_react_state: String):
-	if (hit_react_move and hit_react_state != NO_STATE):
-		entity.do_movement_collide(Vector2(hit_react_move.x, 0.0))
-		var hurt_state_node = state_nodes[hit_react_state]
-		var moved_air_aspect: MovedAirStateAspect = hurt_state_node.get_node('MovedAirStateAspect')
-		if (moved_air_aspect):
-			moved_air_aspect.total_move_height = hit_react_move.y
-	
-	
-func _check_got_killed():
-	if (_can_move_to_dying_state(state) 
+func _check_got_killed(upcoming_state: String):
+	if (_can_move_to_dying_state(upcoming_state) 
 		and got_killed.read_and_reset()):
 		#should transition to dying
 		return "Dying"
@@ -175,8 +161,8 @@ func _check_got_killed():
 
 
 func _can_move_to_dying_state(state: String) -> bool:
-	#only die if not held caught or already dying
-	return state != "Dying" and state != "Caught"
+	#only die if not falling, caught or already dying
+	return not ["Dying", "Caught", "Falling"].has(state)
 	
 
 func _can_be_caught_in_state(state: String) -> bool:
@@ -189,5 +175,5 @@ func _connect_falling_without_rig_lift_check():
 	
 
 func _on_Falling_animation_finished(falling_anim: String):
-	if (entity.rig_vertical_displacement):
+	if (not entity.rig_vertical_displacement):
 		fall_finished.current_value = true

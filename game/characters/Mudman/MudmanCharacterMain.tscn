@@ -152,7 +152,6 @@ shape = SubResource( 1 )
 [node name="InvincibilityBlinker" parent="." index="3" instance=ExtResource( 19 )]
 duration = 1.0
 blink_frequency = 5
-pre_blink_states = [ "Fallen" ]
 
 [node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="4"]
 script = ExtResource( 31 )

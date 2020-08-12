@@ -20,7 +20,6 @@ func _ready():
 	connect("stability_reduced", fsm, "_on_character_reduce_stability")
 	connect("damage_received", fsm, "_on_character_damage_received")
 	connect("got_hit", fsm, "_on_character_got_hit")
-	connect("hit_displaced", fsm, "_on_character_hit_displaced")
 	connect("got_caught", fsm, "_on_character_got_caught")
 	connect("got_released", fsm, "_on_character_got_released")
 

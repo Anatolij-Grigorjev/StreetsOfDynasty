@@ -13,7 +13,6 @@ signal got_hit(hit_connect)
 signal landed_hit(hit_connect)
 signal damage_received(damage, remaining_health, total_health)
 signal stability_reduced(prev_stability, current_stability, total_stability)
-signal hit_displaced(displacement)
 signal got_caught(catcher)
 signal got_released()
 signal caught_character(caught)
@@ -52,9 +51,10 @@ onready var caught_point: Position2D = $Body/CaughtPoint
 
 
 var displacement_up_angle: float = 0.0
-var displacement_speed: float = 0.0
-var max_displacement: float = 0.0
-var elapsed_fall_time: float = 0.0
+var displacement_speed: Vector2 = Vector2.ZERO
+var max_displacement: Vector2 = Vector2.ZERO
+var elapsed_displacement_time: float = 0.0
+var current_horiz_displacement: float = 0.0
 var vert_move_phase: int = VertMovePhases.NONE
 
 
@@ -74,7 +74,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	_process_stability_recovery(delta)
+	elapsed_displacement_time += delta
 	_correct_rig_position(delta)
+	_process_horizontal_movement(delta)
 	
 	
 func _process_stability_recovery(delta: float):
@@ -85,24 +87,29 @@ func _process_stability_recovery(delta: float):
 		
 func _correct_rig_position(delta: float):
 	if (rig_vertical_displacement):
-		elapsed_fall_time += delta
-		var thrust_up
-		var pull_down
-		if (rig.position.y > max_displacement and vert_move_phase == VertMovePhases.LIFT):
-			thrust_up = (displacement_speed * elapsed_fall_time * sin(displacement_up_angle))
-			pull_down = -sign(thrust_up) * abs(Utils.sqr(elapsed_fall_time) * C.GRAVITY / 2)
+		var thrust_up = -1.0
+		var pull_down = -sign(thrust_up) * abs(Utils.sqr(elapsed_displacement_time) * C.GRAVITY / 2)
+		if (rig.position.y > max_displacement.y and vert_move_phase == VertMovePhases.LIFT):
+			thrust_up = (displacement_speed.y * elapsed_displacement_time * sin(displacement_up_angle))
 		else:
 			vert_move_phase = VertMovePhases.DROP
-			thrust_up = 0.0
-			pull_down = abs(Utils.sqr(elapsed_fall_time) * C.GRAVITY / 2)
 		print("position=%s|up=%s|down=%s" % [rig.position.y, thrust_up, pull_down])
 		rig.position.y += thrust_up + pull_down
 		if (rig.position.y > rig_neutral_poistion.y and abs(thrust_up) < abs(pull_down)):
 			rig.position = rig_neutral_poistion
 			rig_vertical_displacement = false
-			elapsed_fall_time = 0.0
+			#landed fall means end of movement
+			elapsed_displacement_time = 0.0
 			vert_move_phase = VertMovePhases.NONE
 			emit_signal("rig_position_corrected")
+			
+			
+func _process_horizontal_movement(delta: float):
+	if (current_horiz_displacement < max_displacement.x):
+		var horizontal_displacement = displacement_speed.x * elapsed_displacement_time
+		current_horiz_displacement += horizontal_displacement
+		print("position=%s|move=%s" % [global_position.x, horizontal_displacement])
+		do_movement_collide(Vector2(horizontal_displacement, 0.0))
 	
 	
 func _get_stability_recovery_per_sec() -> float:
@@ -153,21 +160,18 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	emit_signal("damage_received", hit_connect.attack_damage, health, total_health)
 	
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
-	do_movement_collide(Vector2(displacement.x, 0.0))
+	displacement_speed = displacement
+	max_displacement = displacement
+	elapsed_displacement_time = 0.0
+	current_horiz_displacement = 0.0
 	if (displacement.y):
 		rig_neutral_poistion = rig.position
 		displacement_up_angle = abs(atan(displacement.y / max(displacement.x, 1.0)))
-		displacement_speed = displacement.y
-		max_displacement = displacement.y
 		rig_vertical_displacement = true
-		elapsed_fall_time = 0.0
 		vert_move_phase = VertMovePhases.LIFT
 	else:
 		vert_move_phase = VertMovePhases.NONE
-		displacement_speed = 0.0
 		displacement_up_angle = 0.0
-		elapsed_fall_time = 0.0
-		max_displacement = 0.0
 		rig_vertical_displacement = false
 	print(
 		""" 
@@ -176,7 +180,8 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 		attacker facing: %s, 
 		target facing: %s,
 		displacement_up_angle: %s,
-		displacement_speed: %s
+		displacement_speed: %s,
+		displacement_max: %s
 		""" % 
 			[
 				hit_connect.attackbox.target_move, 
@@ -184,7 +189,8 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 				Utils.get_areagroup_area_owner(hit_connect.attackbox).facing, 
 				facing,
 				displacement_up_angle,
-				displacement_speed
+				displacement_speed,
+				max_displacement
 			]
 	)
 	
@@ -217,10 +223,7 @@ func _receive_damage(hit_connect: HitConnect):
 
 
 func _get_max_allowed_velocity(target_move: Vector2, stability_coef: float) -> Vector2:
-	if (stability_coef < 0.5):
-		return target_move * 2.0
-	else:
-		return target_move / stability_coef
+	return target_move * (1 - max(stability_coef, 0.1))
 
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
