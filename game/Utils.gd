@@ -60,7 +60,13 @@ static func nth_or_default(array: Array, idx: int, default = null):
 		return array[idx]
 	else:
 		return default
-		
+
+"""
+Get back arg1 if its not null, or arg2 if it was
+"""
+static func nvl(value, default):
+	return value if value != null else default
+
 		
 """
 Convert Object properties x and y into a vector2 object
@@ -184,8 +190,8 @@ a child of an AreaGroup node.
 In case an entity is not resolved the function returns null
 """
 static func get_areagroup_area_owner(area: Area2D) -> Node2D:
-	var area_group: AreaGroup = area.get_parent() as AreaGroup
-	if (not area_group):
+	var area_group = area.get_parent()
+	if (not area_group.has_method('switch_to_area')):
 		print("parent not areagroup!")
 		return null
 	return area_group.entity as Node2D

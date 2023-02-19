@@ -35,13 +35,14 @@ How long cooldown between hitting same hitbox with this same attackbox
 export(float) var attack_recovery: float = 0.5
 
 var known_hitboxes = []
-onready var shape: CollisionPolygon2D = get_child(0)
 
-
-var recent_attacks: RecentItemsDictionary = RecentItemsDictionary.new(attack_recovery)
+onready var recent_attacks: RecentItemsDictionary = $RecentItemsDictionary
+#first child is timed dict, so shape is second
+onready var shape: CollisionShape2D = get_child(1)
 
 
 func _ready():
+	recent_attacks.items_ttl_seconds = attack_recovery
 	#connect the hitbox registering signals
 	connect("area_entered", self, "_on_area_entered")
 	connect("area_exited", self, "_on_area_exited")
@@ -62,12 +63,7 @@ func process_attack() -> void:
 
 func _record_hitbox_recovery(hitbox: Hitbox):
 	recent_attacks.add_item(Utils.get_areagroup_area_owner(hitbox))
-
-
-func _process(delta: float):
-	recent_attacks.process(delta)
 	
-
 
 func _on_area_entered(area: Area2D) -> void:
 	if (_is_valid_hitbox(area)):

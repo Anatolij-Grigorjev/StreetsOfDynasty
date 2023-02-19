@@ -7,7 +7,7 @@ The expected client entity of this is a CharacterTemplate
 """
 signal hitbox_hit(hit_connect)
 
-onready var shape: CollisionPolygon2D = get_child(0)
+onready var shape: CollisionShape2D = get_child(0)
 
 
 func _ready():

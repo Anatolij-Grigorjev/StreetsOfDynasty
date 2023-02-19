@@ -28,9 +28,7 @@ extents = Vector2( 60, 5 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
 
-[node name="YuCharacterMain" groups=[
-"Player",
-] instance=ExtResource( 2 )]
+[node name="YuCharacterMain" groups=["Player"] instance=ExtResource( 2 )]
 script = ExtResource( 11 )
 sprite_size = Vector2( 300, 400 )
 
@@ -74,9 +72,6 @@ state_commit_end_anim_sec = 1.0
 
 [node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
-custom_phase_toggle_patterns = {
-
-}
 
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 6 )
@@ -260,6 +255,7 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
 [connection signal="caught" from="Body/YuCharacterRig/CatchboxGroup/CatchAttack" to="FSM" method="_on_Catchbox_caught"]
 
