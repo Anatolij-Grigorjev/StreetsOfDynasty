@@ -1156,7 +1156,7 @@ vframes = 2
 frame = 5
 
 [node name="AnimationPlayer" parent="." index="3"]
-playback_speed = 2.0
+playback_speed = 1.5
 method_call_mode = 1
 anims/attack_a1 = ExtResource( 5 )
 anims/attack_a2 = ExtResource( 3 )

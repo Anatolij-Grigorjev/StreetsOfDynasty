@@ -33,6 +33,7 @@ extents = Vector2( 60, 5 )
 bg_color = Color( 0, 0, 0, 1 )
 
 [node name="MudmanCharacterMain" instance=ExtResource( 1 )]
+collision_mask = 1
 script = ExtResource( 5 )
 move_speed = Vector2( 200, 100 )
 
@@ -162,10 +163,10 @@ margin_top = -288.32
 margin_right = 1.06947
 margin_bottom = -263.32
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 2 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -181,10 +182,10 @@ margin_top = -288.32
 margin_right = 100.906
 margin_bottom = -263.32
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 2 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -200,10 +201,10 @@ margin_top = -265.69
 margin_right = 42.3351
 margin_bottom = -240.69
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 2 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -212,6 +213,7 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 
