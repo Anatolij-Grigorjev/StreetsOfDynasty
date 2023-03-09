@@ -143,7 +143,7 @@ func _on_Character_rig_position_corrected():
 
 
 func _build_next_hit_receive_state(stability: float) -> String:
-	if (stability > 90):
+	if (stability > entity.upright_stability_threshold):
 		return NO_STATE
 	elif (stability > 0):
 		return "Hurt"

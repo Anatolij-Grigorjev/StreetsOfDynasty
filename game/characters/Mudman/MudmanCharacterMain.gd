@@ -2,8 +2,10 @@ extends CharacterTemplate
 """
 Main behavior script for Mudman
 """
-var idle_stability_recovery_per_sec: float = 5
-var hurt_stability_recovery_per_sec: float = 20
+export(float) var idle_stability_recovery_per_sec: float = 5
+export(float) var hurt_stability_recovery_per_sec: float = 20
+
+export(float) var upright_stability_threshold = 85
 
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
@@ -26,7 +28,7 @@ func _ready():
 	
 
 func _get_stability_recovery_per_sec() -> float:
-	if (stability > 90):
+	if (stability > upright_stability_threshold):
 		return idle_stability_recovery_per_sec
 	elif (stability > 0):
 		return hurt_stability_recovery_per_sec

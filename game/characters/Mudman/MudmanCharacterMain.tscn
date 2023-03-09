@@ -5,7 +5,7 @@
 [ext_resource path="res://characters/states/PerpetualState.gd" type="Script" id=3]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
-[ext_resource path="res://characters/Mudman/spritesheets/hurt.png" type="Texture" id=6]
+[ext_resource path="res://characters/Mudman/spritesheets/idle.png" type="Texture" id=6]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=11]
@@ -36,6 +36,9 @@ bg_color = Color( 0, 0, 0, 1 )
 collision_mask = 1
 script = ExtResource( 5 )
 move_speed = Vector2( 200, 100 )
+idle_stability_recovery_per_sec = 5.0
+hurt_stability_recovery_per_sec = 20.0
+upright_stability_threshold = 85.0
 
 [node name="FSM" parent="." index="0"]
 script = ExtResource( 8 )
@@ -88,9 +91,11 @@ next_state = "Falling"
 position = Vector2( 0, -52 )
 
 [node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
-position = Vector2( -2.86569, -6.87122 )
+position = Vector2( -0.707703, 0 )
 texture = ExtResource( 6 )
-offset = Vector2( -31.2202, -23.3204 )
+offset = Vector2( -17.8076, -30.1916 )
+hframes = 5
+frame = 0
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )
