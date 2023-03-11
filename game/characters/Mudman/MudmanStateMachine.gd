@@ -88,7 +88,10 @@ func _get_next_state(delta: float) -> String:
 			return fall_state.next_state
 		"Fallen":
 			var fallen_state = get_state(state) as FiniteState
-			if (not fallen_state.is_state_over):
+			if (
+				not fallen_state.is_state_over 
+				and not entity.is_upright_stable()
+			):
 				return NO_STATE
 			return fallen_state.next_state
 		"Dying":

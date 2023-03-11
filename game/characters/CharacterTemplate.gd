@@ -30,6 +30,11 @@ will go to hurting state when the hit is received (rapid recovery),
 with the points expired the character will fall (recovering all)
 """
 export(float) var total_stability: float = 100
+"""
+number of stability points required for normal (idle) functioning of 
+character. below this the character is hurt/falling/etc
+"""
+export(float) var upright_stability_threshold = 85
 
 
 var velocity = Vector2()
@@ -111,6 +116,10 @@ func _process_horizontal_movement(delta: float):
 		print("position=%s|move=%s" % [global_position.x, horizontal_displacement])
 		do_movement_collide(Vector2(horizontal_displacement, 0.0))
 	
+
+func is_upright_stable() -> bool:
+	return stability >= upright_stability_threshold
+
 	
 func _get_stability_recovery_per_sec() -> float:
 	breakpoint #override me

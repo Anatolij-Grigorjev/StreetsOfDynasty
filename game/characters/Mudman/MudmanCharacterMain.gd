@@ -5,8 +5,6 @@ Main behavior script for Mudman
 export(float) var idle_stability_recovery_per_sec: float = 5
 export(float) var hurt_stability_recovery_per_sec: float = 20
 
-export(float) var upright_stability_threshold = 85
-
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
 
@@ -24,11 +22,10 @@ func _ready():
 	connect("got_hit", fsm, "_on_character_got_hit")
 	connect("got_caught", fsm, "_on_character_got_caught")
 	connect("got_released", fsm, "_on_character_got_released")
-
 	
 
 func _get_stability_recovery_per_sec() -> float:
-	if (stability > upright_stability_threshold):
+	if (is_upright_stable()):
 		return idle_stability_recovery_per_sec
 	elif (stability > 0):
 		return hurt_stability_recovery_per_sec
