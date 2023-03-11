@@ -34,7 +34,7 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	else:
 		attacker = hit_connect.attacker
 		prev_attacker_anim_speed = attacker.anim.playback_speed
-		attacker.anim.playback_speed = anim_slow_factor
+		attacker.anim.playback_speed -= (prev_attacker_anim_speed * anim_slow_factor)
 		timer.start()
 	
 	
