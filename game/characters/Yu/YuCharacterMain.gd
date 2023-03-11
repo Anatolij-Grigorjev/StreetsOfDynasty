@@ -5,6 +5,7 @@ Character behavior and nodes specific to Yu
 
 onready var anim: AnimationPlayer = $Body/YuCharacterRig/AnimationPlayer
 onready var LOG: Logger = $Logger
+onready var enemy_catcher: RayCast2D = $Body/ActiveEnemyCatch
 
 
 func _ready():

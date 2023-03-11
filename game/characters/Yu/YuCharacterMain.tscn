@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
 [ext_resource path="res://characters/hit_effects/AttackTypeHitEffects.gd" type="Script" id=7]
+[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=8]
 [ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.tscn" type="PackedScene" id=9]
+[ext_resource path="res://characters/Yu/states/YuWalkState.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
@@ -40,7 +42,7 @@ script = ExtResource( 4 )
 state_animation = "idle"
 
 [node name="Walk" type="Node" parent="FSM" index="1"]
-script = ExtResource( 4 )
+script = ExtResource( 10 )
 state_animation = "walk"
 
 [node name="WalkStateAspect" type="Node" parent="FSM/Walk" index="0"]
@@ -166,8 +168,10 @@ flash_sound = ExtResource( 24 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-offset = Vector2( -16.8869, -12.6227 )
-frame = 5
+texture = ExtResource( 8 )
+offset = Vector2( -58.468, 4.86353 )
+hframes = 5
+frame = 0
 
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")
@@ -185,6 +189,12 @@ script = ExtResource( 7 )
 
 [node name="CatchPoint" parent="Body" index="1"]
 position = Vector2( 75.9019, -196.513 )
+
+[node name="ActiveEnemyCatch" type="RayCast2D" parent="Body" index="3"]
+cast_to = Vector2( 150, 0 )
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 45 )

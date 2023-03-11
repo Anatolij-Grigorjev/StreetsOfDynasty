@@ -28,6 +28,7 @@ func _process(delta):
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
+	var catchable_enemy = entity.enemy_catcher.get_collider()
 	var was_hit = got_hit.read_and_reset()
 	if (Debug.get_debug2_pressed()):
 		return "CatchAttack"
@@ -48,6 +49,8 @@ func _get_next_state(delta: float) -> String:
 				return "Idle"
 			if (attack_input == C.AttackInputType.NORMAL):
 				return "AttackA1"
+			if (catchable_enemy):
+				return "CatchAttack"
 			return NO_STATE
 		"AttackA1":
 			if (was_hit):
