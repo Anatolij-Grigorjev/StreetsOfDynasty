@@ -28,7 +28,7 @@ func _process(delta):
 func _get_next_state(delta: float) -> String:
 	var move_direction = _get_move_direction()
 	var attack_input: int = _get_attack_input()
-	var catchable_enemy = entity.enemy_catcher.get_collider()
+	var catchable_enemy = _get_latest_catchable()
 	var was_hit = got_hit.read_and_reset()
 	if (Debug.get_debug2_pressed()):
 		return "CatchAttack"
@@ -186,8 +186,22 @@ func _get_attack_input() -> int:
 	if (Input.is_action_just_pressed("attack_special")):
 		return C.AttackInputType.SPECIAL
 	return C.AttackInputType.NONE
-			
-			
+	
+	
+func _get_latest_catchable() -> Object:
+	var catcher = entity.enemy_catcher
+	catcher.force_raycast_update()
+	var caught = catcher.get_collider()
+	if (not caught):
+		return null
+	var character = Utils.get_areagroup_area_owner(caught)
+	if (not character):
+		return null
+	if (character.invincibility):
+		return null
+	return caught
+	
+
 func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 	if (not (attack_state as AttackWithPhasesState)):
 		print(attack_state, " must be a AttackWithPhasesState!")

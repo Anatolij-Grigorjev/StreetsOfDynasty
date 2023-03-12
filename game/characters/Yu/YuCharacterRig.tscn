@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://characters/Yu/attack_a1_swing.wav" type="AudioStream" id=1]
 [ext_resource path="res://characters/CharacterRigTemplate.tscn" type="PackedScene" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://characters/Catchbox.gd" type="Script" id=20]
 [ext_resource path="res://characters/Yu/spritefx/attack_a1_trail.png" type="Texture" id=21]
 [ext_resource path="res://characters/Yu/spritesheets/caught_attack1.png" type="Texture" id=22]
-[ext_resource path="res://characters/Yu/spritesheets/attack_A1.png" type="Texture" id=23]
 [ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=24]
 [ext_resource path="res://characters/AttackBox.tscn" type="PackedScene" id=25]
 
@@ -1119,16 +1118,15 @@ extents = Vector2( 82.7745, 127.069 )
 extents = Vector2( 85.375, 97.5963 )
 
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 67.2838, 190.972 )
+extents = Vector2( 155.071, 190.972 )
 
 [node name="YuCharacterRig" instance=ExtResource( 2 )]
 
 [node name="Sprite" parent="." index="0"]
 material = null
-texture = ExtResource( 23 )
-offset = Vector2( -247.915, -11.3247 )
-hframes = 11
-frame = 1
+texture = ExtResource( 18 )
+offset = Vector2( -56.5521, 7.87216 )
+hframes = 5
 
 [node name="SpriteColorFlash" type="Node" parent="Sprite" index="0"]
 script = ExtResource( 14 )
@@ -1472,5 +1470,5 @@ script = ExtResource( 20 )
 catch_radius = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatchboxGroup/CatchAttack" index="0"]
-position = Vector2( 163.031, 11.2923 )
+position = Vector2( 75.2436, 11.2923 )
 shape = SubResource( 27 )
