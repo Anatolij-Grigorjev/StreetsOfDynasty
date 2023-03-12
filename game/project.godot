@@ -19,15 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://characters/AttackBox.gd"
 }, {
-"base": "State",
-"class": "AttackStatePhaseAspect",
-"language": "GDScript",
-"path": "res://characters/states/state_aspects/AttackStatePhaseAspect.gd"
-}, {
 "base": "Node2D",
 "class": "AttackTypeHitEffects",
 "language": "GDScript",
 "path": "res://characters/hit_effects/AttackTypeHitEffects.gd"
+}, {
+"base": "FiniteState",
+"class": "AttackWithPhasesState",
+"language": "GDScript",
+"path": "res://characters/states/AttackWithPhasesState.gd"
 }, {
 "base": "HitEffectTemplate",
 "class": "AttackerImpactHitEffect",
@@ -202,8 +202,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AreaGroup": "",
 "AttackBox": "",
-"AttackStatePhaseAspect": "",
 "AttackTypeHitEffects": "",
+"AttackWithPhasesState": "",
 "AttackerImpactHitEffect": "",
 "C": "",
 "Catchbox": "",

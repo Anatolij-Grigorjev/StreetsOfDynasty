@@ -189,12 +189,11 @@ func _get_attack_input() -> int:
 			
 			
 func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
-	var attack_phase_aspect = attack_state.get_node('AttackStatePhaseAspect')
-	if (not attack_phase_aspect):
-		print(state, " requires a AttackStatePhaseAspect child!")
+	if (not (attack_state as AttackWithPhasesState)):
+		print(attack_state, " must be a AttackWithPhasesState!")
 		breakpoint
 	if (
-		attack_phase_aspect.attack_phase != C.AttackPhase.WIND_UP
+		attack_state.attack_phase != C.AttackPhase.WIND_UP
 		and attack_input != C.AttackInputType.NONE
 	):
 		pressed_attack_input.current_value = attack_input

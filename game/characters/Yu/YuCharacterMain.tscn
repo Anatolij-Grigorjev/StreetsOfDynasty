@@ -13,8 +13,8 @@
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
-[ext_resource path="res://characters/states/state_aspects/AttackStatePhaseAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/states/state_aspects/MoveToEnemyStateAspect.gd" type="Script" id=15]
+[ext_resource path="res://characters/states/AttackWithPhasesState.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
 [ext_resource path="res://characters/InvincibilityBlinker.tscn" type="PackedScene" id=18]
 [ext_resource path="res://characters/live_data/CharacterStabilityLabel.gd" type="Script" id=19]
@@ -49,20 +49,17 @@ state_animation = "walk"
 script = ExtResource( 5 )
 
 [node name="AttackA1" type="Node" parent="FSM" index="2"]
-script = ExtResource( 6 )
+script = ExtResource( 16 )
 state_animation = "attack_a1"
 next_state = "Idle"
 state_commit_end_anim_sec = 1.0
 
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA1" index="0"]
-script = ExtResource( 14 )
-
-[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackA1" index="0"]
 script = ExtResource( 5 )
 move_speed = Vector2( 35, 10 )
 change_facing = false
 
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="2"]
+[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
 script = ExtResource( 15 )
 collision_mask = 96
 
@@ -72,11 +69,8 @@ state_animation = "attack_b1"
 next_state = "Idle"
 state_commit_end_anim_sec = 1.0
 
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB1" index="0"]
-script = ExtResource( 14 )
-
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
-script = ExtResource( 6 )
+script = ExtResource( 16 )
 state_animation = "attack_a2"
 next_state = "Idle"
 state_commit_end_anim_sec = 0.7
@@ -86,37 +80,25 @@ script = ExtResource( 15 )
 max_move = 50.0
 collision_mask = 96
 
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackA2" index="1"]
-script = ExtResource( 14 )
-__meta__ = {
-"_editor_description_": ""
-}
-
 [node name="AttackB2" type="Node" parent="FSM" index="5"]
-script = ExtResource( 6 )
+script = ExtResource( 16 )
 state_animation = "attack_b2"
 next_state = "AttackB2F"
 state_commit_end_anim_sec = 0.6
 
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2" index="0"]
-script = ExtResource( 14 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="WalkStateAspect" type="Node" parent="FSM/AttackB2" index="1"]
+[node name="WalkStateAspect" type="Node" parent="FSM/AttackB2" index="0"]
 script = ExtResource( 5 )
 move_speed = Vector2( 10, 5 )
 change_facing = false
 
 [node name="AttackB2F" type="Node" parent="FSM" index="6"]
-script = ExtResource( 6 )
+script = ExtResource( 16 )
+__meta__ = {
+"_editor_description_": ""
+}
 state_animation = "attack_b2f"
 next_state = "Idle"
 state_commit_end_anim_sec = 1.4
-
-[node name="AttackStatePhaseAspect" type="Node" parent="FSM/AttackB2F" index="0"]
-script = ExtResource( 14 )
 
 [node name="CatchAttack" type="Node" parent="FSM" index="7"]
 script = ExtResource( 6 )
