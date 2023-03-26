@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
+[ext_resource path="res://characters/Yu/spritefx/attack_b2f_trail.png" type="Texture" id=25]
+[ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 60, 5 )
@@ -153,6 +155,14 @@ position = Vector2( 0, -150 )
 texture = ExtResource( 8 )
 offset = Vector2( -58.468, 4.86353 )
 
+[node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
+scale = Vector2( 0.851272, 1.28561 )
+texture = ExtResource( 25 )
+flip_h = false
+
+[node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
+pitch_scale = 1.75
+
 [node name="AttackboxGroup" parent="Body/YuCharacterRig" index="7"]
 entity_path = NodePath("../../..")
 
@@ -175,6 +185,8 @@ cast_to = Vector2( 150, 0 )
 collision_mask = 96
 collide_with_areas = true
 collide_with_bodies = false
+script = ExtResource( 26 )
+catch_radius = 25.0
 
 [node name="Terrain" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 45 )

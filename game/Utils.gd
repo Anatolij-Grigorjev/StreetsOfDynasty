@@ -9,6 +9,19 @@ Utility to square any number-like var
 """
 static func sqr(num):
 	return num * num
+	
+"""
+check if 2 positions are within a specific distance of each other on
+Z axis
+"""
+static func positions_in_z_range(pos1: Vector2, pos2: Vector2, z_range: float) -> bool:
+	if pos1 == null or pos2 == null or z_range < 0:
+		return false
+	if pos1 != pos2 and z_range == 0.0:
+		return false
+	var diff = abs(pos1.y - pos2.y)
+	return diff <= z_range
+	
 
 """
 Generate random Vector2 with coordinates between

@@ -4,6 +4,8 @@ class_name MovedStateAspect
 A state aspect that allows a character to be moved by 
 a controlled motion with aspects like facing/speed/etc 
 set by the external mover
+By default this moves the entire entity, can move part like the rig
+via custom node path
 """
 
 
@@ -21,11 +23,10 @@ Amount of time to pass before the movement tween is invoked
 """
 export(float) var move_delay: float = 0.0
 """
-If true the aspect will keep impulse provided during previous
-invocation. 
-This way an impulse set via inspector can be applied every invocation
+make this aspect use the provided impulse exactly once 
+and later do nothing
 """
-export(bool) var preserve_impulse: bool = false
+export(bool) var one_shot: bool = true
 
 
 var move_tween: Tween
@@ -81,5 +82,5 @@ func _set_move_tween() -> Tween:
 func _stop_all_movement():
 	move_tween.stop_all()
 	move_tween.remove_all()
-	if (not preserve_impulse):
+	if (one_shot):
 		move_impulse = Vector2.ZERO

@@ -96,10 +96,12 @@ func _entity_in_radius(hitbox_owner: Node2D) -> bool:
 		'to': receiver_position,
 		'color': Color.red
 	})
-	var distance = abs(attacker_position.y - receiver_position.y)
-	Debug.log_debug("%s distance to %s: %s" % [attacker_position, receiver_position, distance] )
-	var does_hit = distance <= radius
-	return does_hit
+	
+	return Utils.positions_in_z_range(
+		attacker_position, 
+		receiver_position, 
+		radius
+	)
 	
 	
 func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:

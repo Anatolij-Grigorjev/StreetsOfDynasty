@@ -191,15 +191,8 @@ func _get_attack_input() -> int:
 func _get_latest_catchable() -> Object:
 	var catcher = entity.enemy_catcher
 	catcher.force_raycast_update()
-	var caught = catcher.get_collider()
-	if (not caught):
-		return null
-	var character = Utils.get_areagroup_area_owner(caught)
-	if (not character):
-		return null
-	if (character.invincibility):
-		return null
-	return caught
+	
+	return catcher.get_caught_enemy()
 	
 
 func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
