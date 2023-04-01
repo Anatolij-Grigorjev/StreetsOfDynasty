@@ -7,6 +7,7 @@ const MAX_CONSECUTIVE_B2_HITS = 5
 
 var pressed_attack_input: SingleReadVar = SingleReadVar.new(C.AttackInputType.NONE)
 var has_caught := SingleReadVar.new(false)
+var fall_finished := SingleReadVar.new(true)
 var caught_character: CharacterTemplate = null
 
 var consecutive_b2_hits : int = 0
@@ -76,12 +77,9 @@ func _get_next_state(delta: float) -> String:
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
 				return NO_STATE
-			#state will change, unset rig position
-			entity.rig_vertical_displacement = false
-			if (move_direction != Vector2.ZERO):
-				return "Walk"
 			if (attack_state.is_state_over):
-				return _next_or_default(attack_state)
+				fall_finished.current_value = false
+				return "Falling"
 			return NO_STATE
 		"AttackA2":
 			if (was_hit):
@@ -168,6 +166,11 @@ func _get_next_state(delta: float) -> String:
 			if (not hurt_state.is_state_over):
 				return NO_STATE
 			return _next_or_default(hurt_state)
+		"Falling":
+			var falling_state = state_nodes[state] as PerpetualState
+			if (not fall_finished.current_value):
+				return NO_STATE
+			return falling_state.next_state
 		_:
 			breakpoint
 			return NO_STATE
@@ -218,6 +221,11 @@ func _on_Catchbox_caught(caught_hitbox: Hitbox):
 	has_caught.current_value = true
 	caught_character.emit_signal("got_caught", entity)
 	self.caught_character = caught_character
+	
+
+func _on_Character_rig_position_corrected():
+	if (state == "Falling"):
+		fall_finished.current_value = true
 	
 	
 func _on_character_got_hit(hit_connect: HitConnect):

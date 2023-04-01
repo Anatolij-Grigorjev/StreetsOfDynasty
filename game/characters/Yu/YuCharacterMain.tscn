@@ -133,7 +133,12 @@ script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
 
-[node name="Catching" type="Node" parent="FSM" index="10"]
+[node name="Falling" type="Node" parent="FSM" index="10"]
+script = ExtResource( 4 )
+state_animation = "attack_b1"
+next_state = "Idle"
+
+[node name="Catching" type="Node" parent="FSM" index="11"]
 script = ExtResource( 13 )
 initial_state = "CatchIdle"
 
@@ -151,11 +156,11 @@ script = ExtResource( 6 )
 state_animation = "catch_attack"
 next_state = "CatchIdle"
 
-[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="11"]
+[node name="SpriteColorFlashRequestor" type="Node" parent="FSM" index="12"]
 script = ExtResource( 23 )
 flash_sound = ExtResource( 24 )
 
-[node name="StatesTween" type="Tween" parent="FSM" index="12"]
+[node name="StatesTween" type="Tween" parent="FSM" index="13"]
 
 [node name="YuCharacterRig" parent="Body" index="0" instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )

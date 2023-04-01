@@ -35,6 +35,8 @@ bg_color = Color( 0, 0, 0, 1 )
 collision_mask = 1
 script = ExtResource( 5 )
 move_speed = Vector2( 200, 100 )
+idle_stability_recovery_per_sec = 5.0
+hurt_stability_recovery_per_sec = 20.0
 
 [node name="FSM" parent="." index="0"]
 script = ExtResource( 8 )
