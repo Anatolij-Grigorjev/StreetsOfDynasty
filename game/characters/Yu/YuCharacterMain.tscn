@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
+[ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=14]
 [ext_resource path="res://characters/states/state_aspects/MoveToEnemyStateAspect.gd" type="Script" id=15]
 [ext_resource path="res://characters/states/AttackWithPhasesState.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
@@ -70,6 +71,14 @@ script = ExtResource( 6 )
 state_animation = "attack_b1"
 next_state = "Idle"
 state_commit_end_anim_sec = 1.0
+
+[node name="MovedAirStateAspect" type="Node" parent="FSM/AttackB1" index="0"]
+script = ExtResource( 14 )
+total_move_height = 95.0
+move_duration = 0.05
+move_delay = 0.2
+preserve_impulse = true
+move_easing = 2
 
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 16 )

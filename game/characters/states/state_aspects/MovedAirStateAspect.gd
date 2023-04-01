@@ -2,8 +2,8 @@ extends State
 class_name MovedAirStateAspect
 """
 A state aspect that allows a character to be moved by 
-a controlled motion with aspects like facing/speed/etc 
-set by the external mover
+a controlled motion vertically with attrbitues like 
+facing/speed/etc set by the external mover
 """
 enum Easing {
 	GENTLE = 0,
@@ -16,15 +16,15 @@ signal vert_move_finished()
 
 
 """
-The total air the aspect should make rig grab
+The amount of air rig will grab at peak of movement
 """
 export(float) var total_move_height: float = 0.0
 """
-Amount of time there should be movement in seconds
+Amount of time there should be ascend movement (in seconds)
 """
 export(float) var move_duration: float = 0.25
 """
-Amount of time to pass before the movement tween is invoked
+Amount of time to pass before the movement tween is started
 """
 export(float) var move_delay: float = 0.0
 """
@@ -39,18 +39,12 @@ export(Easing) var move_easing: int = Easing.HALFWAY
 
 var move_tween: Tween
 
-var vert_current_impulse: float = 0.0
-
-"""
-flag that THIS aspect is the one that started the common tween
-not to consume signals for others
-"""
-var tweens_running: int = 0
+var current_height_impulse: float = 0.0
 
 
 func _ready():
 	call_deferred("_set_move_tween")
-	call_deferred("_set_vert_move_entity_signals")
+	#call_deferred("_set_vert_move_entity_signals")
 
 
 func enter_state(prev_state: String):
@@ -61,17 +55,15 @@ func enter_state(prev_state: String):
 	#wait for delay to pass before movement
 	if (move_delay != 0.0):
 		yield(get_tree().create_timer(move_delay), "timeout")
-	#reset tweens semaphore
-	tweens_running = 0
+	
 	var transition_easing = _get_move_easing_tween_props()
 	#tween interpolates velocity instead of moving entity directly
 	#this leaves control over when that velocity is used
 	move_tween.interpolate_property(
-		self, 'vert_current_impulse',
-		total_move_height, 0.0,
+		self, 'current_height_impulse',
+		0.0, total_move_height,
 		move_duration, transition_easing[0], transition_easing[1]
 	)
-	tweens_running += 1
 	emit_signal("vert_move_started", total_move_height)
 	move_tween.start()
 	
@@ -79,8 +71,8 @@ func enter_state(prev_state: String):
 
 func process_state(delta: float):
 	.process_state(delta)
-	if (vert_current_impulse != 0.0):
-		entity.lift_rig_impulse(Vector2(0, vert_current_impulse) * delta)
+	if (current_height_impulse != 0.0):
+		entity.lift_rig_impulse(Vector2(0, -current_height_impulse) * delta)
 		
 		
 
@@ -90,13 +82,13 @@ func exit_state(next_state: String):
 
 
 func _set_move_tween() -> Tween:
-	var tween: Tween = fsm.get_node('StatesTween') as Tween
+	var tween: Tween = get_node('MoveTween') as Tween
 	if (not tween):
 		tween = Tween.new()
-		tween.name = 'StatesTween'
-		fsm.add_child(tween)
+		tween.name = 'MoveTween'
+		add_child(tween)
 	move_tween = tween
-	move_tween.connect("tween_completed", self, "_on_StatesTween_tween_completed")
+	move_tween.connect("tween_completed", self, "_on_tween_completed")
 	return move_tween
 	
 
@@ -106,7 +98,7 @@ func _stop_all_movement():
 	if (abs(total_move_height) > 0.0):
 		emit_signal("vert_move_finished")
 	move_tween.remove_all()
-	vert_current_impulse = 0.0
+	current_height_impulse = 0.0
 	if (not preserve_impulse):
 		total_move_height = 0.0
 	
@@ -115,23 +107,16 @@ func _get_move_easing_tween_props() -> Array:
 	match(move_easing):
 		Easing.HALFWAY:
 			return [Tween.TRANS_LINEAR, Tween.EASE_OUT_IN]
-		#easings are counter-intuitive because tween substracts
-		#value instead of accumulating it
 		Easing.GENTLE:
-			return [Tween.TRANS_EXPO, Tween.EASE_OUT]
-		Easing.ALL_IN:
 			return [Tween.TRANS_EXPO, Tween.EASE_IN]
+		Easing.ALL_IN:
+			return [Tween.TRANS_EXPO, Tween.EASE_OUT]
 		_:
 			breakpoint
 			return [Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT]
 
 
-func _on_StatesTween_tween_completed(receiver: Object, key: NodePath):
-	#if no tweens running in this instance we ignore signal
-	if (tweens_running == 0):
-		return
-	#reduce num of locked tweens
-	tweens_running -= 1
+func _on_tween_completed(receiver: Object, key: NodePath):
 	emit_signal("vert_move_finished")
 			
 			

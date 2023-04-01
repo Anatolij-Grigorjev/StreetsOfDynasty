@@ -23,8 +23,8 @@ Amount of time to pass before the movement tween is invoked
 """
 export(float) var move_delay: float = 0.0
 """
-make this aspect use the provided impulse exactly once 
-and later do nothing
+make this aspect use the provided impulse once before requiring
+manual resets
 """
 export(bool) var one_shot: bool = true
 
