@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=5]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=6]
 [ext_resource path="res://characters/hit_effects/AttackTypeHitEffects.gd" type="Script" id=7]
-[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=8]
+[ext_resource path="res://characters/Yu/spritesheets/attack_b1.png" type="Texture" id=8]
 [ext_resource path="res://characters/hit_effects/AttackerImpactHitEffect.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/Yu/states/YuWalkState.gd" type="Script" id=10]
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
@@ -26,6 +26,73 @@
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 [ext_resource path="res://characters/Yu/spritefx/attack_b2f_trail.png" type="Texture" id=25]
 [ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
+
+[sub_resource type="Animation" id=3]
+resource_name = "landing"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("HitboxGroup")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "AttackB1" ],
+"method": "switch_to_area"
+} ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 60, 5 )
@@ -74,9 +141,9 @@ state_commit_end_anim_sec = 1.0
 
 [node name="MovedAirStateAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
-total_move_height = 95.0
-move_duration = 0.05
-move_delay = 0.2
+total_move_height = 150.0
+move_duration = 0.1
+move_delay = 0.3
 preserve_impulse = true
 move_easing = 2
 
@@ -133,9 +200,9 @@ script = ExtResource( 6 )
 state_animation = "hurt_low"
 next_state = "Idle"
 
-[node name="Falling" type="Node" parent="FSM" index="10"]
+[node name="Landing" type="Node" parent="FSM" index="10"]
 script = ExtResource( 4 )
-state_animation = "attack_b1"
+state_animation = "landing"
 next_state = "Idle"
 
 [node name="Catching" type="Node" parent="FSM" index="11"]
@@ -167,12 +234,20 @@ position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
 texture = ExtResource( 8 )
-offset = Vector2( -58.468, 4.86353 )
+offset = Vector2( -122.876, -95.6659 )
+hframes = 10
+frame = 4
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-scale = Vector2( 0.851272, 1.28561 )
+visible = true
+modulate = Color( 1, 1, 1, 1 )
+position = Vector2( 65.8415, -119.599 )
+rotation = -0.367449
 texture = ExtResource( 25 )
 flip_h = false
+
+[node name="AnimationPlayer" parent="Body/YuCharacterRig" index="3"]
+anims/landing = SubResource( 3 )
 
 [node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
 pitch_scale = 1.75

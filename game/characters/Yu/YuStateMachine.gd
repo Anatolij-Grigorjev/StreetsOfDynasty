@@ -79,7 +79,8 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			if (attack_state.is_state_over):
 				fall_finished.current_value = false
-				return "Falling"
+				entity.rig_vertical_displacement = true
+				return "Landing"
 			return NO_STATE
 		"AttackA2":
 			if (was_hit):
@@ -166,11 +167,11 @@ func _get_next_state(delta: float) -> String:
 			if (not hurt_state.is_state_over):
 				return NO_STATE
 			return _next_or_default(hurt_state)
-		"Falling":
-			var falling_state = state_nodes[state] as PerpetualState
+		"Landing":
+			var landing_state = state_nodes[state] as PerpetualState
 			if (not fall_finished.current_value):
 				return NO_STATE
-			return falling_state.next_state
+			return landing_state.next_state
 		_:
 			breakpoint
 			return NO_STATE
@@ -224,7 +225,7 @@ func _on_Catchbox_caught(caught_hitbox: Hitbox):
 	
 
 func _on_Character_rig_position_corrected():
-	if (state == "Falling"):
+	if (state == "Landing"):
 		fall_finished.current_value = true
 	
 	

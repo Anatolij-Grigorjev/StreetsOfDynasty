@@ -41,6 +41,8 @@ var move_tween: Tween
 
 var current_height_impulse: float = 0.0
 
+var pre_move_rig_position := Vector2.ZERO
+
 
 func _ready():
 	call_deferred("_set_move_tween")
@@ -65,6 +67,7 @@ func enter_state(prev_state: String):
 		move_duration, transition_easing[0], transition_easing[1]
 	)
 	emit_signal("vert_move_started", total_move_height)
+	pre_move_rig_position = entity.rig.position
 	move_tween.start()
 	
 	
@@ -72,13 +75,17 @@ func enter_state(prev_state: String):
 func process_state(delta: float):
 	.process_state(delta)
 	if (current_height_impulse != 0.0):
-		entity.lift_rig_impulse(Vector2(0, -current_height_impulse) * delta)
+		entity.rig.position = Vector2(
+			pre_move_rig_position.x,
+			pre_move_rig_position.y - current_height_impulse
+		)
 		
 		
 
 func exit_state(next_state: String):
 	.exit_state(next_state)
 	_stop_all_movement()
+	entity.rig.position = pre_move_rig_position
 
 
 func _set_move_tween() -> Tween:
