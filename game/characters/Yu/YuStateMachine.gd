@@ -80,6 +80,7 @@ func _get_next_state(delta: float) -> String:
 			if (attack_state.is_state_over):
 				fall_finished.current_value = false
 				entity.rig_vertical_displacement = true
+				entity.elapsed_displacement_time = 1.0
 				return "Landing"
 			return NO_STATE
 		"AttackA2":

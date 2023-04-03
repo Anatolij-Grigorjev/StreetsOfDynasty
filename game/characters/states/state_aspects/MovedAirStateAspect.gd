@@ -85,7 +85,6 @@ func process_state(delta: float):
 func exit_state(next_state: String):
 	.exit_state(next_state)
 	_stop_all_movement()
-	entity.rig.position = pre_move_rig_position
 
 
 func _set_move_tween() -> Tween:

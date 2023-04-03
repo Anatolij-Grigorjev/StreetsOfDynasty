@@ -29,7 +29,7 @@
 
 [sub_resource type="Animation" id=3]
 resource_name = "landing"
-length = 0.1
+length = 2.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -141,7 +141,7 @@ state_commit_end_anim_sec = 1.0
 
 [node name="MovedAirStateAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
-total_move_height = 150.0
+total_move_height = 300.0
 move_duration = 0.1
 move_delay = 0.3
 preserve_impulse = true
@@ -236,7 +236,7 @@ position = Vector2( 0, -150 )
 texture = ExtResource( 8 )
 offset = Vector2( -122.876, -95.6659 )
 hframes = 10
-frame = 4
+frame = 8
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
 visible = true
