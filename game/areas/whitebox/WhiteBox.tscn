@@ -112,8 +112,6 @@ collision_mask = 1
 
 [node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 503.695, 431 )
-idle_stability_recovery_per_sec = 5.0
-hurt_stability_recovery_per_sec = 20.0
 
 [node name="EnemySpawn" type="Position2D" parent="YSort"]
 position = Vector2( 503.695, 431 )

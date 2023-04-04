@@ -2,7 +2,7 @@ extends CharacterStateMachineTemplate
 
 var target: Node2D
 
-var fall_finished: SingleReadVar = SingleReadVar.new(false)
+var fall_finished: bool = true
 
 func _ready():
 	._ready()
@@ -67,6 +67,7 @@ func _get_next_state(delta: float) -> String:
 				return hit_react_state
 			if (was_released):
 				var state_node: PerpetualState = state_nodes[state]
+				fall_finished = false
 				return "Falling"
 			
 			return NO_STATE
@@ -83,7 +84,7 @@ func _get_next_state(delta: float) -> String:
 			return hurt_state.next_state
 		"Falling":
 			var fall_state = get_state(state) as PerpetualState
-			if (not fall_finished.current_value):
+			if (not fall_finished):
 				return NO_STATE
 			return fall_state.next_state
 		"Fallen":
@@ -142,7 +143,7 @@ func _on_Character_rig_position_corrected():
 	if (state == "Falling"):
 		#screenshake about fall ended
 		Debug.request_screenshake(0.2, 25, 20)
-		fall_finished.current_value = true
+		fall_finished = true
 
 
 func _build_next_hit_receive_state(stability: float) -> String:
@@ -151,6 +152,7 @@ func _build_next_hit_receive_state(stability: float) -> String:
 	elif (stability > 0):
 		return "Hurt"
 	else:
+		fall_finished = false
 		return "Falling"
 	
 	
@@ -179,4 +181,4 @@ func _connect_falling_without_rig_lift_check():
 
 func _on_Falling_animation_finished(falling_anim: String):
 	if (not entity.rig_vertical_displacement):
-		fall_finished.current_value = true
+		fall_finished = true

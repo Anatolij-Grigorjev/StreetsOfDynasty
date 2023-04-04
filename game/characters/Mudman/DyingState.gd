@@ -10,6 +10,6 @@ func enter_state(prev_state: String):
 		#skip animation
 		var anim = entity.anim
 		anim.stop()
-		anim.current_animation = state_params.state_animation
+		anim.current_animation = self.state_animation
 		anim.advance(0.4)
 		anim.play()

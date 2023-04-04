@@ -7,7 +7,7 @@ const MAX_CONSECUTIVE_B2_HITS = 5
 
 var pressed_attack_input: SingleReadVar = SingleReadVar.new(C.AttackInputType.NONE)
 var has_caught := SingleReadVar.new(false)
-var fall_finished := SingleReadVar.new(true)
+var fall_finished := true
 var caught_character: CharacterTemplate = null
 
 var consecutive_b2_hits : int = 0
@@ -78,7 +78,7 @@ func _get_next_state(delta: float) -> String:
 			if (not attack_state.can_change_state):
 				return NO_STATE
 			if (attack_state.is_state_over):
-				fall_finished.current_value = false
+				fall_finished = false
 				entity.rig_vertical_displacement = true
 				entity.elapsed_displacement_time = 1.0
 				return "Landing"
@@ -170,7 +170,7 @@ func _get_next_state(delta: float) -> String:
 			return _next_or_default(hurt_state)
 		"Landing":
 			var landing_state = state_nodes[state] as PerpetualState
-			if (not fall_finished.current_value):
+			if (not fall_finished):
 				return NO_STATE
 			return landing_state.next_state
 		_:
@@ -227,7 +227,7 @@ func _on_Catchbox_caught(caught_hitbox: Hitbox):
 
 func _on_Character_rig_position_corrected():
 	if (state == "Landing"):
-		fall_finished.current_value = true
+		fall_finished = true
 	
 	
 func _on_character_got_hit(hit_connect: HitConnect):
