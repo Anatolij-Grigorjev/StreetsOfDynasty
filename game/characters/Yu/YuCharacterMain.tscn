@@ -205,6 +205,9 @@ script = ExtResource( 4 )
 state_animation = "landing"
 next_state = "Idle"
 
+[node name="WalkStateAspect" type="Node" parent="FSM/Landing" index="0"]
+script = ExtResource( 5 )
+
 [node name="Catching" type="Node" parent="FSM" index="11"]
 script = ExtResource( 13 )
 initial_state = "CatchIdle"

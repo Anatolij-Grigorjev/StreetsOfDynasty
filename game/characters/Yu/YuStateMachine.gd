@@ -73,14 +73,13 @@ func _get_next_state(delta: float) -> String:
 			return NO_STATE
 		"AttackB1":
 			if (was_hit):
+				_set_start_smooth_descent()
 				return "HurtLow"
 			var attack_state = state_nodes[state] as FiniteState
 			if (not attack_state.can_change_state):
 				return NO_STATE
 			if (attack_state.is_state_over):
-				fall_finished = false
-				entity.rig_vertical_displacement = true
-				entity.elapsed_displacement_time = 1.0
+				_set_start_smooth_descent()
 				return "Landing"
 			return NO_STATE
 		"AttackA2":
@@ -169,6 +168,8 @@ func _get_next_state(delta: float) -> String:
 				return NO_STATE
 			return _next_or_default(hurt_state)
 		"Landing":
+			if (was_hit):
+				return "HurtLow"
 			var landing_state = state_nodes[state] as PerpetualState
 			if (not fall_finished):
 				return NO_STATE
@@ -209,6 +210,12 @@ func _cache_next_attack_input(attack_input: int, attack_state: FiniteState):
 		and attack_input != C.AttackInputType.NONE
 	):
 		pressed_attack_input.current_value = attack_input
+
+
+func _set_start_smooth_descent():
+	fall_finished = false
+	entity.rig_vertical_displacement = true
+	entity.elapsed_displacement_time = 1.0
 
 
 func _start_special_flash():

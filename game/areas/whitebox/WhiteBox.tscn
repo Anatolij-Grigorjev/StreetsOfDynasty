@@ -97,10 +97,11 @@ collision_mask = 0
 shape = SubResource( 3 )
 
 [node name="Top" type="StaticBody2D" parent="BG/Colliders"]
-position = Vector2( 500, -150 )
+position = Vector2( 500, 0 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Top"]
+position = Vector2( 12.3662, 95.2195 )
 shape = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
