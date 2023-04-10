@@ -100,7 +100,6 @@ func _correct_rig_position(delta: float):
 			vert_move_phase = VertMovePhases.DROP
 
 		rig.position.y += thrust_up + pull_down
-		
 		if (rig.position.y > rig_neutral_poistion.y and abs(thrust_up) < abs(pull_down)):
 			rig.position = rig_neutral_poistion
 			rig_vertical_displacement = false

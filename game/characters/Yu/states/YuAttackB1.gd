@@ -10,4 +10,5 @@ func enter_state(prev_state: String):
 
 
 func start_rig_movement():
+	fsm.fall_finished = false
 	entity._start_rig_displacement(Vector2(15 * entity.facing, -300))
