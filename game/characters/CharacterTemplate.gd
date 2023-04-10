@@ -111,10 +111,9 @@ func _correct_rig_position(delta: float):
 			
 			
 func _process_horizontal_movement(delta: float):
-	if (current_horiz_displacement < max_displacement.x):
+	if (abs(current_horiz_displacement) < abs(max_displacement.x)):
 		var horizontal_displacement = displacement_speed.x * elapsed_displacement_time
 		current_horiz_displacement += horizontal_displacement
-		print("position=%s|move=%s" % [global_position.x, horizontal_displacement])
 		do_movement_collide(Vector2(horizontal_displacement, 0.0))
 	
 
@@ -170,19 +169,7 @@ func _on_hitbox_hit(hit_connect: HitConnect):
 	emit_signal("damage_received", hit_connect.attack_damage, health, total_health)
 	
 	var displacement = _calc_hit_displacement(hit_connect.attackbox, hit_connect.attack_facing)
-	displacement_speed = displacement
-	max_displacement = displacement
-	elapsed_displacement_time = 0.0
-	current_horiz_displacement = 0.0
-	if (displacement.y):
-		rig_neutral_poistion = rig.position
-		displacement_up_angle = abs(atan(displacement.y / max(displacement.x, 1.0)))
-		rig_vertical_displacement = true
-		vert_move_phase = VertMovePhases.LIFT
-	else:
-		vert_move_phase = VertMovePhases.NONE
-		displacement_up_angle = 0.0
-		rig_vertical_displacement = false
+	_start_rig_displacement(displacement)
 	print(
 		""" 
 		target_move impulse: %s, 
@@ -218,7 +205,31 @@ func _calc_hit_displacement(attackbox: AttackBox, attack_facing: int):
 		return displacement
 	else:
 		return Vector2.ZERO
-		
+
+
+func _start_rig_displacement(displacement: Vector2):
+	displacement_speed = displacement
+	max_displacement = displacement
+	elapsed_displacement_time = 0.0
+	current_horiz_displacement = 0.0
+	if (displacement.y != 0):
+		rig_neutral_poistion = rig.position
+		displacement_up_angle = abs(atan(displacement.y / max(abs(displacement.x), 1.0)))
+		rig_vertical_displacement = true
+		vert_move_phase = VertMovePhases.LIFT
+	else:
+		vert_move_phase = VertMovePhases.NONE
+		displacement_up_angle = 0.0
+		rig_vertical_displacement = false
+	Debug.log_debug("""
+		rig neutral: {},
+		displacement: {},
+		facing: {}, 
+		displacement_up_angle: {},
+		displacement_speed: {},
+		displacement_max: {}
+	""", [rig_neutral_poistion, displacement, facing, displacement_up_angle, displacement_speed, max_displacement])
+
 		
 func _reduce_stability(hit_connect: HitConnect):
 	stability = clamp(stability - hit_connect.attack_disruption, 0, total_stability)

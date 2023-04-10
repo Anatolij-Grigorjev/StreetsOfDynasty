@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://characters/Yu/YuCharacterMain.gd" type="Script" id=11]
 [ext_resource path="res://Logger.gd" type="Script" id=12]
 [ext_resource path="res://characters/states/StateMachineState.gd" type="Script" id=13]
-[ext_resource path="res://characters/states/state_aspects/MovedAirStateAspect.gd" type="Script" id=14]
+[ext_resource path="res://characters/Yu/states/YuAttackB1.gd" type="Script" id=14]
 [ext_resource path="res://characters/states/state_aspects/MoveToEnemyStateAspect.gd" type="Script" id=15]
 [ext_resource path="res://characters/states/AttackWithPhasesState.gd" type="Script" id=16]
 [ext_resource path="res://characters/Yu/YuCatchingStateMachine.gd" type="Script" id=17]
@@ -26,6 +26,24 @@
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 [ext_resource path="res://characters/Yu/spritefx/attack_b2f_trail.png" type="Texture" id=25]
 [ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
+[ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=27]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "method"
+tracks/0/path = NodePath("../../FSM/AttackB1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_rig_movement"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "landing"
@@ -134,18 +152,11 @@ script = ExtResource( 15 )
 collision_mask = 96
 
 [node name="AttackB1" type="Node" parent="FSM" index="3"]
-script = ExtResource( 6 )
-state_animation = "attack_b1"
-next_state = "Idle"
-state_commit_end_anim_sec = 1.0
-
-[node name="MovedAirStateAspect" type="Node" parent="FSM/AttackB1" index="0"]
 script = ExtResource( 14 )
-total_move_height = 300.0
-move_duration = 0.1
-move_delay = 0.3
-preserve_impulse = true
-move_easing = 2
+state_animation = "attack_b1"
+next_state = "Landing"
+state_commit_anim_sec = 0.1
+state_commit_end_anim_sec = 1.0
 
 [node name="AttackA2" type="Node" parent="FSM" index="4"]
 script = ExtResource( 16 )
@@ -236,13 +247,12 @@ flash_sound = ExtResource( 24 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-texture = ExtResource( 8 )
-offset = Vector2( -122.876, -95.6659 )
-hframes = 10
-frame = 8
+texture = ExtResource( 27 )
+offset = Vector2( -106.371, 6.68986 )
+hframes = 12
+frame = 11
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-visible = true
 modulate = Color( 1, 1, 1, 1 )
 position = Vector2( 65.8415, -119.599 )
 rotation = -0.367449
@@ -250,6 +260,7 @@ texture = ExtResource( 25 )
 flip_h = false
 
 [node name="AnimationPlayer" parent="Body/YuCharacterRig" index="3"]
+anims/RESET = SubResource( 4 )
 anims/landing = SubResource( 3 )
 
 [node name="FXPlayer" parent="Body/YuCharacterRig" index="4"]
@@ -273,7 +284,7 @@ script = ExtResource( 7 )
 position = Vector2( 75.9019, -196.513 )
 
 [node name="ActiveEnemyCatch" type="RayCast2D" parent="Body" index="3"]
-cast_to = Vector2( 150, 0 )
+cast_to = Vector2( 95, 0 )
 collision_mask = 96
 collide_with_areas = true
 collide_with_bodies = false
