@@ -15,11 +15,6 @@ var consecutive_b2_hits : int = 0
 
 func _ready():
 	call_deferred("set_state", "Idle")
-	
-
-func set_state(next_state: String):
-	.set_state(next_state)
-	Debug.log_info("{}: '{}' -> '{}'", [owner, previous_state, next_state])
 		
 		
 func _process(delta):

@@ -98,8 +98,9 @@ func _correct_rig_position(delta: float):
 			thrust_up = (displacement_speed.y * elapsed_displacement_time * sin(displacement_up_angle))
 		else:
 			vert_move_phase = VertMovePhases.DROP
-		print("position=%s|up=%s|down=%s" % [rig.position.y, thrust_up, pull_down])
+
 		rig.position.y += thrust_up + pull_down
+		
 		if (rig.position.y > rig_neutral_poistion.y and abs(thrust_up) < abs(pull_down)):
 			rig.position = rig_neutral_poistion
 			rig_vertical_displacement = false
@@ -236,7 +237,7 @@ func _get_max_allowed_velocity(target_move: Vector2, stability_coef: float) -> V
 
 
 func _on_FSM_state_changed(old_state: String, new_state: String):
-	pass
+	Debug.log_info("{}: '{}' -> '{}'", [self, old_state, new_state])
 	
 	
 func _get_rig_node() -> Node2D:

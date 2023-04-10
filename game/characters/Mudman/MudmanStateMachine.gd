@@ -11,11 +11,6 @@ func _ready():
 		var player = get_tree().get_nodes_in_group("Player")[0]
 		call_deferred("_set_target", player)
 	_connect_falling_without_rig_lift_check()
-		
-		
-func set_state(next_state: String):
-	.set_state(next_state)
-	Debug.log_info("{}: '{}' -> '{}'", [owner, previous_state, next_state])
 	
 
 func _set_target(new_target: Node2D):
