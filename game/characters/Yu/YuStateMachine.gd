@@ -26,8 +26,6 @@ func _get_next_state(delta: float) -> String:
 	var attack_input: int = _get_attack_input()
 	var catchable_enemy = _get_latest_catchable()
 	var was_hit = got_hit.read_and_reset()
-	if (Debug.get_debug2_pressed()):
-		return "CatchAttack"
 	
 	match(state):
 		"Idle":
