@@ -18,6 +18,7 @@ signal got_released()
 signal caught_character(caught)
 signal moved_to_catching_pos(caught_character)
 signal rig_position_corrected
+signal rig_lift_started(lift_amount, lift_velocity)
 signal died
 
 
@@ -216,6 +217,7 @@ func _start_rig_displacement(displacement: Vector2):
 		displacement_up_angle = abs(atan(displacement.y / max(abs(displacement.x), 1.0)))
 		rig_vertical_displacement = true
 		vert_move_phase = VertMovePhases.LIFT
+		emit_signal("rig_lift_started", displacement.y, displacement_speed)
 	else:
 		vert_move_phase = VertMovePhases.NONE
 		displacement_up_angle = 0.0
