@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://characters/Dropshadow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/states/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://characters/CharacterTemplate.gd" type="Script" id=3]
 
@@ -16,3 +17,6 @@ script = ExtResource( 2 )
 [node name="CatchPoint" type="Position2D" parent="Body"]
 
 [node name="CaughtPoint" type="Position2D" parent="Body"]
+
+[node name="Dropshadow" parent="." instance=ExtResource( 1 )]
+show_behind_parent = true

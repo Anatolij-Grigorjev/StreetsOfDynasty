@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Mudman/MudmanCharacterRig.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/states/PerpetualState.gd" type="Script" id=3]
 [ext_resource path="res://characters/states/FiniteState.gd" type="Script" id=4]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=5]
+[ext_resource path="res://characters/Mudman/spritesheets/idle.png" type="Texture" id=6]
 [ext_resource path="res://characters/Mudman/MudmanStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://characters/HealthBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/states/state_aspects/WalkStateAspect.gd" type="Script" id=11]
@@ -87,6 +88,13 @@ next_state = "Falling"
 
 [node name="MudmanCharacterRig" parent="Body" index="0" instance=ExtResource( 2 )]
 position = Vector2( 0, -52 )
+
+[node name="Sprite" parent="Body/MudmanCharacterRig" index="0"]
+position = Vector2( -0.707703, 0 )
+texture = ExtResource( 6 )
+offset = Vector2( -17.8076, -30.1916 )
+hframes = 5
+frame = 0
 
 [node name="HealthbarHolder" type="Node2D" parent="Body/MudmanCharacterRig" index="2"]
 position = Vector2( -80.8488, -164.185 )
@@ -209,6 +217,10 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
+[node name="Dropshadow" parent="." index="5"]
+position = Vector2( 2.92209, 46.7535 )
+scale = Vector2( 3, 1 )
 
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BluntHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]
 [connection signal="color_flash_hit_received" from="Body/MudmanCharacterRig/AttackTypeHitEffects/BleedingHitEffects/FlashColorHitEffect" to="." method="_on_HitEffect_flash_hit_received"]

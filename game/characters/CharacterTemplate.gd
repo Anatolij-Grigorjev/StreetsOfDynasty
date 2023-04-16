@@ -45,7 +45,7 @@ var stability : float
 var invincibility := false
 
 var rig_vertical_displacement: bool = false
-var rig_neutral_poistion: Vector2 = Vector2.ZERO
+var rig_neutral_position: Vector2 = Vector2.ZERO
 
 onready var fsm: CharacterStateMachineTemplate = $FSM
 onready var body: Node2D = $Body
@@ -75,7 +75,7 @@ func _ready() -> void:
 		if (hitbox as Hitbox):
 			hitbox.connect("hitbox_hit", self, "_on_hitbox_hit")
 			
-	rig_neutral_poistion = rig.position
+	rig_neutral_position = rig.position
 	
 	
 func _process(delta: float) -> void:
@@ -101,8 +101,8 @@ func _correct_rig_position(delta: float):
 			vert_move_phase = VertMovePhases.DROP
 
 		rig.position.y += thrust_up + pull_down
-		if (rig.position.y > rig_neutral_poistion.y and abs(thrust_up) < abs(pull_down)):
-			rig.position = rig_neutral_poistion
+		if (rig.position.y > rig_neutral_position.y and abs(thrust_up) < abs(pull_down)):
+			rig.position = rig_neutral_position
 			rig_vertical_displacement = false
 			#landed fall means end of movement
 			elapsed_displacement_time = 0.0
@@ -213,7 +213,7 @@ func _start_rig_displacement(displacement: Vector2):
 	elapsed_displacement_time = 0.0
 	current_horiz_displacement = 0.0
 	if (displacement.y != 0):
-		rig_neutral_poistion = rig.position
+		rig_neutral_position = rig.position
 		displacement_up_angle = abs(atan(displacement.y / max(abs(displacement.x), 1.0)))
 		rig_vertical_displacement = true
 		vert_move_phase = VertMovePhases.LIFT
@@ -229,7 +229,7 @@ func _start_rig_displacement(displacement: Vector2):
 		displacement_up_angle: {},
 		displacement_speed: {},
 		displacement_max: {}
-	""", [rig_neutral_poistion, displacement, facing, displacement_up_angle, displacement_speed, max_displacement])
+	""", [rig_neutral_position, displacement, facing, displacement_up_angle, displacement_speed, max_displacement])
 
 		
 func _reduce_stability(hit_connect: HitConnect):

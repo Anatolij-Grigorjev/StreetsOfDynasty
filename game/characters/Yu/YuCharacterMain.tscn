@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://characters/Yu/spritefx/attack_b2f_trail.png" type="Texture" id=25]
 [ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
 [ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=27]
-[ext_resource path="res://characters/Dropshadow.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -360,10 +359,9 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Dropshadow" parent="." index="6" instance=ExtResource( 28 )]
-show_behind_parent = true
-position = Vector2( -5.84085, 55.488 )
-scale = Vector2( 4, 1 )
+[node name="Dropshadow" parent="." index="6"]
+position = Vector2( -12.1684, 59.8686 )
+scale = Vector2( 3.5, 1 )
 
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
 [connection signal="caught" from="Body/YuCharacterRig/CatchboxGroup/CatchAttack" to="FSM" method="_on_Catchbox_caught"]
