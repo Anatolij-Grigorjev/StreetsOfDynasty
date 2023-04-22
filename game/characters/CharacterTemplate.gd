@@ -19,6 +19,7 @@ signal caught_character(caught)
 signal moved_to_catching_pos(caught_character)
 signal rig_position_corrected
 signal rig_lift_started(lift_amount, lift_velocity)
+signal changed_facing(new_facing)
 signal died
 
 
@@ -127,8 +128,11 @@ func _get_stability_recovery_per_sec() -> float:
 	
 	
 func set_facing(new_facing: int):
+	if new_facing == facing:
+		return
 	facing = new_facing
 	body.scale.x = facing
+	emit_signal("changed_facing", new_facing)
 	
 
 """

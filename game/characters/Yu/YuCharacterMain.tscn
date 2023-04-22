@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -24,9 +24,8 @@
 [ext_resource path="res://characters/live_data/CharacterStateLabel.gd" type="Script" id=22]
 [ext_resource path="res://characters/SpriteColorFlashRequestor.gd" type="Script" id=23]
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
-[ext_resource path="res://characters/Yu/spritefx/attack_b2f_trail.png" type="Texture" id=25]
+[ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=25]
 [ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
-[ext_resource path="res://characters/Yu/spritesheets/walk.png" type="Texture" id=27]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -247,17 +246,15 @@ flash_sound = ExtResource( 24 )
 position = Vector2( 0, -150 )
 
 [node name="Sprite" parent="Body/YuCharacterRig" index="0"]
-texture = ExtResource( 27 )
-offset = Vector2( -106.371, 6.68986 )
-hframes = 12
-frame = 11
+texture = ExtResource( 25 )
+offset = Vector2( -58.468, 4.86353 )
+frame = 2
 
 [node name="TrailFX" parent="Body/YuCharacterRig" index="1"]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 65.8415, -119.599 )
-rotation = -0.367449
-texture = ExtResource( 25 )
-flip_h = false
+modulate = Color( 1, 1, 1, 0.0588235 )
+show_behind_parent = false
+position = Vector2( 55.7294, -49.1013 )
+rotation = -3.16578
 
 [node name="AnimationPlayer" parent="Body/YuCharacterRig" index="3"]
 anims/RESET = SubResource( 4 )
@@ -360,7 +357,7 @@ __meta__ = {
 }
 
 [node name="Dropshadow" parent="." index="6"]
-position = Vector2( -12.1684, 59.8686 )
+position = Vector2( 15.5756, 50.6206 )
 scale = Vector2( 3.5, 1 )
 
 [connection signal="state_changed" from="FSM" to="InvincibilityBlinker" method="_on_CharacterTemplate_state_changed"]
