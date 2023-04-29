@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://areas/CharacterSpawner.gd" type="Script" id=1]
+
+[node name="CharacterSpawner" type="Position2D"]
+position = Vector2( 503.695, 431 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
