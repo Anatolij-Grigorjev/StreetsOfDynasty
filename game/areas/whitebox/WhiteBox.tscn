@@ -2,12 +2,11 @@
 
 [ext_resource path="res://areas/whitebox/whitebox_sky.png" type="Texture" id=1]
 [ext_resource path="res://areas/whitebox/whitebox_floor.png" type="Texture" id=2]
-[ext_resource path="res://characters/Yu/YuCharacterMain.tscn" type="PackedScene" id=3]
+[ext_resource path="res://characters/Mudman/MudmanCharacterMain.gd" type="Script" id=3]
 [ext_resource path="res://characters/Mudman/MudmanCharacterMain.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=5]
-[ext_resource path="res://characters/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://FPSLabel.gd" type="Script" id=5]
+[ext_resource path="res://areas/AreaTemplate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://FPSLabel.tscn" type="PackedScene" id=7]
-[ext_resource path="res://areas/whitebox/WhiteBox.gd" type="Script" id=8]
 [ext_resource path="res://areas/CharacterSpawner.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -22,26 +21,25 @@ extents = Vector2( 820, 155 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 820, 150 )
 
-[node name="WhiteBox" type="Node2D" groups=["stage"]]
-script = ExtResource( 8 )
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
-position = Vector2( 640, 350 )
-current = true
+[node name="WhiteBox" instance=ExtResource( 6 )]
 
-[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 5 )]
+[node name="Camera2D" parent="." index="0"]
+current = false
 
-[node name="BG" type="Node2D" parent="."]
+[node name="BG" type="Node2D" parent="." index="1"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprites" type="Node2D" parent="BG"]
+[node name="Sprites" type="Node2D" parent="BG" index="0"]
 position = Vector2( 0, 50 )
 
-[node name="Chunk1" type="Node2D" parent="BG/Sprites"]
+[node name="Chunk1" type="Node2D" parent="BG/Sprites" index="0"]
 
-[node name="Sky1" type="Sprite" parent="BG/Sprites/Chunk1"]
+[node name="Sky1" type="Sprite" parent="BG/Sprites/Chunk1" index="0"]
 position = Vector2( -127.128, 72.3574 )
 scale = Vector2( 6.728, 0.240709 )
 texture = ExtResource( 1 )
@@ -49,17 +47,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Ground1" type="Sprite" parent="BG/Sprites/Chunk1"]
+[node name="Ground1" type="Sprite" parent="BG/Sprites/Chunk1" index="1"]
 position = Vector2( -130, 90 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Chunk2" type="Node2D" parent="BG/Sprites"]
+[node name="Chunk2" type="Node2D" parent="BG/Sprites" index="1"]
 position = Vector2( 1020.18, 0 )
 
-[node name="Sky1" type="Sprite" parent="BG/Sprites/Chunk2"]
+[node name="Sky1" type="Sprite" parent="BG/Sprites/Chunk2" index="0"]
 position = Vector2( -129.286, 74.5162 )
 scale = Vector2( 6.72774, 0.243208 )
 texture = ExtResource( 1 )
@@ -67,74 +65,68 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Ground1" type="Sprite" parent="BG/Sprites/Chunk2"]
+[node name="Ground1" type="Sprite" parent="BG/Sprites/Chunk2" index="1"]
 position = Vector2( -130, 90 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Colliders" type="Node2D" parent="BG"]
+[node name="Colliders" type="Node2D" parent="BG" index="1"]
 
-[node name="Left" type="StaticBody2D" parent="BG/Colliders"]
+[node name="Left" type="StaticBody2D" parent="BG/Colliders" index="0"]
 position = Vector2( -150, 300 )
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Left" index="0"]
 shape = SubResource( 1 )
 
-[node name="Right" type="StaticBody2D" parent="BG/Colliders"]
+[node name="Right" type="StaticBody2D" parent="BG/Colliders" index="1"]
 position = Vector2( 1170, 300 )
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Right" index="0"]
 shape = SubResource( 2 )
 
-[node name="Bottom" type="StaticBody2D" parent="BG/Colliders"]
+[node name="Bottom" type="StaticBody2D" parent="BG/Colliders" index="2"]
 position = Vector2( 500, 750 )
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Bottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Bottom" index="0"]
 shape = SubResource( 3 )
 
-[node name="Top" type="StaticBody2D" parent="BG/Colliders"]
+[node name="Top" type="StaticBody2D" parent="BG/Colliders" index="3"]
 position = Vector2( 500, 0 )
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Top"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Top" index="0"]
 position = Vector2( 12.3662, 95.2195 )
 shape = SubResource( 4 )
 
-[node name="YSort" type="YSort" parent="."]
-
-[node name="YuCharacterMain" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 199.514, 431 )
-scale = Vector2( 0.75, 0.75 )
-collision_mask = 1
-
-[node name="MudmanCharacterMain" parent="YSort" instance=ExtResource( 4 )]
+[node name="MudmanCharacterMain" type="KinematicBody2D" parent="YSort" index="1" instance=ExtResource( 4 )]
 position = Vector2( 503.695, 431 )
+collision_layer = 2
+script = ExtResource( 3 )
+move_speed = Vector2( 200, 100 )
 
-[node name="Corpses" type="YSort" parent="YSort" groups=["corpses"]]
+[node name="Corpses" type="YSort" parent="YSort" index="2" groups=["corpses"]]
 
-[node name="EnemySpawn" type="Position2D" parent="YSort"]
+[node name="EnemySpawn" type="Position2D" parent="YSort" index="3"]
 position = Vector2( 723.914, 415.627 )
 script = ExtResource( 9 )
 character_scn = ExtResource( 4 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enable = true
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 6 )]
-
-[node name="RemoteCharacterHealthBar" parent="CanvasLayer/HUD/Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer" index="1"]
-character_node_path = NodePath("../../../../../../../../YSort/YuCharacterMain")
-
-[node name="FPSLabel" parent="CanvasLayer" instance=ExtResource( 7 )]
+[node name="FPSLabel" type="Label" parent="CanvasLayer" index="1" instance=ExtResource( 7 )]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -150.0
-margin_right = 0.0
 margin_bottom = 60.0
+rect_min_size = Vector2( 150, 60 )
+custom_colors/font_color = Color( 0.870588, 1, 0.00784314, 1 )
+custom_styles/normal = SubResource( 5 )
+text = "24.567 FPS"
+align = 1
+valign = 1
+script = ExtResource( 5 )
 
 [editable path="CanvasLayer/HUD"]

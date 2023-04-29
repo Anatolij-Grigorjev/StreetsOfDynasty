@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://areas/whitebox/WhiteBox.gd" type="Script" id=1]
+[ext_resource path="res://characters/Yu/YuCharacterMain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=9]
+
+[node name="AreaTemplate" type="Node2D" groups=["stage"]]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+position = Vector2( 640, 350 )
+current = true
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 9 )]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="YuCharacterMain" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 199.514, 431 )
+scale = Vector2( 0.75, 0.75 )
+collision_mask = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="RemoteCharacterHealthBar" parent="CanvasLayer/HUD/Margin25/ScreenParts/ScreenTop/Lifebar/VBoxContainer" index="1"]
+character_node_path = NodePath("../../../../../../../../YSort/YuCharacterMain")
+
+[editable path="CanvasLayer/HUD"]
