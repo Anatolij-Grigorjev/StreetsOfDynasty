@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://characters/Yu/YuStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://characters/CharacterTemplate.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://characters/charge_special.wav" type="AudioStream" id=24]
 [ext_resource path="res://characters/Yu/spritesheets/idle.png" type="Texture" id=25]
 [ext_resource path="res://characters/Yu/ActiveEnemyCatch.gd" type="Script" id=26]
+[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=27]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -121,7 +122,23 @@ bg_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 11 )
 sprite_size = Vector2( 300, 400 )
 
-[node name="FSM" parent="." index="0"]
+[node name="Camera2D" type="Camera2D" parent="." index="0" groups=["camera"]]
+position = Vector2( -70, -300 )
+current = true
+limit_left = 0
+limit_top = -500
+limit_right = 3650
+limit_bottom = 875
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_left = 0.1
+drag_margin_right = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="ScreenShake" parent="Camera2D" index="0" instance=ExtResource( 27 )]
+
+[node name="FSM" parent="." index="1"]
 script = ExtResource( 1 )
 
 [node name="Idle" type="Node" parent="FSM" index="0"]
@@ -288,23 +305,23 @@ collide_with_bodies = false
 script = ExtResource( 26 )
 catch_radius = 25.0
 
-[node name="Terrain" type="CollisionShape2D" parent="." index="2"]
+[node name="Terrain" type="CollisionShape2D" parent="." index="3"]
 position = Vector2( 0, 45 )
 shape = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Logger" type="Node" parent="." index="3"]
+[node name="Logger" type="Node" parent="." index="4"]
 script = ExtResource( 12 )
 
-[node name="InvincibilityBlinker" parent="." index="4" instance=ExtResource( 18 )]
+[node name="InvincibilityBlinker" parent="." index="5" instance=ExtResource( 18 )]
 duration = 1.5
 blink_frequency = 3
 pre_blink_states = [ "Falling", "HurtLow" ]
 dont_blink_sprites_paths = [ NodePath("../Body/YuCharacterRig/TrailFX"), NodePath("../Body/YuCharacterRig/TrailFX2") ]
 
-[node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="5"]
+[node name="CharacterDataDisplayLabels" type="Node2D" parent="." index="6"]
 script = ExtResource( 21 )
 
 [node name="CharacterPositionLabel" type="Label" parent="CharacterDataDisplayLabels" index="0"]
@@ -356,7 +373,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Dropshadow" parent="." index="6"]
+[node name="Dropshadow" parent="." index="7"]
 position = Vector2( 15.5756, 50.6206 )
 scale = Vector2( 3.5, 1 )
 

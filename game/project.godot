@@ -253,7 +253,7 @@ max_remote_stdout_chars_per_second=""
 [application]
 
 config/name="Streets Of Dynasty"
-run/main_scene="res://areas/whitebox/WhiteBox.tscn"
+run/main_scene="res://areas/walkbox/Walkbox.tscn"
 config/icon="res://icon.png"
 
 [autoload]

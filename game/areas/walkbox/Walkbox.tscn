@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://areas/AreaTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://areas/walkbox/cretebrick970.png" type="Texture" id=2]
 [ext_resource path="res://areas/walkbox/sky.png" type="Texture" id=3]
-[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 100, 1000 )
@@ -211,21 +210,6 @@ position = Vector2( 3745, 220 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BG/Colliders/Right" index="0"]
 shape = SubResource( 4 )
-
-[node name="Camera2D" type="Camera2D" parent="YSort/YuCharacterMain" index="7" groups=["camera"]]
-position = Vector2( -73.3916, -366.958 )
-current = true
-limit_left = 0
-limit_top = -500
-limit_right = 3650
-limit_bottom = 875
-limit_smoothed = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
-[node name="ScreenShake" parent="YSort/YuCharacterMain/Camera2D" index="0" instance=ExtResource( 4 )]
 
 [node name="CanvasLayer" parent="." index="3"]
 visible = false
