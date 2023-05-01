@@ -26,7 +26,7 @@ func _leave_corpse() -> Node2D:
 	var corpse := _build_facing_position_aware_corpse()
 	
 	#add corpse to corpses in scene
-	var corpses_node = Utils.get_node_by_tag("corpses")
+	var corpses_node = Utils.find_node_by_tag("corpses")
 	corpses_node.add_child(corpse)
 	
 	Debug.log_info("%s leaving corpse at %s", [entity, corpse.global_position])

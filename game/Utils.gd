@@ -150,7 +150,7 @@ static func get_collision_rects_overlap(
 Globally search for the first node within the specific group
 (i.e. node with a specific tag)
 """
-static func get_node_by_tag(tag: String) -> Node:
+static func find_node_by_tag(tag: String) -> Node:
 	var nodes = Debug.get_tree().get_nodes_in_group(tag)
 	if (nodes):
 		return nodes[0]
