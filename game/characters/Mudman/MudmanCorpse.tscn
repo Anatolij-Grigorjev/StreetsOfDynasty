@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=1]
+[ext_resource path="res://characters/Mudman/MudmanCorpse.gd" type="Script" id=2]
 
 [sub_resource type="Curve" id=5]
 max_value = 2.0
@@ -445,6 +446,7 @@ tracks/6/keys = {
 }
 
 [node name="MudmanCorpse" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.498039, 0.498039, 0.498039, 1 )
