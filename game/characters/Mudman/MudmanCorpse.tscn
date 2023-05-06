@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=1]
 
@@ -109,7 +109,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5.10587, 68.6966 ), Vector2( 5.10587, 68.6966 ), Vector2( -4.213, 33.717 ) ]
+"values": [ Vector2( 5.10587, 68.6966 ), Vector2( 5.10587, 68.6966 ), Vector2( 5.106, 33.717 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:self_modulate")
@@ -174,6 +174,96 @@ tracks/6/keys = {
 "values": [ Vector2( 100, 5 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "powder_head_legs"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 963.263, 164.918, 278.26, 91.1579 ), Rect2( 963.263, 164.918, 278.26, 91.1579 ), Rect2( 1213.26, 164.918, 25, 91.158 ), Rect2( 1233.26, 164.918, 5, 91.158 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5.10587, 68.6966 ), Vector2( 5.10587, 68.6966 ), Vector2( 150, 68.697 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.498039, 0.498039, 0.498039, 1 ), Color( 0.498039, 0.498039, 0.498039, 1 ), Color( 0.498039, 0.498039, 0.498039, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 3.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/CPUParticles2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -141.107, -93.1073 ), Vector2( -141.107, -93.1073 ), Vector2( -55.5354, -102.427 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/CPUParticles2D:emission_rect_extents")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 10, 50 ) ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "powder_top_down"
 length = 6.0
@@ -199,7 +289,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5.10587, 68.6966 ), Vector2( 5.10587, 68.6966 ), Vector2( -4.21342, 101.717 ) ]
+"values": [ Vector2( 5.10587, 68.6966 ), Vector2( 5.10587, 68.6966 ), Vector2( 5.106, 101.717 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:self_modulate")
@@ -311,7 +401,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "powder_bottom_up"
 anims/RESET = SubResource( 3 )
 anims/powder_bottom_up = SubResource( 6 )
+anims/powder_head_legs = SubResource( 7 )
 anims/powder_top_down = SubResource( 4 )
