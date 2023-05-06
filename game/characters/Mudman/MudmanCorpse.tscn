@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://characters/Mudman/spritesheets/dying.png" type="Texture" id=1]
-[ext_resource path="res://characters/spritefx/attack_blunt_spark.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=5]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.991404, 0.0205629 ), 0.875585, 0.0, 0, 0 ]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "sink"
-length = 3.1
+[sub_resource type="Animation" id=3]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:region_rect")
 tracks/0/interp = 1
@@ -16,81 +18,165 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 2.5 ),
-"transitions": PoolRealArray( 1, 0.999997, 0.307786, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 930, 0, 310, 256 ), Rect2( 930, 0, 310, 256 ), Rect2( 930, -9.25627, 310, 256 ), Rect2( 930, -90, 310, 256 ) ]
+"values": [ Rect2( 930, 0, 310, 256 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 3.1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.71689, 8.11856 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.498039, 0.498039, 0.498039, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/CPUParticles2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -18.2158, -1.27084 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "powder_top_down"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.4, 3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 963.263, 164.918, 278.26, 91.1579 ), Rect2( 963.263, 245.312, 278.26, 10 ), Rect2( 963.263, 250.312, 278.26, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5.10587, 68.6966 ), Vector2( -4.21342, 101.717 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4, 3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.498039, 0.498039, 0.498039, 1 ), Color( 0.498039, 0.498039, 0.498039, 1 ), Color( 0.498039, 0.498039, 0.498039, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 3.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Hole:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 0.378929, 0.378929, 1 ),
-"update": 0,
-"values": [ Vector2( -30.133, 4.37046 ), Vector2( -30.133, 4.37046 ), Vector2( -14.8299, 10.6367 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Hole:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 2.5, 3 ),
-"transitions": PoolRealArray( 0.307786, 0.307786, 1, 0.203063, 1 ),
-"update": 0,
-"values": [ Vector2( 0.966495, 0.966495 ), Vector2( 0.966495, 0.966495 ), Vector2( 3.8893, 3.8893 ), Vector2( 3.889, 3.889 ), Vector2( 0, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Hole:self_modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/CPUParticles2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.4, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+"values": [ Vector2( -19.5275, -126.574 ), Vector2( -18.6802, -97.3435 ) ]
 }
 
 [node name="MudmanCorpse" type="Node2D"]
 
-[node name="Hole" type="Sprite" parent="."]
-self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -30.133, 4.37046 )
-scale = Vector2( 0.966495, 0.966495 )
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 308, 42, 140, 64 )
-
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 0.498039, 0.498039, 0.498039, 1 )
+position = Vector2( 1.71689, 8.11856 )
 texture = ExtResource( 1 )
 offset = Vector2( -31.0676, -94.665 )
 region_enabled = true
 region_rect = Rect2( 930, 0, 310, 256 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+position = Vector2( -18.2158, -1.27084 )
+emitting = false
+amount = 300
+lifetime = 10.0
+preprocess = 0.3
+speed_scale = 2.0
+randomness = 0.2
+emission_shape = 2
+emission_rect_extents = Vector2( 100, 5 )
+spread = 126.4
+gravity = Vector2( 0, -98 )
+initial_velocity = 5.0
+linear_accel = 10.0
+linear_accel_random = 0.2
+scale_amount_curve = SubResource( 5 )
+hue_variation_random = 0.3
 
 [node name="Label" type="Label" parent="."]
 margin_left = -61.5177
@@ -98,10 +184,10 @@ margin_top = -136.602
 margin_right = 38.4823
 margin_bottom = -111.602
 rect_min_size = Vector2( 100, 25 )
-custom_styles/normal = SubResource( 1 )
 custom_colors/font_color = Color( 0.968627, 0.960784, 0.960784, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 1 )
 text = "<NO_STATE>"
 align = 1
 valign = 1
@@ -111,5 +197,6 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "sink"
-anims/sink = SubResource( 2 )
+autoplay = "powder_top_down"
+anims/RESET = SubResource( 3 )
+anims/powder_top_down = SubResource( 4 )

@@ -163,10 +163,6 @@ script = ExtResource( 5 )
 move_speed = Vector2( 35, 10 )
 change_facing = false
 
-[node name="MoveToEnemyStateAspect" type="Node" parent="FSM/AttackA1" index="1"]
-script = ExtResource( 15 )
-collision_mask = 96
-
 [node name="AttackB1" type="Node" parent="FSM" index="3"]
 script = ExtResource( 14 )
 state_animation = "attack_b1"

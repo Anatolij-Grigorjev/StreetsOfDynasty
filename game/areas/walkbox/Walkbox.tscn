@@ -219,7 +219,4 @@ position = Vector2( 1191.53, 433.874 )
 script = ExtResource( 4 )
 character_scn = ExtResource( 5 )
 
-[node name="CanvasLayer" parent="." index="3"]
-visible = false
-
 [editable path="CanvasLayer/HUD"]
