@@ -73,6 +73,21 @@ static func nth_or_default(array: Array, idx: int, default = null):
 		return array[idx]
 	else:
 		return default
+	
+
+"""
+Get random element from source array. 
+shortcut nil if the array is missing or empty.
+shortcut if only one element.
+"""
+static func random_from(array: Array):
+	if array == null or array.empty():
+		return null
+	if array.size() == 1:
+		return array[0]
+	
+	return array[randi() % array.size()]
+
 
 """
 Get back arg1 if its not null, or arg2 if it was

@@ -6,4 +6,4 @@ func _ready():
 	var death_animations = Array(anim.get_animation_list())
 	death_animations.erase("RESET")
 	
-	anim.play(death_animations[randi() % death_animations.size()])
+	anim.play(Utils.random_from(death_animations))
