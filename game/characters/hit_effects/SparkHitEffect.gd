@@ -23,8 +23,8 @@ func invoke_hit_fx(hit_connect: HitConnect):
 	#hit damage label
 	var label = _build_damage_label(hit_connect)
 	label.global_position = (
-		#at receiver healthbar pos
-		hit_connect.receiver.healthbar_pos.global_position 
+		#at spark pos
+		spark.global_position 
 		#with some randomness
 		+ hit_connect.receiver.facing * Utils.rand_point(25.0, 25.0)
 	)
@@ -50,7 +50,6 @@ func _build_damage_label(hit_connect: HitConnect) -> Node2D:
 	
 	var label = DamageLabel.instance()
 	label.movement *= rand_range(0.75, 1.75)
-	label.movement.x *= hit_connect.attack_facing
 	var label_node: Label = label.get_node("Label")
 	label_node.set("custom_colors/font_color", label_color)
 	var stylebox: StyleBoxFlat = label_node.get("custom_styles/normal")

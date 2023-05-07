@@ -7,11 +7,11 @@ export(float) var hurt_stability_recovery_per_sec: float = 20
 
 onready var anim: AnimationPlayer = $Body/MudmanCharacterRig/AnimationPlayer
 onready var hit_effects: AttackTypeHitEffects = $Body/MudmanCharacterRig/AttackTypeHitEffects
-onready var healthbar_pos = $Body/MudmanCharacterRig/HealthbarHolder
 
 
 func _ready():
-	var healthbar = healthbar_pos.get_node("HealthBar")
+	
+	var healthbar = $Body/MudmanCharacterRig/HealthbarHolder/HealthBar
 	connect("damage_received", healthbar, "_on_character_damage_received")
 	healthbar.set_total(total_health)
 	
