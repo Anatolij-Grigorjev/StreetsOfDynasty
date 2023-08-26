@@ -40,12 +40,23 @@ onready var recent_attacks: RecentItemsDictionary = $RecentItemsDictionary
 #first child is timed dict, so shape is second
 onready var shape: CollisionShape2D = get_child(1)
 
+#reference to potential character owner of this attackbox
+#populated by AreaGroup if this node is part of an areagroup
+var entity: Node2D
+
 
 func _ready():
-	recent_attacks.items_ttl_seconds = attack_recovery
+	recent_attacks.items_ttl_seconds = calc_attack_recovery()
 	#connect the hitbox registering signals
 	connect("area_entered", self, "_on_area_entered")
 	connect("area_exited", self, "_on_area_exited")
+	
+
+func calc_attack_recovery() -> float:
+	if not entity:
+		return attack_recovery
+	
+	return attack_recovery / entity.anim.playback_speed
 
 
 """

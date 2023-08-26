@@ -4,9 +4,6 @@ class_name RecentItemsDictionary
 """
 An items list that only holds onto those it consides 'recent',
 as defined by the initial TTL
-the user is expected to include #process calls into the timeline
-of the running scene, since this class is not a part of it
-
 """
 var _values: Dictionary = {}
 

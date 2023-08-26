@@ -21,6 +21,8 @@ func _ready() -> void:
 		if (node is Area2D):
 			var area := node as Area2D
 			all_areas[area.name] = area
+			if "entity" in area:
+				area.entity = entity
 
 """
 Switch to a specific named area and disable all others
