@@ -26,7 +26,7 @@ func _ready() -> void:
 
 """
 Switch to a specific named area and disable all others
-STABLE: Utils use this method to determine is a node is an AreaGroup
+STABLE: Utils use this method to determine if a node is an AreaGroup
 in call to 'Utils#get_areagroup_area_owner'
 """
 func switch_to_area(area_name: String) -> void:

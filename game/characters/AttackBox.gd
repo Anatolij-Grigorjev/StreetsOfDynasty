@@ -88,7 +88,7 @@ func _on_area_exited(area: Area2D) -> void:
 	
 	
 func _is_valid_hitbox(area: Area2D) -> bool:
-	var this_owner = Utils.get_areagroup_area_owner(self)
+	var this_owner = entity
 	var area_owner = Utils.get_areagroup_area_owner(area)
 	return (
 		is_instance_valid(area) 
@@ -98,7 +98,7 @@ func _is_valid_hitbox(area: Area2D) -> bool:
 	
 	
 func _entity_in_radius(hitbox_owner: Node2D) -> bool:
-	var this_owner = Utils.get_areagroup_area_owner(self)
+	var this_owner = entity
 	var attacker_position = this_owner.global_position
 	var receiver_position = hitbox_owner.global_position
 	Debug.add_global_draw({
@@ -130,4 +130,4 @@ func _hitbox_can_be_hit(hitbox: Hitbox) -> bool:
 	
 	
 func _to_string():
-	return "AB[%s:%s]" % [Utils.get_areagroup_area_owner(self), name]
+	return "AB[%s:%s]" % [entity, name]

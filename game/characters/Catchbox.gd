@@ -9,6 +9,10 @@ signal caught(enemy_hitbox)
 
 export(float) var catch_radius: float = 35.77
 
+# reference to owner entity of this catchbox. populated by
+# owning catchbox area group, if this node is part of a group
+var entity: Node2D
+
 
 func _ready():
 	Debug.log_info("%s can make catch signals on mask %s", [self, collision_mask])
@@ -16,14 +20,14 @@ func _ready():
 	
 
 func _to_string() -> String:
-	return "CB[%s:%s]" % [owner.name, name]
+	return "CB[%s:%s]" % [entity, name]
 	
 	
 func _on_area_entered(area: Area2D):
 	if (not visible): 
 		return
 	var enemy_hitbox_owner = Utils.get_areagroup_area_owner(area)
-	var this_hitbox_owner = Utils.get_areagroup_area_owner(self)
+	var this_hitbox_owner = entity
 	if (enemy_hitbox_owner != this_hitbox_owner and 
 	not enemy_hitbox_owner.invincibility):
 		var target_pos = enemy_hitbox_owner.global_position
